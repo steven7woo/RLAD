@@ -4,10 +4,18 @@ Reference for getting `./RFT_pipeline.sh run` working on this cluster
 (`/fsx/gstevenw/testing_alignment_algos/RLAD`). Written 2026-07-13.
 
 The RLAD repo assumes a Slurm cluster with GPU gres and a working Pyxis/enroot
-container stack. This HyperPod cluster differs on three points, each of which
-blocked the pipeline in turn. All three are now resolved; this documents what
-broke, why, and how it was fixed — so a future run (or a fresh clone) can
-reproduce the fix quickly.
+container stack. This HyperPod cluster differs on several points, each of which
+blocked the pipeline in turn. Six issues were hit and resolved over the course
+of one run; this documents what broke, why, and how it was fixed — so a future
+run (or a fresh clone) can reproduce the fixes quickly.
+
+- **Issues 1–3** (gres, `cluster_env.sh` sourcing, Pyxis/enroot) are
+  environment/infra problems that block *before* or *at the start of* the run.
+  Fixes 1 & 2 are committed to the repo; Fix 3 is a one-time cluster + image setup.
+- **Issues 4–6** (`pylatexenc`, a checkpoint download race, the RFT-corpus
+  validator) surfaced mid-run as individual stages executed. Issue 4 is a
+  host-env install, 5 self-healed via the controller's auto-resubmit, and 6 is
+  a committed code fix.
 
 ## Environment summary
 
