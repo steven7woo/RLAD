@@ -195,6 +195,119 @@ The receipt must record `source=docker.io#radixark/miles:dev-cu12-202606172131`
 
 ---
 
+## Issue 4 — `pylatexenc` missing from the host conda env
+
+### Symptom
+`base_eval` (base scoring) ran to completion on all 16 shards but the Slurm job
+kept ending in `FAILED` with progress stuck at `0/48000 rows`; the controller
+resubmitted it repeatedly. The real error was only in the per-shard logs
+(`runs/eval/dsr_pool_score/shard*_<jid>.log`), not the job's `.err`:
+```
+ModuleNotFoundError: No module named 'pylatexenc'
+  ... miles/rollout/rm_hub/math_utils.py, line 10, in <module>
+      from pylatexenc import latex2text
+```
+
+### Root cause
+The eval/scoring shards run in the **host `rlad` conda env** (`Env: .../envs/rlad/bin/python`
+in the shard header), *not* inside the Miles container. That env was missing
+`pylatexenc`, a dependency of miles' DeepScaleR answer grader. Generation
+succeeds, but grading (`grade_response` → `_deepscaler_grade`) imports the
+grader lazily and crashes on the **first graded sample** — after ~1 hr of
+16-GPU generation, all of which is then discarded (grading happens before the
+`samples*.jsonl` are written, so nothing is persisted). Two full passes were
+lost this way before the cause was found.
+
+### Fix (no commit — host env only)
+```bash
+/fsx/gstevenw/miniconda3/envs/rlad/bin/python -m pip install pylatexenc   # -> 2.10
+# verify the whole grader chain imports:
+PYTHONPATH=train/rl/miles /fsx/.../envs/rlad/bin/python -c \
+  'from miles.rollout.rm_hub.deepscaler import get_deepscaler_rule_based_reward'
+```
+The env lives on shared `/fsx`, so all compute nodes see the install
+immediately. The in-flight job (which imports the grader only after generation)
+picked up the fix and completed without a resubmit. base pass@1 = 0.4347.
+
+**Debugging note:** when an inference/eval job `FAILED`s with 0 progress but the
+job `.out/.err` look clean, read the **per-shard** logs — that's where the
+Python traceback lands.
+
+---
+
+## Issue 5 — base checkpoint conversion race (transient, self-healed)
+
+### Symptom
+`base_ckpt` (job 22, HF→Megatron convert of Qwen3-1.7B) failed once with:
+```
+ValueError: Weights ['model.embed_tokens.weight'] not found in safetensors files in
+  .../models--Qwen--Qwen3-1.7B/snapshots/70d244cc.../
+```
+
+### Root cause & resolution — **not a bug, no fix needed**
+A startup race: the conversion read the safetensors while the model was still
+downloading into the HF cache. The file mtimes proved it — the failed read was
+at 11:06:57, but `model-0000{1,2}-of-00002.safetensors` were finalized at 11:08.
+The controller auto-resubmitted (job 26); by then the download was complete
+(verified `embed_tokens.weight` present, index intact) and it converted cleanly.
+Documented only so a future one-off failure here isn't mistaken for corruption.
+
+---
+
+## Issue 6 — RFT-corpus validator used a stripped copy of the problem text
+
+### Symptom
+After `rft_gen` and `rft_score` completed, the RFT-corpus build succeeded
+(`build-rft: kept 1728 (dropped 4242 ineffective, 30 leak)`) but the controller
+aborted with:
+```
+ERROR: RFT corpus validation failed or produced fewer than 128 accepted rows
+```
+Misleading — 1728 ≫ the 128-row minimum. The failure was the validator's strict
+`assert actual == expected` (the byte-exact corpus re-derivation in
+`validate_rft corpus`, `RFT_pipeline.sh`), which differed on **exactly 29 of
+1728 rows**.
+
+### Root cause
+Two different sources for each problem's text:
+
+| | Source of `problem` | `dsr-13346` |
+|---|---|---|
+| `build-rft` (writes the corpus) | raw HF dataset `ds[i]["problem"]` — **unstripped** | `"\nIn the isosceles tr…"` (len 370) |
+| validator (re-derives `expected`) | curriculum `metadata.problem` from `train_easy/medium.jsonl` — **stripped** | `"In the isosceles tra…"` (len 369) |
+
+The curriculum builder stored a whitespace-stripped copy; 29 DeepScaleR problems
+carry leading/trailing whitespace. So the validator's reconstructed user prompt
+(`ABSGEN_INSTRUCTION + "\n\nProblem:\n" + problem`) didn't byte-match the corpus
+for those 29, failing the whole run. The corpus itself is **correct and
+self-consistent** — `gen-abs`, `score`, and `build-rft` all read the raw
+dataset identically; only the validator disagreed.
+
+### Fix (committed: "Fix RFT-corpus validator to source problem text from raw dataset", `b17b43a`)
+Changed the validator to build `problem_by_qid` from the raw dataset, matching
+`build-rft`, instead of the curriculum metadata:
+```python
+from datasets import load_dataset
+_ds = load_dataset("agentica-org/DeepScaleR-Preview-Dataset", split="train")
+problem_by_qid = {qid: _ds[int(qid.split("-")[1])]["problem"] for qid in expected_qids}
+```
+This *tightens* the check (validates what was actually built); the existing
+1728-row corpus passes as-is, so no regeneration was needed.
+
+**Resume gotcha:** the commit changed `HEAD`, and the state manifest
+(`runs/rft_pipeline/manifest.env`) pins `repo_commit`, so `resume` refused with
+"pipeline parameters or repository commit changed". Since the change touched
+only validator logic (no stage's output artifact), the correct action was to
+bump the manifest's `repo_commit` line to the new HEAD, then `resume`:
+```bash
+sed -i "s/^repo_commit=.*/repo_commit=$(git rev-parse HEAD)/" \
+  train/rl/runs/rft_pipeline/manifest.env
+```
+(General rule: commit repo edits *before* launching a run so the manifest
+records the final commit and this doesn't come up.)
+
+---
+
 ## Running / monitoring
 
 ```bash
@@ -216,7 +329,8 @@ squeue -u $USER
 
 ## Quick recovery checklist (fresh clone or node replacement)
 
-1. `git` history already contains the Issue 1 & 2 fixes — no re-editing needed if reusing this checkout.
+1. `git` history already contains the Issue 1, 2 & 6 fixes — no re-editing needed if reusing this checkout.
 2. If a p5 was replaced, confirm pyxis: `srun --nodelist=<node> --exclusive --container-image=docker.io#alpine:latest cat /etc/os-release` prints Alpine. If not, re-run `install_enroot_pyxis.sh compute` on it.
 3. Confirm `images/miles.sqsh` + `images/miles.sqsh.source` exist and bytes match. If missing, redo Fix 3B.
-4. `./RFT_pipeline.sh run`.
+4. Confirm the host env has `pylatexenc` (Issue 4): `python -c 'import pylatexenc'` in the `rlad` env; `pip install pylatexenc` if missing.
+5. `./RFT_pipeline.sh run`.
