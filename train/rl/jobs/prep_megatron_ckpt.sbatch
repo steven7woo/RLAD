@@ -2,7 +2,6 @@
 #SBATCH --job-name=rlad-prep-ckpt
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --gpus-per-node=8
 #SBATCH --cpus-per-task=64
 #SBATCH --exclusive
 #SBATCH --time=03:55:00

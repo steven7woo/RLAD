@@ -154,7 +154,7 @@ load_profile() {
         --nodes="${RLAD_INFERENCE_NODES}"
         --ntasks="${RLAD_INFERENCE_NODES}"
         --ntasks-per-node=1
-        --gpus-per-node="${RLAD_GPUS_PER_NODE}"
+        --exclusive
     )
     [[ -z "${RLAD_INFERENCE_NODELIST}" ]] ||
         INFERENCE_SBATCH_ARGS+=(--nodelist="${RLAD_INFERENCE_NODELIST}")

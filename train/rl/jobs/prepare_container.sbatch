@@ -2,7 +2,7 @@
 #SBATCH --job-name=rlad-container
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --gpus-per-node=1
+#SBATCH --exclusive
 #SBATCH --cpus-per-task=8
 #SBATCH --mem=64G
 #SBATCH --time=03:55:00
@@ -72,7 +72,7 @@ echo "Importing ${SOURCE}"
 echo "Saving validated SquashFS image to ${OUT}"
 export PYTHONPATH="/root/Megatron-LM:${MILES_DIR}:${RLAD_HOME}"
 srun \
-    --nodes=1 --ntasks=1 --gpus-per-task=1 \
+    --nodes=1 --ntasks=1 --exclusive \
     "${CONTAINER_ARGS[@]}" \
     --no-container-entrypoint \
     --export=ALL \

@@ -52,7 +52,7 @@ if [[ "${RLAD_GPU_SHARD_WORKER:-0}" != 1 ]]; then
         --ntasks="${ALLOCATED_NODES}" \
         --ntasks-per-node=1 \
         --cpus-per-task="${SLURM_CPUS_PER_TASK:-1}" \
-        --gpus-per-task="${GPUS_PER_NODE}" \
+        --exclusive \
         --kill-on-bad-exit=1 \
         --export=ALL,RLAD_GPU_SHARD_WORKER=1 \
         "$(readlink -f -- "$0")" "${TOTAL_SHARDS}" "${GPUS_PER_NODE}" \

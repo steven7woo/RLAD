@@ -2,7 +2,7 @@
 #SBATCH --job-name=rlad-solgen-data
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
-#SBATCH --gpus-per-node=1
+#SBATCH --exclusive
 #SBATCH --cpus-per-task=16
 #SBATCH --time=01:00:00
 #SBATCH --output=logs/%x_%j.out
