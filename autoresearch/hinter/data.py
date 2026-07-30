@@ -29,11 +29,36 @@ def validate_split(config: dict[str, Any]) -> None:
         raise RuntimeError("split position is outside the pinned dataset")
 
 
+def _register_forward_compatible_feature_types() -> None:
+    """Let the pinned ``datasets==3.6.0`` parse newer ``List`` feature metadata.
+
+    The pinned parquet was published with Arrow schema metadata that types one
+    unused auxiliary column (``solution_code_indices``) with the ``datasets>=4.0``
+    ``List`` feature. ``datasets==3.6.0`` has no ``List`` entry in its feature
+    registry, so ``Features.from_arrow_schema`` raises ``Feature type 'List' not
+    found`` before any row is read -- even though that column is absent from the
+    actual table and is discarded during schema reconciliation. ``List`` is the
+    renamed successor of the still-present ``Sequence`` feature and shares its
+    ``{"feature": ..., "_type": ...}`` serialization, so aliasing the name onto
+    ``Sequence`` makes metadata parsing succeed without touching any pinned
+    value. This is idempotent, only fills a missing name, and leaves the loaded
+    dataset's canonical fingerprint (verified against the pinned fingerprint
+    below) unchanged.
+    """
+    import datasets.features.features as feature_module
+
+    if "List" not in feature_module._FEATURE_TYPES and not hasattr(
+        feature_module, "List"
+    ):
+        feature_module._FEATURE_TYPES["List"] = feature_module.Sequence
+
+
 def load_pinned_dataset(config: dict[str, Any]) -> Any:
     from datasets import load_dataset
     from huggingface_hub import hf_hub_download
 
     validate_split(config)
+    _register_forward_compatible_feature_types()
     dataset_spec = config["dataset"]
     dataset = load_dataset(
         dataset_spec["repo_id"],
