@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
-  "generation": 5,
+  "generation": 4,
   "hints": [
     {
       "hint_id": 1,
@@ -15,17 +15,17 @@
       "hint_id": 2,
       "train_position": 28,
       "train_qid": "30302",
-      "hint": "Whenever an equation equates two n-th powers of linear expressions in z, take moduli before hunting roots. FIRST MOVE: from (z-a)^n = c(z-b)^n, divide by (z-b)^n to get ((z-a)/(z-b))^n = c, then take moduli: |z-a| = k|z-b|. TRAP: k is the n-th ROOT of |c|, not |c| raised to the n-th power; verify k^n = |c| first, since a wrong k gives a self-consistent but wrong circle. Then set z = x+iy, square, collect the x^2+y^2 terms, divide by their coefficient, complete the square, read off center and radius (k=1 gives a line). Check numerically against the ORIGINAL equation, never your derived one: build one explicit root and measure its distance to your center. Report exactly one value, then stop.",
-      "tokens": 195,
-      "hint_hash": "9c61d4740f15b2ee26ca0faf9788b29a7708fbd5b52b36c49ac95ba82bb3cd00"
+      "hint": "For \"all roots lie on one circle\" problems, take moduli before hunting roots. FIRST MOVE: from (z-a)^n = c(z-b)^n, divide by (z-b)^n to get ((z-a)/(z-b))^n = c, then take moduli: |z-a| = k|z-b|. TRAP: k is the n-th ROOT of |c|, not |c| raised to the n-th power; verify k^n = |c| first, since a wrong k gives a self-consistent but wrong circle. Then set z = x+iy, square, collect the x^2+y^2 terms, divide by their coefficient, complete the square, read off center and radius (an Apollonius circle; k=1 gives a line). Check numerically against the ORIGINAL equation, never your derived one: build one explicit root and measure its distance to your center. Report exactly one value, then stop.",
+      "tokens": 198,
+      "hint_hash": "403ac7fe6d24609478ebddf8eeef57d4a375e388b75b64df02190ca6628359fa"
     },
     {
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square; the far edges are too distant to matter, so the overlap is a right-angle wedge. Never conclude the small square is wholly covered; the wedge apex sits at its center. Then be numeric, not qualitative: for one angle, find where the two rays exit the square, list the polygon vertices in order, and shoelace it. Repeat for a second angle. If the two values agree, the overlap is angle-independent; never argue minimality in prose. Trust the shoelace numbers over any closed-form guess, never restart, and once a number is in hand do not re-derive it or write a formatted solution: state that one value in one short line and stop.",
-      "tokens": 190,
-      "hint_hash": "cde40cad3d78c688d058a4c1b49465a4b669a468253d28c371e90239b1bd1797"
+      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square; show the far edges are too distant to matter, so the overlap is a right-angle wedge cut by the small square. Never conclude the small square is wholly covered; the wedge apex sits at its center. Then be numeric, not qualitative: for one angle, find where the two rays exit the square, list the polygon vertices in order, and shoelace it. Repeat for a second angle. If the two values agree, accept that the overlap is angle-independent and do not hunt for a proof; otherwise minimize over the symmetry-reduced range. Trust the shoelace numbers over any closed-form guess, never restart, and once two values agree, report exactly one number and stop reasoning.",
+      "tokens": 191,
+      "hint_hash": "7d558dd1246b9fa85107df156c2038c19f7eac6dcbc4d6e9796c2024f6c76b7a"
     },
     {
       "hint_id": 4,
@@ -84,6 +84,6 @@
       "hint_hash": "03b88454bbefe8b368f773ca44d44d049e482cea344efb81862348cdcd92e1e8"
     }
   ],
-  "total_tokens": 1653,
-  "book_hash": "4c981762e4006770f1df1330a54d20b2e49c56774c823d6baefef44a58ec0d39"
+  "total_tokens": 1657,
+  "book_hash": "32e35311bc07d72ee7be423bd54cbd832bdf25598aced6b71816e245eb9923ba"
 }
