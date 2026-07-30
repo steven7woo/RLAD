@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+  "round": 1,
+  "book_hash_before": "d9ca50fca21d46b3e8991a3f418a2b21c0f0d0af2e8b69ea841b887e8c5d25bd",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "For puzzles where agents announce ignorance, first write down exactly what each agent knows. If the setup leaves ambiguous which of two quantities was revealed, that ambiguity is part of every agent's uncertainty: do not case-split externally, assume one reading, and restart. An agent holding x who sees N must keep every partner value legal under either reading (sum/product reveal: N-x and N/x when each is a valid natural number). \"I do not know\" means at least two partner values survive, which constrains that agent's own number. Apply announcements in order, filtering the set left by the previous one. Verify at the end: your candidate makes both announcements true and no rival candidate does. Track eliminations once and move forward instead of relitigating; looping exhausts your budget before you answer.",
+      "mutation": "replace abstract set-filtering recipe with a concrete first move, the sum/product ambiguity trap, and an anti-looping directive",
+      "subagent_summary": "Fresh rollouts on execution 618.22 scored 2/8. All four zero-reward failures with finish_reason=length never reached a final answer: they oscillated over whether 2002 was the sum or the product, repeatedly declared a contradiction and restarted the analysis from scratch until the 16k budget ran out. The two zero-reward finishers did pick one reading, enumerated factor pairs, then chose an arbitrary member of a pair without checking that rivals were excluded. The incumbent hint described set filtering abstractly and said nothing about the ambiguous reveal or about not restarting, so the revision names the concrete first move (write each agent knowledge state, keep both readings inside the uncertainty), states the uniqueness check, and warns against relitigating eliminations.",
+      "sampling_slurm_job_id": "618.22",
+      "tokens": 162,
+      "hint_hash": "dbc2ee04fc1040b32c556b3902c8b24a068f4fb2a65471d780bb7cf95f06ed05",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "For root-locus questions, take moduli before hunting individual roots. Given (z-a)^n = c(z-b)^n, divide by (z-b)^n and take absolute values: |z-a| = k|z-b| with k = |c|^(1/n). That is an Apollonius circle, so every root lies on one circle whichever n-th root of c you pick; you never need the roots themselves. Avoid parametrizing the ratio as k e^{i t} and eliminating t, which is where sign and algebra slips occur. Instead set z = x+iy, square both sides, collect the x^2+y^2 terms, divide by their coefficient, and complete the square to read off center and radius. Note z = b is never a root, and k = 1 degenerates to a line. Confirm by substituting one real root into your circle equation.",
+      "mutation": "generalize to Apollonius-modulus method; replace parametrize-and-eliminate step with x+iy complete-the-square",
+      "subagent_summary": "All 8 fresh rollouts (execution_id 618.14) scored reward 1, so the incumbent is already on-task; the win is transfer, not train accuracy. Every trace independently found the ratio substitution unaided, so those words are wasted; the observable risk was the follow-on step, where rollouts that parametrized the ratio angle and eliminated it produced long, shaky algebra and inconsistent center signs (some reported the center mirrored) while still landing the radius. The revision therefore drops the problem-specific substitution scaffolding, states the general modulus/Apollonius-circle framing for any (z-a)^n = c(z-b)^n, prescribes the safer x+iy complete-the-square route, and adds the degenerate-case and verification checks.",
+      "sampling_slurm_job_id": "618.14",
+      "tokens": 189,
+      "hint_hash": "9138cd5979de483d23029b8e4c72d6e198252a7e38b0ad951230b784f87a090b",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square; show the far edges are too distant to matter, so the overlap is a right-angle wedge cut by the small square. Then be numeric, not qualitative: for one angle, find where the two rays exit the square, list the polygon vertices in order, and shoelace it. Repeat for a second angle. If the two values match, suspect the overlap is angle-independent and confirm it by pairing congruent pieces under the square's own rotational symmetry; otherwise minimize over the symmetry-reduced range. Box a number well before you run long.",
+      "mutation": "replace piecewise-minimization framing with a concrete shoelace-two-angles procedure plus anti-loop and budget guards",
+      "subagent_summary": "All 8 rollouts scored 0 and every one terminated with finish_reason=length at the 16384-token cap, with zero reaching a final boxed answer; the incumbent hint's instruction to build a piecewise overlap function over critical angles caused the students to re-derive the rotated square's edge equations dozens of times (11-59 separate angle substitutions per rollout, 53-81 self-corrections) and oscillate between contradictory qualitative claims. The revision therefore drops the piecewise-minimization framing and instead prescribes a terminating computation: prune the far edges, shoelace an explicit vertex list at two angles, and use the observed equality to trigger a symmetry proof, plus explicit anti-restart and box-early guards aimed squarely at the length failure.",
+      "sampling_slurm_job_id": "618.18",
+      "tokens": 161,
+      "hint_hash": "d69272dd32d75bb109b8f90ec51dbfc046caef43ffec91aebfcc7655b32b70ce",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "00f433b6ea19dfe2336efbb3476fea529c0993179016a67ce16e4288905f3cd0"
+    },
+    {
+      "hint_id": 4,
+      "hint": "Several hidden degree-n polynomials must jointly hit prescribed values at consecutive integers. Two traps: do NOT difference one polynomial and conclude impossibility, and do NOT assume each polynomial is used once.\n\nMethod: write the prescribed value as a function of the INPUT, not the position; for an arithmetic progression over consecutive inputs the target is affine, L(x)=px+q. Fix one polynomial P and set g=P-L. Every input assigned to P is a root of g. Compare degrees to show g is not identically zero, so g has at most n roots; that caps how many inputs any single polynomial can serve. Multiply/sum that cap over the family for the upper bound, then exhibit a construction giving each polynomial a disjoint block of inputs where it interpolates L. Report one exact integer.",
+      "mutation": "name the two observed failure traps up front, then give the concrete P-minus-affine-target root-counting recipe",
+      "subagent_summary": "All 8 rollouts scored 0. The dominant failure was taking the finite difference P(x+1)-P(x) of a single polynomial, finding it non-constant, and declaring the progression impossible or collapsing to a tiny answer (2, 5, 6); the second failure was assuming each polynomial can be used only once and answering with the count of polynomials (10). Two runs also burned the full token budget oscillating between these two wrong frames. The incumbent hint's abstract 'affine-in-index target' and 'suitable finite difference' language was never operationalized, so the revision states the target as affine in the INPUT, makes g = P - L and its root count the explicit first move, and warns against the exact two traps observed.",
+      "sampling_slurm_job_id": "618.16",
+      "tokens": 161,
+      "hint_hash": "f212db17d44fe5d49e8827b752416b5712e08e5fae6e5c30aafeee3eac2b3c99",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "93b35723e9cc953d39ac835ae67c34590b0c25060143ab50c99c75c21cbb1ff2"
+    },
+    {
+      "hint_id": 5,
+      "hint": "When unknown points on a fixed curve y=g(x) are tied by a known displacement (u,v), reduce to ONE unknown: let the free vertex be (t, g(t)) and its partner (t+u, g(t)+v), then solve the single scalar equation g(t+u) = g(t) + v.\n\nFor a logarithmic curve, convert that additive offset to a multiplicative one BEFORE cross-multiplying: log_c(B) - log_c(A) = v means B/A = c^v. Flipping the direction or sign of that power is the dominant failure mode.\n\nIf you hit an impossible identity or a negative discriminant, you flipped the offset: recheck only that conversion line. Do not conclude the configuration is impossible, and do not restart from scratch.\n\nDiscard roots that reproduce a given vertex (degenerate). Finish with the shoelace determinant in cyclic order.",
+      "mutation": "replace generic recipe with one-unknown translation setup plus log offset sign trap and no-restart rule",
+      "subagent_summary": "Fresh rollouts scored 5/8; all three failures ended with finish_reason='length' at the 16384-token cap, and each had the same root cause: the additive log offset was applied in the wrong direction when equating the two graph conditions, producing an impossible identity or a negative discriminant, after which the model looped for thousands of tokens guessing configurations instead of rechecking that one line. Successful rollouts all did the same thing early: parametrize one vertex, translate it by the displacement, convert the offset multiplicatively, drop the degenerate root, then shoelace. The revised hint front-loads that one-unknown reduction, names the sign/direction trap explicitly, and forbids the restart spiral, while dropping incumbent words spent on parameter fitting that every rollout already did correctly.",
+      "sampling_slurm_job_id": "618.15",
+      "tokens": 185,
+      "hint_hash": "b4fd32f624ae17388dbdae26f7e56c31810f77c5a9d0b0ec175f909f80debcae",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "When a random process moves items between stacks, do NOT assume all final arrangements are equally likely, and do NOT assume an item is equally likely to land in any slot. That unjustified-uniformity leap is the trap here; refuse it even if the answer looks elegant.\n\nInstead encode a whole run as a string of move letters (T = source-to-middle, G = middle-to-destination). A string is legal only if it never pops an empty pile. With few items, enumerate all legal strings. Multiply step probabilities along each string: 1/2 when both moves are available, but exactly 1 when only one is. Track the labelled piles to read the true final order, remembering each transfer reverses a pile. Sum probabilities of the strings meeting the asked event, and check all legal strings total 1.",
+      "mutation": "add explicit anti-uniformity warning plus concrete move-string enumeration recipe",
+      "subagent_summary": "Only 1 of 8 rollouts was correct; 6 of the 8 failures collapsed the whole process to 'the shed order is a uniformly random permutation' and then answered 1/24 or 1/4 by symmetry, and one asserted a specific bag could never reach the bottom. The incumbent hint's abstract 'state graph / dynamic programming' framing was never actually executed by the student, so I replaced it with an explicit named-representation recipe (enumerable move strings, forced-move probability 1 vs 1/2, stack reversal on transfer) and a direct warning against the uniform-permutation leap that caused every observed failure.",
+      "sampling_slurm_job_id": "618.19",
+      "tokens": 166,
+      "hint_hash": "3187f2a53030cbfb51c900ebffe00401cce79e1a38087f368354a4aa2449afc0",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "hint": "When many weighted power sums sum a_i*(node_i)^k are prescribed, read them as one linear functional L(p) = sum a_i p(node_i) on polynomials p of the node variable; k is p's degree, not an index. Moments vanishing for k=1..N-1 with the k=N moment normalized make L return p's leading coefficient for every p of degree <= N, and the absent k=0 equation forces p(0)=0, so keep a factor x. To isolate ONE weight, choose the monic p vanishing at 0 and at all nodes but that one; then L(p) = weight * p(node), giving the weight as a reciprocal product of node differences. Never expand the Vandermonde system or solve for all weights, and reject any argument concluding the weights are all zero. Watch signs, test the idea on 3 nodes, then stop.",
+      "mutation": "name the test-polynomial first move and the two observed failure modes (Vandermonde detour, all-zero conclusion)",
+      "subagent_summary": "All 8 fresh rollouts scored 0 and 7 of 8 exhausted the 16384-token budget; the incumbent hint's abstract 'linear functional / Lagrange interpolation' framing was quoted back but never operationalized, so runs looped for thousands of tokens re-deriving whether the Vandermonde system was consistent instead of picking a concrete test polynomial. Two recurring failure modes: interpreting the exponent as a coefficient index and concluding all weights vanish, or building the right root product but losing the sign/normalization while trying to solve for every weight at once. The revision therefore states the degree-vs-index reading, the missing k=0 moment implying a forced root at 0, an explicit single-weight test-polynomial first move, and the two traps to reject, so the solver commits early instead of exploring until truncation.",
+      "sampling_slurm_job_id": "618.20",
+      "tokens": 186,
+      "hint_hash": "df2b6c0bb67ee7a7318408c81bd24cd991a087e82515c0f9894388200cdd9dc7",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "When totals are given for a whole group but the group size N is unknown, treat N as an unknown divisor. A clause like \"each item's share is a whole number\" forces N to divide every listed total, so N is a common divisor: factor them, take their gcd, and if nothing else pins N down choose the largest admissible divisor, then check each total/N is an integer. Treat decorative layout wording (streets, rows, groups) as a constraint only if it supplies real numbers. Fix the percentage base before computing: \"markup is p% of cost\" means price = cost x (1 + p/100), not cost/(1 - p/100). Sum components first, divide by N, apply the multiplier last, and keep the original units.",
+      "mutation": "generalize to reusable unknown-divisor + percentage-base recipe, drop problem-specific scaffolding",
+      "subagent_summary": "Fresh run scored 8/8 at train_i 1.0 with no truncations, so the on-task job is done and the gap is transfer (heldout 0.15). Rollouts showed the incumbent's problem-specific phrases ('equal-street layout constrains H', 'maximum-feasible-count interpretation') being quoted back and puzzled over for many tokens, and the recurring genuine hesitation was which base the percentage applies to; so I replaced the bespoke scaffolding with a general 'group size is an unknown common divisor, take the gcd, verify integrality' recipe plus an explicit markup-base formula and a warning to ignore decorative layout wording.",
+      "sampling_slurm_job_id": "618.17",
+      "tokens": 162,
+      "hint_hash": "3150ffa9989e11a4e8fc3a502bd2e997dfad35884aee7e9a655faaddd0c6470b",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "When the constraint is a commuting identity like p(q(x)) = q(p(x)) with unknown coefficients, do not expand the composition: its degree is the product of the degrees, and drowning in that algebra is the main way these problems are lost. Instead posit an affine link q = a*p + b, testing the simplest cases a = ±1 first, and fix b from the given point values. The identity then reduces to \"p commutes with an affine involution\", which forces p to be antisymmetric about that map's fixed point m: p(m+t) + p(m-t) is constant. Use that symmetry to produce the requested outputs directly instead of solving for every coefficient. Expect one leftover free coefficient; verify the requested values do not depend on it, then set it to something convenient and check the identity numerically at two points.",
+      "mutation": "give an explicit affine-ansatz first move plus symmetry identity, warn against expanding the composition",
+      "subagent_summary": "All 8 rollouts engaged the incumbent hint but its abstract phrases ('shared affine coordinate', 'common iterate') gave no executable first move: 6 of 8 spent the entire 16k budget cycling through dead ends (are they inverses? are they linear? maybe drop the quadratic term?) and hit the length cap with no answer, and the one non-length failure did the same. The single success only broke through after guessing the concrete ansatz q = -p + const, then exploiting the resulting reflection symmetry, so the revision names that ansatz and the symmetry identity outright and warns against expanding the degree-9 composition.",
+      "sampling_slurm_job_id": "618.21",
+      "tokens": 171,
+      "hint_hash": "4f1f9baf5c0ee54e69e21910d4c53ff35a80a21cf99453fae5e77e4e344dd246",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "d95dbbc2898bc6c58c3684891a45d7c76fe4e0835ddd91bed1a4955ddf89942a"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Model the whole procedure as one permutation of positions and answer with its order. First, brute-force simulate it on the two smallest sizes, writing out the full position-to-position map, before you propose any formula. Do not shortcut from \"each stage is an involution\" or \"each stage swaps two halves\" to a shift or a product of 2-cycles: composing stages in sequence usually creates long cycles, so compute the composition entry by entry, applying stages in the stated order. Then trace one position's forward orbit until it returns, and take the order as the lcm of cycle lengths. Index from 0 and write indices in fixed-width binary to expose a bitwise pattern. If a formula and a simulation disagree, trust the simulation.",
+      "mutation": "replace abstract bitwise-affine framing with explicit brute-force-first orbit tracing plus the observed involution/half-shift trap warning",
+      "subagent_summary": "All 3 correct rollouts explicitly built the full position-to-position map for a small size, then traced a single forward orbit to its return; all 5 failures shared one root cause, collapsing the composition of stages into 'a product of disjoint 2-cycles' or 'a half-shift' because each individual stage is an involution, and 3 of those burned the entire 16384-token budget looping on inconsistent hand computations. The incumbent hint's 'bitwise affine permutation' framing was never used by any rollout, so it was replaced with a concrete simulate-first, trace-one-orbit procedure and an explicit warning against the involution/half-shift shortcut, plus a tiebreak rule to trust simulation over pattern guesses to stop the loops.",
+      "sampling_slurm_job_id": "618.13",
+      "tokens": 149,
+      "hint_hash": "e51af9be832378e0a6ce8a00f813b534bb184fc849d29822c6773cc7f6a81266",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}
