@@ -65,6 +65,27 @@
             "J_i": 0.45
           },
           "proposal_eval_slurm_job_id": "618.23"
+        },
+        {
+          "round": 2,
+          "decision": "discarded",
+          "proposal_hash": "7204cd1115e5d9d5a5bcdca1ec79d232fcaf8055b4aad7e59df7ce3b7834db0a",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "7204cd1115e5d9d5a5bcdca1ec79d232fcaf8055b4aad7e59df7ce3b7834db0a",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 9,
+            "J_denominator": 80,
+            "J_i": 0.1125
+          },
+          "proposal_eval_slurm_job_id": "618.43"
         }
       ]
     },
@@ -72,23 +93,23 @@
       "hint_id": 2,
       "train_position": 28,
       "train_qid": "30302",
-      "hint": "For root-locus questions, take moduli before hunting individual roots. Given (z-a)^n = c(z-b)^n, divide by (z-b)^n and take absolute values: |z-a| = k|z-b| with k = |c|^(1/n). That is an Apollonius circle, so every root lies on one circle whichever n-th root of c you pick; you never need the roots themselves. Avoid parametrizing the ratio as k e^{i t} and eliminating t, which is where sign and algebra slips occur. Instead set z = x+iy, square both sides, collect the x^2+y^2 terms, divide by their coefficient, and complete the square to read off center and radius. Note z = b is never a root, and k = 1 degenerates to a line. Confirm by substituting one real root into your circle equation.",
-      "tokens": 189,
-      "hint_hash": "9138cd5979de483d23029b8e4c72d6e198252a7e38b0ad951230b784f87a090b",
+      "hint": "For \"all roots lie on one circle\" problems, take moduli before hunting roots. From (z-a)^n = c(z-b)^n get |z-a| = k|z-b| with k = |c|^(1/n). TRAP: |c|*|z-b|^n means c is NOT raised to the n-th power; compute k as a plain number and check k^n = |c| before continuing, since a wrong k gives a wrong but perfectly self-consistent circle. Then set z = x+iy, square, collect the x^2+y^2 terms, divide by their coefficient, complete the square, read off center and radius (an Apollonius circle; k=1 degenerates to a line). Verify against the ORIGINAL equation, never your derived one: solve (z-a)/(z-b) = k for its real root and check its distance to your center equals your radius. Then box.",
+      "tokens": 196,
+      "hint_hash": "fad519d5df8c79bed93cda1aeff9f3e875b36bbc185cc1cb6999b9dd9ac812c6",
       "metrics": {
         "schema_version": 1,
         "hint_id": 2,
-        "hint_hash": "9138cd5979de483d23029b8e4c72d6e198252a7e38b0ad951230b784f87a090b",
+        "hint_hash": "fad519d5df8c79bed93cda1aeff9f3e875b36bbc185cc1cb6999b9dd9ac812c6",
         "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
-        "train_correct": 7,
+        "train_correct": 8,
         "train_total": 8,
-        "train_i": 0.875,
+        "train_i": 1.0,
         "heldout_correct": 12,
         "heldout_total": 80,
         "heldout_i": 0.15,
-        "J_numerator": 82,
+        "J_numerator": 92,
         "J_denominator": 80,
-        "J_i": 1.025
+        "J_i": 1.15
       },
       "history": [
         {
@@ -131,6 +152,27 @@
             "J_i": 1.025
           },
           "proposal_eval_slurm_job_id": "618.24"
+        },
+        {
+          "round": 2,
+          "decision": "kept",
+          "proposal_hash": "fad519d5df8c79bed93cda1aeff9f3e875b36bbc185cc1cb6999b9dd9ac812c6",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "fad519d5df8c79bed93cda1aeff9f3e875b36bbc185cc1cb6999b9dd9ac812c6",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 92,
+            "J_denominator": 80,
+            "J_i": 1.15
+          },
+          "proposal_eval_slurm_job_id": "618.44"
         }
       ]
     },
@@ -197,6 +239,27 @@
             "J_i": 0.25
           },
           "proposal_eval_slurm_job_id": "618.25"
+        },
+        {
+          "round": 2,
+          "decision": "discarded",
+          "proposal_hash": "c4dd1b82d059c3f8b2daf62a558f310c24b06608381aa1310b08df841616cf5a",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "c4dd1b82d059c3f8b2daf62a558f310c24b06608381aa1310b08df841616cf5a",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 9,
+            "J_denominator": 80,
+            "J_i": 0.1125
+          },
+          "proposal_eval_slurm_job_id": "618.45"
         }
       ]
     },
@@ -263,6 +326,27 @@
             "J_i": 1.1875
           },
           "proposal_eval_slurm_job_id": "618.26"
+        },
+        {
+          "round": 2,
+          "decision": "discarded",
+          "proposal_hash": "26029fbd81b4e715c4dacce95acb742b451d983f7981645e574325645139ff30",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "26029fbd81b4e715c4dacce95acb742b451d983f7981645e574325645139ff30",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 33,
+            "J_denominator": 80,
+            "J_i": 0.4125
+          },
+          "proposal_eval_slurm_job_id": "618.46"
         }
       ]
     },
@@ -329,6 +413,27 @@
             "J_i": 0.975
           },
           "proposal_eval_slurm_job_id": "618.27"
+        },
+        {
+          "round": 2,
+          "decision": "discarded",
+          "proposal_hash": "de35af1b9485c4e475e5b8eabaf2b9c038698ded8b0d5c49627b7ee4e10e9cce",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "de35af1b9485c4e475e5b8eabaf2b9c038698ded8b0d5c49627b7ee4e10e9cce",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 7,
+            "heldout_total": 80,
+            "heldout_i": 0.0875,
+            "J_numerator": 57,
+            "J_denominator": 80,
+            "J_i": 0.7125
+          },
+          "proposal_eval_slurm_job_id": "618.47"
         }
       ]
     },
@@ -395,6 +500,27 @@
             "J_i": 0.1875
           },
           "proposal_eval_slurm_job_id": "618.28"
+        },
+        {
+          "round": 2,
+          "decision": "discarded",
+          "proposal_hash": "3b7dd0a97c3f3813409d80289a1bb8d56888bcc31282fb51bd4793373bbdd53e",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "3b7dd0a97c3f3813409d80289a1bb8d56888bcc31282fb51bd4793373bbdd53e",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 14,
+            "J_denominator": 80,
+            "J_i": 0.175
+          },
+          "proposal_eval_slurm_job_id": "618.48"
         }
       ]
     },
@@ -461,6 +587,27 @@
             "J_i": 0.3
           },
           "proposal_eval_slurm_job_id": "618.29"
+        },
+        {
+          "round": 2,
+          "decision": "discarded",
+          "proposal_hash": "f0622c32ca141caff2750dea3976ff8ea777646e3c40a7aa78842990bf4b2aee",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "f0622c32ca141caff2750dea3976ff8ea777646e3c40a7aa78842990bf4b2aee",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 12,
+            "J_denominator": 80,
+            "J_i": 0.15
+          },
+          "proposal_eval_slurm_job_id": "618.49"
         }
       ]
     },
@@ -527,6 +674,27 @@
             "J_i": 0.725
           },
           "proposal_eval_slurm_job_id": "618.30"
+        },
+        {
+          "round": 2,
+          "decision": "discarded",
+          "proposal_hash": "987ab6157a1ffc7104a9192b0d2ed24aeeae4c30aaab76f559099512f0fbd80a",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "987ab6157a1ffc7104a9192b0d2ed24aeeae4c30aaab76f559099512f0fbd80a",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 64,
+            "J_denominator": 80,
+            "J_i": 0.8
+          },
+          "proposal_eval_slurm_job_id": "618.50"
         }
       ]
     },
@@ -593,6 +761,27 @@
             "J_i": 0.5125
           },
           "proposal_eval_slurm_job_id": "618.31"
+        },
+        {
+          "round": 2,
+          "decision": "discarded",
+          "proposal_hash": "a9e3ad7f15584dbf0896713391ae22473faca6c44aa8f31ea85f093c451284cc",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "a9e3ad7f15584dbf0896713391ae22473faca6c44aa8f31ea85f093c451284cc",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 24,
+            "J_denominator": 80,
+            "J_i": 0.3
+          },
+          "proposal_eval_slurm_job_id": "618.51"
         }
       ]
     },
@@ -600,23 +789,23 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Treat each switcheroo as a permutation of positions. Label positions by fixed-width binary strings and determine which bit or block each stage changes; test the rule on the smallest sizes to fix indexing conventions. Compose the stages into one bitwise affine permutation. Determine its order from the cycle structure and prove minimality by exhibiting a position with the full cycle length.",
-      "tokens": 72,
-      "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5",
+      "hint": "First move: for the two smallest sizes, write positions 0..N-1 as an explicit list and rewrite the entire list after each stage k=0,1,...,n-1 in order; that is one operation. Reapply it and track the orbit of a single label until it repeats. That cycle length is your candidate order. Then write positions in binary and express the whole operation as one map on bit strings (which bits flip, which rotate), and verify it reproduces both explicit traces. Trap: if traces of different sizes suggest different formulas, your trace is wrong, not the formula piecewise; redo the smallest case letter by letter. Trust the verified bit map over pattern-guessing. Once two sizes agree, stop exploring, never restart the analysis, and box a single closed form in n.",
+      "tokens": 166,
+      "hint_hash": "dd13dfdbf01ce17b82749c8a21248b69e4fc454c46da7dfa1dea17c016ff54c0",
       "metrics": {
         "schema_version": 1,
         "hint_id": 10,
-        "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5",
+        "hint_hash": "dd13dfdbf01ce17b82749c8a21248b69e4fc454c46da7dfa1dea17c016ff54c0",
         "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
-        "train_correct": 2,
+        "train_correct": 4,
         "train_total": 8,
-        "train_i": 0.25,
-        "heldout_correct": 9,
+        "train_i": 0.5,
+        "heldout_correct": 8,
         "heldout_total": 80,
-        "heldout_i": 0.1125,
-        "J_numerator": 29,
+        "heldout_i": 0.1,
+        "J_numerator": 48,
         "J_denominator": 80,
-        "J_i": 0.3625
+        "J_i": 0.6
       },
       "history": [
         {
@@ -659,6 +848,27 @@
             "J_i": 0.275
           },
           "proposal_eval_slurm_job_id": "618.32"
+        },
+        {
+          "round": 2,
+          "decision": "kept",
+          "proposal_hash": "dd13dfdbf01ce17b82749c8a21248b69e4fc454c46da7dfa1dea17c016ff54c0",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "dd13dfdbf01ce17b82749c8a21248b69e4fc454c46da7dfa1dea17c016ff54c0",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 8,
+            "heldout_total": 80,
+            "heldout_i": 0.1,
+            "J_numerator": 48,
+            "J_denominator": 80,
+            "J_i": 0.6
+          },
+          "proposal_eval_slurm_job_id": "618.52"
         }
       ]
     }

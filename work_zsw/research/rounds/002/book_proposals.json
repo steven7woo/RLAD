@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+  "round": 2,
+  "book_hash_before": "e22fca4fa988f62e1fbcfd5444205f0751243494f9b2503dda6f506e051be0c2",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "A number N is shown but nobody is told whether it is the sum or the product: both readings stay live for everyone at once. First move: for a holder of x, write the partner set C(x) = {N-x, N/x}, keeping only natural values (N/x only when x divides N). \"I don't know\" means |C(x)| >= 2.\n\nTrap: do not case-split into \"it must be the sum\" / \"it must be the product\". You will contradict both, then guess. A contradiction means you wrongly assumed the reading was known; reinstate both, do not restart.\n\nFilter in speaking order: list D, the first speaker's surviving values (divisors of N are few, so D is short). The next speaker is ignorant iff two or more elements of C(y) lie in D. Sweep once and box the unique survivor.",
+      "mutation": "replace abstract no-case-split rule with executable partner-set first move plus ordered filter and commit",
+      "subagent_summary": "Fresh run scored 0/8 (execution 618.33): five of eight rollouts hit the 16384-token cap and three finished only after long thrash, and every rollout that did box an answer had first derived 'both readings are impossible' and then guessed a factor pair. The incumbent hint stated the no-external-case-split principle abstractly but gave no computable first step, so the student never built the candidate-partner set; the revision leads with C(x) = {N-x, N/x}, names 'you will contradict both readings then guess' as the concrete trap, and orders the announcement filter into one forward sweep ending in a commit.",
+      "sampling_slurm_job_id": "618.33",
+      "tokens": 181,
+      "hint_hash": "7204cd1115e5d9d5a5bcdca1ec79d232fcaf8055b4aad7e59df7ce3b7834db0a",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "dbc2ee04fc1040b32c556b3902c8b24a068f4fb2a65471d780bb7cf95f06ed05"
+    },
+    {
+      "hint_id": 2,
+      "hint": "For \"all roots lie on one circle\" problems, take moduli before hunting roots. From (z-a)^n = c(z-b)^n get |z-a| = k|z-b| with k = |c|^(1/n). TRAP: |c|*|z-b|^n means c is NOT raised to the n-th power; compute k as a plain number and check k^n = |c| before continuing, since a wrong k gives a wrong but perfectly self-consistent circle. Then set z = x+iy, square, collect the x^2+y^2 terms, divide by their coefficient, complete the square, read off center and radius (an Apollonius circle; k=1 degenerates to a line). Verify against the ORIGINAL equation, never your derived one: solve (z-a)/(z-b) = k for its real root and check its distance to your center equals your radius. Then box.",
+      "mutation": "replace parametrization warning with the n-th-root-of-c trap and an original-equation verification",
+      "subagent_summary": "All 8 rollouts terminated normally (finish_reason stop, 3.4k-7.8k tokens), so budget is not the issue; 7 of 8 were correct and every rollout visibly followed the incumbent's take-moduli-then-complete-the-square recipe. The single failure came from taking the modulus without extracting the n-th root of the constant, which produced a self-consistent-but-wrong circle that survived its own internal check and even the incumbent's suggested substitution check, because the derived equation was verified rather than the original. I therefore cut the dead-weight clause warning against a parametrization no rollout used, and spent those tokens on an explicit k^n = |c| sanity check plus a verification anchored to the original equation.",
+      "sampling_slurm_job_id": "618.34",
+      "tokens": 196,
+      "hint_hash": "fad519d5df8c79bed93cda1aeff9f3e875b36bbc185cc1cb6999b9dd9ac812c6",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "9138cd5979de483d23029b8e4c72d6e198252a7e38b0ad951230b784f87a090b"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union = sum of areas minus overlap, so maximize by minimizing overlap. Do this first, then never redo it: put the pinned corner at the origin, keep the small square axis-aligned, and let a single angle theta rotate the other shape. Prune before computing: only the two edges meeting at the pinned point can cut the small square, so ignore the far edges. Pick one convenient theta, find where those two rays exit the square, list the region's vertices in cyclic order, and shoelace. Repeat at one other theta. If the two values agree, that IS the answer: do not scan more angles, do not restart, do not re-verify. Box it immediately and keep the final write-up to three lines.",
+      "mutation": "add hard stopping rule and cap re-verification to kill truncation",
+      "subagent_summary": "All 8 fresh rollouts (execution_id 618.35) finished with finish_reason=length at the full 16384-token cap and scored 0; 6 of 8 never even emitted a </think>, and the two that did ran out of room mid-write-up after already having a correct value in the reasoning. The failure is pure non-termination from endless re-verification ('Wait' appears 34-71 times per rollout, and the incumbent's 'otherwise minimize over the symmetry-reduced range' plus 'confirm it by pairing congruent pieces' invited an open-ended angle scan), not bad geometry, so I removed the extra confirmation branch and replaced it with an explicit two-sample-then-stop rule plus an immediate-box and three-line-write-up cap.",
+      "sampling_slurm_job_id": "618.35",
+      "tokens": 149,
+      "hint_hash": "c4dd1b82d059c3f8b2daf62a558f310c24b06608381aa1310b08df841616cf5a",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "d69272dd32d75bb109b8f90ec51dbfc046caef43ffec91aebfcc7655b32b70ce"
+    },
+    {
+      "hint_id": 4,
+      "hint": "Several hidden degree-n polynomials must jointly hit prescribed values at consecutive integers. Rewrite the target as a function of the INPUT x, not the position: an arithmetic progression over consecutive inputs is affine, L(x)=px+q.\n\nFirst move: fix a polynomial P and set g=P-L. Subtracting an affine L leaves P's leading term untouched, so deg g = deg P exactly, NOT one less; getting that degree wrong is the main way this problem is lost. Each input handled by P is a root of g, so P serves at most deg P inputs; multiply by the number of polynomials.\n\nA polynomial may be reused, so never conclude one input each. Check the cap is attained by giving each polynomial its own block of consecutive inputs where it interpolates L. When cap and construction agree, box the integer immediately; do not restart.",
+      "mutation": "fix the degree-of-difference off-by-one and add commit rule",
+      "subagent_summary": "On my 8 fresh rollouts (execution_id 618.36) only 3 were correct; the 5 failures split into two clusters that both mis-set the per-polynomial cap: two computed deg(P-L)=deg P-1 (treating the affine subtraction as if it dropped the leading term) and so undercounted roots, and two collapsed to one input per polynomial after wrongly arguing reuse is impossible; one more never terminated and hit the 16384-token cap with no boxed answer. The incumbent named the g=P-L move but never pinned the degree, so I state deg g = deg P exactly as the headline trap, keep the reuse warning, and add an explicit commit-and-box rule to stop the looping rollout.",
+      "sampling_slurm_job_id": "618.36",
+      "tokens": 173,
+      "hint_hash": "26029fbd81b4e715c4dacce95acb742b451d983f7981645e574325645139ff30",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "f212db17d44fe5d49e8827b752416b5712e08e5fae6e5c30aafeee3eac2b3c99"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Reduce to ONE unknown: put the free vertex at (t, g(t)) and its partner at (t+u, g(t)+v) for the given displacement (u,v), then solve g(t+u) = g(t) + v.\n\nFor y = log_c(ratio), adding v to the log multiplies the ratio by c^v in the GIVEN base c (c<1 shrinks it). Compute c^v as a number, then cross-multiply; using c^(-v) is the dominant error.\n\nIf the discriminant comes out negative, do NOT recheck earlier lines or restart with renamed variables: negate (u,v), shifting the other vertex, and redo only the cross-multiplication. Allow one flip, then commit.\n\nDrop any root reproducing a known vertex. Finish with the shoelace determinant in cyclic order and box a number.",
+      "mutation": "replace discriminant-panic loop with a bounded one-flip repair rule",
+      "subagent_summary": "All 4 of 8 failures were finish_reason=length at the full 16384-token cap, and every one of them hit a negative discriminant, then spent thousands of tokens re-verifying identical algebra and restarting with renamed variables instead of correcting the sign of the displacement; the 4 successes reached the same quadratic with the offset oriented the right way and finished in 8-12k tokens. The incumbent already said \"do not restart\" but gave no bounded repair action, so the revision names the exact fix (negate the displacement, redo only the cross-multiplication), caps it at one flip, and states the base-c<1 direction explicitly as the concrete first move.",
+      "sampling_slurm_job_id": "618.37",
+      "tokens": 180,
+      "hint_hash": "de35af1b9485c4e475e5b8eabaf2b9c038698ded8b0d5c49627b7ee4e10e9cce",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b4fd32f624ae17388dbdae26f7e56c31810f77c5a9d0b0ec175f909f80debcae"
+    },
+    {
+      "hint_id": 6,
+      "hint": "When items pass through an intermediate holding spot, model it as a stack: a run is a string of pushes and pops, and the resulting pile read bottom-up is the pop order. Label the items 1..n, write the exact push/pop string that produces the requested arrangement, then price it step by step: factor 1/2 only when both a push and a pop are legal, factor 1 when one side is forced because a stack is empty. Multiply. Two traps: the order is NOT deterministic, and it is NOT uniform over n! -- only stack-permutations occur. Check small cases by hand and confirm probabilities sum to 1. Report exactly one value for the part asked, then stop.",
+      "mutation": "replace abstract state-graph DP with explicit push/pop stack encoding, the two observed traps, and a one-value stopping rule stated without answer-marker language",
+      "subagent_summary": "All 8 fresh rollouts scored 0 under the incumbent state-graph/DP hint and none actually built that state graph: 4 declared the resulting order forced (probability 1), 3 treated it as uniform over 4!, and 1 blew the 16384-token cap enumerating sequences ad hoc. So the revision names the concrete push/pop stack encoding and the per-step 1/2-versus-forced weighting as the opening move, explicitly negates the two observed traps, and closes with a commit-to-one-value-and-stop rule, since the one rollout that did reach the correct value lost reward by continuing on to emit a second marked result for the later part.",
+      "sampling_slurm_job_id": "618.38",
+      "tokens": 145,
+      "hint_hash": "3b7dd0a97c3f3813409d80289a1bb8d56888bcc31282fb51bd4793373bbdd53e",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Read these as moment conditions: each a_i is a weight attached to a fixed node i, NOT a coefficient of a polynomial in x. Confusing the two wastes the whole budget. First move: multiply equation k by c_k and add. Then for any test polynomial f(x)=sum c_k x^k using only the exponents actually present (so f(0)=0), you get sum_i a_i f(i) = the same combination of right-hand sides. To isolate one weight, pick f vanishing at 0 and at every other node; that weight then equals the right-hand side over f(its own node). Collapse that product of integer node differences into factorials, fixing the sign by counting negative factors. Verify by re-substituting f. Do not tabulate small cases hoping for a pattern, and do not restart - box the closed form early.",
+      "mutation": "replace abstract functional language with an executable test-polynomial first move plus anti-looping rule",
+      "subagent_summary": "All 8 rollouts scored 0 and 7 of 8 terminated by hitting the 16384-token cap with no boxed answer; the incumbent's abstract 'linear functional / vanishing moments' framing gave no executable first step, so the student repeatedly conflated the weights a_i with coefficients of a polynomial in x, declared the system inconsistent, and looped through tiny n=2,3,4 cases guessing patterns. The revision names the exact misreading to avoid, gives the concrete first move (weight the equations by c_k to build a test polynomial and evaluate at the nodes), specifies choosing f to vanish at 0 and at all other nodes so one weight survives, and adds an explicit do-not-restart-and-box-early rule to fix the non-termination that dominated the failures.",
+      "sampling_slurm_job_id": "618.39",
+      "tokens": 178,
+      "hint_hash": "f0622c32ca141caff2750dea3976ff8ea777646e3c40a7aa78842990bf4b2aee",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "First decide, from the wording alone, whether each given figure is an aggregate or a per-unit amount; if a reading forces an absurd count, drop it at once and never relitigate it. When an unknown count n is pinned down only by integrality, rewrite \"each unit's share is a whole number\" as \"n divides that total\": factor the given totals and take their gcd. If the wording still leaves n free, take the largest admissible n, state that choice once, and move on instead of enumerating divisors. Then add the components once, divide by n, and apply a percentage markup as a single multiplication by (1+p); the order of dividing and marking up is irrelevant, so do not redo it both ways. Confirm every per-unit share is an integer, then box the number in the problem's units.",
+      "mutation": "generalize divisor-count technique and add anti-relitigation / single-pass markup rules",
+      "subagent_summary": "Fresh training run scored 8/8 with no truncation, so the incumbent is already on-task and the remaining cost is wasted reasoning, not error: the longest rollouts burned thousands of tokens oscillating between the aggregate and per-unit readings of the same figures, and several recomputed the markup twice (before and after dividing) to confirm the identical result. The revision drops problem-specific scaffolding (street layout, the interpretation label) in favour of a reusable rule set - resolve aggregate-vs-per-unit once, convert integrality into a divides/gcd condition, take the largest admissible count without enumerating divisors, apply the markup as one (1+p) multiplication - which should preserve on-task accuracy while transferring to any integrality-pinned counting problem.",
+      "sampling_slurm_job_id": "618.40",
+      "tokens": 171,
+      "hint_hash": "987ab6157a1ffc7104a9192b0d2ed24aeeae4c30aaab76f559099512f0fbd80a",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Given p(q(x))=q(p(x)) with unknown coefficients, never expand the composition: degree-9 coefficient matching is what makes solvers run out of room with no answer. First move: posit q = a*p + b, match leading coefficients to pin a via a^3 = a, then substitute u = p(x) (valid, p takes infinitely many values) to collapse everything to the one-variable identity p(a*u + b) = a*p(u) + b. Test each allowed a in one line; discard branches clashing with the given values. The surviving branch makes p antisymmetric about the fixed point m: p(m+t) + p(m-t) is constant. Read each requested value off that symmetry by pairing it with a point you already know, instead of solving for every coefficient. A free coefficient remains: check the answers ignore it, verify the identity numerically at one x, box immediately, never restart.",
+      "mutation": "replace abstract affine framing with executable degree-reduction first move plus anti-looping commit rule",
+      "subagent_summary": "All 5 failing rollouts ended with finish_reason=length at the 16384-token cap and no boxed answer; every one of them had accepted the affine link q=a*p+b but then either tried to match coefficients of the degree-9 composition or blindly guessed constants, and two burned thousands of tokens re-deriving the leading-term condition after an earlier arithmetic slip. The 3 successful rollouts all shared one move the incumbent hint never named: substituting u=p(x) to reduce the identity to a single-variable equation, ruling out the a=+1 branch quickly, and letting the leftover cubic coefficient cancel. The revision therefore trades the incumbent's abstract 'reduces to commuting with an affine involution' language for that concrete degree-reduction step, a one-line branch test, and an explicit box-and-never-restart rule targeting the observed non-termination.",
+      "sampling_slurm_job_id": "618.41",
+      "tokens": 191,
+      "hint_hash": "a9e3ad7f15584dbf0896713391ae22473faca6c44aa8f31ea85f093c451284cc",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "4f1f9baf5c0ee54e69e21910d4c53ff35a80a21cf99453fae5e77e4e344dd246"
+    },
+    {
+      "hint_id": 10,
+      "hint": "First move: for the two smallest sizes, write positions 0..N-1 as an explicit list and rewrite the entire list after each stage k=0,1,...,n-1 in order; that is one operation. Reapply it and track the orbit of a single label until it repeats. That cycle length is your candidate order. Then write positions in binary and express the whole operation as one map on bit strings (which bits flip, which rotate), and verify it reproduces both explicit traces. Trap: if traces of different sizes suggest different formulas, your trace is wrong, not the formula piecewise; redo the smallest case letter by letter. Trust the verified bit map over pattern-guessing. Once two sizes agree, stop exploring, never restart the analysis, and box a single closed form in n.",
+      "mutation": "replace abstract 'compose into bitwise affine permutation' with concrete explicit-list first move, ban piecewise patching, add commit-and-box rule",
+      "subagent_summary": "Fresh rollouts scored 3/8: four of five failures hit the 16384-token cap (finish_reason=length) after producing mutually inconsistent hand traces for small sizes and then oscillating between several candidate closed forms, and the one terminating failure trusted a sloppy small-case trace over verification. The incumbent named the destination (bitwise affine permutation, cycle structure, minimality proof) but no executable first move, so the revision front-loads an explicit position-list trace of a couple of small sizes plus orbit tracking, uses the bit-string map only as a cross-check, and adds the observed-failure guard: a disagreement between sizes means the trace is wrong rather than the answer being piecewise, plus an explicit stop-exploring-and-box rule to fight non-termination.",
+      "sampling_slurm_job_id": "618.42",
+      "tokens": 166,
+      "hint_hash": "dd13dfdbf01ce17b82749c8a21248b69e4fc454c46da7dfa1dea17c016ff54c0",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}
