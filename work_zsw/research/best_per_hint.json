@@ -107,6 +107,27 @@
             "J_i": 0.1625
           },
           "proposal_eval_slurm_job_id": "618.63"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "eec4613d14e1b659333aca94da67b01cc5d23bce88ad8a334957f96a23ce589d",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "eec4613d14e1b659333aca94da67b01cc5d23bce88ad8a334957f96a23ce589d",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 34,
+            "J_denominator": 80,
+            "J_i": 0.425
+          },
+          "proposal_eval_slurm_job_id": "618.83"
         }
       ]
     },
@@ -215,6 +236,27 @@
             "J_i": 1.175
           },
           "proposal_eval_slurm_job_id": "618.64"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "ab043133f56d9ac630d47a269b7d7aa7282f3351ce363520498ce8627e2ebc78",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "ab043133f56d9ac630d47a269b7d7aa7282f3351ce363520498ce8627e2ebc78",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 91,
+            "J_denominator": 80,
+            "J_i": 1.1375
+          },
+          "proposal_eval_slurm_job_id": "618.84"
         }
       ]
     },
@@ -323,6 +365,27 @@
             "J_i": 0.3875
           },
           "proposal_eval_slurm_job_id": "618.65"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "85acd68689c1a2fdd859b865a54118b0394becf8ccc75aa07dbfeb7787e8420c",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "85acd68689c1a2fdd859b865a54118b0394becf8ccc75aa07dbfeb7787e8420c",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 21,
+            "J_denominator": 80,
+            "J_i": 0.2625
+          },
+          "proposal_eval_slurm_job_id": "618.85"
         }
       ]
     },
@@ -431,6 +494,27 @@
             "J_i": 0.825
           },
           "proposal_eval_slurm_job_id": "618.66"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "06304fdaf55721d1abf45c33a396401b80749988bde002d02d6a9e808fab2fa4",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "06304fdaf55721d1abf45c33a396401b80749988bde002d02d6a9e808fab2fa4",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 52,
+            "J_denominator": 80,
+            "J_i": 0.65
+          },
+          "proposal_eval_slurm_job_id": "618.86"
         }
       ]
     },
@@ -539,6 +623,27 @@
             "J_i": 0.975
           },
           "proposal_eval_slurm_job_id": "618.67"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "fc2fc2f5f3ac71dac1973b82092fff45906d144057bf8c8cc93377f5bfee139e",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "fc2fc2f5f3ac71dac1973b82092fff45906d144057bf8c8cc93377f5bfee139e",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 55,
+            "J_denominator": 80,
+            "J_i": 0.6875
+          },
+          "proposal_eval_slurm_job_id": "618.87"
         }
       ]
     },
@@ -647,6 +752,27 @@
             "J_i": 0.4375
           },
           "proposal_eval_slurm_job_id": "618.68"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "33dd81a061a382dadf20c2841c3f2d2b573b1322b41507b5ca356f07f988695b",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "33dd81a061a382dadf20c2841c3f2d2b573b1322b41507b5ca356f07f988695b",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 20,
+            "J_denominator": 80,
+            "J_i": 0.25
+          },
+          "proposal_eval_slurm_job_id": "618.88"
         }
       ]
     },
@@ -654,23 +780,23 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
-      "tokens": 82,
-      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4",
+      "hint": "Interpret the unknowns as weights of a functional L(f) = sum of weight_i times f(node_i) over distinct nodes. The vanishing conditions say L kills a consecutive block of monomials; the last fixes L on one more. Note which monomial is NOT prescribed (often the constant) and never use it. First move: build ONE explicit product polynomial vanishing at every node but the target one and expanding only in prescribed monomials; evaluate L on it twice - by linearity, and as the target weight times its value at that node. Solve that one equation. Do not invert the system, re-index, or test a small analogue. Reduce the product of node differences to a factorial, commit to one value, and stop reasoning.",
+      "tokens": 154,
+      "hint_hash": "a5f0bebbf171514448d2c25b2da91ad8d8e32249a497ec55ab02a9ef2011f442",
       "metrics": {
         "schema_version": 1,
         "hint_id": 7,
-        "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4",
+        "hint_hash": "a5f0bebbf171514448d2c25b2da91ad8d8e32249a497ec55ab02a9ef2011f442",
         "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
         "train_correct": 1,
         "train_total": 8,
         "train_i": 0.125,
-        "heldout_correct": 14,
+        "heldout_correct": 15,
         "heldout_total": 80,
-        "heldout_i": 0.175,
-        "J_numerator": 24,
+        "heldout_i": 0.1875,
+        "J_numerator": 25,
         "J_denominator": 80,
-        "J_i": 0.3
+        "J_i": 0.3125
       },
       "history": [
         {
@@ -755,6 +881,27 @@
             "J_i": 0.25
           },
           "proposal_eval_slurm_job_id": "618.69"
+        },
+        {
+          "round": 4,
+          "decision": "kept",
+          "proposal_hash": "a5f0bebbf171514448d2c25b2da91ad8d8e32249a497ec55ab02a9ef2011f442",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "a5f0bebbf171514448d2c25b2da91ad8d8e32249a497ec55ab02a9ef2011f442",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 25,
+            "J_denominator": 80,
+            "J_i": 0.3125
+          },
+          "proposal_eval_slurm_job_id": "618.89"
         }
       ]
     },
@@ -863,6 +1010,27 @@
             "J_i": 0.925
           },
           "proposal_eval_slurm_job_id": "618.70"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "935885c8e23ec1c736517eeec62bdad804b4f94c87114262fa3defdc1555c0f6",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "935885c8e23ec1c736517eeec62bdad804b4f94c87114262fa3defdc1555c0f6",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 52,
+            "J_denominator": 80,
+            "J_i": 0.65
+          },
+          "proposal_eval_slurm_job_id": "618.90"
         }
       ]
     },
@@ -971,6 +1139,27 @@
             "J_i": 1.175
           },
           "proposal_eval_slurm_job_id": "618.71"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "e929c6fa403cd283b1955edb9b80a4423ef61e41a2e6c8731f7f4cf3cb55c79e",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "e929c6fa403cd283b1955edb9b80a4423ef61e41a2e6c8731f7f4cf3cb55c79e",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 6,
+            "heldout_total": 80,
+            "heldout_i": 0.075,
+            "J_numerator": 76,
+            "J_denominator": 80,
+            "J_i": 0.95
+          },
+          "proposal_eval_slurm_job_id": "618.91"
         }
       ]
     },
@@ -978,23 +1167,23 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "First move: for the two smallest sizes, write positions 0..N-1 as an explicit list and rewrite the entire list after each stage k=0,1,...,n-1 in order; that is one operation. After every stage the list must still contain each label exactly once; if two labels land in one slot your bookkeeping is broken, so redo that stage by physically swapping the two blocks. Reapply it and track the orbit of a single label until it repeats. That cycle length is your candidate order. Then write positions in binary and express the whole operation as one map on bit strings (which bits flip, which rotate), and verify it reproduces both explicit traces. Trap: never accept a shortcut claim about the net effect unless it matches your trace; if a formula and a trace disagree, trust the trace. Once two sizes agree, stop exploring, never restart the analysis, and report exactly one closed form in n, then stop.",
-      "tokens": 194,
-      "hint_hash": "854dd260013d73627dad0d67ef8f749d5b41dff8237e99a470e336c555d9e388",
+      "hint": "First move: for the two smallest sizes, write positions 0..N-1 as an explicit list and rewrite the entire list after each stage k=0,1,...,n-1 in order; that is one operation. After every stage the list must still contain each label exactly once; if two labels land in one slot your bookkeeping is broken, so redo that stage by physically swapping the two blocks. Reapply the whole operation and track the orbit of a single label until it repeats. That cycle length is your candidate order. Trap: the stages overlap, so the composite is not a product of disjoint swaps and usually is not its own inverse; never assert order 2, and never reuse a stage-level shortcut, unless your trace confirms it. If a formula and a trace disagree, trust the trace. Once two sizes agree, stop exploring, never restart the analysis, and report exactly one closed form in n, then stop.",
+      "tokens": 190,
+      "hint_hash": "03b88454bbefe8b368f773ca44d44d049e482cea344efb81862348cdcd92e1e8",
       "metrics": {
         "schema_version": 1,
         "hint_id": 10,
-        "hint_hash": "854dd260013d73627dad0d67ef8f749d5b41dff8237e99a470e336c555d9e388",
+        "hint_hash": "03b88454bbefe8b368f773ca44d44d049e482cea344efb81862348cdcd92e1e8",
         "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
         "train_correct": 4,
         "train_total": 8,
         "train_i": 0.5,
-        "heldout_correct": 13,
+        "heldout_correct": 15,
         "heldout_total": 80,
-        "heldout_i": 0.1625,
-        "J_numerator": 53,
+        "heldout_i": 0.1875,
+        "J_numerator": 55,
         "J_denominator": 80,
-        "J_i": 0.6625
+        "J_i": 0.6875
       },
       "history": [
         {
@@ -1079,6 +1268,27 @@
             "J_i": 0.6625
           },
           "proposal_eval_slurm_job_id": "618.72"
+        },
+        {
+          "round": 4,
+          "decision": "kept",
+          "proposal_hash": "03b88454bbefe8b368f773ca44d44d049e482cea344efb81862348cdcd92e1e8",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "03b88454bbefe8b368f773ca44d44d049e482cea344efb81862348cdcd92e1e8",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 55,
+            "J_denominator": 80,
+            "J_i": 0.6875
+          },
+          "proposal_eval_slurm_job_id": "618.92"
         }
       ]
     }

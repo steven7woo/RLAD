@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
-  "generation": 4,
+  "generation": 3,
   "hints": [
     {
       "hint_id": 1,
@@ -55,9 +55,9 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Interpret the unknowns as weights of a functional L(f) = sum of weight_i times f(node_i) over distinct nodes. The vanishing conditions say L kills a consecutive block of monomials; the last fixes L on one more. Note which monomial is NOT prescribed (often the constant) and never use it. First move: build ONE explicit product polynomial vanishing at every node but the target one and expanding only in prescribed monomials; evaluate L on it twice - by linearity, and as the target weight times its value at that node. Solve that one equation. Do not invert the system, re-index, or test a small analogue. Reduce the product of node differences to a factorial, commit to one value, and stop reasoning.",
-      "tokens": 154,
-      "hint_hash": "a5f0bebbf171514448d2c25b2da91ad8d8e32249a497ec55ab02a9ef2011f442"
+      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
+      "tokens": 82,
+      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
     },
     {
       "hint_id": 8,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "First move: for the two smallest sizes, write positions 0..N-1 as an explicit list and rewrite the entire list after each stage k=0,1,...,n-1 in order; that is one operation. After every stage the list must still contain each label exactly once; if two labels land in one slot your bookkeeping is broken, so redo that stage by physically swapping the two blocks. Reapply the whole operation and track the orbit of a single label until it repeats. That cycle length is your candidate order. Trap: the stages overlap, so the composite is not a product of disjoint swaps and usually is not its own inverse; never assert order 2, and never reuse a stage-level shortcut, unless your trace confirms it. If a formula and a trace disagree, trust the trace. Once two sizes agree, stop exploring, never restart the analysis, and report exactly one closed form in n, then stop.",
-      "tokens": 190,
-      "hint_hash": "03b88454bbefe8b368f773ca44d44d049e482cea344efb81862348cdcd92e1e8"
+      "hint": "First move: for the two smallest sizes, write positions 0..N-1 as an explicit list and rewrite the entire list after each stage k=0,1,...,n-1 in order; that is one operation. After every stage the list must still contain each label exactly once; if two labels land in one slot your bookkeeping is broken, so redo that stage by physically swapping the two blocks. Reapply it and track the orbit of a single label until it repeats. That cycle length is your candidate order. Then write positions in binary and express the whole operation as one map on bit strings (which bits flip, which rotate), and verify it reproduces both explicit traces. Trap: never accept a shortcut claim about the net effect unless it matches your trace; if a formula and a trace disagree, trust the trace. Once two sizes agree, stop exploring, never restart the analysis, and report exactly one closed form in n, then stop.",
+      "tokens": 194,
+      "hint_hash": "854dd260013d73627dad0d67ef8f749d5b41dff8237e99a470e336c555d9e388"
     }
   ],
-  "total_tokens": 1657,
-  "book_hash": "32e35311bc07d72ee7be423bd54cbd832bdf25598aced6b71816e245eb9923ba"
+  "total_tokens": 1589,
+  "book_hash": "ad7cf6958b4bc7857b2873e4276cee61995d6f70c9f659e68ed8b727ce126aae"
 }

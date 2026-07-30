@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+  "round": 4,
+  "book_hash_before": "ad7cf6958b4bc7857b2873e4276cee61995d6f70c9f659e68ed8b727ce126aae",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "For puzzles where agents announce ignorance, first write down exactly what each agent knows. If the setup leaves ambiguous which of two quantities was revealed, that ambiguity is part of every agent's uncertainty: do not split into external cases and solve each separately. Instead build ONE table of candidate own-values x. Seeing N, an agent holding x has partner candidates N-x and N/x, and x stays ambiguous only when both are natural numbers, so ambiguity forces x to divide N; list those x. Every other x is eliminated by the first \"I do not know\". Then filter that surviving list with the second announcement. Consistency is not enough: confirm each rival in your table fails an announcement. Track eliminations once, never relitigate, then report exactly one value and stop.",
+      "mutation": "make the anti-case-split clause executable: one divisor table as the first move, plus rival-elimination check",
+      "subagent_summary": "Train reward was 1/8; seven failures shared one pattern: the student read \"I do not know\" as merely \"the revealed number has several factor pairs\", which discriminates nothing, then committed to an arbitrary mid-sized factor pair, and several first split into external sum-vs-product cases and declared one contradictory despite the incumbent forbidding it. The edit keeps the incumbent's proven framing but replaces the abstract no-case-split and verify clauses with an executable first move (one table of own-values x, ambiguity requires both readings legal so x must divide N) and a rival-elimination check, and is slightly shorter than the incumbent.",
+      "sampling_slurm_job_id": "618.73",
+      "tokens": 156,
+      "hint_hash": "eec4613d14e1b659333aca94da67b01cc5d23bce88ad8a334957f96a23ce589d",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "dbc2ee04fc1040b32c556b3902c8b24a068f4fb2a65471d780bb7cf95f06ed05"
+    },
+    {
+      "hint_id": 2,
+      "hint": "When a problem asks for a locus (circle, center, radius) or an aggregate rather than the individual roots, take moduli before hunting roots. FIRST MOVE: from (z-a)^n = c(z-b)^n, divide by (z-b)^n to get ((z-a)/(z-b))^n = c, then take moduli: |z-a| = k|z-b|. TRAP: k is the n-th ROOT of |c|, not |c| raised to the n-th power; verify k^n = |c| first, since a wrong k gives a self-consistent but wrong circle. Then set z = x+iy, square both sides, complete the square, and read off center and radius (an Apollonius circle; k=1 gives a line). Check numerically against the ORIGINAL equation, never your derived one: build one explicit root and measure its distance to your center. Report exactly one value, then stop.",
+      "mutation": "replace unused algebra micro-step with a broader locus/aggregate trigger",
+      "subagent_summary": "All 8 fresh rollouts scored reward 1 with finish_reason stop and no truncation, so the hint's first move, the k-trap and the commit-and-stop rule are all working and were left verbatim. Clause-level inspection showed zero rollouts used the 'collect the x^2+y^2 terms, divide by their coefficient' micro-step (they went straight from squaring to completing the square), so that dead clause was deleted and its tokens spent widening the opening trigger from the narrow 'all roots lie on one circle' phrasing to any locus-or-aggregate request, targeting the weak held-out transfer rather than the already-saturated training score. Total length is unchanged at 198 tokens, so the shared book does not grow.",
+      "sampling_slurm_job_id": "618.74",
+      "tokens": 198,
+      "hint_hash": "ab043133f56d9ac630d47a269b7d7aa7282f3351ce363520498ce8627e2ebc78",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "403ac7fe6d24609478ebddf8eeef57d4a375e388b75b64df02190ca6628359fa"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square; the far edges are too distant to matter, so ignore them. Never conclude the small square is wholly covered; the wedge apex sits at its center. Be numeric, not qualitative: start axis-parallel, find where the two rays exit the small square, then list the clipped polygon in order, including every corner of the small square lying between those exit points - it is usually a quadrilateral, not the triangle through the exit points. Shoelace it, then repeat for a rotated angle. If the two values agree, accept that the overlap is angle-independent and do not hunt for a proof. Never restart; once two values agree, report exactly one number and stop reasoning.",
+      "mutation": "name the quadrilateral-vs-triangle clipping trap; drop redundant trust clause",
+      "subagent_summary": "Fresh rollouts scored 1/8 with 6 of 8 truncating at the 16384-token cap: the student repeatedly looped hunting for a rotation that shrinks the overlap instead of finishing one numeric case. The two that terminated both reduced the clipped region to a triangle through the two exit rays, dropping the small-square corner that lies between them, so one reported a too-small overlap. The edit replaces the vague per-angle instruction with an explicit axis-parallel first move and a named clipping trap (include every enclosed corner; the region is usually a quadrilateral), and deletes the redundant trust-the-shoelace clause to stay near the incumbent length.",
+      "sampling_slurm_job_id": "618.75",
+      "tokens": 188,
+      "hint_hash": "85acd68689c1a2fdd859b865a54118b0394becf8ccc75aa07dbfeb7787e8420c",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "7d558dd1246b9fa85107df156c2038c19f7eac6dcbc4d6e9796c2024f6c76b7a"
+    },
+    {
+      "hint_id": 4,
+      "hint": "Several hidden degree-n polynomials must jointly hit prescribed values at consecutive integers. Two traps: do NOT difference one polynomial and conclude impossibility, and do NOT assume each polynomial is used once.\n\nMethod: write the prescribed value as a function of the INPUT, not the position; for an arithmetic progression over consecutive inputs the target is affine, L(x)=px+q. Fix one polynomial P and set g=P-L. Every input assigned to P is a root of g. Subtracting an affine function cannot change the leading coefficient, so deg g = n exactly, not n-1, and g is nonzero: at most n roots per polynomial. Sum that cap over the family, then give each polynomial a disjoint block of inputs interpolating L; consecutiveness never blocks this, so do not retreat to a smaller count. Report one exact integer.",
+      "mutation": "pin deg(P-L)=n exactly (not n-1) and forbid retreating from the matched bound",
+      "subagent_summary": "Fresh rollouts scored 3/8 with two dominant, distinct failure modes: three rollouts mis-set deg(P-L)=n-1 instead of n and so undercounted the per-polynomial root cap, while two others derived the correct cap but then abandoned it, arguing that consecutive inputs force each polynomial to be used only once. One rollout looped to the token cap after concluding impossibility. The edit keeps the proven affine-target/root-counting skeleton and replaces only the vague \"compare degrees to show g is not identically zero\" clause with the exact leading-coefficient argument, plus a short guard against retreating from an already-matched bound.",
+      "sampling_slurm_job_id": "618.76",
+      "tokens": 171,
+      "hint_hash": "06304fdaf55721d1abf45c33a396401b80749988bde002d02d6a9e808fab2fa4",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "f212db17d44fe5d49e8827b752416b5712e08e5fae6e5c30aafeee3eac2b3c99"
+    },
+    {
+      "hint_id": 5,
+      "hint": "When unknown points on a fixed curve y=g(x) are tied by a known displacement (u,v), reduce to ONE unknown: let the free vertex be (t, g(t)) and its partner (t+u, g(t)+v), then solve the single scalar equation g(t+u) = g(t) + v.\n\nFor a logarithmic curve, convert that additive offset to a multiplicative one BEFORE cross-multiplying: log_c(B) - log_c(A) = v means B/A = c^v.\n\nTest that line at once: a given vertex's x must be a root of your equation. If it is not, or the discriminant is negative, you flipped the offset - replace c^v by its reciprocal and re-solve only that equation. Never restart or call the configuration impossible.\n\nDiscard roots reproducing a given vertex. Finish with the shoelace determinant.",
+      "mutation": "swap the vague sign-flip warning for a concrete root self-test with targeted recovery",
+      "subagent_summary": "All three failures (3/8) hit the 16384-token cap after deriving the same offset direction backwards, producing a negative discriminant and then spending 6000+ tokens doubting the curve parameters and the parallelogram reading instead of the one conversion line; the incumbent told them the flip was the dominant failure mode but gave no way to detect it. The revision names an executable detector (a given vertex must be a root of the reduced scalar equation) plus a one-line recovery, and drops the diffuse do-not-restart wording to stay shorter than the incumbent.",
+      "sampling_slurm_job_id": "618.77",
+      "tokens": 184,
+      "hint_hash": "fc2fc2f5f3ac71dac1973b82092fff45906d144057bf8c8cc93377f5bfee139e",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b4fd32f624ae17388dbdae26f7e56c31810f77c5a9d0b0ec175f909f80debcae"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Track the ordered contents of the truck, gate, and shed rather than informal move sequences. At each state attach the actual transition probability, which changes when only one move is available. Each stack is last-in-first-out, so translate the asked-about position into a timing claim: whatever is deposited first sits at the bottom. Which item that is depends only on how many loading moves happen before the first delivery move, so condition on that count, multiply 1/2 for every step where two moves were genuinely available, and add the qualifying paths. Never answer 1/n on the grounds that each item is equally likely to occupy each position; the induced distribution over orders is not uniform. Report exactly one value per part, then stop.",
+      "mutation": "replace vague 'trace the realizing sequences' with the concrete conditioning move: count loading moves before the first delivery move",
+      "subagent_summary": "All 8 rollouts scored 0, but not from truncation or bad arithmetic: 6 of 8 correctly derived the first sub-answer via the state/forced-move accounting the incumbent already teaches, then answered the second sub-part with a bare 1/n symmetry claim, which the grader reads as the emitted value. They also all reached the correct last-in-first-out timing claim but had no executable way to identify WHICH item satisfies it, so they defaulted to symmetry despite the incumbent's explicit prohibition. I therefore replaced the vague 'trace only the move sequences that realize that event' clause with the concrete conditioning step (count the loading moves preceding the first delivery move), keeping the proven state-graph, timing-claim, anti-symmetry, and commit clauses and holding length at the incumbent's 146-147 tokens.",
+      "sampling_slurm_job_id": "618.78",
+      "tokens": 147,
+      "hint_hash": "33dd81a061a382dadf20c2841c3f2d2b573b1322b41507b5ca356f07f988695b",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "f42ab52a7986f701b5f58ac0be9971ac18d82f4c450fceaa2b4bac9880f44efc"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Interpret the unknowns as weights of a functional L(f) = sum of weight_i times f(node_i) over distinct nodes. The vanishing conditions say L kills a consecutive block of monomials; the last fixes L on one more. Note which monomial is NOT prescribed (often the constant) and never use it. First move: build ONE explicit product polynomial vanishing at every node but the target one and expanding only in prescribed monomials; evaluate L on it twice - by linearity, and as the target weight times its value at that node. Solve that one equation. Do not invert the system, re-index, or test a small analogue. Reduce the product of node differences to a factorial, commit to one value, and stop reasoning.",
+      "mutation": "replace abstract Lagrange/verify clauses with one explicit test-polynomial construction plus a stop rule",
+      "subagent_summary": "Fresh rollouts scored 0/8 with 7 of 8 truncating at the 16384-token cap: the student latched onto the functional framing but never had an executable first move, so it churned on Vandermonde inversion and on self-contradictory small analogues (wrong equation/unknown counts) until it ran out of room, and the several rollouts that did emit a value had silently swapped node index for exponent. I therefore kept the proven functional/moment framing and the product-of-node-differences endpoint, but swapped the vague 'apply Lagrange interpolation after any useful index shift' and the verify-the-highest-moment clause (no rollout followed either productively; the latter fed the looping) for a single concrete construction plus an explicit no-restart, commit-and-stop rule.",
+      "sampling_slurm_job_id": "618.79",
+      "tokens": 154,
+      "hint_hash": "a5f0bebbf171514448d2c25b2da91ad8d8e32249a497ec55ab02a9ef2011f442",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let H be the number of identical items. Integer per-item component costs mean H must divide every listed component total; layout or grouping wording adds no constraint unless it forces divisibility. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all component totals before dividing by H, apply the stated markup multiplicatively, and check integrality and units.",
+      "mutation": "replace problem-specific layout clause with general no-extra-constraint rule",
+      "subagent_summary": "All 8/8 rollouts were correct with finish_reason stop and no truncation, so the divisibility + maximum-count + multiplicative-markup core is proven and untouched. The one clause the rollouts implicated as harmful was the assertion that the layout constrains H arithmetically: rollouts revisited that wording 1 to 41 times each, repeatedly asking what constraint it imposed before concluding it imposed none, which is pure wasted budget. I replaced that single clause with a general rule that grouping/layout wording adds no constraint unless it forces divisibility, and generalized 'stage' to 'component' for transfer, keeping the hint at the same length (76 vs 77 tokens).",
+      "sampling_slurm_job_id": "618.80",
+      "tokens": 76,
+      "hint_hash": "935885c8e23ec1c736517eeec62bdad804b4f94c87114262fa3defdc1555c0f6",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "When the constraint is a commuting identity like p(q(x)) = q(p(x)) with unknown coefficients, do not expand the composition: its degree is the product of the degrees, and drowning in that algebra is the main way these problems are lost. Instead posit the affine link q = -p + b and fix b from the given point values. The identity then collapses to p(-p+b) = -p(p)+b; pin p by matching the top couple of coefficients as an identity in x, never by plugging in one value of x - a single point is a weaker constraint and hands you absurd coefficients that still look self-consistent. Expect one leftover free coefficient; verify the requested outputs do not depend on it, then set it to something convenient. Evaluate each requested output through q = -p + b at the needed point rather than re-expanding q term by term. Recheck the given values once, then report one result and stop.",
+      "mutation": "swap unused branch-elimination clause for a warning against pinning coefficients from a single x",
+      "subagent_summary": "6 of 8 rollouts were correct; both failures shared one mechanism: after correctly deriving the affine link they abandoned coefficient matching and instead plugged a single x value into the commuting identity, which under-determines the system, produced a huge spurious coefficient, and led to one non-terminating rollout (hit the 16384-token cap) and one confidently wrong result. Meanwhile the incumbent clause telling the student not to explore the q = p + constant branch is dead weight - essentially no rollout ever pursued that branch - so I deleted it and spent those tokens on the concrete trap the rollouts actually fell into, keeping total length at the incumbent's.",
+      "sampling_slurm_job_id": "618.81",
+      "tokens": 193,
+      "hint_hash": "e929c6fa403cd283b1955edb9b80a4423ef61e41a2e6c8731f7f4cf3cb55c79e",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "8198f46ecb6773324be0c859c56a0ad50cefd003d11ec94e1b5845e37e7269e5"
+    },
+    {
+      "hint_id": 10,
+      "hint": "First move: for the two smallest sizes, write positions 0..N-1 as an explicit list and rewrite the entire list after each stage k=0,1,...,n-1 in order; that is one operation. After every stage the list must still contain each label exactly once; if two labels land in one slot your bookkeeping is broken, so redo that stage by physically swapping the two blocks. Reapply the whole operation and track the orbit of a single label until it repeats. That cycle length is your candidate order. Trap: the stages overlap, so the composite is not a product of disjoint swaps and usually is not its own inverse; never assert order 2, and never reuse a stage-level shortcut, unless your trace confirms it. If a formula and a trace disagree, trust the trace. Once two sizes agree, stop exploring, never restart the analysis, and report exactly one closed form in n, then stop.",
+      "mutation": "replace unused bit-string clause with the observed order-2 involution trap",
+      "subagent_summary": "3/8 correct; the two cleanest wins came from pure explicit list tracing plus orbit tracking and never touched the binary/bit-string clause, while three of five failures collapsed to the same fallacy of calling the composite a product of disjoint transpositions and asserting order 2, and two failures looped to the token cap while trying to reconcile a bit-string model. I therefore deleted the bit-string verification clause no winning rollout used and spent fewer tokens on an explicit warning that the overlapping stages do not compose into disjoint swaps and the composite is not self-inverse, keeping the proven first move, invariant check, trust-the-trace rule and commit-and-stop ending intact.",
+      "sampling_slurm_job_id": "618.82",
+      "tokens": 190,
+      "hint_hash": "03b88454bbefe8b368f773ca44d44d049e482cea344efb81862348cdcd92e1e8",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "854dd260013d73627dad0d67ef8f749d5b41dff8237e99a470e336c555d9e388"
+    }
+  ]
+}
