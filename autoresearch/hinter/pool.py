@@ -73,6 +73,30 @@ def _queue_state(job_id: str) -> str | None:
     return states[0] if states else None
 
 
+def _granted_nodes() -> list[str]:
+    """Return the hostnames Slurm actually granted this allocation.
+
+    Nodes are requested by count rather than by name, so the concrete nodelist
+    is only known once the job is running.  ``SLURM_JOB_NODELIST`` is in
+    compressed form (``ip-10-1-[38-11,81-8]``), so expand it via
+    ``scontrol show hostnames`` instead of parsing it here.
+    """
+    nodelist = os.environ.get("SLURM_JOB_NODELIST", "").strip()
+    if not nodelist:
+        raise RuntimeError("SLURM_JOB_NODELIST is unset inside the allocation")
+    completed = subprocess.run(
+        ["scontrol", "show", "hostnames", nodelist],
+        check=True,
+        capture_output=True,
+        text=True,
+    )
+    return [
+        line.strip().split(".", 1)[0]
+        for line in completed.stdout.splitlines()
+        if line.strip()
+    ]
+
+
 def _validate_allocation(
     value: dict[str, Any],
     config: dict[str, Any],
@@ -125,19 +149,22 @@ def start_pool(*, restart: bool = False) -> dict[str, Any]:
             STOP_PATH.unlink()
 
     slurm = config["slurm"]
-    nodes = ",".join(slurm["nodes"])
+    node_count = int(slurm["node_count"])
+    gpus_per_node = int(slurm["gpus_per_node"])
     command = [
         "sbatch",
         "--parsable",
         f"--partition={slurm['partition']}",
-        "--nodes=2",
-        "--ntasks=16",
-        "--ntasks-per-node=8",
-        f"--gpus-per-node={slurm['gpus_per_node']}",
+        f"--nodes={node_count}",
+        f"--ntasks={node_count * gpus_per_node}",
+        f"--ntasks-per-node={gpus_per_node}",
+        # This cluster defines no GPU gres, so --gpus-* / --gres requests are
+        # rejected at submit time.  Whole exclusive nodes are how GPUs are
+        # obtained here; each task is confined to one GPU by the dispatcher via
+        # CUDA_VISIBLE_DEVICES instead of by Slurm.
         f"--cpus-per-task={slurm['cpus_per_step']}",
         f"--mem={slurm['memory']}",
         "--exclusive",
-        f"--nodelist={nodes}",
         f"--time={slurm['time']}",
         "--export="
         + ",".join(
@@ -165,7 +192,9 @@ def start_pool(*, restart: bool = False) -> dict[str, Any]:
         "schema_version": 1,
         "job_id": job_id,
         "partition": slurm["partition"],
-        "nodes": slurm["nodes"],
+        # Empty until the dispatcher records the nodes Slurm actually granted;
+        # a submitted job is still pending and has no nodelist yet.
+        "nodes": [],
         "pool_slots": slurm["pool_slots"],
         "exclusive": True,
         "gpus_per_node": slurm["gpus_per_node"],
@@ -578,8 +607,6 @@ def _launch(
         "--ntasks=1",
         f"--nodelist={node}",
         f"--cpus-per-task={config['slurm']['cpus_per_step']}",
-        "--gpus-per-task=1",
-        "--gpu-bind=single:1",
         "--kill-on-bad-exit=1",
         f"--job-name={task_id}",
         f"--output={stdout}",
@@ -594,6 +621,10 @@ def _launch(
     environment["RLAD_REPO_ROOT"] = str(REPO_ROOT)
     environment["RLAD_AUTORESEARCH_WORK"] = str(WORK_ROOT)
     environment["AUTORESEARCH_POOL_SLOT"] = str(gpu_index)
+    # No GPU gres on this cluster, so Slurm cannot bind one GPU per task.  The
+    # dispatcher owns whole exclusive nodes and hands each task exactly one
+    # distinct GPU by index; the task asserts it sees exactly one device.
+    environment["CUDA_VISIBLE_DEVICES"] = str(gpu_index)
     return subprocess.Popen(
         command,
         cwd=REPO_ROOT,
@@ -615,6 +646,22 @@ def dispatch() -> int:
     active = load_pool_allocation(config, config_hash)
     if active["job_id"] != allocation:
         raise RuntimeError("dispatcher job does not match the active allocation")
+    granted = _granted_nodes()
+    if len(granted) != int(config["slurm"]["node_count"]):
+        raise RuntimeError(
+            "Slurm granted "
+            f"{len(granted)} nodes, expected {config['slurm']['node_count']}"
+        )
+    if active["nodes"] and active["nodes"] != granted:
+        raise RuntimeError("allocation nodes do not match the granted nodelist")
+    if not active["nodes"]:
+        active = {**active, "nodes": granted}
+        validate_pool_allocation(
+            active,
+            config=config,
+            config_hash=config_hash,
+        )
+        atomic_write_json(ALLOCATION_PATH, active)
     _make_dirs()
     _recover_running()
     processes: dict[
@@ -629,11 +676,11 @@ def dispatch() -> int:
     max_active = int(config["slurm"]["pool_slots"])
     slots = [
         (node, gpu_index)
-        for node in config["slurm"]["nodes"]
+        for node in active["nodes"]
         for gpu_index in range(int(config["slurm"]["gpus_per_node"]))
     ]
     if len(slots) != max_active:
-        raise RuntimeError("configured H100 slot count is inconsistent")
+        raise RuntimeError("granted GPU slot count is inconsistent")
     while True:
         for task_id, (
             process,

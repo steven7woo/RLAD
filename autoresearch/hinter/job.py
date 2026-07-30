@@ -303,16 +303,25 @@ def run_task(task_path: Path) -> None:
     pool_slot = int(pool_slot_raw)
     if not 0 <= pool_slot < int(config["slurm"]["gpus_per_node"]):
         raise RuntimeError("dispatcher pool slot is outside the node capacity")
-    slurm_gpus_raw = os.environ.get("SLURM_GPUS_PER_TASK")
-    if slurm_gpus_raw != "1":
-        raise RuntimeError("Slurm did not grant exactly one GPU to the task")
+    # This cluster defines no GPU gres, so Slurm cannot bind one GPU per task
+    # and SLURM_GPUS_PER_TASK is never set.  The dispatcher owns whole exclusive
+    # nodes and assigns each task one distinct GPU index via
+    # CUDA_VISIBLE_DEVICES, so verify that pin instead and require it to match
+    # the audited pool slot -- two tasks sharing a GPU would otherwise be
+    # invisible here.
     visible_cuda_device = os.environ.get("CUDA_VISIBLE_DEVICES", "").strip()
     if not visible_cuda_device or "," in visible_cuda_device:
         raise RuntimeError("task does not have exactly one CUDA device binding")
+    if visible_cuda_device != str(pool_slot):
+        raise RuntimeError(
+            "task CUDA device does not match its audited dispatcher pool slot"
+        )
     node = socket.gethostname().split(".", 1)[0]
     pool_allocation = load_pool_allocation(config, config_hash)
     if allocation != pool_allocation["job_id"]:
         raise RuntimeError("task job does not match the active pool allocation")
+    if not pool_allocation["nodes"]:
+        raise RuntimeError("pool allocation has not recorded its granted nodes")
     if node not in pool_allocation["nodes"]:
         raise RuntimeError("task is running outside the two-node pool")
 
@@ -341,7 +350,7 @@ def run_task(task_path: Path) -> None:
         "node": node,
         "gpu_count": 1,
         "pool_slot": pool_slot,
-        "slurm_gpus_per_task": 1,
+        "gpu_binding": config["slurm"]["gpu_binding"],
         "visible_cuda_device": visible_cuda_device,
         "config_hash": config_hash,
         "source_hash": expected_source,

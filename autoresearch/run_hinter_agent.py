@@ -38,9 +38,9 @@ PLAN_PATH = REPO_ROOT / "docs" / "plan" / "hinter.md"
 WORK_DIR = REPO_ROOT / "work_zsw"
 TRANSCRIPT = WORK_DIR / "agent_transcript.jsonl"
 MODEL = (
-    "us.anthropic.claude-opus-4-8"
+    "us.anthropic.claude-opus-5"
     if os.environ.get("CLAUDE_CODE_USE_BEDROCK")
-    else "claude-opus-4-8"
+    else "claude-opus-5"
 )
 DEFAULT_MAX_TURNS = 100000
 SESSION_NAMESPACE = uuid.UUID("3e3924da-70ad-47fc-a1fa-28c873f5fbd3")
@@ -63,14 +63,30 @@ optimization levers are the ten hint texts.
 Use only the portable implementation under `autoresearch/` and the runtime
 workspace `work_zsw/`. Never read or modify the older `work/` experiment.
 
+You run headless: there is NO interactive operator attached. Asking a question
+reaches nobody and only wastes a turn, so never block on one. When you hit a
+decision, resolve it from `autoresearch/config.json` and the plan, act, and
+record the reasoning in your notes. If something is genuinely unsafe to decide
+alone, stop and write the open question into `work_zsw/OPEN_QUESTIONS.md`
+instead of waiting.
+
 ## Absolute safety constraints
 
 - Never run Qwen/vLLM student inference on the login node.
 - Start the two-node pool with
   `uv run --project autoresearch python -m autoresearch.hinter.pool start`.
-  It exclusively reserves `ip-10-1-38-11` and `ip-10-1-81-8` in partition
-  `ml.p5.48xlarge` (8 H100s each). Every actual inference is a distinct
-  one-GPU `srun` step. Do not bypass this queue.
+  It exclusively reserves whole nodes in the partition named in
+  `autoresearch/config.json`. That config is AUTHORITATIVE for hardware:
+  operator-approved changes to `slurm.partition`, `slurm.node_count`, and
+  `slurm.cpus_per_step` are expected and must not be reverted. Do not repin the
+  allocation to specific hostnames and do not "restore" any partition named in
+  older docs, comments, or this prompt's history. Every actual inference is
+  still a distinct one-GPU `srun` step. Do not bypass this queue.
+- This cluster defines NO GPU gres: `--gpus-per-task`, `--gpus-per-node`,
+  `--gpu-bind`, and `--gres` are rejected at submit time and
+  `SLURM_GPUS_PER_TASK` is never set. GPUs come from whole `--exclusive` nodes,
+  and the dispatcher confines each task to one GPU via `CUDA_VISIBLE_DEVICES`
+  matched against its audited pool slot. Do not reintroduce gres flags.
 - Never inspect, print, summarize, or send to a subagent any held-out problem,
   answer, rollout, per-question reward, or winning question-hint pairing.
   Private evaluator output is aggregate-only. Do not read the source dataset,
@@ -181,7 +197,7 @@ again for the last completed round (use `--round 0` if no research round has
 finished). It will create a terminal-only checkpoint if that round was already
 pushed. Terminal publication requests a pool drain;
 confirm with `autoresearch.hinter.pool status` that the allocation becomes
-terminal so the 16 H100s are released. A persisted `STOPPED.json` is
+terminal so the pooled GPUs are released. A persisted `STOPPED.json` is
 authoritative and must never be resumed.
 
 ## Persistence

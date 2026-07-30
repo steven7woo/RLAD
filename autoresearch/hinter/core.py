@@ -141,7 +141,7 @@ RECEIPT_KEYS = {
     "node",
     "gpu_count",
     "pool_slot",
-    "slurm_gpus_per_task",
+    "gpu_binding",
     "visible_cuda_device",
     "config_hash",
     "source_hash",
@@ -412,18 +412,18 @@ def _validate_config(config: dict[str, Any]) -> None:
         raise RuntimeError("experiment budget changed")
     slurm = config["slurm"]
     if slurm != {
-        "partition": "ml.p5.48xlarge",
-        "nodes": ["ip-10-1-38-11", "ip-10-1-81-8"],
+        "partition": "ml.p4d.24xlarge",
+        "node_count": 2,
         "exclusive": True,
         "gpus_per_node": 8,
         "pool_slots": 16,
         "gpus_per_task": 1,
-        "gpu_binding": "slurm_gpus_per_task_1_gpu_bind_single_1",
-        "cpus_per_step": 12,
+        "gpu_binding": "dispatcher_cuda_visible_devices_one_gpu_per_slot",
+        "cpus_per_step": 6,
         "memory": "0",
         "time": "1-00:00:00",
     }:
-        raise RuntimeError("two-node H100 allocation changed")
+        raise RuntimeError("two-node A100 allocation changed")
     if config["publication"] != {
         "remote": "origin",
         "commit_prefix": "autoresearch: hinter round",
@@ -920,7 +920,6 @@ def validate_pool_allocation(
     expected = {
         "schema_version": 1,
         "partition": slurm["partition"],
-        "nodes": slurm["nodes"],
         "pool_slots": slurm["pool_slots"],
         "exclusive": True,
         "gpus_per_node": slurm["gpus_per_node"],
@@ -935,6 +934,23 @@ def validate_pool_allocation(
     for key, expected_value in expected.items():
         if value[key] != expected_value:
             raise ValueError(f"pool allocation has stale {key}")
+    # Nodes are assigned opportunistically by Slurm, so the allocation records
+    # the hostnames the scheduler actually granted rather than a pinned list.
+    # An empty list means the job is still pending and has no nodelist yet;
+    # once the dispatcher records them, the count must match node_count.
+    # Downstream receipt/task checks require every execution to land on one of
+    # these recorded nodes, so a pending (empty) list admits no execution.
+    nodes = value["nodes"]
+    if not isinstance(nodes, list) or not all(
+        isinstance(node, str) and node and node == node.strip()
+        for node in nodes
+    ):
+        raise ValueError("pool allocation has an invalid node list")
+    if nodes and (
+        len(nodes) != int(slurm["node_count"])
+        or len(set(nodes)) != len(nodes)
+    ):
+        raise ValueError("pool allocation has an invalid node list")
     source_hash = value["source_hash"]
     if (
         not isinstance(source_hash, str)
@@ -1015,7 +1031,7 @@ def validate_receipt(
         "input_sha256": sha256_file(input_path),
         "output_path": str(output_path.resolve()),
         "gpu_count": 1,
-        "slurm_gpus_per_task": 1,
+        "gpu_binding": config["slurm"]["gpu_binding"],
         "exit_code": 0,
     }
     for key, value in expected.items():

@@ -94,17 +94,14 @@
     "stop_after_consecutive_zero_keep_rounds": 3
   },
   "slurm": {
-    "partition": "ml.p5.48xlarge",
-    "nodes": [
-      "ip-10-1-38-11",
-      "ip-10-1-81-8"
-    ],
+    "partition": "ml.p4d.24xlarge",
+    "node_count": 2,
     "exclusive": true,
     "gpus_per_node": 8,
     "pool_slots": 16,
     "gpus_per_task": 1,
-    "gpu_binding": "slurm_gpus_per_task_1_gpu_bind_single_1",
-    "cpus_per_step": 12,
+    "gpu_binding": "dispatcher_cuda_visible_devices_one_gpu_per_slot",
+    "cpus_per_step": 6,
     "memory": "0",
     "time": "1-00:00:00"
   },

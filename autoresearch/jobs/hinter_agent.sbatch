@@ -84,15 +84,13 @@ trap handle_signal TERM INT
 
 coordinator_partition="${SLURM_JOB_PARTITION:-}"
 coordinator_host="$(hostname -s)"
-if [[ "${coordinator_partition}" == "ml.p5.48xlarge" ]]; then
-    echo "ERROR: the SDK coordinator must not occupy ml.p5.48xlarge" >&2
-    echo "Submit this wrapper to a non-H100 CPU/service partition." >&2
-    exit 2
-fi
-case "${coordinator_host}" in
-    ip-10-1-38-11|ip-10-1-81-8)
-        echo "ERROR: coordinator landed on reserved H100 host ${coordinator_host}" >&2
-        echo "Use a non-H100 CPU/service partition." >&2
+# The worker pool now takes whichever GPU nodes Slurm grants, so guard by
+# partition rather than by pinned hostname: the coordinator must never sit on
+# a GPU partition where it would consume a node the pool needs.
+case "${coordinator_partition}" in
+    ml.p4d.24xlarge|ml.p5.48xlarge)
+        echo "ERROR: the SDK coordinator must not occupy ${coordinator_partition}" >&2
+        echo "Submit this wrapper to a non-GPU CPU/service partition." >&2
         exit 2
         ;;
 esac

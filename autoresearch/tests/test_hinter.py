@@ -11,6 +11,11 @@ import pytest
 from autoresearch.hinter import core, pool, publish, state
 
 
+# Stand-in for the hostnames Slurm grants at run time; the pool no longer pins
+# nodes by name, so allocations record whichever nodes the scheduler assigned.
+GRANTED_NODES = ["ip-10-1-173-179", "ip-10-1-184-205"]
+
+
 class FakeTokenizer:
     def encode(self, text: str, add_special_tokens: bool = False) -> list[int]:
         del add_special_tokens
@@ -33,8 +38,35 @@ def test_config_matches_contract(config: dict) -> None:
         core.HELDOUT_POSITIONS
     )
     assert config["slurm"]["pool_slots"] == 16
+    assert config["slurm"]["node_count"] == 2
+    assert (
+        config["slurm"]["node_count"] * config["slurm"]["gpus_per_node"]
+        == config["slurm"]["pool_slots"]
+    )
+    # p4d.24xlarge has 48 CPUs per node, so the per-node task fan-out must fit.
+    assert config["slurm"]["gpus_per_node"] * config["slurm"]["cpus_per_step"] <= 48
+    assert "nodes" not in config["slurm"]
     assert config["sampling"]["rollouts"] == 8
     assert config["sampling"]["max_tokens"] == 16384
+
+
+def test_pool_requests_no_gpu_gres() -> None:
+    """This cluster defines no GPU gres; --gpus-*/--gres fail at submit time."""
+    sources = [
+        (core.REPO_ROOT / "autoresearch/jobs/hinter_pool.sbatch").read_text(
+            encoding="utf-8"
+        ),
+        (core.REPO_ROOT / "autoresearch/hinter/pool.py").read_text(
+            encoding="utf-8"
+        ),
+    ]
+    for source in sources:
+        for line in source.splitlines():
+            code = line.split("#", 1)[0]
+            for flag in ("--gpus-per-task", "--gpus-per-node", "--gres", "--gpu-bind"):
+                assert flag not in code, f"gres flag {flag} in: {line.strip()}"
+    # GPUs come from whole exclusive nodes instead.
+    assert "#SBATCH --exclusive" in sources[0]
 
 
 def test_agent_sbatch_does_not_consume_h100_pool() -> None:
@@ -51,8 +83,7 @@ def test_agent_sbatch_does_not_consume_h100_pool() -> None:
     assert not any("--partition=" in line for line in directives)
     assert not any("--gpus" in line or "--gres" in line for line in directives)
     assert not any("--nodelist" in line for line in directives)
-    assert "ml.p5.48xlarge" in script
-    assert "ip-10-1-38-11|ip-10-1-81-8" in script
+    assert "ml.p4d.24xlarge|ml.p5.48xlarge" in script
     assert script.index("trap cleanup_on_exit EXIT") < script.index(
         "gh auth status"
     )
@@ -500,7 +531,7 @@ def test_receipt_binds_archived_allocation_and_input(
             "schema_version": 1,
             "job_id": job_id,
             "partition": config["slurm"]["partition"],
-            "nodes": config["slurm"]["nodes"],
+            "nodes": GRANTED_NODES,
             "pool_slots": 16,
             "exclusive": True,
             "gpus_per_node": 8,
@@ -530,10 +561,10 @@ def test_receipt_binds_archived_allocation_and_input(
         "allocation_job_id": "111",
         "slurm_step_id": "7",
         "execution_id": "111.7",
-        "node": config["slurm"]["nodes"][0],
+        "node": GRANTED_NODES[0],
         "gpu_count": 1,
         "pool_slot": 3,
-        "slurm_gpus_per_task": 1,
+        "gpu_binding": config["slurm"]["gpu_binding"],
         "visible_cuda_device": "0",
         "config_hash": config_hash,
         "source_hash": source_hash,
