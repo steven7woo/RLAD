@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+  "generation": 2,
+  "hints": [
+    {
+      "hint_id": 1,
+      "train_position": 163,
+      "train_qid": "28054",
+      "hint": "For puzzles where agents announce ignorance, first write down exactly what each agent knows. If the setup leaves ambiguous which of two quantities was revealed, that ambiguity is part of every agent's uncertainty: do not case-split externally, assume one reading, and restart. An agent holding x who sees N must keep every partner value legal under either reading (sum/product reveal: N-x and N/x when each is a valid natural number). \"I do not know\" means at least two partner values survive, which constrains that agent's own number. Apply announcements in order, filtering the set left by the previous one. Verify at the end: your candidate makes both announcements true and no rival candidate does. Track eliminations once and move forward instead of relitigating; looping exhausts your budget before you answer.",
+      "tokens": 162,
+      "hint_hash": "dbc2ee04fc1040b32c556b3902c8b24a068f4fb2a65471d780bb7cf95f06ed05"
+    },
+    {
+      "hint_id": 2,
+      "train_position": 28,
+      "train_qid": "30302",
+      "hint": "For \"all roots lie on one circle\" problems, take moduli before hunting roots. From (z-a)^n = c(z-b)^n get |z-a| = k|z-b| with k = |c|^(1/n). TRAP: |c|*|z-b|^n means c is NOT raised to the n-th power; compute k as a plain number and check k^n = |c| before continuing, since a wrong k gives a wrong but perfectly self-consistent circle. Then set z = x+iy, square, collect the x^2+y^2 terms, divide by their coefficient, complete the square, read off center and radius (an Apollonius circle; k=1 degenerates to a line). Verify against the ORIGINAL equation, never your derived one: solve (z-a)/(z-b) = k for its real root and check its distance to your center equals your radius. Then box.",
+      "tokens": 196,
+      "hint_hash": "fad519d5df8c79bed93cda1aeff9f3e875b36bbc185cc1cb6999b9dd9ac812c6"
+    },
+    {
+      "hint_id": 3,
+      "train_position": 6,
+      "train_qid": "8554",
+      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square; show the far edges are too distant to matter, so the overlap is a right-angle wedge cut by the small square. Then be numeric, not qualitative: for one angle, find where the two rays exit the square, list the polygon vertices in order, and shoelace it. Repeat for a second angle. If the two values match, suspect the overlap is angle-independent and confirm it by pairing congruent pieces under the square's own rotational symmetry; otherwise minimize over the symmetry-reduced range. Box a number well before you run long.",
+      "tokens": 161,
+      "hint_hash": "d69272dd32d75bb109b8f90ec51dbfc046caef43ffec91aebfcc7655b32b70ce"
+    },
+    {
+      "hint_id": 4,
+      "train_position": 189,
+      "train_qid": "25003",
+      "hint": "Several hidden degree-n polynomials must jointly hit prescribed values at consecutive integers. Two traps: do NOT difference one polynomial and conclude impossibility, and do NOT assume each polynomial is used once.\n\nMethod: write the prescribed value as a function of the INPUT, not the position; for an arithmetic progression over consecutive inputs the target is affine, L(x)=px+q. Fix one polynomial P and set g=P-L. Every input assigned to P is a root of g. Compare degrees to show g is not identically zero, so g has at most n roots; that caps how many inputs any single polynomial can serve. Multiply/sum that cap over the family for the upper bound, then exhibit a construction giving each polynomial a disjoint block of inputs where it interpolates L. Report one exact integer.",
+      "tokens": 161,
+      "hint_hash": "f212db17d44fe5d49e8827b752416b5712e08e5fae6e5c30aafeee3eac2b3c99"
+    },
+    {
+      "hint_id": 5,
+      "train_position": 70,
+      "train_qid": "30418",
+      "hint": "When unknown points on a fixed curve y=g(x) are tied by a known displacement (u,v), reduce to ONE unknown: let the free vertex be (t, g(t)) and its partner (t+u, g(t)+v), then solve the single scalar equation g(t+u) = g(t) + v.\n\nFor a logarithmic curve, convert that additive offset to a multiplicative one BEFORE cross-multiplying: log_c(B) - log_c(A) = v means B/A = c^v. Flipping the direction or sign of that power is the dominant failure mode.\n\nIf you hit an impossible identity or a negative discriminant, you flipped the offset: recheck only that conversion line. Do not conclude the configuration is impossible, and do not restart from scratch.\n\nDiscard roots that reproduce a given vertex (degenerate). Finish with the shoelace determinant in cyclic order.",
+      "tokens": 185,
+      "hint_hash": "b4fd32f624ae17388dbdae26f7e56c31810f77c5a9d0b0ec175f909f80debcae"
+    },
+    {
+      "hint_id": 6,
+      "train_position": 62,
+      "train_qid": "26989",
+      "hint": "Describe a configuration by the ordered contents of the truck, gate, and shed rather than by informal move sequences. Legal moves form a small state graph; at each state, attach the actual transition probability, noting that it changes when only one move is available. Propagate probabilities by dynamic programming while retaining enough label order to test the requested final event. Check that probabilities, rather than merely path counts, sum to one.",
+      "tokens": 83,
+      "hint_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "train_position": 57,
+      "train_qid": "3836",
+      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
+      "tokens": 82,
+      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "train_position": 35,
+      "train_qid": "23443",
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, apply the stated markup multiplicatively, and check integrality and units.",
+      "tokens": 77,
+      "hint_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "train_position": 188,
+      "train_qid": "3980",
+      "hint": "When the constraint is a commuting identity like p(q(x)) = q(p(x)) with unknown coefficients, do not expand the composition: its degree is the product of the degrees, and drowning in that algebra is the main way these problems are lost. Instead posit an affine link q = a*p + b, testing the simplest cases a = ±1 first, and fix b from the given point values. The identity then reduces to \"p commutes with an affine involution\", which forces p to be antisymmetric about that map's fixed point m: p(m+t) + p(m-t) is constant. Use that symmetry to produce the requested outputs directly instead of solving for every coefficient. Expect one leftover free coefficient; verify the requested values do not depend on it, then set it to something convenient and check the identity numerically at two points.",
+      "tokens": 171,
+      "hint_hash": "4f1f9baf5c0ee54e69e21910d4c53ff35a80a21cf99453fae5e77e4e344dd246"
+    },
+    {
+      "hint_id": 10,
+      "train_position": 26,
+      "train_qid": "3843",
+      "hint": "First move: for the two smallest sizes, write positions 0..N-1 as an explicit list and rewrite the entire list after each stage k=0,1,...,n-1 in order; that is one operation. Reapply it and track the orbit of a single label until it repeats. That cycle length is your candidate order. Then write positions in binary and express the whole operation as one map on bit strings (which bits flip, which rotate), and verify it reproduces both explicit traces. Trap: if traces of different sizes suggest different formulas, your trace is wrong, not the formula piecewise; redo the smallest case letter by letter. Trust the verified bit map over pattern-guessing. Once two sizes agree, stop exploring, never restart the analysis, and box a single closed form in n.",
+      "tokens": 166,
+      "hint_hash": "dd13dfdbf01ce17b82749c8a21248b69e4fc454c46da7dfa1dea17c016ff54c0"
+    }
+  ],
+  "total_tokens": 1444,
+  "book_hash": "ec1ceee8fe6950e6e1b5654c6f4e037dd39fa9623c694c9e362bf2865c90e852"
+}
