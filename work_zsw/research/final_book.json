@@ -85,5 +85,13 @@
     }
   ],
   "total_tokens": 1660,
-  "book_hash": "4a9b5d9844710062c8a25b97575ae4bf229c037272096c59175757cb43078dd7"
+  "book_hash": "4a9b5d9844710062c8a25b97575ae4bf229c037272096c59175757cb43078dd7",
+  "stopping_status": {
+    "completed_rounds": 6,
+    "last_round": 6,
+    "consecutive_zero_keep_rounds": 0,
+    "max_rounds": 6,
+    "should_stop": true,
+    "reason": "round_budget_exhausted"
+  }
 }

@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "completed_rounds": 6,
+  "last_round": 6,
+  "consecutive_zero_keep_rounds": 0,
+  "max_rounds": 6,
+  "should_stop": true,
+  "reason": "round_budget_exhausted"
+}

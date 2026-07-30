@@ -149,6 +149,27 @@
             "J_i": 0.4375
           },
           "proposal_eval_slurm_job_id": "618.103"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "2bb207cd5f32facdd1bfa4f205e8cf23cbfd9e8f33685ee3ab55a18bd3db4cc4",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "2bb207cd5f32facdd1bfa4f205e8cf23cbfd9e8f33685ee3ab55a18bd3db4cc4",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 36,
+            "J_denominator": 80,
+            "J_i": 0.45
+          },
+          "proposal_eval_slurm_job_id": "618.123"
         }
       ]
     },
@@ -299,6 +320,27 @@
             "J_i": 1.175
           },
           "proposal_eval_slurm_job_id": "618.104"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "0a03e8e51b5b50177e648e0508dc1dab2d3578e29ed3e61fe399adeeefe20a48",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "0a03e8e51b5b50177e648e0508dc1dab2d3578e29ed3e61fe399adeeefe20a48",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 92,
+            "J_denominator": 80,
+            "J_i": 1.15
+          },
+          "proposal_eval_slurm_job_id": "618.124"
         }
       ]
     },
@@ -306,23 +348,23 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square; the far edges are too distant to matter, so the overlap is a right-angle wedge. Never conclude the small square is wholly covered; the wedge apex sits at its center. Then be numeric, not qualitative: for one angle, find where the two rays exit the square, list the polygon vertices in order, and shoelace it. Repeat for a second angle. If the two values agree, the overlap is angle-independent; never argue minimality in prose. Trust the shoelace numbers over any closed-form guess, never restart, and once a number is in hand do not re-derive it or write a formatted solution: state that one value in one short line and stop.",
-      "tokens": 190,
-      "hint_hash": "cde40cad3d78c688d058a4c1b49465a4b669a468253d28c371e90239b1bd1797",
+      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square, so the overlap is a right-angle wedge. Never conclude the small square is wholly covered; the wedge apex sits at its center. Then be numeric, not qualitative: pick two specific tilt angles and never build a symbolic tan-angle formula; for each, find where the two rays exit the square, list the polygon vertices in order, and shoelace decimals. If the two values agree, the overlap is angle-independent; never argue minimality in prose. Trust the shoelace numbers over any closed-form guess, never restart, and once a number is in hand do not re-derive it or write a formatted solution: state that one value in one short line and stop.",
+      "tokens": 188,
+      "hint_hash": "7f6f7154d4fb512267ac31b10ca7619afd3eece344d94fa33fc0e3a676f1b121",
       "metrics": {
         "schema_version": 1,
         "hint_id": 3,
-        "hint_hash": "cde40cad3d78c688d058a4c1b49465a4b669a468253d28c371e90239b1bd1797",
+        "hint_hash": "7f6f7154d4fb512267ac31b10ca7619afd3eece344d94fa33fc0e3a676f1b121",
         "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
-        "train_correct": 3,
+        "train_correct": 4,
         "train_total": 8,
-        "train_i": 0.375,
+        "train_i": 0.5,
         "heldout_correct": 8,
         "heldout_total": 80,
         "heldout_i": 0.1,
-        "J_numerator": 38,
+        "J_numerator": 48,
         "J_denominator": 80,
-        "J_i": 0.475
+        "J_i": 0.6
       },
       "history": [
         {
@@ -449,6 +491,27 @@
             "J_i": 0.475
           },
           "proposal_eval_slurm_job_id": "618.105"
+        },
+        {
+          "round": 6,
+          "decision": "kept",
+          "proposal_hash": "7f6f7154d4fb512267ac31b10ca7619afd3eece344d94fa33fc0e3a676f1b121",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "7f6f7154d4fb512267ac31b10ca7619afd3eece344d94fa33fc0e3a676f1b121",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 8,
+            "heldout_total": 80,
+            "heldout_i": 0.1,
+            "J_numerator": 48,
+            "J_denominator": 80,
+            "J_i": 0.6
+          },
+          "proposal_eval_slurm_job_id": "618.125"
         }
       ]
     },
@@ -599,6 +662,27 @@
             "J_i": 0.975
           },
           "proposal_eval_slurm_job_id": "618.106"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "8ece9093831a58cdbf5dd3659098096f871d8fb7c6df9889d9bb867c9f2e769b",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "8ece9093831a58cdbf5dd3659098096f871d8fb7c6df9889d9bb867c9f2e769b",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 72,
+            "J_denominator": 80,
+            "J_i": 0.9
+          },
+          "proposal_eval_slurm_job_id": "618.126"
         }
       ]
     },
@@ -749,6 +833,27 @@
             "J_i": 0.6375
           },
           "proposal_eval_slurm_job_id": "618.107"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "96a1d676223d38da10a9b3942f69b0619801749bb3ca48310f09910aac8b9cdb",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "96a1d676223d38da10a9b3942f69b0619801749bb3ca48310f09910aac8b9cdb",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 66,
+            "J_denominator": 80,
+            "J_i": 0.825
+          },
+          "proposal_eval_slurm_job_id": "618.127"
         }
       ]
     },
@@ -756,23 +861,23 @@
       "hint_id": 6,
       "train_position": 62,
       "train_qid": "26989",
-      "hint": "Describe a configuration by the ordered contents of the truck, gate, and shed rather than by informal move sequences. Legal moves form a small state graph; at each state, attach the actual transition probability, noting that it changes when only one move is available. Each stack is last-in-first-out, so translate the asked-about position into a timing claim: whatever is deposited first sits at the bottom. Then trace only the move sequences that realize that event, multiplying 1/2 per step where two moves were genuinely available, and add those path probabilities. Do not substitute a symmetry claim that each item is equally likely to occupy each position; the induced distribution over orders is not uniform. Report exactly one value per part, then stop.",
-      "tokens": 146,
-      "hint_hash": "f42ab52a7986f701b5f58ac0be9971ac18d82f4c450fceaa2b4bac9880f44efc",
+      "hint": "Describe a configuration by the ordered contents of the truck, gate, and shed rather than by informal move sequences. At each state attach the actual transition probability, noting that it changes when only one move is available. Each stack is last-in-first-out, so translate the asked-about position into a timing claim: whatever is deposited first sits at the bottom. Then trace only the move sequences that realize that event, multiplying 1/2 per step where two moves were genuinely available, and add those path probabilities. Do not substitute a symmetry claim that each item is equally likely to occupy each position; the induced distribution over orders is not uniform. When several parts are labelled, only one value is graded: close by restating the value for the first labelled part alone, then stop.",
+      "tokens": 155,
+      "hint_hash": "13155263e5b9e43df8ae8b429afa6b04f70775469a76699a87a27296b68fc70f",
       "metrics": {
         "schema_version": 1,
         "hint_id": 6,
-        "hint_hash": "f42ab52a7986f701b5f58ac0be9971ac18d82f4c450fceaa2b4bac9880f44efc",
+        "hint_hash": "13155263e5b9e43df8ae8b429afa6b04f70775469a76699a87a27296b68fc70f",
         "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
-        "train_correct": 2,
+        "train_correct": 3,
         "train_total": 8,
-        "train_i": 0.25,
-        "heldout_correct": 15,
+        "train_i": 0.375,
+        "heldout_correct": 13,
         "heldout_total": 80,
-        "heldout_i": 0.1875,
-        "J_numerator": 35,
+        "heldout_i": 0.1625,
+        "J_numerator": 43,
         "J_denominator": 80,
-        "J_i": 0.4375
+        "J_i": 0.5375
       },
       "history": [
         {
@@ -899,6 +1004,27 @@
             "J_i": 0.1125
           },
           "proposal_eval_slurm_job_id": "618.108"
+        },
+        {
+          "round": 6,
+          "decision": "kept",
+          "proposal_hash": "13155263e5b9e43df8ae8b429afa6b04f70775469a76699a87a27296b68fc70f",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "13155263e5b9e43df8ae8b429afa6b04f70775469a76699a87a27296b68fc70f",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 43,
+            "J_denominator": 80,
+            "J_i": 0.5375
+          },
+          "proposal_eval_slurm_job_id": "618.128"
         }
       ]
     },
@@ -1049,6 +1175,27 @@
             "J_i": 0.15
           },
           "proposal_eval_slurm_job_id": "618.109"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "90beb60238fb9a54900010e713dbe9cb70b3d75b9ca3b601cf15b6611a571703",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "90beb60238fb9a54900010e713dbe9cb70b3d75b9ca3b601cf15b6611a571703",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 9,
+            "J_denominator": 80,
+            "J_i": 0.1125
+          },
+          "proposal_eval_slurm_job_id": "618.129"
         }
       ]
     },
@@ -1199,6 +1346,27 @@
             "J_i": 0.5375
           },
           "proposal_eval_slurm_job_id": "618.110"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "a78f91bad260281d8a3715b2b4ce30af1a7f0f0efb42138a35db5820dbca1ec4",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "a78f91bad260281d8a3715b2b4ce30af1a7f0f0efb42138a35db5820dbca1ec4",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 8,
+            "heldout_total": 80,
+            "heldout_i": 0.1,
+            "J_numerator": 78,
+            "J_denominator": 80,
+            "J_i": 0.975
+          },
+          "proposal_eval_slurm_job_id": "618.130"
         }
       ]
     },
@@ -1349,6 +1517,27 @@
             "J_i": 0.9
           },
           "proposal_eval_slurm_job_id": "618.111"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "f7844bf7c3f0653288307033435c3402b66f2ae9289ba8476fea62fc6118e6df",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "f7844bf7c3f0653288307033435c3402b66f2ae9289ba8476fea62fc6118e6df",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 80,
+            "J_denominator": 80,
+            "J_i": 1.0
+          },
+          "proposal_eval_slurm_job_id": "618.131"
         }
       ]
     },
@@ -1499,6 +1688,27 @@
             "J_i": 0.65
           },
           "proposal_eval_slurm_job_id": "618.112"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "cb3f1fa8c186e3339bded2e1e7f9e7bbb3ce2847fe047e1e7a6863943ba96efd",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "cb3f1fa8c186e3339bded2e1e7f9e7bbb3ce2847fe047e1e7a6863943ba96efd",
+            "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 31,
+            "J_denominator": 80,
+            "J_i": 0.3875
+          },
+          "proposal_eval_slurm_job_id": "618.132"
         }
       ]
     }

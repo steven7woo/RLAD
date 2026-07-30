@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "8d488890694ef85a931ea363938fa45674911daa43e3e3db8abfa1934f4366d7",
-  "generation": 6,
+  "generation": 5,
   "hints": [
     {
       "hint_id": 1,
@@ -23,9 +23,9 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square, so the overlap is a right-angle wedge. Never conclude the small square is wholly covered; the wedge apex sits at its center. Then be numeric, not qualitative: pick two specific tilt angles and never build a symbolic tan-angle formula; for each, find where the two rays exit the square, list the polygon vertices in order, and shoelace decimals. If the two values agree, the overlap is angle-independent; never argue minimality in prose. Trust the shoelace numbers over any closed-form guess, never restart, and once a number is in hand do not re-derive it or write a formatted solution: state that one value in one short line and stop.",
-      "tokens": 188,
-      "hint_hash": "7f6f7154d4fb512267ac31b10ca7619afd3eece344d94fa33fc0e3a676f1b121"
+      "hint": "Covered area = sum of areas minus overlap, so minimize overlap. Fix coordinates once, with the shared point at the origin, and never re-derive that setup. Key pruning: only the two edges meeting at the shared point can cut the small square; the far edges are too distant to matter, so the overlap is a right-angle wedge. Never conclude the small square is wholly covered; the wedge apex sits at its center. Then be numeric, not qualitative: for one angle, find where the two rays exit the square, list the polygon vertices in order, and shoelace it. Repeat for a second angle. If the two values agree, the overlap is angle-independent; never argue minimality in prose. Trust the shoelace numbers over any closed-form guess, never restart, and once a number is in hand do not re-derive it or write a formatted solution: state that one value in one short line and stop.",
+      "tokens": 190,
+      "hint_hash": "cde40cad3d78c688d058a4c1b49465a4b669a468253d28c371e90239b1bd1797"
     },
     {
       "hint_id": 4,
@@ -47,9 +47,9 @@
       "hint_id": 6,
       "train_position": 62,
       "train_qid": "26989",
-      "hint": "Describe a configuration by the ordered contents of the truck, gate, and shed rather than by informal move sequences. At each state attach the actual transition probability, noting that it changes when only one move is available. Each stack is last-in-first-out, so translate the asked-about position into a timing claim: whatever is deposited first sits at the bottom. Then trace only the move sequences that realize that event, multiplying 1/2 per step where two moves were genuinely available, and add those path probabilities. Do not substitute a symmetry claim that each item is equally likely to occupy each position; the induced distribution over orders is not uniform. When several parts are labelled, only one value is graded: close by restating the value for the first labelled part alone, then stop.",
-      "tokens": 155,
-      "hint_hash": "13155263e5b9e43df8ae8b429afa6b04f70775469a76699a87a27296b68fc70f"
+      "hint": "Describe a configuration by the ordered contents of the truck, gate, and shed rather than by informal move sequences. Legal moves form a small state graph; at each state, attach the actual transition probability, noting that it changes when only one move is available. Each stack is last-in-first-out, so translate the asked-about position into a timing claim: whatever is deposited first sits at the bottom. Then trace only the move sequences that realize that event, multiplying 1/2 per step where two moves were genuinely available, and add those path probabilities. Do not substitute a symmetry claim that each item is equally likely to occupy each position; the induced distribution over orders is not uniform. Report exactly one value per part, then stop.",
+      "tokens": 146,
+      "hint_hash": "f42ab52a7986f701b5f58ac0be9971ac18d82f4c450fceaa2b4bac9880f44efc"
     },
     {
       "hint_id": 7,
@@ -84,6 +84,6 @@
       "hint_hash": "03b88454bbefe8b368f773ca44d44d049e482cea344efb81862348cdcd92e1e8"
     }
   ],
-  "total_tokens": 1660,
-  "book_hash": "4a9b5d9844710062c8a25b97575ae4bf229c037272096c59175757cb43078dd7"
+  "total_tokens": 1653,
+  "book_hash": "4c981762e4006770f1df1330a54d20b2e49c56774c823d6baefef44a58ec0d39"
 }
