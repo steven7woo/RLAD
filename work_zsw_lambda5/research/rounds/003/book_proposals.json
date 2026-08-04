@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+  "round": 3,
+  "book_hash_before": "a4a966e029bc0826c9a3b4b0412dfa0daed45a8a681a45a35d5bf4aa64d5144c",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "First write, for each speaker, exactly what they see and what stays unknown to them. If the problem never says which quantity the public number is, that role is unknown to them too, so no speaker may just subtract or divide to pin the partner. For each possible private value v, list the partners allowed under every reading, dropping those that break the domain rules (natural number, exact division). One survivor means \"I know\"; two or more means \"I don't know\". Turn each announcement into the set of v it permits, then apply later announcements only to those survivors. If every reading looks contradictory, you gave a speaker knowledge they lack: fix the unknown list rather than guessing a plausible value to fill the answer.",
+      "mutation": "knowledge-inventory-plus-no-guess-bar",
+      "subagent_summary": "All 8 round-3 rollouts scored 0: six explicitly argued that a speaker who knows their own number plus the public number can compute the partner, concluded both the sum reading and the product reading are impossible, and then emitted an arbitrary divisor of the public number to fill the answer box (three separate divisors appeared across the eight samples), while three burned the token cap looping on that same contradiction. The revision front-loads an explicit per-speaker knowledge inventory that forbids 'just subtract/divide', replaces group-deletion language with a concrete per-private-value count of partners across readings, and adds an explicit bar on guessing when every reading looks contradictory - the exact point where every failure went astray.",
+      "sampling_slurm_job_id": "149.57",
+      "tokens": 146,
+      "hint_hash": "7bfb7a0d8f83d797ba13b71ed1076d9e3bc7002785faa9b3a27625fa42b6c21f",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "0fa96053d79aac037ffbeaa924500a0114b1fad8dab76251534170a8d16f138f"
+    },
+    {
+      "hint_id": 2,
+      "hint": "For (z-a)^n = c(z-b)^n (b may be 0), do not enumerate the n roots. Take moduli: every root obeys |z-a| = k|z-b|, k = |c|^(1/n). If k = 1 the locus is the perpendicular bisector of a and b: a line, not a circle. Otherwise it is an Apollonius circle, and the fastest data comes from dropping the bars along line ab: solve z-a = k(z-b) and z-a = -k(z-b). Those two points are opposite ends of a diameter, so center = their midpoint, radius = half their distance. Cross-check once with z = x+iy: square, collect x^2+y^2, divide by its coefficient, complete the square. The center is off the origin and not on the circle itself, so |z| varies; that is expected. Report exactly the quantity asked.",
+      "mutation": "diameter-endpoints-shortcut-plus-center-not-on-circle-warning",
+      "subagent_summary": "All 8 round-3 rollouts scored 1 (3.3k-7.7k tokens), so training is saturated and the loss is transfer: every rollout got |z-a|=k|z-b| within a few hundred tokens, but then 4 of 8 burned 12-40 exponential expressions re-deriving individual roots to spot-check the locus, and 3 of 8 (including the two most hedged, 16-18 'Wait's) stalled on a self-inflicted contradiction from testing the center point itself and concluding the circle was wrong. The revision therefore adds a portable constant-work route to the circle's data (the two collinear points where the bars drop, which bound a diameter, giving center as midpoint and radius as half the distance), demotes the coordinate expansion to a single cross-check, and states explicitly that the center is not on the circle so |z| varying is expected.",
+      "sampling_slurm_job_id": "149.58",
+      "tokens": 198,
+      "hint_hash": "1f201f288fcb54e8912556e65d37575844f34bb6254ce56a76fd292e0482315d",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "65a545bc36267d194340d7e9cea8a5fc006f707b001219525d3396c4903feb34"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union = sum of areas minus overlap, so minimize overlap. First fix coordinates: put the contact point at the origin and list every vertex of both shapes, verifying each side length. Mis-listing a vertex, or assuming the small shape lies wholly inside the big one, is the usual fatal error. Then compute the overlap at two orientations, one aligned and one rotated, each time naming the overlap polygon's vertices and its area. Never assert a fraction like 'half' from words alone. If the contact point is a symmetry center of one shape and the other covers exactly one of its k congruent wedges, the overlap is 1/k of it at every angle; the two values then agree, and that value is both min and max, so report the union and stop. If they disagree, a region was drawn wrong: recheck it, then test only angles where the edge-crossing pattern changes.",
+      "mutation": "coordinate-vertex-audit-before-invariance-check",
+      "subagent_summary": "Round-3 training reproduced 7/8 with the incumbent; the single failure never ran the incumbent invariance test properly because it mis-listed the large square vertices and then evaluated the aligned orientation as full containment (overlap = whole small square) instead of the actual corner region, so its two test values disagreed and it settled on a verbally asserted rotated fraction with no computed region. Held-out also fell to 0.0875 under the incumbent, indicating its bespoke k-fold-wedge criterion is being applied by fiat rather than checked, while the round-2 shoelace variant lifted held-out to 0.2 but collapsed train. This revision therefore prepends a cheap coordinate/vertex audit and an explicit ban on uncomputed overlap fractions, keeps the invariance-then-stop control flow that trains well, and routes disagreement back to re-checking the region instead of a costly general clipping search.",
+      "sampling_slurm_job_id": "149.59",
+      "tokens": 183,
+      "hint_hash": "1205be011a301eed49e2a6ed6ef748f5c1393aaa0804c33b10ef9bf173087112",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "a3268d480f0c74f9a8026bf5c2b6dd432a3ba1363673f43d20f5ae1256a63607"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of a required pattern may come from any of N given functions, the only usable constraint is pointwise. Write the pattern's value at index n as T(n) and partition the used indices by which function produced them. Never chain neighbouring terms, and never require one function's own values to step by the pattern's difference: its index group need not be consecutive, so its successive differences are irrelevant. On P's group the only condition is P(n) = T(n), so each such n is a root of P - T, nonzero because low-degree T cannot cancel P's leading term. Each group thus holds at most deg P indices; the bound is N x deg P. Any argument ending in 'P must be affine' or 'one term per function' came from adjacent differences - discard it. Confirm tightness by giving each function one block of indices and interpolating T there, then report the count.",
+      "mutation": "kill-the-per-function-consecutive-difference-trap",
+      "subagent_summary": "My 8 public rollouts scored 6/8; both failures were token-cap truncations, never wrong answers. One never partitioned indices at all and burned the budget building a recursive shift construction from adjacent-term differences; the other quoted the hint's product late but then re-imposed a constant successive difference within a single polynomial's own values, concluded 'each function contributes at most one term', and looped. The revision therefore targets that specific trap: it states that a function's index group need not be consecutive so its own successive differences carry no information, and adds a discard rule for any line ending in 'P must be affine' or 'one term per function'.",
+      "sampling_slurm_job_id": "149.60",
+      "tokens": 187,
+      "hint_hash": "0d7624081f4a992aa82591cf8525706fc082722e4d07498d140313eb0793fab8",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "c88c72a8af76a0349016b46bf3a91690c7375399032fa6e2fedac91359b1f577"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Fit the unknown parameters first: convert each given point to exponential form (log_c u = y means u = c^y) and solve the linear system. With base c<1 exponentiating flips the direction you expect, so recompute each given point's y from the fitted parameters as a check. Use the vector condition to write one unknown vertex as (t, f(t)) and the other as its translate; subtracting the two curve equations turns the y-gap d into a single factor c^d on the argument, leaving one rational equation. Drop roots that reproduce a given vertex (degenerate) or make an argument nonpositive. Then evaluate f at each new vertex and check it equals the y you assigned it; a mismatch is a sign or exponent slip to repair, not to work around. Never report an area from a point that fails this check. Area = |cross product| of adjacent edges, or shoelace.",
+      "mutation": "substitute-back-vertex-check-before-area",
+      "subagent_summary": "Train fell to 5/8 with the incumbent. All three failures shared one root cause: after solving the reduced rational equation they assigned the translated vertex a y-value that does not satisfy the curve (P off the graph), and two of them noticed the contradiction, called the problem inconsistent, and reported the area anyway; the third burned its whole budget on a mis-fit parameter pair it never sanity-checked against the given points. The revision keeps the reduction pipeline but replaces the discriminant flip-and-redo advice with two cheap closures: re-derive the given points' y from the fitted parameters, and evaluate f at every new vertex before any area is computed.",
+      "sampling_slurm_job_id": "149.61",
+      "tokens": 189,
+      "hint_hash": "7062684d5bae525d34d57b9a13efc1ad3c4184ce06fcb57a0955b87bb17f1ed2",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "bf462b403f17cd428257353852dc46039314abb29f7a1232a8b7b962384878f2"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Treat each pile as a stack: the first item placed on it ends at the bottom, the last on top. So convert the position asked about into a delivery rank (bottom = delivered first) before computing anything.\n\nThen ask which move sequences realize that event; such a constraint usually forces most moves and leaves only a few free choices. Weight a step 1/2 only where both moves are legal, and 1 where one side is empty so the move is forced. Multiply along a sequence, then sum the qualifying sequences. Reachable final orders are neither all permutations nor equally likely, so avoid favourable-over-total and 1/n!.",
+      "mutation": "orientation-to-delivery-rank-plus-forced-move-branch-counting",
+      "subagent_summary": "My 8 rollouts under the incumbent scored 2/8; the two successes were the only ones that used the rule 'bottom of the shed is the first bag delivered' and then multiplied 1/2 per real branch point, while five failures assumed uniformity (1/24, 1/4 from 'each bag equally likely to be last') and one inverted the orientation to conclude the outcome was forced. Rounds 1-2 already showed that long enumerate-the-whole-tree hints hurt held-out badly, so this revision stays near the incumbent's length and adds only the two steps the successful rollouts used: translate the asked position into a delivery rank, then count genuine 1/2 branch points versus forced moves.",
+      "sampling_slurm_job_id": "149.62",
+      "tokens": 129,
+      "hint_hash": "ab7fb02c765a14922053e501904b3361aa53ec39f67a65e3fe31c827952a0a3d",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "hint": "These rows are one rule usable on whole polynomials: if p(x)=sum_k b_k x^k uses only exponents k appearing among the rows, then sum_i a_i p(v_i) = sum_k b_k r_k, where r_k is row k's right-hand side. Note p is evaluated at the nodes v_i, never at a row index.\n\nTo read off a single weight a_t, choose such a p that vanishes at every node except v_t, of degree at most the largest exponent present, inserting a factor x when no constant term is allowed. Then a_t = (that known sum)/p(v_t), a signed product of node differences. Check the degree budget fits before expanding anything.",
+      "mutation": "apply-rows-to-test-polynomial-dual-basis",
+      "subagent_summary": "All 8 rollouts scored 0 with a single shared error: each set P(x)=sum_i a_i x^i and reinterpreted row k as P(k)=0, swapping the node index with the condition exponent; the resulting degree-2005 polynomial with only 2004 roots left one free parameter, so rollouts either stalled declaring the system inconsistent/underdetermined or resolved the free root arbitrarily and reported a harmonic-sum, 1/2005, or 0 value. Rounds 1-2 already tried longer prose warnings against that swap and lost heldout accuracy, so this revision drops the warning framing and instead gives the positive mechanical rule -- apply the rows to a test polynomial evaluated at the nodes, chosen to isolate one weight -- keeping the text near incumbent length since the shorter incumbent transfers best.",
+      "sampling_slurm_job_id": "149.63",
+      "tokens": 148,
+      "hint_hash": "d636b3a5b5b8102e6bfabcd395a8cce725811581805e973f2b7d415e7b426729",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let N be the unknown count of identical units. Structural wording about equal groups constrains N arithmetically, and integer per-unit amounts mean N must divide every listed total. Determine the admissible common divisors, whose gcd is the largest N, using the intended maximum-feasible-count interpretation. Add all component amounts before dividing by N, apply any stated markup or discount multiplicatively, and check integrality and units.",
+      "mutation": "minimal-delta-genericize-nouns-keep-length",
+      "subagent_summary": "All 8 of my round-3 public rollouts scored reward 1 (train_i = 1.0), the third saturated round, so the only headroom is transfer, where the incumbent gets 9/80. Every correct rollout ran the same spine (divide-every-total -> gcd -> take max count -> sum -> scale by 1.2), and their only wasted effort was 6-23 backtracks re-deriving that the gcd is the maximum admissible count and re-reading the domain nouns; rounds 1 and 2 showed that replacing the incumbent with a longer, restructured generic paragraph (137 and 162 tokens) collapses train to 3/8 and 4/8 for only +2 and +3 heldout. So instead of another rewrite I made a minimal-delta edit at nearly the incumbent's length: same sentence skeleton and same operative phrases, but the house/street/construction nouns swapped for domain-neutral ones and the gcd-is-the-largest-N step stated explicitly, which should keep the training spine intact while letting the method apply to non-housing items of this class.",
+      "sampling_slurm_job_id": "149.64",
+      "tokens": 86,
+      "hint_hash": "f5ed76c60d421a1e9567f5df7d50b2fc936dfb2d46c4a9113fede876040d8c34",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "For p(q(x))=q(p(x)) with p,q of equal degree n, never open with a generic ax^n+...+d setup or match coefficients of the degree-n^2 composition. Recenter: assume a common fixed point r, write p(x)=r+A(x-r)^n and q(x)=r+B(x-r)^n, so composing only multiplies constants. Leading terms give AB^n=BA^n, so A^(n-1)=B^(n-1); B=A forces p=q, which distinct data forbids, so take the other root (B=-A for odd n). Push the given values through: their sum cancels the (x-r)^n parts and pins r, their difference pins A. Then read requested values off the centered form - p(r)=q(r)=r is free, an input d away from r costs only +-A*d^n. Verify the identity once and stop.",
+      "mutation": "justify-sign-branch-and-add-centered-evaluation-shortcut",
+      "subagent_summary": "All 8 public rollouts were correct again this round (8/8, 3.8k-6.1k tokens, none truncated), so the training question is saturated and the only loss is transfer and wasted reasoning. Every rollout still burned its first ~800 tokens writing out the generic ax^3+bx^2+cx+d pair before recentering, and each re-derived the B=+-A branch and then argued from scratch about why B=-A, because the incumbent asserts the odd-n sign without a reason. The revision explicitly bans the generic-coefficient opening, supplies the reason (B=A collapses to p=q, which distinct given data forbids), and adds the read-off rule that the fixed point is free and an input at distance d costs only A*d^n, so evaluation needs no expansion; the round-2 attempt to widen the trigger to all polynomial functional identities cost train 5/8, so the p(q)=q(p) trigger is kept concrete.",
+      "sampling_slurm_job_id": "149.65",
+      "tokens": 191,
+      "hint_hash": "639ef1aaea5466e5ec2541d329bfd26d7725952c998e3c95d3e186a3b31cd4f1",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "8c6cf2ad54328ef6d5d7727c427a0f3b4e2872fcbd87df2e3a186687f9e272bd"
+    },
+    {
+      "hint_id": 10,
+      "hint": "For \"how many repeats restore the original\" problems, simulate; don't theorize. Write the state as distinct labels and do each listed sub-step by rewriting the whole state: swapping two adjacent blocks concatenates them in the other order and leaves the rest fixed. Fix ONE convention (slot i now holds label X) and never mix in its inverse (label at i goes to slot j); that mix-up makes correct work look self-contradictory. After each sub-step check every label appears once. Never assume overlapping sub-steps compose to an involution or to disjoint swaps. Then repeat the full operation, counting until the state first returns to the original; cross-check against the lcm of the disjoint cycle lengths. Do the two smallest sizes exactly, propose a closed form, test it on one larger size, and if a size disagrees redo that simulation instead of patching the formula piecewise.",
+      "mutation": "single-direction-convention-plus-no-piecewise-patching",
+      "subagent_summary": "4/8 correct: one failure asserted the composite of the overlapping block swaps was disjoint transpositions and answered 2 without ever tracing it, and the three length-capped failures thrashed because their position map disagreed with their own string simulation after they silently switched between \"slot i receives\" and \"label at i goes to\" (one produced a non-injective map with two positions sent to the same target and never noticed). Two of those reached self-consistent counts for the smallest sizes, then abandoned them and burned the remaining budget inventing piecewise formulas for different n instead of rechecking the smaller simulation.",
+      "sampling_slurm_job_id": "149.66",
+      "tokens": 181,
+      "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "f5e98cb83b7d21cc59c0ef6c4bdd6b70731bf33bd4636ee98ff25a9b5546eb9d"
+    }
+  ]
+}
