@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+  "round": 2,
+  "book_hash_before": "d0c57cf9fb5b08070bd78a7936ae8587916aa36a0326ee83507b13b8e20db984",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "When a public number could be either aggregate (sum or product), the reading itself is the hidden unknown. A speaker knowing their own value plus one fixed reading can already force the partner, so \"I don't know\" never means \"many pairs exist overall\"; it means two or more readings stay live for that speaker. Method: for each private value v, build one candidate partner per reading (public minus v, public divided by v, ...) and delete those breaking the domain rules (positive integer, exact division). One survivor means \"I know\"; two or more means \"I don't know\". Then convert the first statement into the set of values that speaker could hold, prune the second speaker's candidates with it, and recount. If nothing survives, recheck your constraints instead of inventing a tie-breaker.",
+      "mutation": "count-partners-across-readings-per-private-value",
+      "subagent_summary": "Round-2 rollouts scored 2/8; every wrong rollout read \"I don't know\" as global ambiguity among all factor pairs, then noticed that a speaker's own number plus one fixed reading pins the partner, declared a contradiction, and substituted an invented tie-breaker about the hidden aggregate's uniqueness (three of eight also burned the token cap looping on that contradiction). The revision names the actual source of residual uncertainty - several readings alive for one private value - and gives a concrete per-value partner-counting rule plus a bar on inventing tie-breakers, which is the exact step the failures skipped.",
+      "sampling_slurm_job_id": "149.37",
+      "tokens": 164,
+      "hint_hash": "7081bc33cce4aa7e0825a327f187b2e274351922a791f7bc9c88b25f949cf011",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "0fa96053d79aac037ffbeaa924500a0114b1fad8dab76251534170a8d16f138f"
+    },
+    {
+      "hint_id": 2,
+      "hint": "When asked for the circle or line on which ALL solutions lie, never enumerate solutions; find one necessary condition all of them obey. Moduli do this: |AB|=|A||B|, so P=cQ gives |P|=|c||Q|, and if both sides are nth powers, nth roots give a distance ratio |z-a|=k|z-b| with k=|c|^(1/n). Then set z=x+iy, square, expand, collect the x^2+y^2 terms, divide by their coefficient, complete the square, and read off center and radius. If k=1 it is a line, not a circle. Since the condition is necessary, that locus IS the answer: do not refit a circle through sampled roots, nor doubt it because |z| varies along it. Then report exactly the quantity asked.",
+      "mutation": "broaden-trigger-to-locus-invariant-and-stress-necessity",
+      "subagent_summary": "All 8 rollouts scored 1 and every one reached the modulus ratio within the first few hundred tokens, so training accuracy is saturated and the remaining cost is transfer plus wasted verification: after already completing the square, 6 of 8 rollouts re-derived individual roots from nth roots of unity (11-29 exponential expressions each) and one spent 22 'Wait' hedges questioning whether the locus really held because |z| was not constant. The incumbent fires only on the literal template (z-a)^n=c(z-b)^n and names Apollonius as a label, so the revision keys the trigger on the general goal ('locus of all solutions'), states the modulus mechanism |AB|=|A||B| that generates the ratio, and asserts that a necessary condition already IS the locus so the model stops refitting circles through sampled roots.",
+      "sampling_slurm_job_id": "149.38",
+      "tokens": 177,
+      "hint_hash": "5019c021f2699abf588834f79f03ebfbbed8de65374aa589e92b0aee4b69cdb1",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "65a545bc36267d194340d7e9cea8a5fc006f707b001219525d3396c4903feb34"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union = sum of areas minus overlap, so minimize the overlap. Put the shared point at the origin and describe each shape by linear inequalities; then the overlap is a polygon you clip and area by shoelace. Never infer an overlap from words like tangent or roughly half: every overlap value must come from a computed area. Get numbers early by evaluating the overlap at three concrete orientations, one aligned, one symmetric, one generic skew. If they agree, the placement constraint plus the symmetry has made the overlap constant, so it is both the minimum and the maximum; report the union and stop. If they differ, keep the best sampled value, then check only the finitely many angles where the vertex and edge incidence pattern changes, plus interior stationary points, since a piecewise smooth area attains its extremes there.",
+      "mutation": "require-computed-polygon-areas-at-sampled-orientations",
+      "subagent_summary": "Round-2 training hit 7/8 with the incumbent, and every rollout (including the winners) reached a verdict by verbal plausibility rather than by any actual area computation; the single failure talked itself into a 'sides tangent, so overlap is half the small square' claim and reported it without ever clipping a region. Meanwhile heldout fell from 0.175 to 0.0875 under the incumbent, so its narrow k-fold-wedge-tiling criterion is not transferring. This revision keeps the min-overlap framing and the invariance-then-stop control flow but replaces the bespoke symmetry criterion with a portable half-plane/shoelace recipe plus an explicit ban on uncomputed overlap values, and falls back to breakpoint-and-stationary-point search only when sampled values disagree.",
+      "sampling_slurm_job_id": "149.39",
+      "tokens": 164,
+      "hint_hash": "ccfc91dca4e41fae13028465bd3bd459da0d298496e5f952724d5b84c5084512",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "a3268d480f0c74f9a8026bf5c2b6dd432a3ba1363673f43d20f5ae1256a63607"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of the required pattern may come from any of N given functions, never compare adjacent terms: neighbours can use different functions, so that route yields no bound. Write the pattern's value at index n as an explicit T(n), then partition indices by which function produced them. On one function P's group, P - T vanishes and is not identically zero, since subtracting the low-degree T cannot cancel P's leading term; so that group holds at most deg P indices. Hence Bound = N x deg P. Trust that product even if it looks too large for a contest; do not shrink or re-derive it. Instead verify by construction: give each function its own block of consecutive indices and interpolate T's values there - matching that many points leaves coefficients free, so a legal function exists. Bound plus construction is the whole proof; then answer.",
+      "mutation": "trust-the-product-and-verify-by-interpolation-then-stop",
+      "subagent_summary": "My 8 public rollouts with the incumbent hint scored 5/8; all three failures hit the 16384-token cap rather than reaching a wrong answer. One did reach the N x deg-P product but then spent thousands of tokens doubting it as 'too large for a competition' and re-litigating the construction; the other two never partitioned indices by function and looped on the vacuous adjacent-difference contradiction until truncation. The revision therefore keeps the grouping/root-bound skeleton but adds an explicit stop rule: accept the product, justify it once by block-interpolation (free coefficients remain), and terminate instead of re-deriving.",
+      "sampling_slurm_job_id": "149.40",
+      "tokens": 176,
+      "hint_hash": "c88c72a8af76a0349016b46bf3a91690c7375399032fa6e2fedac91359b1f577",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "d21f8fdfb7b030dd855ee44da6cf4c805a32548098ce56539000ab07255c6b86"
+    },
+    {
+      "hint_id": 5,
+      "hint": "For \"points on a curve + vector condition\" problems: substitute the known points into the curve equation, solve for the unknown parameters, and re-check both points before going on. A vector equality makes the figure a parallelogram, so write one unknown vertex as (x, f(x)) and get the other by adding the known displacement; one equation in x remains. On log/exp curves a constant y-shift becomes a constant multiplicative factor on the argument, collapsing that equation to a rational one. Expect extraneous roots: a root reproducing a given vertex gives a degenerate figure, and roots making any argument nonpositive are outside the domain; discard both and keep the branch with four distinct points. Then area = |cross product| of adjacent edge vectors, or shoelace in general.",
+      "mutation": "generalize-plus-extraneous-degenerate-root-filter",
+      "subagent_summary": "All 8 public rollouts were correct this round (train_i=1.0), so the training question is saturated and the binding constraint is transfer, which fell from 0.15 to 0.1375 when the incumbent grew to 151 tokens. Every rollout's real decision point was not the log-base direction the incumbent warns about but the quadratic yielding two in-domain roots, one of which reproduces a given vertex and collapses the figure; rollouts burned many tokens rediscovering that filter. The revision drops the discriminant flip-and-redo advice and states the portable pipeline: fit parameters, use the displacement to reduce to one unknown, exploit y-shift as a multiplicative argument factor, then reject degenerate and out-of-domain roots before the cross-product area.",
+      "sampling_slurm_job_id": "149.41",
+      "tokens": 161,
+      "hint_hash": "9763a2b8d200801a8763a998b61753425f4deb3148dc5eb985f9c5a6a4b83876",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "bf462b403f17cd428257353852dc46039314abb29f7a1232a8b7b962384878f2"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Never judge by intuition whether the outcome is forced or uniform; enumerate. State = ordered contents of each pile; expand the tree of legal moves, small for few items.\n\nOrientation: whatever is placed on a pile first ends up at its bottom, the last on top. Convert the position asked about (bottom, second from bottom) into a rank in arrival order, and do the same for the source pile, before comparing.\n\nWeights: 1/2 only where two moves are genuinely legal; where one source is empty the move is forced, weight 1. Hence outcomes are not equally likely, so never answer favorable/total or 1/n!.\n\nMultiply along each path, add paths satisfying the event, and verify leaf probabilities sum to 1.",
+      "mutation": "add-first-in-is-bottom-orientation-rule-and-enumerate-over-intuition",
+      "subagent_summary": "All 8 of my public rollouts scored 0 with two recurring errors: four asserted the delivery order is deterministically reversed (answering 1 and 0), and four treated outcomes as uniform over permutations or over which item lands last (answering 1/24 or 1/4). Six also inverted the pile orientation, treating the last item delivered as the bottom rather than the top, which makes the position asked about untestable. The revision therefore states the first-in-is-bottom rule and the position-to-arrival-rank translation explicitly, and replaces the incumbent's abstract state-graph advice with an explicit enumerate-then-weight recipe that names the forced-move weight 1 and bans favorable/total counting.",
+      "sampling_slurm_job_id": "149.42",
+      "tokens": 151,
+      "hint_hash": "799dfd7ee6975a319656183ff16b41113c39659444024eb701a4df04b4013c56",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Audit the roles first: in a sum like sum_i a_i * (v_i)^k, the index i labels an unknown weight sitting at a fixed value v_i, while k only numbers which condition you are in. Silently swapping weight-index and condition-exponent is the usual fatal error here.\n\nThen stress-test the setup on the smallest analogue (2 or 3 unknowns). If the toy version comes out inconsistent or underdetermined, your setup is wrong, not the problem: swap the roles and rebuild rather than patching it.\n\nWith the roles right, do not solve the whole system. Probe it: pick one test expression that makes every unknown except the target vanish, read the target off in a line or two, then sanity-check it against the extreme condition.",
+      "mutation": "role-audit+small-case-falsification+single-target-probe",
+      "subagent_summary": "All 8 rollouts scored 0 with one shared root cause: each recast the unknowns as coefficients of a polynomial evaluated at the row index, swapping the weight index with the condition exponent, then burned the budget (7 of 8 hit the token cap) chasing a phantom extra root or a harmonic-sum coefficient. Two rollouts did construct the small analogue and found it inconsistent or underdetermined, yet read that as their own confusion instead of proof the setup was wrong, so this revision makes the small case an explicit falsification test of the setup and replaces full-system solving with a single-target probe step.",
+      "sampling_slurm_job_id": "149.43",
+      "tokens": 157,
+      "hint_hash": "aebc888467d4bac12a1c4af028c4122c04afcf4ec7f7986434285074c186ba70",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "When a needed count is missing, call it N and settle two readings once, up front: is each listed figure a grand total or a per-unit amount, and does a stated percentage apply to the whole or the part? Then stop revisiting them.\n\nIf every per-unit share must be a whole number, N divides each listed figure, so N is a common divisor of them all and the largest admissible N is their gcd. If the wording asks for the maximum feasible count, take that gcd and say so. Talk of identical equal groups only makes N a multiple of the group count; check it, do not over-constrain.\n\nThen sum, divide by N, and apply the percentage as one factor; scaling commutes with dividing, so either order works. Verify shares are whole and units match.",
+      "mutation": "pin-readings-once-keep-gcd-maxcount",
+      "subagent_summary": "All 8 of my round-2 public rollouts scored reward 1 (train_i = 1.0), so the training item is saturated and the only headroom is transfer, where the incumbent gets 9/80. The wasted effort was not arithmetic but ambiguity churn: each rollout burned 16-29 'wait' backtracks re-arguing whether the listed figures were village totals or per-house amounts and whether the 20 percent markup applied to the total or to the per-unit cost, running 2.7k-6.8k tokens. Round 1 showed that genericizing away the gcd / maximum-feasible-count mechanic costs train (8/8 down to 3/8) for only +2 heldout, so I kept that mechanic and added portable instructions to fix both readings once and to note that a uniform percentage commutes with the division, which should cut backtracking on unseen items of this class.",
+      "sampling_slurm_job_id": "149.44",
+      "tokens": 162,
+      "hint_hash": "69f105e73d4f79d4d0bde5a9a545738bf16f242ec966c713a80753532c8422d0",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "For a polynomial functional identity (p(q(x))=q(p(x)), iterates, self-similar maps), do not match coefficients of the degree-n^2 expansion. Normalize first: find the invariants - degree, leading coefficient, and a shared fixed point or symmetry center r - then recenter each map as r+A(x-r)^n and r+B(x-r)^n, so composing only multiplies constants. Leading terms force AB(A^(n-1)-B^(n-1))=0, so B=+-A; derive that once, keep both branches, and let the data kill one instead of relooping. Use the given values symmetrically: their sum cancels the (x-r)^n parts and pins r, their difference pins A. Check the fixed point and one spare x, then evaluate the asked inputs in centered form.",
+      "mutation": "generalize-to-normalize-invariants-then-recenter-and-branch",
+      "subagent_summary": "With the incumbent hint all 8 public rollouts were correct (8/8, avg ~5.2k tokens vs 7 of 8 hitting the 16k cap in round 1), so the training question is saturated and the remaining loss is transfer (heldout 0.1625). Reading the correct rollouts, the one wasted stretch is that each spends many lines re-deriving the B=+-A sign because the hint asserted B=-A without the factored form, and several first restate the full ax^3+bx^2+cx+d setup before recentering. The revision therefore states the general normalize-invariants-then-recenter procedure, gives the factored leading-term condition AB(A^(n-1)-B^(n-1))=0 with an instruction to carry both branches, and widens the trigger from commuting cubics to polynomial functional identities generally so it can transfer.",
+      "sampling_slurm_job_id": "149.45",
+      "tokens": 175,
+      "hint_hash": "cd2936d6d9b661814c9309439f45d4f6c0908f6f5cef4a191740061871834ca3",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "8c6cf2ad54328ef6d5d7727c427a0f3b4e2872fcbd87df2e3a186687f9e272bd"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Simulate, don't guess. Write the state as a string of distinct labels (a,b,c,...) and do each stage by rewriting the whole string: swapping two adjacent blocks concatenates them in the other order (not a reversal), and everything past those blocks stays put. Apply exactly the listed stages, in order. After each stage verify every label appears exactly once; a duplicate or missing label means you mis-traced, so redo it. Then repeat the full operation, counting until the string equals the original; that count is the answer for that size. Never assume the composition is an involution or disjoint swaps, since overlapping swaps merge into long cycles. Get exact counts for the two or three smallest sizes, fit the pattern, and confirm on the next size up.",
+      "mutation": "simulate-labeled-string-with-bijection-check",
+      "subagent_summary": "4/8 correct; all four failures came from mis-tracing the block swap rather than from missing the lcm idea the incumbent already supplies. One rollout produced a non-injective position map (two positions sent to the same target) and never noticed, one asserted the composition of the overlapping swaps was an involution and answered 2, and two burned the token cap guessing closed forms after generating mutually inconsistent per-size counts. The revision therefore replaces abstract index tracing with rewriting a concrete labeled string, adds a per-stage every-label-exactly-once check, and replaces cycle-structure guessing with counting repeats until the string returns.",
+      "sampling_slurm_job_id": "149.46",
+      "tokens": 156,
+      "hint_hash": "c0f3359a71da2dd86f338f44cc7a21ea781943a5eb9b7de66750790b91fc4aa2",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "f5e98cb83b7d21cc59c0ef6c4bdd6b70731bf33bd4636ee98ff25a9b5546eb9d"
+    }
+  ]
+}
