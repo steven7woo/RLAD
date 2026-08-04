@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+  "round": 1,
+  "book_hash_before": "85c06677116e49e8f305208550220e6812379dba1cc0a8be48405a22e3f264ff",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Before computing, pin down exactly what is known and by whom, including any label the wording leaves open (e.g. which quantity a displayed number is). If a label is unknown, a candidate is (private value, label); do not force one global case, which manufactures false contradictions. 'I do not know X' means my own information still permits two or more candidates. Choose the representation that makes the candidate set finite and small (divisors, complements, symmetry, invariants), apply statements in order, prune once each. If a branch looks contradictory, suspect an assumption you added and re-read rather than re-deriving it again. Verify the survivor against every condition, then box it.",
+      "mutation": "keep unstated labels as part of the candidate, and break the contradiction-relooping that burns the token budget",
+      "subagent_summary": "All 8 fresh rollouts scored 0 and 5 of 8 hit the 16384-token cap; every one split the problem into mutually exclusive global cases, declared each case contradictory, then re-derived the same case repeatedly until it either ran out of tokens or guessed an unverified value. The incumbent hint said to build a candidate set but never told the student that an unstated label is itself part of a candidate, nor how to escape a self-inflicted contradiction, so I added both plus an explicit stop-and-verify to cut the runaway loop.",
+      "sampling_slurm_job_id": "150.20",
+      "tokens": 142,
+      "hint_hash": "94767b7202cf5d499b1458d492aaa4b942134d41aaf5a5105613a15b33b362ff",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "First pin down precisely what is asked and in what form. Before grinding, hunt for structure that collapses the work: homogeneity (divide both sides by one side so only a single ratio remains), symmetry, an invariant, or a substitution reducing the relation to w^n = c, which fixes |w| and leaves finitely many values. Then solve back for the original unknown and describe the resulting locus by algebra, e.g. completing the square, rather than enumerating cases numerically. Keep everything exact as fractions or radicals, never decimals. Cover all branches, discard degenerate ones, and verify with one concrete instance or limiting case before reporting the simplified answer.",
+      "mutation": "generalize problem-specific Mobius/ratio recipe into reusable structure-finding + exactness + verification strategy",
+      "subagent_summary": "All 8 fresh training rollouts were correct and none truncated, so train_i is saturated at 1.0 while heldout_i sits at 0.125; the incumbent's gain is therefore almost entirely from naming this problem's exact substitution w=(z-1)/z, which cannot transfer. I rewrote it as the underlying transferable moves the successful rollouts actually used: exploit homogeneity to reduce to one ratio, reduce to a w^n = c form that pins the modulus, recover the original unknown and identify the locus by algebra rather than case enumeration, stay exact, and verify one instance before answering.",
+      "sampling_slurm_job_id": "150.13",
+      "tokens": 134,
+      "hint_hash": "522d61457e89465e8a7bfc849b07a03c0da4af9ddc2c5b4491a76e55d53ceeb5",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Fix coordinates once, putting the pinned point at the origin; never restart the setup. For a union of fixed-area pieces, maximize the union by minimizing the overlap. Before grinding out a piecewise area-vs-angle case analysis, test for rotational invariance: if k rotated copies of the overlap region tile a full region, the overlap is exactly 1/k for every angle, so nothing needs optimizing. Generally, when a wedge apex sits at a center of symmetry, use that symmetry instead of hunting intersection points. Verify on one easy configuration, give an exact fraction, and stop.",
+      "mutation": "replace piecewise-angle grind with symmetry/invariance shortcut plus commit-and-stop discipline",
+      "subagent_summary": "Seven of eight rollouts ran to the 16384-token cap without emitting any answer: they repeatedly rebuilt the coordinate setup and looped on 'the sides are tangent... but this is too vague' while trying to sweep the overlap area as a function of rotation angle, which is exactly what the incumbent hint asks for. The one success and one near-success got there by noticing the overlap is angle-independent, so the revision keeps the union-minus-overlap framing but redirects effort to a rotational-invariance/symmetry check, forbids re-deriving the setup, and demands committing to an exact fraction instead of continuing to search.",
+      "sampling_slurm_job_id": "150.16",
+      "tokens": 117,
+      "hint_hash": "6895075b3c8d3022684325973d416c0c6de5eaefdb3216294c5b27ade783a059",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "00f433b6ea19dfe2336efbb3476fea529c0993179016a67ce16e4288905f3cd0"
+    },
+    {
+      "hint_id": 4,
+      "hint": "Extremal \"how long / how many at most\" problems need two halves: an upper bound and a matching construction. State both targets before computing. For bounds, express the required pattern as one closed form in the index (an arithmetic progression is A+B*index), subtract it from each candidate function, and count zeros: a degree-d polynomial minus an affine function is still degree d and not identically zero, so it can match at most d indices. When several functions are available, each contributes its own cap, so add the caps over all functions - do not stop at one function's cap, and do not use the function count alone. Do not chase consecutive differences; that only limits reuse of a single function. Then realize the bound by cutting the index range into consecutive blocks and interpolating one function per block. Commit to this route early instead of enumerating cases.",
+      "mutation": "reframe as bound-plus-construction; forbid the consecutive-difference dead end and require summing per-function root caps",
+      "subagent_summary": "All 8 fresh rollouts scored 0: four ran out of tokens mid-derivation and the four that finished all produced answers far too small. Each finisher fixated on consecutive differences of one polynomial, concluded a single polynomial cannot sustain the progression, and then reported either one function's root cap or the number of functions instead of summing a per-function cap across all available functions, and none attempted a construction. The revision names the bound-plus-construction structure, blocks the consecutive-difference dead end, tells it to add the per-function caps, and pushes for an early commitment to reduce length-limit truncation.",
+      "sampling_slurm_job_id": "150.17",
+      "tokens": 177,
+      "hint_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "93b35723e9cc953d39ac835ae67c34590b0c25060143ab50c99c75c21cbb1ff2"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Pin unknown parameters first: plug in each given condition and solve the small system. Then hunt for structure before grinding algebra. Rewrite a fraction as 1 + c/(x+b); test for a symmetry center (h,k) via f(h+t)+f(h-t)=2k, or oddness after shifting. If such symmetry exists, obtain the remaining points as reflections through the center instead of solving equations for them, and get areas from the shoelace/cross-product formula.\n\nRead a contradiction, such as a negative discriminant or empty domain, as evidence your setup or branch choice is wrong, not your arithmetic. Change representation once instead of looping on the same recomputation. Do one numeric spot-check, then commit and state the value.",
+      "mutation": "replace generic procedure with symmetry-center shortcut plus anti-loop rule on contradictions",
+      "subagent_summary": "Seven of eight fresh rollouts solved it; the single failure hit max tokens after its brute-force elimination produced a negative discriminant and then spent thousands of tokens re-verifying the same cross-multiplication instead of changing approach. The incumbent hint prescribes exactly that expensive eliminate-and-solve path, so I replaced it with a transferable instruction to look for a symmetry center and use reflections plus shoelace, and to treat a contradiction as a signal to switch representation once rather than loop.",
+      "sampling_slurm_job_id": "150.14",
+      "tokens": 150,
+      "hint_hash": "4dfd4c901532b591e57acb18527ed63a95fff108f57f092b769935d15f97eb88",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Main trap: do not assume a random process makes all orderings equally likely, and do not jump to 1/n or 1/n!. Uniformity must be derived, never asserted. A branch is 1/2 only where two moves are genuinely available and becomes 1 once the choice is forced, so paths carry unequal weight and shorter paths are often likelier.\n\nInstead fix a compact state (the ordered contents of each pile), enumerate reachable states, multiply the actual branch probability along each path, then add the probabilities of every distinct path reaching the target event. Sanity-check that probabilities over all outcomes sum to 1, and test the same reasoning on 2 or 3 items by hand. Handle each part as a separate event, state each result in order at the end, and if you claim an outcome is impossible, name the blocking constraint.",
+      "mutation": "attack the false-uniformity assumption; require derived path probabilities plus small-case check",
+      "subagent_summary": "Fresh sampling with the incumbent hint gave 2/8 correct; every rollout finished well within the token budget, so length was never the problem. Six of the eight failures collapsed the process to 'all orderings are equally likely' and read off 1/n or 1/n!, or declared an outcome impossible from intuition, so the revision names that symmetry shortcut as the trap, insists branch weights be multiplied along each concrete path (1/2 only when a choice truly exists, 1 when forced), and adds a small-case hand check plus a sum-to-one test.",
+      "sampling_slurm_job_id": "150.15",
+      "tokens": 172,
+      "hint_hash": "0ac1224b31d00697e03ba5c0028a103aff26fa7b283c8ea589f0aad96efd31e0",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "hint": "When a problem carries a huge parameter (2005 terms, n conditions), do not push the general symbolic machinery first: that path eats the whole token budget. Shrink to the smallest cases n = 2, 3, 4, solve each tiny system exactly by hand, and tabulate. Read off the closed form, tracking the sign and which factorial or index shift appears. Confirm on one more case, then give a one-line structural reason (a polynomial vanishing at the listed nodes must factor through them). If a general method has not closed after a couple of paragraphs, abandon it and commit from the pattern.",
+      "mutation": "replace abstract-machinery framing with small-case tabulation plus budget-abort rule",
+      "subagent_summary": "Only 1 of 8 fresh rollouts scored, and 6 of 8 hit the 16384-token cap without ever emitting an answer, so the dominant failure is budget exhaustion rather than a reasoning gap. The incumbent hint's functional/Lagrange/Vandermonde vocabulary is exactly what the doomed rollouts churned on for tens of thousands of characters, while the single success ignored it and instead solved tiny instances and read off the pattern; the two that did finish also showed off-by-one slips in the factorial and sign. The revision therefore prescribes small-case tabulation with explicit sign and index-shift tracking, a brief structural justification, and an abort rule when a general method stalls.",
+      "sampling_slurm_job_id": "150.18",
+      "tokens": 128,
+      "hint_hash": "2aede24f636e400a140c881ae888ef724a71d96f3ec41e5a62769af799ffe0b6",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Name the unknowns and write the exact constraint each given number imposes; never assume a count that was not stated. If an integrality condition applies to several totals, the unknown count must divide all of them: take their gcd and list its divisors, and use the gcd itself when the largest feasible count is intended. Sum related totals before dividing, and treat a p% markup or discount as a multiplier (1+p/100), not an addition. Then substitute your value back into every condition to check integrality and units, and report the quantity actually asked for, not an intermediate one.",
+      "mutation": "de-specialize to domain-neutral divisibility/percent/units checklist",
+      "subagent_summary": "All 8 fresh rollouts scored reward 1 and terminated normally in roughly 3-5k tokens, so train_i is saturated at 1.0 and every remaining gain must come from transfer; the incumbent's low aggregate transfer score is consistent with its wording being locked to this question's own nouns and stage vocabulary. The rollouts show the student's actual working steps are generic (impose divisibility on several totals, take a gcd, sum before dividing, apply the percent as a multiplier), so I restated exactly those moves in domain-neutral language and added two broadly useful guards the rollouts spent effort re-deriving: substitute back to verify integrality/units, and answer the quantity asked rather than an intermediate.",
+      "sampling_slurm_job_id": "150.19",
+      "tokens": 121,
+      "hint_hash": "0d69acbbc22f6b6d010a7598ef5f396aab2ad9b836bc2daa3901cefadc1a3caf",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Budget your algebra before starting. If a route needs full expansion of a composed or high-degree identity, it will exhaust your tokens: reject it. Instead match only the extreme-degree and constant terms, count unknowns against independent equations, and adopt the smallest parameter ansatz the symmetry allows. When two objects commute or are related by a shift, locate a shared fixed point and re-center coordinates there; each map then becomes odd about that center, and a symmetric combination of them is forced constant, collapsing the identity to something linear. Pin the few free parameters with the given data, verify by one clean substitution, and evaluate only what is asked. A contradiction means your representation is wrong, not your arithmetic; switch representation rather than re-expanding, and never present a value you could not check.",
+      "mutation": "add explicit budget guard against full expansion plus a concrete recenter-at-shared-fixed-point recipe and a contradiction-means-change-representation rule",
+      "subagent_summary": "All 8 fresh rollouts scored 0: seven of eight ran to the 16384-token cap mid-expansion of the composed identity, looping on coefficient matching and re-deriving contradictory relations, and the single one that terminated invented large coefficients without any check. The incumbent hint named the right ideas but never forbade brute-force expansion or told the student what to do on hitting a contradiction, so the revision makes the cost guard explicit, gives an actionable recentering/symmetry construction, and demands one verifying substitution before answering.",
+      "sampling_slurm_job_id": "150.22",
+      "tokens": 158,
+      "hint_hash": "eab27d3627aae1499f17984f65024e2ab712331f9350f11716df1e8621e3725f",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "d95dbbc2898bc6c58c3684891a45d7c76fe4e0835ddd91bed1a4955ddf89942a"
+    },
+    {
+      "hint_id": 10,
+      "hint": "You want the order of one composed permutation: the lcm of its cycle lengths. Pin down what a single application is (every stage, in order) and write the explicit index map for the smallest case before generalizing. Fix one indexing convention (0-based, binary digits of the index) and never switch it. Trace the orbit of one index by hand; its length is a hard lower bound. Tabulate the two smallest cases, conjecture the closed form, verify on exactly one larger case, then box it and stop re-deriving. Odd or irregular cycle lengths almost always mean a stage-order or off-by-one error, not exotic structure: recheck the map instead of hunting a stranger pattern. Never assert a cycle structure you have not traced. Commit a final boxed answer well before you run long.",
+      "mutation": "add orbit-trace lower bound plus small-case table with one verification case, blame indexing for odd cycle lengths, and force early commit to stop token overruns",
+      "subagent_summary": "Only 3 of 8 rollouts were correct and all 5 failures shared one pattern: after building a small-case table the student distrusted it, re-derived the composed map with inconsistent stage order or off-by-one indexing, produced implausible cycle lengths (e.g. 5, 7, 2^n-1), and 4 of the 5 then hit the 16384-token cap mid-loop without committing an answer. The incumbent asked for a 'bitwise affine permutation' and a minimality proof, which invited exactly that open-ended re-derivation, so the revision replaces it with a concrete orbit-trace lower bound, a bounded verify-once-then-stop protocol, and an explicit instruction to suspect indexing rather than exotic cycle structure.",
+      "sampling_slurm_job_id": "150.21",
+      "tokens": 163,
+      "hint_hash": "075d3405404f1f300e09228ddcff2dbe646c2a4753c235ae8010456f10fb00e8",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}

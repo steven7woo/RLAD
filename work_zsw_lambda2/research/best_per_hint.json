@@ -1,0 +1,666 @@
+{
+  "schema_version": 1,
+  "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+  "hints": [
+    {
+      "hint_id": 1,
+      "train_position": 163,
+      "train_qid": "28054",
+      "hint": "Represent every interpretation consistent with the public statements as a finite candidate set. For each speaker, group candidates by the value that speaker privately knows. A claim of not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing information sets after every deletion; do not reason from the original set after later statements. The surviving candidate determines the requested quantity.",
+      "tokens": 77,
+      "hint_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 1,
+        "hint_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 0,
+        "train_total": 8,
+        "train_i": 0.0,
+        "heldout_correct": 14,
+        "heldout_total": 80,
+        "heldout_i": 0.175,
+        "J_numerator": 28,
+        "J_denominator": 80,
+        "J_i": 0.35
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 28,
+            "J_denominator": 80,
+            "J_i": 0.35
+          },
+          "proposal_eval_slurm_job_id": "150.3"
+        },
+        {
+          "round": 1,
+          "decision": "discarded",
+          "proposal_hash": "94767b7202cf5d499b1458d492aaa4b942134d41aaf5a5105613a15b33b362ff",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "94767b7202cf5d499b1458d492aaa4b942134d41aaf5a5105613a15b33b362ff",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 18,
+            "J_denominator": 80,
+            "J_i": 0.225
+          },
+          "proposal_eval_slurm_job_id": "150.23"
+        }
+      ]
+    },
+    {
+      "hint_id": 2,
+      "train_position": 28,
+      "train_qid": "30302",
+      "hint": "Divide by the appropriate power of the variable and introduce the ratio w=(z-1)/z. The equation then restricts w to a fixed finite set on a circle. Solve the Möbius relation for z in terms of w, and characterize the image locus geometrically (or by an equation in x and y). Use all allowed roots and check exceptional values before extracting the requested circle parameter.",
+      "tokens": 81,
+      "hint_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 2,
+        "hint_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 7,
+        "train_total": 8,
+        "train_i": 0.875,
+        "heldout_correct": 10,
+        "heldout_total": 80,
+        "heldout_i": 0.125,
+        "J_numerator": 90,
+        "J_denominator": 80,
+        "J_i": 1.125
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 90,
+            "J_denominator": 80,
+            "J_i": 1.125
+          },
+          "proposal_eval_slurm_job_id": "150.4"
+        },
+        {
+          "round": 1,
+          "decision": "discarded",
+          "proposal_hash": "522d61457e89465e8a7bfc849b07a03c0da4af9ddc2c5b4491a76e55d53ceeb5",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "522d61457e89465e8a7bfc849b07a03c0da4af9ddc2c5b4491a76e55d53ceeb5",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 8,
+            "heldout_total": 80,
+            "heldout_i": 0.1,
+            "J_numerator": 86,
+            "J_denominator": 80,
+            "J_i": 1.075
+          },
+          "proposal_eval_slurm_job_id": "150.24"
+        }
+      ]
+    },
+    {
+      "hint_id": 3,
+      "train_position": 6,
+      "train_qid": "8554",
+      "hint": "Fix coordinates once, putting the pinned point at the origin; never restart the setup. For a union of fixed-area pieces, maximize the union by minimizing the overlap. Before grinding out a piecewise area-vs-angle case analysis, test for rotational invariance: if k rotated copies of the overlap region tile a full region, the overlap is exactly 1/k for every angle, so nothing needs optimizing. Generally, when a wedge apex sits at a center of symmetry, use that symmetry instead of hunting intersection points. Verify on one easy configuration, give an exact fraction, and stop.",
+      "tokens": 117,
+      "hint_hash": "6895075b3c8d3022684325973d416c0c6de5eaefdb3216294c5b27ade783a059",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 3,
+        "hint_hash": "6895075b3c8d3022684325973d416c0c6de5eaefdb3216294c5b27ade783a059",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 4,
+        "train_total": 8,
+        "train_i": 0.5,
+        "heldout_correct": 15,
+        "heldout_total": 80,
+        "heldout_i": 0.1875,
+        "J_numerator": 70,
+        "J_denominator": 80,
+        "J_i": 0.875
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "00f433b6ea19dfe2336efbb3476fea529c0993179016a67ce16e4288905f3cd0",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 30,
+            "J_denominator": 80,
+            "J_i": 0.375
+          },
+          "proposal_eval_slurm_job_id": "150.5"
+        },
+        {
+          "round": 1,
+          "decision": "kept",
+          "proposal_hash": "6895075b3c8d3022684325973d416c0c6de5eaefdb3216294c5b27ade783a059",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "6895075b3c8d3022684325973d416c0c6de5eaefdb3216294c5b27ade783a059",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 70,
+            "J_denominator": 80,
+            "J_i": 0.875
+          },
+          "proposal_eval_slurm_job_id": "150.25"
+        }
+      ]
+    },
+    {
+      "hint_id": 4,
+      "train_position": 189,
+      "train_qid": "25003",
+      "hint": "Extremal \"how long / how many at most\" problems need two halves: an upper bound and a matching construction. State both targets before computing. For bounds, express the required pattern as one closed form in the index (an arithmetic progression is A+B*index), subtract it from each candidate function, and count zeros: a degree-d polynomial minus an affine function is still degree d and not identically zero, so it can match at most d indices. When several functions are available, each contributes its own cap, so add the caps over all functions - do not stop at one function's cap, and do not use the function count alone. Do not chase consecutive differences; that only limits reuse of a single function. Then realize the bound by cutting the index range into consecutive blocks and interpolating one function per block. Commit to this route early instead of enumerating cases.",
+      "tokens": 177,
+      "hint_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 4,
+        "hint_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 2,
+        "train_total": 8,
+        "train_i": 0.25,
+        "heldout_correct": 18,
+        "heldout_total": 80,
+        "heldout_i": 0.225,
+        "J_numerator": 56,
+        "J_denominator": 80,
+        "J_i": 0.7
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "93b35723e9cc953d39ac835ae67c34590b0c25060143ab50c99c75c21cbb1ff2",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 32,
+            "J_denominator": 80,
+            "J_i": 0.4
+          },
+          "proposal_eval_slurm_job_id": "150.6"
+        },
+        {
+          "round": 1,
+          "decision": "kept",
+          "proposal_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 18,
+            "heldout_total": 80,
+            "heldout_i": 0.225,
+            "J_numerator": 56,
+            "J_denominator": 80,
+            "J_i": 0.7
+          },
+          "proposal_eval_slurm_job_id": "150.26"
+        }
+      ]
+    },
+    {
+      "hint_id": 5,
+      "train_position": 70,
+      "train_qid": "30418",
+      "hint": "First substitute the two known graph points to determine the parameters of the logarithmic fractional-linear function. Derive the parallelogram translation from oriented vectors, impose both graph equations, and eliminate one coordinate using the logarithm. Solve the remaining scalar relation while respecting the domain, then compute the area from a determinant. Verify that the resulting points lie on the correct branches.",
+      "tokens": 73,
+      "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 5,
+        "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 6,
+        "train_total": 8,
+        "train_i": 0.75,
+        "heldout_correct": 12,
+        "heldout_total": 80,
+        "heldout_i": 0.15,
+        "J_numerator": 84,
+        "J_denominator": 80,
+        "J_i": 1.05
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 84,
+            "J_denominator": 80,
+            "J_i": 1.05
+          },
+          "proposal_eval_slurm_job_id": "150.7"
+        },
+        {
+          "round": 1,
+          "decision": "discarded",
+          "proposal_hash": "4dfd4c901532b591e57acb18527ed63a95fff108f57f092b769935d15f97eb88",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "4dfd4c901532b591e57acb18527ed63a95fff108f57f092b769935d15f97eb88",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 70,
+            "J_denominator": 80,
+            "J_i": 0.875
+          },
+          "proposal_eval_slurm_job_id": "150.27"
+        }
+      ]
+    },
+    {
+      "hint_id": 6,
+      "train_position": 62,
+      "train_qid": "26989",
+      "hint": "Main trap: do not assume a random process makes all orderings equally likely, and do not jump to 1/n or 1/n!. Uniformity must be derived, never asserted. A branch is 1/2 only where two moves are genuinely available and becomes 1 once the choice is forced, so paths carry unequal weight and shorter paths are often likelier.\n\nInstead fix a compact state (the ordered contents of each pile), enumerate reachable states, multiply the actual branch probability along each path, then add the probabilities of every distinct path reaching the target event. Sanity-check that probabilities over all outcomes sum to 1, and test the same reasoning on 2 or 3 items by hand. Handle each part as a separate event, state each result in order at the end, and if you claim an outcome is impossible, name the blocking constraint.",
+      "tokens": 172,
+      "hint_hash": "0ac1224b31d00697e03ba5c0028a103aff26fa7b283c8ea589f0aad96efd31e0",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 6,
+        "hint_hash": "0ac1224b31d00697e03ba5c0028a103aff26fa7b283c8ea589f0aad96efd31e0",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 1,
+        "train_total": 8,
+        "train_i": 0.125,
+        "heldout_correct": 9,
+        "heldout_total": 80,
+        "heldout_i": 0.1125,
+        "J_numerator": 28,
+        "J_denominator": 80,
+        "J_i": 0.35
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 20,
+            "J_denominator": 80,
+            "J_i": 0.25
+          },
+          "proposal_eval_slurm_job_id": "150.8"
+        },
+        {
+          "round": 1,
+          "decision": "kept",
+          "proposal_hash": "0ac1224b31d00697e03ba5c0028a103aff26fa7b283c8ea589f0aad96efd31e0",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "0ac1224b31d00697e03ba5c0028a103aff26fa7b283c8ea589f0aad96efd31e0",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 28,
+            "J_denominator": 80,
+            "J_i": 0.35
+          },
+          "proposal_eval_slurm_job_id": "150.28"
+        }
+      ]
+    },
+    {
+      "hint_id": 7,
+      "train_position": 57,
+      "train_qid": "3836",
+      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
+      "tokens": 82,
+      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 7,
+        "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 1,
+        "train_total": 8,
+        "train_i": 0.125,
+        "heldout_correct": 13,
+        "heldout_total": 80,
+        "heldout_i": 0.1625,
+        "J_numerator": 36,
+        "J_denominator": 80,
+        "J_i": 0.45
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 36,
+            "J_denominator": 80,
+            "J_i": 0.45
+          },
+          "proposal_eval_slurm_job_id": "150.9"
+        },
+        {
+          "round": 1,
+          "decision": "discarded",
+          "proposal_hash": "2aede24f636e400a140c881ae888ef724a71d96f3ec41e5a62769af799ffe0b6",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "2aede24f636e400a140c881ae888ef724a71d96f3ec41e5a62769af799ffe0b6",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 36,
+            "J_denominator": 80,
+            "J_i": 0.45
+          },
+          "proposal_eval_slurm_job_id": "150.29"
+        }
+      ]
+    },
+    {
+      "hint_id": 8,
+      "train_position": 35,
+      "train_qid": "23443",
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, apply the stated markup multiplicatively, and check integrality and units.",
+      "tokens": 77,
+      "hint_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 8,
+        "hint_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 8,
+        "train_total": 8,
+        "train_i": 1.0,
+        "heldout_correct": 13,
+        "heldout_total": 80,
+        "heldout_i": 0.1625,
+        "J_numerator": 106,
+        "J_denominator": 80,
+        "J_i": 1.325
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 106,
+            "J_denominator": 80,
+            "J_i": 1.325
+          },
+          "proposal_eval_slurm_job_id": "150.10"
+        },
+        {
+          "round": 1,
+          "decision": "discarded",
+          "proposal_hash": "0d69acbbc22f6b6d010a7598ef5f396aab2ad9b836bc2daa3901cefadc1a3caf",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "0d69acbbc22f6b6d010a7598ef5f396aab2ad9b836bc2daa3901cefadc1a3caf",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 44,
+            "J_denominator": 80,
+            "J_i": 0.55
+          },
+          "proposal_eval_slurm_job_id": "150.30"
+        }
+      ]
+    },
+    {
+      "hint_id": 9,
+      "train_position": 188,
+      "train_qid": "3980",
+      "hint": "Budget your algebra before starting. If a route needs full expansion of a composed or high-degree identity, it will exhaust your tokens: reject it. Instead match only the extreme-degree and constant terms, count unknowns against independent equations, and adopt the smallest parameter ansatz the symmetry allows. When two objects commute or are related by a shift, locate a shared fixed point and re-center coordinates there; each map then becomes odd about that center, and a symmetric combination of them is forced constant, collapsing the identity to something linear. Pin the few free parameters with the given data, verify by one clean substitution, and evaluate only what is asked. A contradiction means your representation is wrong, not your arithmetic; switch representation rather than re-expanding, and never present a value you could not check.",
+      "tokens": 158,
+      "hint_hash": "eab27d3627aae1499f17984f65024e2ab712331f9350f11716df1e8621e3725f",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 9,
+        "hint_hash": "eab27d3627aae1499f17984f65024e2ab712331f9350f11716df1e8621e3725f",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 0,
+        "train_total": 8,
+        "train_i": 0.0,
+        "heldout_correct": 14,
+        "heldout_total": 80,
+        "heldout_i": 0.175,
+        "J_numerator": 28,
+        "J_denominator": 80,
+        "J_i": 0.35
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "d95dbbc2898bc6c58c3684891a45d7c76fe4e0835ddd91bed1a4955ddf89942a",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 7,
+            "heldout_total": 80,
+            "heldout_i": 0.0875,
+            "J_numerator": 14,
+            "J_denominator": 80,
+            "J_i": 0.175
+          },
+          "proposal_eval_slurm_job_id": "150.11"
+        },
+        {
+          "round": 1,
+          "decision": "kept",
+          "proposal_hash": "eab27d3627aae1499f17984f65024e2ab712331f9350f11716df1e8621e3725f",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "eab27d3627aae1499f17984f65024e2ab712331f9350f11716df1e8621e3725f",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 28,
+            "J_denominator": 80,
+            "J_i": 0.35
+          },
+          "proposal_eval_slurm_job_id": "150.31"
+        }
+      ]
+    },
+    {
+      "hint_id": 10,
+      "train_position": 26,
+      "train_qid": "3843",
+      "hint": "Treat each switcheroo as a permutation of positions. Label positions by fixed-width binary strings and determine which bit or block each stage changes; test the rule on the smallest sizes to fix indexing conventions. Compose the stages into one bitwise affine permutation. Determine its order from the cycle structure and prove minimality by exhibiting a position with the full cycle length.",
+      "tokens": 72,
+      "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5",
+      "metrics": {
+        "schema_version": 1,
+        "hint_id": 10,
+        "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5",
+        "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+        "train_correct": 3,
+        "train_total": 8,
+        "train_i": 0.375,
+        "heldout_correct": 11,
+        "heldout_total": 80,
+        "heldout_i": 0.1375,
+        "J_numerator": 52,
+        "J_denominator": 80,
+        "J_i": 0.65
+      },
+      "history": [
+        {
+          "round": 0,
+          "decision": "initial",
+          "metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 52,
+            "J_denominator": 80,
+            "J_i": 0.65
+          },
+          "proposal_eval_slurm_job_id": "150.12"
+        },
+        {
+          "round": 1,
+          "decision": "discarded",
+          "proposal_hash": "075d3405404f1f300e09228ddcff2dbe646c2a4753c235ae8010456f10fb00e8",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "075d3405404f1f300e09228ddcff2dbe646c2a4753c235ae8010456f10fb00e8",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 42,
+            "J_denominator": 80,
+            "J_i": 0.525
+          },
+          "proposal_eval_slurm_job_id": "150.32"
+        }
+      ]
+    }
+  ]
+}
