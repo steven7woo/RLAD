@@ -1013,6 +1013,7 @@ def validate_pool_allocation(
     config: dict[str, Any],
     config_hash: str,
     require_current_source: bool = True,
+    require_current_config: bool = True,
 ) -> None:
     require_exact_keys(value, POOL_ALLOCATION_KEYS, "pool allocation")
     slurm = config["slurm"]
@@ -1027,8 +1028,17 @@ def validate_pool_allocation(
         "gpu_binding": slurm["gpu_binding"],
         "repo_root": str(REPO_ROOT),
         "work_root": str(WORK_ROOT),
-        "config_hash": config_hash,
     }
+    # A TERMINAL allocation is only ever inspected in order to archive it, so it
+    # is checked with require_current_config=False.  Otherwise an intentional
+    # config edit (e.g. raising the pool walltime) would permanently wedge
+    # `pool start --restart`: the dead record can never again match the current
+    # config_hash, yet it must be validated before it can be archived.  The
+    # hardware pinning above -- partition, exact node pair, slot count,
+    # exclusivity, and one-GPU binding -- is still enforced unconditionally, so
+    # relaxing this cannot let a pool adopt another lambda run's nodes.
+    if require_current_config:
+        expected["config_hash"] = config_hash
     if require_current_source:
         expected["source_hash"] = source_bundle_hash(RUNTIME_SOURCE_FILES)
     for key, expected_value in expected.items():

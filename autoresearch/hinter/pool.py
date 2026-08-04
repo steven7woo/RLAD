@@ -63,12 +63,30 @@ def _make_dirs() -> None:
 
 
 def _queue_state(job_id: str) -> str | None:
+    """Return the job's queue state, or None once it is no longer queued.
+
+    Slurm eventually purges finished jobs from the queue entirely, after which
+    `squeue -j <id>` exits non-zero with "Invalid job id specified" rather than
+    returning an empty list.  That is the ordinary end state of every completed
+    pool, so it must read as terminal (None) exactly like an empty response;
+    treating it as an error would crash `pool start --restart`, `wait`, and
+    `status` for any run whose allocation had aged out -- i.e. precisely the
+    resume path.  Any other squeue failure (e.g. an unreachable controller) is
+    still raised, so a transient outage can never be misreported as terminal.
+    """
     completed = subprocess.run(
         ["squeue", "-h", "-j", job_id, "-o", "%T"],
-        check=True,
+        check=False,
         capture_output=True,
         text=True,
     )
+    if completed.returncode != 0:
+        stderr = completed.stderr.lower()
+        if "invalid job id" in stderr:
+            return None
+        raise RuntimeError(
+            f"squeue failed for job {job_id}: {completed.stderr.strip()}"
+        )
     states = [line.strip() for line in completed.stdout.splitlines() if line.strip()]
     return states[0] if states else None
 
@@ -103,12 +121,14 @@ def _validate_allocation(
     config_hash: str,
     *,
     require_current_source: bool = True,
+    require_current_config: bool = True,
 ) -> None:
     validate_pool_allocation(
         value,
         config=config,
         config_hash=config_hash,
         require_current_source=require_current_source,
+        require_current_config=require_current_config,
     )
 
 
@@ -121,14 +141,28 @@ def start_pool(*, restart: bool = False) -> dict[str, Any]:
     _make_dirs()
     if ALLOCATION_PATH.exists():
         previous = load_json(ALLOCATION_PATH)
+        # Defer the config_hash comparison until the job state is known.  A
+        # terminal record is read only so it can be archived, and an
+        # intentional config edit means it can never match again; requiring a
+        # match here would wedge --restart forever.  Hardware pinning is still
+        # validated unconditionally.
         _validate_allocation(
             previous,
             config,
             config_hash,
             require_current_source=False,
+            require_current_config=False,
         )
         state = _queue_state(str(previous["job_id"]))
         if state in {"PENDING", "CONFIGURING", "RUNNING", "COMPLETING"}:
+            # A live pool must match the current config and source exactly:
+            # its already-running dispatcher was launched under the old
+            # identity, so reusing it would silently mix identities.
+            if previous["config_hash"] != config_hash:
+                raise RuntimeError(
+                    "active pool allocation uses a stale config; "
+                    "stop it before restarting"
+                )
             if previous["source_hash"] != source_bundle_hash(
                 RUNTIME_SOURCE_FILES
             ):

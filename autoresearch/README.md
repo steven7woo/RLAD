@@ -125,14 +125,19 @@ GPUs per node:   8
 pool slots:      16
 ```
 
-Tasks are immutable JSON requests. The parent requests all eight GPUs on each
-exclusive node. The dispatcher owns sixteen fixed `(node, slot)` positions and
-launches each task with `srun --exclusive --exact --nodelist=<node>
---gpus-per-task=1 --gpu-bind=single:1`. The GPU entry point refuses to run
-without a numeric Slurm step, `SLURM_GPUS_PER_TASK=1`, and exactly one
+Tasks are immutable JSON requests. This cluster defines **no GPU gres**, so
+`--gres`, `--gpus-per-task`, `--gpus-per-node`, and `--gpu-bind` are rejected at
+submit time and `SLURM_GPUS_PER_TASK` is never set. GPUs therefore come from
+whole `--exclusive` nodes instead: the parent holds both nodes outright, the
+dispatcher owns sixteen fixed `(node, slot)` positions, and each task is
+launched with `srun --exclusive --exact --nodes=1 --ntasks=1
+--nodelist=<node> --cpus-per-task=<cpus_per_step>`. Confinement to exactly one
+GPU is enforced by the dispatcher, which sets `CUDA_VISIBLE_DEVICES` to the
+single device index matching the task's audited pool slot. The GPU entry point
+refuses to run without a numeric Slurm step and exactly one
 `CUDA_VISIBLE_DEVICES` entry. Each receipt binds the input hash, allocation ID,
-unique step ID, named node, pool slot, Slurm GPU grant, visible device,
-source/config hashes, timing, and output hash.
+unique step ID, named node, pool slot, audited one-GPU count and binding mode,
+visible device, source/config hashes, timing, and output hash.
 
 Baseline and proposal held-out tasks are accepted only at their registered
 paths and only when their hint identity exactly matches the initial book or

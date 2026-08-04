@@ -774,6 +774,115 @@ def test_receipt_binds_archived_allocation_and_input(
         )
 
 
+def test_queue_state_treats_purged_job_as_terminal(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """A job Slurm has purged must read as terminal, not crash the pool.
+
+    Slurm drops finished jobs from the queue, after which `squeue -j` exits 1
+    with "Invalid job id specified".  That is the normal end state of every
+    completed pool, so it has to behave like an empty queue response, otherwise
+    `pool start --restart` / `wait` / `status` all crash on resume.  A different
+    squeue failure must still raise so an outage is never read as terminal.
+    """
+
+    def fake_run(command, **kwargs):
+        assert kwargs["check"] is False
+        return subprocess.CompletedProcess(
+            command,
+            1,
+            stdout="",
+            stderr="slurm_load_jobs error: Invalid job id specified\n",
+        )
+
+    monkeypatch.setattr(pool.subprocess, "run", fake_run)
+    assert pool._queue_state("140") is None
+
+    def fake_outage(command, **kwargs):
+        return subprocess.CompletedProcess(
+            command,
+            1,
+            stdout="",
+            stderr="slurm_load_jobs error: Unable to contact slurm controller\n",
+        )
+
+    monkeypatch.setattr(pool.subprocess, "run", fake_outage)
+    with pytest.raises(RuntimeError, match="squeue failed"):
+        pool._queue_state("140")
+
+    def fake_running(command, **kwargs):
+        return subprocess.CompletedProcess(
+            command, 0, stdout="RUNNING\n", stderr=""
+        )
+
+    monkeypatch.setattr(pool.subprocess, "run", fake_running)
+    assert pool._queue_state("140") == "RUNNING"
+
+
+def test_terminal_allocation_validates_after_intentional_config_change(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    config: dict,
+) -> None:
+    """A dead pool record must stay archivable after a legitimate config edit.
+
+    `pool start --restart` has to validate the terminal allocation before it can
+    archive it.  Raising e.g. the pool walltime changes `config_hash`, so that
+    dead record can never match again -- if the comparison were mandatory there,
+    --restart would be wedged forever and the run could not get a fresh pool.
+    Hardware pinning must still be enforced regardless.
+    """
+    effective_config, config_hash = core.load_config(require_frozen=False)
+    monkeypatch.setattr(core, "WORK_ROOT", tmp_path)
+    allocation = {
+        "schema_version": 1,
+        "job_id": "140",
+        "partition": effective_config["slurm"]["partition"],
+        "nodes": list(effective_config["slurm"]["nodes"]),
+        "pool_slots": effective_config["slurm"]["pool_slots"],
+        "exclusive": True,
+        "gpus_per_node": effective_config["slurm"]["gpus_per_node"],
+        "gpus_per_task": 1,
+        "gpu_binding": effective_config["slurm"]["gpu_binding"],
+        "python": sys.executable,
+        "repo_root": str(core.REPO_ROOT),
+        "work_root": str(tmp_path),
+        "config_hash": "0" * 64,  # submitted under the pre-edit config
+        "source_hash": core.source_bundle_hash(core.RUNTIME_SOURCE_FILES),
+        "submitted_epoch": time.time(),
+    }
+
+    # Terminal/archive path: tolerates the superseded config_hash.
+    core.validate_pool_allocation(
+        allocation,
+        config=effective_config,
+        config_hash=config_hash,
+        require_current_source=False,
+        require_current_config=False,
+    )
+
+    # Default (live pool) path: still rejects a stale config_hash.
+    with pytest.raises(ValueError, match="stale config_hash"):
+        core.validate_pool_allocation(
+            allocation,
+            config=effective_config,
+            config_hash=config_hash,
+            require_current_source=False,
+        )
+
+    # Relaxing the config check must NOT relax hardware pinning: a pool may
+    # never adopt another lambda run's node pair.
+    hijacked = {**allocation, "nodes": ["ip-10-1-196-96", "ip-10-1-226-48"]}
+    with pytest.raises(ValueError, match="stale nodes"):
+        core.validate_pool_allocation(
+            hijacked,
+            config=effective_config,
+            config_hash=config_hash,
+            require_current_source=False,
+            require_current_config=False,
+        )
+
+
 def _configure_state(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,
