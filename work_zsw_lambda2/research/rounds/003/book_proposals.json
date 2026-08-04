@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+  "round": 3,
+  "book_hash_before": "dc4b32550309f71785839371925be169d5cd21b1955fc8a226b480e85d7b588e",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "A speaker who knows their own value and one displayed aggregate can always recover the partner inside a fixed reading. So \"I don't know\" never comes from the display having many factor pairs; it can only come from not knowing which aggregate is displayed. Test each speaker's own value against every reading: subtraction needs it below the display, division needs it to divide the display. Uncertainty means two or more readings stay feasible, so that value must pass all those tests at once. Then impose each reading's equation on the pair and keep the reading that leaves exactly one consistent pair. Don't enumerate pairs for pages -- state your result early, then recheck both statements.",
+      "mutation": "kill the wrong source of uncertainty: ignorance comes from the unknown reading, not from many factorizations, so intersect feasibility tests across readings",
+      "subagent_summary": "Fresh sampling with the incumbent hint scored 0/8 and 5 of 8 hit the token cap; every rollout attributed \"I don't know\" to the display having many factor pairs, then correctly noticed that a speaker's own value pins the partner uniquely, declared a contradiction, and either looped enumerating pairs until truncation or picked an arbitrary factor. The incumbent flags label ambiguity but still frames uncertainty as multiple partners, so I replaced that with the correct rule -- uncertainty comes only from the unknown reading -- and turned it into an intersect-the-feasibility-tests procedure that terminates quickly.",
+      "sampling_slurm_job_id": "150.53",
+      "tokens": 134,
+      "hint_hash": "319fe8d355e0dc9553c5d160edfbe35845d62046af8e4ee26502954554f37755",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "cbbaaafa1907efc60835e2a44f805271c9a2f4cd4fe5d3988c244caa7b7e5f7b"
+    },
+    {
+      "hint_id": 2,
+      "hint": "When both sides have the same degree in the unknown, divide by one side so a single ratio w remains and the relation becomes w^n = c; that pins |w| exactly. Then ask whether moduli alone suffice: taking absolute values often reduces the problem to |z-a| = k|z-b| with k fixed. Square it, expand using |u|^2 = u times its conjugate, and a circle equation appears; complete the square to read off center and radius. Prefer this to parametrizing w by an angle and inverting a Moebius map, which invites sign slips and long case work. Keep values exact, spot-check one explicit root, and commit to a stated result before your budget runs low.",
+      "mutation": "replace the problem-specific Mobius substitution with the general modulus route (|z-a|=k|z-b| squared into a circle), warning off the angle-parametrization path",
+      "subagent_summary": "All eight fresh rollouts were correct this round and none truncated, so train is saturated at 1.0 while heldout stays at 0.125; the incumbent's remaining value is mostly its literal naming of this problem's substitution, which cannot transfer. The shortest, cleanest rollouts avoided angle parametrization and instead took absolute values to get a fixed-ratio distance condition, squared it with the conjugate identity, and completed the square, while the only prior failure came from sign slips inside the Moebius-parametrization branch; I therefore promoted the modulus route as the transferable technique and kept exactness, one spot-check, and early commitment.",
+      "sampling_slurm_job_id": "150.60",
+      "tokens": 149,
+      "hint_hash": "28f5940fca6f5c106c6b1b812d8d3d0783186de0eb13a7af8747b9a265995f64",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Fix one coordinate frame with the pinned point at the origin; never rebuild it. Union = sum of areas minus overlap, so minimize overlap. A vertex covers only the sector spanned by its interior angle, so a big shape need not contain a small one centred at that apex; if that apex is a centre of n-fold symmetry, the sector clips exactly 1/n at every rotation, the angle drops out, and nothing is left to optimize. Then spend your budget once: settle the overlap with one clean argument plus one extreme case, write the exact value down immediately, and treat a value that repeats on re-checking as a stop signal, not a reason to try more angles. Close the reasoning and report in two short lines.",
+      "mutation": "keep the sector/symmetry core but compress it and add budget discipline: stop re-litigating once the value repeats",
+      "subagent_summary": "Four of eight rollouts were correct, and the failure mode has shifted: all eight reached the correct value early in reasoning (within the first ~7k characters), but every one of the four failures then kept re-testing rotation angles and re-deriving the setup until it hit the 16384-token cap with the reasoning block still open, so nothing was scored. The containment warning from the incumbent is now working, so this revision shortens that clause and spends the freed tokens on explicit budget discipline: one clean overlap argument plus one extreme case, record the exact value immediately, and treat a repeated value as a stop signal rather than grounds for another angle sweep.",
+      "sampling_slurm_job_id": "150.54",
+      "tokens": 149,
+      "hint_hash": "a71ec282166673f98eebbf05af901e78a1fce63d67599d67a059c52543234e4c",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "e73c55e27100ae936358bb7823761096f52d3e52bbb1bf81a9e7298441eeb331"
+    },
+    {
+      "hint_id": 4,
+      "hint": "Extremal \"at most how many\" problems need two halves that meet: an upper bound and a construction reaching it. Name a candidate count early, before you run long.\n\nBound: write the required pattern as one closed form in the index (an arithmetic progression is A+B*n). Each index used is then a root of a nonzero difference polynomial, so a degree-d piece covers at most d indices - d+1 counts points you may freely interpolate, a different question. Pieces may be reused and each brings its own budget, so total the budgets over all pieces; the piece count alone is not the cap, and that total is already in the units asked for.\n\nIf a branch proves the situation impossible although the problem says it happened, you over-constrained something that was free; drop it in one line.\n\nReach the bound by splitting the index range into consecutive blocks, one piece per block, then keep that count.",
+      "mutation": "separate the degree-d root cap from the d+1 interpolation count, assert the summed budget is already in the asked-for units, and compress the impossibility-branch exit",
+      "subagent_summary": "All 8 fresh rollouts scored 0 and none reached the intended count: four hit the token limit while relooping on a self-inflicted impossibility (forcing one polynomial's own consecutive difference to be constant), and the finishers answered either the number of available objects or a bare degree/interpolation count. One rollout derived the correct product of per-object budgets but then rejected it as \"not directly applicable\" and reinterpreted it as a single object's cap, so the revision distinguishes the root cap from the interpolation count, states that the summed budget is already the quantity being asked for, and shortens the exit from impossibility branches to reduce truncation.",
+      "sampling_slurm_job_id": "150.55",
+      "tokens": 186,
+      "hint_hash": "4e9c9418a15c4194d3667965861938531754dd02fddf311005f8446d2bacd97c",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Name your unknowns and turn each given condition into one exact equation; solve for any constants first. Reduce to a single variable, keep exact fractions, and discard roots that are degenerate or outside the domain. Verify with a second, different method rather than repeating the first. State your result early, then stop.",
+      "mutation": "compress to a terse generic name-reduce-discard-crosscheck rule, roughly half the length of prior rewrites",
+      "subagent_summary": "All eight fresh rollouts were correct at about 9.4k completion tokens, so train accuracy is saturated and only transfer can move J. The real crux in every successful rollout was rejecting the degenerate root of the reduced one-variable equation and then cross-checking the area by a second formula, so I kept exactly those two transferable moves. Both prior rewrites were long generic discipline lists (136-150 tokens) and lost heldout against a 73-token incumbent, so this proposal tests brevity: about 68 tokens of dense imperatives with no setup-specific vocabulary.",
+      "sampling_slurm_job_id": "150.58",
+      "tokens": 63,
+      "hint_hash": "83c896bc82082c6ed4cb8791f9d2a555f90a25b05e0dc438a5532b3b8a6282c8",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Two traps. (1) Asserting symmetry: \"each item is equally likely in any slot\", or \"n! orderings so 1/n!\", is a guess; a process random over MOVES is rarely uniform over OUTCOMES. (2) Declaring the result forced (probability 0 or 1): before that, exhibit two distinct reachable end states.\n\nPin mechanics before counting. If every item must traverse every leg of a route, total moves = items x legs, not items. Piles are last-in-first-out, so a destination's BOTTOM is its FIRST arrival, its top the LAST; derive that from the stated rule. Restate the event as an exact constraint on the move sequence. A step is 1/2 only where both options are genuinely available; forced steps (one side empty) count 1. Hand-enumerate 2 items to calibrate. Do each part from scratch, and commit to a result rather than dithering.",
+      "mutation": "add forced-outcome (0 or 1) trap plus total-moves = items x legs and LIFO first-arrival-is-bottom mechanics",
+      "subagent_summary": "Fresh sampling with the incumbent scored 0/8 (one rollout hit the 16384-token cap while dithering; the other seven terminated normally), so length is only a marginal issue. Two rollouts newly collapsed the process to a deterministic outcome and reported certainty or impossibility, several miscounted the total number of moves by charging one move per item instead of one per item per leg, and most still fell back on an asserted uniform-permutation shortcut for the second part. The revision keeps the symmetry warning that transferred well, forbids an unargued 0-or-1 claim without two exhibited reachable end states, states the moves = items x legs count and the last-in-first-out fact that a destination's bottom is its earliest arrival, and pushes for an early committed result.",
+      "sampling_slurm_job_id": "150.56",
+      "tokens": 198,
+      "hint_hash": "d8275a49a8c4c5c47f1a038656afc89757cd584f7c8f14fc127016077c3673b7",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "45b2c0df517f87901f5a1ad921b228f3059ad2ca08158d9c5eb6939a11ecf4b4"
+    },
+    {
+      "hint_id": 7,
+      "hint": "A large fixed parameter means: restate the problem as a family in n. Write the scaling rule once -- how many unknowns, how many vanishing conditions, which single condition is nonzero -- and never renegotiate it mid-solution. Then solve n = 2, 3, 4 by plain elimination, record the requested quantity as a signed rational, and factor it: 1/k!, a binomial, a product of differences. Two or three agreeing cases are enough; commit that closed form with its sign and index shift, and stop searching for a general proof. If a slicker reinterpretation contradicts a case you already solved by hand, discard the reinterpretation, not the arithmetic.",
+      "mutation": "pin the n-family scaling rule up front and forbid renegotiating the setup mid-solution",
+      "subagent_summary": "Fresh sampling scored 2 of 8; both successes came from plain elimination on n = 2, 3, 4 followed by an immediate commit to the factored pattern, while all 6 failures hit the 16384-token cap. The dominant failure was not arithmetic but repeated renegotiation of the small-case setup: rollouts kept re-deriving how many conditions the reduced instance should have, then adopted a polynomial reinterpretation that contradicted their own hand-solved case and restarted instead of trusting it. The revision therefore makes the n-family scaling rule an explicit one-time step, forbids revisiting it, and instructs the student to discard a contradicting reinterpretation rather than the verified arithmetic.",
+      "sampling_slurm_job_id": "150.59",
+      "tokens": 142,
+      "hint_hash": "d5791c5d4416ca9b3e228253dbe8e2420e31df8f7d6b3a3040758c82d7c3a717",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "970826b6d808a016748fe1e6cda39b71098679265ead772ffa8f52eeb6eaed54"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation: their gcd. Add all construction costs before dividing by H, apply the stated markup multiplicatively, and check integrality and units. In general: decide once whether each given figure is a per-unit amount or a whole-collection total and never reopen that reading; when an unknown count must divide several totals, their gcd is the largest admissible count; commit to a value early, then confirm it reproduces every given total.",
+      "mutation": "keep incumbent text verbatim, name gcd explicitly, and append a short domain-neutral transfer clause (fix per-unit-vs-total scope once, gcd = largest admissible count, commit then back-verify)",
+      "subagent_summary": "All 8 fresh rollouts scored reward 1 with clean stops at 2.7-5.6k tokens, so train_i is saturated at 1.0 and every remaining point of gain must come from transfer. Rounds 1 and 2 both rewrote the hint wholesale and each collapsed train (0.25 and 0.5) while transfer barely moved, so this round preserves the incumbent sentences verbatim and only appends reusable strategy. The rollouts show two concrete, repeatable stalls: 20-80 oscillations per rollout over whether a listed figure is per-unit or a collection total, and 6-24 restatements of the maximum-feasible-count clause before concluding the gcd, so I name the gcd inline and add a decide-once/commit-then-back-verify rule.",
+      "sampling_slurm_job_id": "150.62",
+      "tokens": 138,
+      "hint_hash": "c03778f3bc7724422dfb82291710466ce4ad975bf698a71f3ceda969d5c10745",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Never name a full set of unknown coefficients and never expand a composed or high-degree identity; that always exhausts your budget. Instead recenter: shift to coordinates about an unknown center c and try the smallest symmetric ansatz, e.g. for an identity in two same-degree maps take f=c+a(x-c)^k and g=c-a(x-c)^k, where odd k makes both sides collapse identically. The two supplied values then differ only in the sign of the a-term: add them to isolate c, subtract to isolate a. Verify by that symmetry, not by expanding. Ask whether a requested input is itself the center or a fixed point, making its value immediate. Ugly fractions or divisor-hunting mean the ansatz is wrong, not the arithmetic: switch once, then commit, state your result, and stop re-deriving.",
+      "mutation": "name the recenter-plus-antisymmetric-ansatz construction concretely, add add/subtract-the-two-given-values solve step, structural (non-expanding) verification, and an ugly-fractions abort signal with a one-switch cap",
+      "subagent_summary": "Fresh rollouts split 4/8 correct with a sharp pattern: every success terminated under 10k tokens after committing to a shared-center antisymmetric ansatz and solving the two given values by adding/subtracting them, while all four failures ran to the 16384-token cap - two after reverting to full coefficient expansion of the composition, one lost in divisor-hunting over ugly fractions, and one that reached the right ansatz but then tried to verify it by brute expansion. The revision therefore spells out the recentering construction and its two-equation solve, replaces expansion-based verification with a symmetry check, and gives an explicit abort signal plus a one-switch cap so the student stops re-deriving instead of burning the budget.",
+      "sampling_slurm_job_id": "150.57",
+      "tokens": 172,
+      "hint_hash": "3bc4a8fb988c1eb05c38ceb4f4bd0bb3b1f52a692bff540b0be46ed42b51bd06",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "2bcb5d3e6fb5734eebdd781a83717282b26d1535b8a1350660140759e3a7d0f7"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Before trusting an elegant shortcut, try to falsify it. At the smallest nontrivial size write distinct labels and carry the process out literally, each stated step acting on the previous step's output, never on the original arrangement. Then check the shortcut's prediction against that trace; if they disagree, discard the shortcut rather than launching a general symbolic derivation. Return-to-start questions ask for an order: reapply the whole process, counting, until the start reappears. Get exact counts at two different sizes and compare them to the size parameter before generalizing. Do not assume the period is 2 merely because each stage looks like a swap; composing swaps usually does not have period 2. Commit your result early, then stop.",
+      "mutation": "attack the premature-shortcut failure mode: force falsification of any guessed closed form against a literal small-case trace, forbid assuming period 2 from swap-shaped stages, and require exact counts at two sizes",
+      "subagent_summary": "Only 2 of 8 rollouts were correct. The dominant new failure was premature abstraction into a plausible-sounding shortcut: three finishing rollouts all asserted the process was a fixed block shift or a product of disjoint 2-cycles and therefore had period 2, without ever tracing labels far enough to falsify that claim, and the four token-capped rollouts burned the budget on symbolic index formulas after abandoning small cases. The revision therefore keeps the incumbent's concrete-trace instinct but reorients it as a falsification test on any guessed shortcut, names the swap-implies-period-2 trap explicitly, and requires exact counts at two sizes before generalizing.",
+      "sampling_slurm_job_id": "150.61",
+      "tokens": 148,
+      "hint_hash": "ae55ce3989859ea6f512c3e2c3fa5c48cffc4b29cf1ba69ccbf46e955fbe0f0d",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}

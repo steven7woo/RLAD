@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 3,
+  "generation": 2,
   "hints": [
     {
       "hint_id": 1,
@@ -39,9 +39,9 @@
       "hint_id": 5,
       "train_position": 70,
       "train_qid": "30418",
-      "hint": "Name your unknowns and turn each given condition into one exact equation; solve for any constants first. Reduce to a single variable, keep exact fractions, and discard roots that are degenerate or outside the domain. Verify with a second, different method rather than repeating the first. State your result early, then stop.",
-      "tokens": 63,
-      "hint_hash": "83c896bc82082c6ed4cb8791f9d2a555f90a25b05e0dc438a5532b3b8a6282c8"
+      "hint": "First substitute the two known graph points to determine the parameters of the logarithmic fractional-linear function. Derive the parallelogram translation from oriented vectors, impose both graph equations, and eliminate one coordinate using the logarithm. Solve the remaining scalar relation while respecting the domain, then compute the area from a determinant. Verify that the resulting points lie on the correct branches.",
+      "tokens": 73,
+      "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
     },
     {
       "hint_id": 6,
@@ -71,19 +71,19 @@
       "hint_id": 9,
       "train_position": 188,
       "train_qid": "3980",
-      "hint": "Never name a full set of unknown coefficients and never expand a composed or high-degree identity; that always exhausts your budget. Instead recenter: shift to coordinates about an unknown center c and try the smallest symmetric ansatz, e.g. for an identity in two same-degree maps take f=c+a(x-c)^k and g=c-a(x-c)^k, where odd k makes both sides collapse identically. The two supplied values then differ only in the sign of the a-term: add them to isolate c, subtract to isolate a. Verify by that symmetry, not by expanding. Ask whether a requested input is itself the center or a fixed point, making its value immediate. Ugly fractions or divisor-hunting mean the ansatz is wrong, not the arithmetic: switch once, then commit, state your result, and stop re-deriving.",
-      "tokens": 172,
-      "hint_hash": "3bc4a8fb988c1eb05c38ceb4f4bd0bb3b1f52a692bff540b0be46ed42b51bd06"
+      "hint": "Never open with a full set of unknown coefficients; that path always runs out of tokens. For an identity required to hold for all x, do not match coefficients. Instead guess a small structured family that satisfies it identically, then fit the given numbers. Ask what forces such maps to agree: a shared center c with each map of the form c plus or minus a*(x-c)^k, one map equal to the other plus a constant, or both iterates of a single map. Two unknowns plus the two given values is usually the whole problem. Also substitute the given special inputs into the identity for a free scalar equation, and check whether a requested input is itself the center, which makes its value immediate. When the problem asserts a unique answer, one family member meeting every stated condition suffices: verify it by direct substitution, then read off what is asked. A contradiction means the family is wrong, not the arithmetic; switch families instead of expanding further.",
+      "tokens": 195,
+      "hint_hash": "2bcb5d3e6fb5734eebdd781a83717282b26d1535b8a1350660140759e3a7d0f7"
     },
     {
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Before trusting an elegant shortcut, try to falsify it. At the smallest nontrivial size write distinct labels and carry the process out literally, each stated step acting on the previous step's output, never on the original arrangement. Then check the shortcut's prediction against that trace; if they disagree, discard the shortcut rather than launching a general symbolic derivation. Return-to-start questions ask for an order: reapply the whole process, counting, until the start reappears. Get exact counts at two different sizes and compare them to the size parameter before generalizing. Do not assume the period is 2 merely because each stage looks like a swap; composing swaps usually does not have period 2. Commit your result early, then stop.",
-      "tokens": 148,
-      "hint_hash": "ae55ce3989859ea6f512c3e2c3fa5c48cffc4b29cf1ba69ccbf46e955fbe0f0d"
+      "hint": "Treat each switcheroo as a permutation of positions. Label positions by fixed-width binary strings and determine which bit or block each stage changes; test the rule on the smallest sizes to fix indexing conventions. Compose the stages into one bitwise affine permutation. Determine its order from the cycle structure and prove minimality by exhibiting a position with the full cycle length.",
+      "tokens": 72,
+      "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
     }
   ],
-  "total_tokens": 1325,
-  "book_hash": "f93552fce0b96f517f09ee4b14565befa4817ba961101f0bcda9348141d9c50e"
+  "total_tokens": 1282,
+  "book_hash": "dc4b32550309f71785839371925be169d5cd21b1955fc8a226b480e85d7b588e"
 }
