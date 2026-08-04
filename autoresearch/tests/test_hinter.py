@@ -12,11 +12,6 @@ import pytest
 from autoresearch.hinter import core, pool, publish, state
 
 
-# The pool pins its node pair per lambda so concurrent runs stay disjoint, so an
-# allocation must record exactly the pair the effective config names.
-GRANTED_NODES = list(core.ALLOWED_ALLOCATIONS[1][1])
-
-
 class FakeTokenizer:
     def encode(self, text: str, add_special_tokens: bool = False) -> list[int]:
         del add_special_tokens
@@ -696,7 +691,13 @@ def test_receipt_binds_archived_allocation_and_input(
     monkeypatch: pytest.MonkeyPatch,
     config: dict,
 ) -> None:
-    _, config_hash = core.load_config(require_frozen=False)
+    # `validate_receipt` checks the archived allocation against the *effective*
+    # config (lambda launchers override partition/nodes via the environment), so
+    # the fake allocation must be built from that same effective config rather
+    # than the raw config.json fixture -- otherwise this test only passes when
+    # the ambient environment happens to select lambda=1.
+    effective_config, config_hash = core.load_config(require_frozen=False)
+    granted_nodes = list(effective_config["slurm"]["nodes"])
     monkeypatch.setattr(core, "WORK_ROOT", tmp_path)
     pool_root = tmp_path / "pool"
     pool_root.mkdir()
@@ -706,13 +707,13 @@ def test_receipt_binds_archived_allocation_and_input(
         return {
             "schema_version": 1,
             "job_id": job_id,
-            "partition": config["slurm"]["partition"],
-            "nodes": GRANTED_NODES,
+            "partition": effective_config["slurm"]["partition"],
+            "nodes": granted_nodes,
             "pool_slots": 16,
             "exclusive": True,
             "gpus_per_node": 8,
             "gpus_per_task": 1,
-            "gpu_binding": config["slurm"]["gpu_binding"],
+            "gpu_binding": effective_config["slurm"]["gpu_binding"],
             "python": sys.executable,
             "repo_root": str(core.REPO_ROOT),
             "work_root": str(tmp_path),
@@ -737,10 +738,10 @@ def test_receipt_binds_archived_allocation_and_input(
         "allocation_job_id": "111",
         "slurm_step_id": "7",
         "execution_id": "111.7",
-        "node": GRANTED_NODES[0],
+        "node": granted_nodes[0],
         "gpu_count": 1,
         "pool_slot": 3,
-        "gpu_binding": config["slurm"]["gpu_binding"],
+        "gpu_binding": effective_config["slurm"]["gpu_binding"],
         "visible_cuda_device": "0",
         "config_hash": config_hash,
         "source_hash": source_hash,
