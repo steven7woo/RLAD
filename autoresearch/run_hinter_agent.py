@@ -79,7 +79,7 @@ You run headless: there is NO interactive operator attached. Asking a question
 reaches nobody and only wastes a turn, so never block on one. When you hit a
 decision, resolve it from `autoresearch/config.json` and the plan, act, and
 record the reasoning in your notes. If something is genuinely unsafe to decide
-alone, stop and write the open question into `work_zsw/OPEN_QUESTIONS.md`
+alone, stop and write the open question into `{workspace}/OPEN_QUESTIONS.md`
 instead of waiting.
 
 ## Absolute safety constraints
