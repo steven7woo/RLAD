@@ -1,0 +1,2 @@
+round,book_hash_before,book_hash_after,mean_train_before,mean_train_after,mean_heldout_before,mean_heldout_after,mean_J_before,mean_J_after,num_kept,num_discarded,total_tokens_before,total_tokens_after,elapsed_seconds,notes
+1,a4f6559f175878a48411a30621f777cef52c470866f30c23837251e671b9e3c7,53987718a56afa8f169994dcbb3c734d7bb7c2535ef1f62e9347f1cf432c2013,0.3625,0.4,0.165,0.18625,2.0125,2.2625,5,5,796,1188,3479.2680943012238,

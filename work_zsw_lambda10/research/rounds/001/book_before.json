@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "generation": 0,
+  "hints": [
+    {
+      "hint_id": 1,
+      "train_position": 163,
+      "train_qid": "28054",
+      "hint": "Represent every interpretation consistent with the public statements as a finite candidate set. For each speaker, group candidates by the value that speaker privately knows. A claim of not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing information sets after every deletion; do not reason from the original set after later statements. The surviving candidate determines the requested quantity.",
+      "tokens": 77,
+      "hint_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "train_position": 28,
+      "train_qid": "30302",
+      "hint": "Divide by the appropriate power of the variable and introduce the ratio w=(z-1)/z. The equation then restricts w to a fixed finite set on a circle. Solve the Möbius relation for z in terms of w, and characterize the image locus geometrically (or by an equation in x and y). Use all allowed roots and check exceptional values before extracting the requested circle parameter.",
+      "tokens": 81,
+      "hint_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "train_position": 6,
+      "train_qid": "8554",
+      "hint": "Maximizing a union is equivalent to minimizing the overlap because both square areas are fixed. Parameterize the rotation angle after using symmetry to reduce its range. With the specified corner and center coincident, express the overlap as a small collection of triangles or sectors whose boundaries change only at a few critical angles. Minimize the resulting piecewise expression, checking interval endpoints and symmetry cases, then subtract from the sum of the two areas.",
+      "tokens": 86,
+      "hint_hash": "00f433b6ea19dfe2336efbb3476fea529c0993179016a67ce16e4288905f3cd0"
+    },
+    {
+      "hint_id": 4,
+      "train_position": 189,
+      "train_qid": "25003",
+      "hint": "Encode the desired arithmetic progression by subtracting its affine-in-index target from every candidate polynomial evaluation. Partition the indices according to which polynomial was chosen. For each fixed polynomial, translate the required equal-spacing condition into zeros of a bounded-degree polynomial or of a suitable finite difference. Bound how many indices that polynomial can support unless the difference is identically zero, rule out the identity case from the setup, and sum the bounds over all choices. Construct an extremal assignment separately.",
+      "tokens": 94,
+      "hint_hash": "93b35723e9cc953d39ac835ae67c34590b0c25060143ab50c99c75c21cbb1ff2"
+    },
+    {
+      "hint_id": 5,
+      "train_position": 70,
+      "train_qid": "30418",
+      "hint": "First substitute the two known graph points to determine the parameters of the logarithmic fractional-linear function. Derive the parallelogram translation from oriented vectors, impose both graph equations, and eliminate one coordinate using the logarithm. Solve the remaining scalar relation while respecting the domain, then compute the area from a determinant. Verify that the resulting points lie on the correct branches.",
+      "tokens": 73,
+      "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "train_position": 62,
+      "train_qid": "26989",
+      "hint": "Describe a configuration by the ordered contents of the truck, gate, and shed rather than by informal move sequences. Legal moves form a small state graph; at each state, attach the actual transition probability, noting that it changes when only one move is available. Propagate probabilities by dynamic programming while retaining enough label order to test the requested final event. Check that probabilities, rather than merely path counts, sum to one.",
+      "tokens": 83,
+      "hint_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "train_position": 57,
+      "train_qid": "3836",
+      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
+      "tokens": 82,
+      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "train_position": 35,
+      "train_qid": "23443",
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, apply the stated markup multiplicatively, and check integrality and units.",
+      "tokens": 77,
+      "hint_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "train_position": 188,
+      "train_qid": "3980",
+      "hint": "Compare leading and constant terms in the commuting-polynomial identity before expanding all coefficients. Look for a shared affine coordinate in which both same-degree maps have a constrained centered form or arise from a common iterate with simple affine symmetries. Use the supplied values to determine the transformation and remaining parameters, then evaluate only the requested inputs and verify the full composition identity.",
+      "tokens": 71,
+      "hint_hash": "d95dbbc2898bc6c58c3684891a45d7c76fe4e0835ddd91bed1a4955ddf89942a"
+    },
+    {
+      "hint_id": 10,
+      "train_position": 26,
+      "train_qid": "3843",
+      "hint": "Treat each switcheroo as a permutation of positions. Label positions by fixed-width binary strings and determine which bit or block each stage changes; test the rule on the smallest sizes to fix indexing conventions. Compose the stages into one bitwise affine permutation. Determine its order from the cycle structure and prove minimality by exhibiting a position with the full cycle length.",
+      "tokens": 72,
+      "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ],
+  "total_tokens": 796,
+  "book_hash": "a4f6559f175878a48411a30621f777cef52c470866f30c23837251e671b9e3c7"
+}

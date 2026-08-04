@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "generation": 1,
+  "hints": [
+    {
+      "hint_id": 1,
+      "train_position": 163,
+      "train_qid": "28054",
+      "hint": "Represent every interpretation consistent with the public statements as a finite candidate set. For each speaker, group candidates by the value that speaker privately knows. A claim of not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing information sets after every deletion; do not reason from the original set after later statements. The surviving candidate determines the requested quantity.",
+      "tokens": 77,
+      "hint_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "train_position": 28,
+      "train_qid": "30302",
+      "hint": "Divide by the appropriate power of the variable and introduce the ratio w=(z-1)/z. The equation then restricts w to a fixed finite set on a circle. Solve the Möbius relation for z in terms of w, and characterize the image locus geometrically (or by an equation in x and y). Use all allowed roots and check exceptional values before extracting the requested circle parameter.",
+      "tokens": 81,
+      "hint_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "train_position": 6,
+      "train_qid": "8554",
+      "hint": "Before case-bashing an extremum, test whether the quantity depends on the free parameter at all. Set coordinates with the special shared point at the origin, then compute one exact value at the simplest configuration (aligned or symmetric) to own a concrete candidate. Recompute at one tilted value using coordinates, intersection points and the shoelace formula, never prose estimates. If the two agree, a symmetry is mapping one piece of the region onto another and the quantity is constant, so there is nothing left to optimize. For unions and coverings, use total minus intersection. Once two independent computations agree, stop: do not restart the setup or open new configurations. You have limited length and one answer, so commit and state it.",
+      "tokens": 147,
+      "hint_hash": "918623ddf49b0ec8c88e8becd4d23b6c8423864ccda8f888c55e8989ee25135c"
+    },
+    {
+      "hint_id": 4,
+      "train_position": 189,
+      "train_qid": "25003",
+      "hint": "When each term of a required arithmetic (or linear) sequence may be produced by any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not chase consecutive differences across different polynomials; that mixes unrelated functions and stalls. Because the inputs are consecutive, position and input are interchangeable, so every written value must equal one common affine function L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each such input is a root of P(x)-L(x). Subtracting a degree-one function cannot kill a higher leading term, so that difference is nonzero of degree deg P, capping each group at deg P inputs. Multiply by the menu size for the bound, then construct a matching example by making each polynomial agree with L on its own block of inputs.",
+      "tokens": 162,
+      "hint_hash": "3f7a40ea94795e85eeacaf7eb371e77a133709fb15b5eb9c6c9aea2f3cc76b62"
+    },
+    {
+      "hint_id": 5,
+      "train_position": 70,
+      "train_qid": "30418",
+      "hint": "First substitute the two known graph points to determine the parameters of the logarithmic fractional-linear function. Derive the parallelogram translation from oriented vectors, impose both graph equations, and eliminate one coordinate using the logarithm. Solve the remaining scalar relation while respecting the domain, then compute the area from a determinant. Verify that the resulting points lie on the correct branches.",
+      "tokens": 73,
+      "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "train_position": 62,
+      "train_qid": "26989",
+      "hint": "Model relay-through-a-buffer stack tasks as stack shunting: fix one stated labeling (name items bottom-to-top), keep the ordered source, buffer, and destination stacks, and describe a run by its word of pushes and pops. Restate the target event as a condition on that word, using that a destination stack's bottom is whatever arrived first and its top whatever arrived last, so \"lands at the bottom\" constrains the earliest moves, not the latest. Never assume all n! final orders or all words are equally likely: stack rules make many orders unreachable and forced moves make branches unequal, so a bare 1/k or 1/k! is a red flag. Multiply true per-step probabilities along each admissible word, using one when a move is forced (empty buffer forces a push, empty source forces a pop) and one half only at free steps; check branch probabilities from each state sum to one.",
+      "tokens": 185,
+      "hint_hash": "67d122a90af2e0710ab939322c2a6639c7d9434bfc510d8f18475e267a2103c9"
+    },
+    {
+      "hint_id": 7,
+      "train_position": 57,
+      "train_qid": "3836",
+      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
+      "tokens": 82,
+      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "train_position": 35,
+      "train_qid": "23443",
+      "hint": "Before computing, name every unknown the problem leaves implicit, tag each given with its unit, and mark which numbers are group totals versus per-item amounts. Write the target symbolically first, substitute numbers once.\n\nWatch for hidden integrality: words like integer, whole, identical, or equal parts usually force an unknown count to divide several given totals at once. Take the gcd of those totals, list its divisors, drop candidates that break a stated condition, and let the problem's extremal wording pick among the rest.\n\nTurn each percent or ratio into a multiplier and say which base it multiplies; a percent of cost multiplies cost, not price.\n\nSum the parts before dividing once. Then substitute back, check every per-unit amount is legal, and report in the requested unit.",
+      "tokens": 157,
+      "hint_hash": "b2978873c5591981a1c31bc9bd3f65c56e9dc8e7a037ff47aa156c6b908886d9"
+    },
+    {
+      "hint_id": 9,
+      "train_position": 188,
+      "train_qid": "3980",
+      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation rather than solving for every coefficient. If an ansatz fails, test a different symmetry instead of concluding no such polynomials exist, then verify the identity at one numeric input.",
+      "tokens": 152,
+      "hint_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076"
+    },
+    {
+      "hint_id": 10,
+      "train_position": 26,
+      "train_qid": "3843",
+      "hint": "Treat each switcheroo as a permutation of positions. Label positions by fixed-width binary strings and determine which bit or block each stage changes; test the rule on the smallest sizes to fix indexing conventions. Compose the stages into one bitwise affine permutation. Determine its order from the cycle structure and prove minimality by exhibiting a position with the full cycle length.",
+      "tokens": 72,
+      "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ],
+  "total_tokens": 1188,
+  "book_hash": "53987718a56afa8f169994dcbb3c734d7bb7c2535ef1f62e9347f1cf432c2013"
+}

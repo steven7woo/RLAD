@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "round": 1,
+  "book_hash_before": "a4f6559f175878a48411a30621f777cef52c470866f30c23837251e671b9e3c7",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "When a puzzle reveals a value but leaves open which quantity it is, or which case or role applies, that ambiguity is an unknown to pin down, not to assume: the people inside the puzzle share it, so keep every reading alive. For a speaker holding a private value, each surviving reading yields one candidate for the other value; discard readings whose candidate is inadmissible. \"Cannot determine\" means two or more candidates survive; \"can determine\" means exactly one. Apply statements in order, and for a later speaker keep only candidates that leave that speaker uncertain too. Never commit to a candidate you already showed violates a statement; if none survives, an assumption you added is wrong, so change it rather than re-arguing settled cases.",
+      "mutation": "treat-revealed-quantity-ambiguity-as-shared-unknown-and-forbid-self-contradicting-commit",
+      "subagent_summary": "In the fresh rollouts (execution 148.19, 1 of 8 correct) the failures were interpretive, not arithmetic: every losing run first fixed the revealed value's identity as an external fact, which makes each speaker able to compute the partner immediately and so produced contradictions in both branches. Several runs then committed to a candidate while explicitly writing that it contradicts the stated ignorance, and two exhausted the 16384-token cap re-arguing cases they had already settled. The incumbent's generic candidate-set-and-delete-unique-groups wording never flags that the reading itself is unknown to the speakers, so it addresses neither failure; the revision names that shared ambiguity as the coordinate to keep open, defines can/cannot-determine as survivor counts, and adds a transferable rule against reporting a candidate already shown to fail.",
+      "sampling_slurm_job_id": "148.19",
+      "tokens": 150,
+      "hint_hash": "432d12bf7bac345c08bcc0647a4af003bcd315371d47cc16efeadeac06c97f4c",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "When an equation equates equal powers of two linear expressions in z, divide by one side so it reads (ratio)^n = constant. Only the modulus of that ratio is forced, and it is the same for every root, so take absolute values immediately instead of enumerating all n roots or parametrizing a Mobius image. You get a ratio of distances |z - a| = k|z - b|. Put z = x + iy, square, and collect: for k not 1 the x^2 and y^2 coefficients match, so divide through by that common coefficient before completing the square, then read off center and radius; k = 1 degenerates to a line. Never read a radius off an unnormalized equation. Confirm what you divided by is not a root, and test one explicit root.",
+      "mutation": "generalize-trigger-plus-modulus-shortcut-and-normalize-before-completing-square",
+      "subagent_summary": "Fresh rollouts (execution_id 148.22) scored 8/8, so the incumbent is not failing on train; the gap is transfer (heldout_i=0.2) because it hardcodes one substitution and a Mobius-image detour. Seven of eight traces followed that detour, enumerating all roots and parametrizing the circle before recovering the locus, while the one trace that took moduli at once reached a ratio-of-distances circle in a few lines. Traces also repeatedly landed on a quadratic whose x^2+y^2 coefficient was not 1, the natural spot to misread a radius, so the revision states the general trigger, routes straight to the modulus step, requires normalizing before completing the square, names the degenerate equal-distance case, and keeps two cheap validity checks.",
+      "sampling_slurm_job_id": "148.22",
+      "tokens": 169,
+      "hint_hash": "6edcdbd2b61f4fd9f52c4ac87eaad1604d049ac9ac126b5aa0ad69243bffaed7",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Before case-bashing an extremum, test whether the quantity depends on the free parameter at all. Set coordinates with the special shared point at the origin, then compute one exact value at the simplest configuration (aligned or symmetric) to own a concrete candidate. Recompute at one tilted value using coordinates, intersection points and the shoelace formula, never prose estimates. If the two agree, a symmetry is mapping one piece of the region onto another and the quantity is constant, so there is nothing left to optimize. For unions and coverings, use total minus intersection. Once two independent computations agree, stop: do not restart the setup or open new configurations. You have limited length and one answer, so commit and state it.",
+      "mutation": "invariance-check-before-case-analysis-plus-commit-early",
+      "subagent_summary": "All 8 rollouts ran to the 16384-token cap with reward 0, and 6 of 8 never emitted a boxed answer at all, yet 7 of 8 had already reached the correct value early (median roughly 17 percent into the trace) and then abandoned it; traces show 23-64 'Alternatively' restarts each and heavy dead-end exploration of tangency configurations. The bottleneck is budget and commitment rather than method, and the incumbent's instruction to build a piecewise expression over critical angles actively feeds the loop, so the revision front-loads a cheap two-position invariance test, demands numeric verification via coordinates and shoelace instead of prose, and orders the solver to stop and answer once two computations agree.",
+      "sampling_slurm_job_id": "148.20",
+      "tokens": 147,
+      "hint_hash": "918623ddf49b0ec8c88e8becd4d23b6c8423864ccda8f888c55e8989ee25135c",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "00f433b6ea19dfe2336efbb3476fea529c0993179016a67ce16e4288905f3cd0"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of a required arithmetic (or linear) sequence may be produced by any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not chase consecutive differences across different polynomials; that mixes unrelated functions and stalls. Because the inputs are consecutive, position and input are interchangeable, so every written value must equal one common affine function L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each such input is a root of P(x)-L(x). Subtracting a degree-one function cannot kill a higher leading term, so that difference is nonzero of degree deg P, capping each group at deg P inputs. Multiply by the menu size for the bound, then construct a matching example by making each polynomial agree with L on its own block of inputs.",
+      "mutation": "replace-difference-chasing-with-shared-affine-target-and-per-polynomial-root-count",
+      "subagent_summary": "All 8 fresh training rollouts (execution 148.21) scored 0/8 with an identical failure mode: they tried to enforce the progression by differencing consecutive terms produced by DIFFERENT polynomials, concluded a degree-5 polynomial 'would have to be linear or constant', and then guessed a tiny value or the menu size; half also exhausted the token budget re-deriving that dead end. None made the decisive move of writing the target progression as one shared affine function of the input and counting roots of P(x)-L(x) per polynomial. The revision names the wrong path explicitly, supplies the index-equals-input observation that legitimizes the shared affine target, gives the degree-based per-polynomial cap and menu-size multiplication, and asks for a matching construction, all phrased for any finite-menu fixed-degree family.",
+      "sampling_slurm_job_id": "148.21",
+      "tokens": 162,
+      "hint_hash": "3f7a40ea94795e85eeacaf7eb371e77a133709fb15b5eb9c6c9aea2f3cc76b62",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "93b35723e9cc953d39ac835ae67c34590b0c25060143ab50c99c75c21cbb1ff2"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Restate every condition as an equation, including the implicit ones: domain restrictions, vertex ordering, vector or midpoint relations. Pin unknown parameters first by substituting the given data, then recheck them against each condition before going on.\n\nNext look for structure that collapses the algebra: a center of symmetry, an odd/even rewrite, an invariant, a substitution leaving one unknown. Reflected or translated points often follow from that structure instead of fresh equations.\n\nWhen clearing fractions, cross-multiply pairwise and re-expand once. Treat ugly output, such as big radicals or roots outside the domain, as a signal to recheck that step, not to push on.\n\nDrop degenerate or domain-violating roots, then recompute the requested quantity a second way (shoelace versus cross product, or resubstitution).\n\nStay brief and commit to one boxed result.",
+      "mutation": "generalize-to-class-procedure-with-ugly-root-error-signal",
+      "subagent_summary": "Seven of eight rollouts were correct; the one failure mis-paired the cross-multiplication when clearing a fractional equation, turned rational roots into surds, then spent the whole 16384-token budget manipulating those radicals and never committed to a boxed result. The incumbent hint was written around this problem's specific machinery, which is noise on unseen questions, so this edit replaces it with a transferable procedure: pin parameters and verify, exploit symmetry or an invariant, cross-multiply pairwise, treat ugly roots as an error signal rather than pressing on, discard degenerate or out-of-domain solutions, confirm the target quantity a second way, and commit concisely.",
+      "sampling_slurm_job_id": "148.15",
+      "tokens": 172,
+      "hint_hash": "0e09ab52d1a561b032d1a8b6ebc24d434c2788bd3d1f84cc0b85ba26b97363d6",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Model relay-through-a-buffer stack tasks as stack shunting: fix one stated labeling (name items bottom-to-top), keep the ordered source, buffer, and destination stacks, and describe a run by its word of pushes and pops. Restate the target event as a condition on that word, using that a destination stack's bottom is whatever arrived first and its top whatever arrived last, so \"lands at the bottom\" constrains the earliest moves, not the latest. Never assume all n! final orders or all words are equally likely: stack rules make many orders unreachable and forced moves make branches unequal, so a bare 1/k or 1/k! is a red flag. Multiply true per-step probabilities along each admissible word, using one when a move is forced (empty buffer forces a push, empty source forces a pop) and one half only at free steps; check branch probabilities from each state sum to one.",
+      "mutation": "stack-shunting push/pop word framing plus bottom-equals-arrived-first rule and forced-move weight one",
+      "subagent_summary": "Across the eight fresh rollouts (2/8 correct) every failure abandoned state tracking and substituted a uniform-permutation hand-wave, giving 1/24 or 1/16 on part (a) and 1/4 on part (b) from the claim that each item is equally likely to be moved last; the two rewarded rollouts only loosely counted free binary choices rather than tracking states. The incumbent hint's abstract state-graph-plus-dynamic-programming language was ignored because the student never built a state, so the revision names the concrete representation (a push/pop word over three ordered stacks), explicitly flags the equally-likely-permutation shortcut as an error, and supplies the two facts the failures lacked: a destination stack's bottom is whatever arrived first, and forced moves carry probability one.",
+      "sampling_slurm_job_id": "148.13",
+      "tokens": 185,
+      "hint_hash": "67d122a90af2e0710ab939322c2a6639c7d9434bfc510d8f18475e267a2103c9",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "hint": "When a problem carries a huge index, do not attack it symbolically at full size. First normalize: shift indices or factor a common power out of each term so exponents start at 0, which exposes hidden interpolation or moment structure. Then solve the two or three smallest sizes exactly, tabulate, and conjecture the closed form. Recall the invariant: weights that annihilate every monomial below the top degree yet are normalized on it are reciprocals of products of node differences, so expect factorials and alternating signs; count both explicitly. Substitute your candidate back into the small cases and into the given normalizing condition; if it fails, discard it rather than rationalizing. Never assert a value from vague symmetry. If an approach stalls twice, abandon it, commit to the concrete computation, and report one exact simplified value.",
+      "mutation": "normalize-then-small-cases-verify-and-commit",
+      "subagent_summary": "All 8 training rollouts scored 0: six ran the generation budget to the cap circling abstract linear-functional and Vandermonde language without ever computing a value, and the two that terminated asserted an answer from vague orthogonality or an unchecked small-size pattern. The incumbent named the right machinery but supplied no procedure, so the revision orders normalization first, then exactly solved small cases with an explicit conjecture, states the product-of-node-differences invariant with sign and factorial bookkeeping, and requires substitution-based rejection plus committing to a finished exact value before the budget runs out.",
+      "sampling_slurm_job_id": "148.14",
+      "tokens": 167,
+      "hint_hash": "d68fa31e9792546c3135f2ddf7835bb7b7aabcff3c3dfca6c128f72afd44c362",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Before computing, name every unknown the problem leaves implicit, tag each given with its unit, and mark which numbers are group totals versus per-item amounts. Write the target symbolically first, substitute numbers once.\n\nWatch for hidden integrality: words like integer, whole, identical, or equal parts usually force an unknown count to divide several given totals at once. Take the gcd of those totals, list its divisors, drop candidates that break a stated condition, and let the problem's extremal wording pick among the rest.\n\nTurn each percent or ratio into a multiplier and say which base it multiplies; a percent of cost multiplies cost, not price.\n\nSum the parts before dividing once. Then substitute back, check every per-unit amount is legal, and report in the requested unit.",
+      "mutation": "generalize-to-reusable-setup-integrality-percent-base-verify",
+      "subagent_summary": "All 8 fresh training rollouts were graded correct, so train_i is saturated at 1.0 and every remaining unit of J at lambda=10 must come from transfer; the incumbent hint spends most of its budget describing this one scenario (street layout, stage list, an opaque named 'maximum-feasible-count interpretation'), which is consistent with held-out accuracy sitting near floor. Reading the rollouts, the load-bearing moves were all family-level: recover an implicit count, read per-unit wholeness as simultaneous divisibility and reduce it via gcd to a short divisor list, use the problem's own extremal wording to select, and fix the percentage base before multiplying. The revision states exactly that procedure plus a back-substitution and unit check, with no reference to the training instance.",
+      "sampling_slurm_job_id": "148.18",
+      "tokens": 157,
+      "hint_hash": "b2978873c5591981a1c31bc9bd3f65c56e9dc8e7a037ff47aa156c6b908886d9",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation rather than solving for every coefficient. If an ansatz fails, test a different symmetry instead of concluding no such polynomials exist, then verify the identity at one numeric input.",
+      "mutation": "replace-vague-affine-advice-with-explicit-reflection-involution-ansatz-and-budget-warning",
+      "subagent_summary": "All eight fresh training rollouts scored 0 and every one terminated on the token cap (finish_reason=length) while grinding through brute-force coefficient expansion of the composition; two also wrongly concluded no such polynomials exist after a bad ansatz. The incumbent hint gestured at a 'shared affine coordinate' without saying what to do, so the revision names the reusable move concretely: reflect one map into the other via the affine involution L(t)=s-t, impose the point-symmetry condition, and read off requested values from that identity, plus an explicit warning not to expand and not to declare the system unsolvable.",
+      "sampling_slurm_job_id": "148.16",
+      "tokens": 152,
+      "hint_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "d95dbbc2898bc6c58c3684891a45d7c76fe4e0835ddd91bed1a4955ddf89942a"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Model the compound operation as one permutation of positions, 0-indexed, with a single fixed direction (p goes to f(p)); never mix forward and inverse mid-derivation. The stages are applied in sequence, so each stage acts on the word the earlier stages already produced and moves an entire current prefix block; they are not independent commuting swaps, and any conclusion like \"disjoint 2-cycles, so order 2\" is a red flag. Trace positions through the stages once on one small instance, then stop tracing and seek a closed form for the composite (a shift, or a fixed bit operation) that gives the order immediately - unbudgeted hand-tracing runs out of room. Check the pattern on more than one size, since tiny cases let rival formulas coincide, then report the lcm of cycle lengths and exhibit a position with a full orbit.",
+      "mutation": "sequential-composition-warning-plus-budgeted-tracing-to-closed-form",
+      "subagent_summary": "In the eight fresh rollouts (2/8 correct) four hit the 16384-token cap while hand-tracing individual positions and never emitted an answer, and both finished failures asserted the stages are independent disjoint transpositions and reported order 2. The revision names that specific misread - stages act sequentially on the already-modified word and move whole current prefix blocks, not independent swaps - flags the 'order 2' conclusion as a red flag, and caps tracing at one small instance before demanding a closed form, since unbudgeted tracing caused the other four failures.",
+      "sampling_slurm_job_id": "148.17",
+      "tokens": 175,
+      "hint_hash": "75d054dfb4abe65b686664a5c0fec486fa8f7d50954b69633bb81451de2e08cc",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}
