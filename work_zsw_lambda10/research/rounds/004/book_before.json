@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 4,
+  "generation": 3,
   "hints": [
     {
       "hint_id": 1,
@@ -23,9 +23,9 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Only what you write after your reasoning ends gets graded, so reasoning that never ends scores zero. Stop reasoning by the halfway mark, then write one line: the value in a box. Do not re-derive anything after closing; that write-up gets cut off. Keep the first exact value you compute; unease is no reason to reopen, only a finished rival computation is. Ask early whether the free parameter matters: a wedge of angle 360/k at the centre of a k-fold symmetric shape cuts off exactly area/k in any orientation. For unions, covered = sum of parts minus overlap.",
-      "tokens": 122,
-      "hint_hash": "696e4bd374fc53e4ff449724af00cf5f5446cd0eea489d9ede25197ca26e394b"
+      "hint": "Before case-bashing an extremum, test whether the quantity depends on the free parameter at all. Set coordinates with the special shared point at the origin, then compute one exact value at the simplest configuration (aligned or symmetric) to own a concrete candidate. Recompute at one tilted value using coordinates, intersection points and the shoelace formula, never prose estimates. If the two agree, a symmetry is mapping one piece of the region onto another and the quantity is constant, so there is nothing left to optimize. For unions and coverings, use total minus intersection. Once two independent computations agree, stop: do not restart the setup or open new configurations. You have limited length and one answer, so commit and state it.",
+      "tokens": 147,
+      "hint_hash": "918623ddf49b0ec8c88e8becd4d23b6c8423864ccda8f888c55e8989ee25135c"
     },
     {
       "hint_id": 4,
@@ -55,9 +55,9 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Before any theory: shrink the huge parameter to 2, 3, 4, solve each tiny case by plain elimination, tabulate the requested value. Three exact entries, then generalize. Never pack the unknowns into one polynomial and never work at full size symbolically; both stall. Read the value off the table and confirm it on the next size.",
-      "tokens": 73,
-      "hint_hash": "74f69952b9f10938e319d80089c7d99dc7fc02f1799860576f387015e63ac6ae"
+      "hint": "Do not model unknowns as coefficients of a single polynomial in x; expanding such a polynomial burns the whole budget with nothing to show. First move: replace the huge parameter by its smallest values, solve each tiny system exactly by elimination, and tabulate the quantity asked for. Read the pattern off that table, recheck it on one small case, then state it at the given size.",
+      "tokens": 78,
+      "hint_hash": "b2294ffb06fe64f3e4a994bbe4afab5fca8a5e3f5ff31f073862a0e8ad1b932e"
     },
     {
       "hint_id": 8,
@@ -84,6 +84,6 @@
       "hint_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565"
     }
   ],
-  "total_tokens": 1149,
-  "book_hash": "7f7b0c5cedda760e0688b77c39d89d49b12177c9d824464ea36def74d71a9198"
+  "total_tokens": 1179,
+  "book_hash": "40e575e7deec146f9fed1cf6fc75e4fa046c297bc820fd98422b2c1254fa4a7a"
 }

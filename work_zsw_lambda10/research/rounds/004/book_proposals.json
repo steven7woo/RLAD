@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "round": 4,
+  "book_hash_before": "40e575e7deec146f9fed1cf6fc75e4fa046c297bc820fd98422b2c1254fa4a7a",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "State what the given data pins down and what it leaves open - including which role a stated number could play - then enumerate the finitely many cases in a short list instead of arguing in prose. Read \"X cannot determine Y\" as a count: that case survives only if two or more possibilities remain consistent with what X can actually see. Apply such remarks in the order they are made, re-filtering after each. Before committing, recheck the surviving case against every stated condition. If your reasoning starts repeating itself, stop and decide: choose the case meeting the most conditions. Always end with one final boxed answer.",
+      "mutation": "generalize-to-case-enumeration-with-count-test-verify-and-forced-boxed-commit",
+      "subagent_summary": "Execution 148.75 scored 3 of 8. Three failures ran into the 16384-token cap with no boxed answer at all; the two that stopped declared every branch contradictory and then named an arbitrary candidate. The recurring logical error is treating \"cannot determine\" as a claim to refute rather than a survivor count over cases the speakers themselves cannot distinguish. Rounds 1-3 all attacked this with longer, more puzzle-specific wording (150/167/102 tokens) and each lost held-out accuracy against the 77-token incumbent, so this edit stays terse and deliberately generic: name what the data leaves open, enumerate cases as a list, read knowledge claims as counts, recheck the survivor against all conditions, stop when reasoning repeats, and always emit one boxed answer. The verify, anti-loop and commit clauses help ordinary problems too, so it should transfer instead of over-fitting.",
+      "sampling_slurm_job_id": "148.75",
+      "tokens": 125,
+      "hint_hash": "8e4a94225794f2b1d6738192b467448fb4aa309c821d93befe2b23cbbba776e2",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable and set w=(z-1)/z. The equation restricts w to a finite set on a circle. Solve the Mobius relation for z and characterize the image locus by an equation in x and y. It arrives as A(x^2+y^2)+Bx+Cy+D=0. Equal x^2 and y^2 coefficients with no xy term already certify a circle, even when A is not 1 and the center is off the origin, so do not stall debating ellipse versus circle and do not expect |z| to be constant. Divide by A, complete the square, then read center and radius. Check exceptional values and box the requested parameter.",
+      "mutation": "certify-circle-from-equal-square-coefficients-to-stop-ellipse-stall",
+      "subagent_summary": "Fresh rollouts (execution_id 148.76) scored 7/8, the incumbent's first train miss in four rounds: the failed trace derived the correct locus quadratic early, then spent over 30k characters insisting the unnormalized A(x^2+y^2)+Bx+D form was an ellipse and that |z| should be constant, looping through recomputed sample roots until it hit the length cap with no boxed answer. Six of the seven passing traces also paid for that same doubt before normalizing. Round 2 showed a bare normalize-and-non-origin warning only ties held-out, so this edit instead supplies the missing certification (equal square coefficients and no xy term mean circle regardless of scale or center) that terminates the stall, then keeps the divide-by-A, complete-the-square, and box-the-answer steps.",
+      "sampling_slurm_job_id": "148.76",
+      "tokens": 147,
+      "hint_hash": "fdeed1fe8fb4c4da801317e624426159f544e08e866ac89049244e1cad3bed80",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "a2617d5cf40e8a99a8f74a784b3ae2a8d34000cee46fba8c99104d13b42a8740"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Only what you write after your reasoning ends gets graded, so reasoning that never ends scores zero. Stop reasoning by the halfway mark, then write one line: the value in a box. Do not re-derive anything after closing; that write-up gets cut off. Keep the first exact value you compute; unease is no reason to reopen, only a finished rival computation is. Ask early whether the free parameter matters: a wedge of angle 360/k at the centre of a k-fold symmetric shape cuts off exactly area/k in any orientation. For unions, covered = sum of parts minus overlap.",
+      "mutation": "target-the-grading-gate-close-reasoning-by-halfway-then-one-boxed-line-no-rewrite",
+      "subagent_summary": "Fresh round-4 rollouts under the 147-token incumbent scored 1/8. Reward requires a boxed value after the reasoning block closes: four of eight never closed it, and two closed it then began a long fresh write-up and were cut off mid-derivation, despite having already boxed the correct value inside the reasoning. Six of eight held the correct exact value by 7-16 percent of the trace, so the loss is the output protocol, not the method; the incumbent's shoelace/invariance recipe was executed essentially never (0-1 mentions). Rounds 2-3 showed extra prohibitions and a generic case-scoring rule both lose, so this revision names the grading gate, caps reasoning at the halfway mark, forbids re-deriving in the write-up, and compresses the geometry to one reusable wedge fact at 122 tokens versus 147.",
+      "sampling_slurm_job_id": "148.77",
+      "tokens": 122,
+      "hint_hash": "696e4bd374fc53e4ff449724af00cf5f5446cd0eea489d9ede25197ca26e394b",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "918623ddf49b0ec8c88e8becd4d23b6c8423864ccda8f888c55e8989ee25135c"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of a required linear pattern may come from any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not difference terms across different polynomials. Inputs are consecutive, so index and input are interchangeable and every value equals one shared affine L(x)=A+Bx of its own input. Each input is then a root of P(x)-L(x), nonzero of degree exactly deg P: one polynomial serves at most deg P inputs, not one fewer, not one more. Every block lies on that same L, so concatenating blocks cannot break the spacing and the capacities simply add. Report the sum over the menu, never one factor alone; exhibit it by letting each polynomial match L on its own block, then stop.",
+      "mutation": "shorten-jointly-calibrate-cap-both-directions-and-kill-block-boundary-doubt",
+      "subagent_summary": "Fresh round-4 rollouts (execution 148.78) scored 2/8 with the incumbent. All six failures report one factor instead of the total, from two root causes: a belief that handing off between polynomials breaks the progression at block boundaries, which makes them discard the product they had already written and fall back to the per-polynomial cap (the two rollouts that hit the token ceiling spent their whole tail on that false contradiction), and an off-by-one in the cap in both directions, once as degree-minus-one and once as degree-plus-one interpolation points. The revision is shorter than the incumbent (150 vs 153 tokens): it drops the redundant grouping clause, pins the cap as exactly deg P in both directions, and states that all blocks lie on the same affine target so concatenation cannot break the spacing.",
+      "sampling_slurm_job_id": "148.78",
+      "tokens": 150,
+      "hint_hash": "b549f8862c7f5a527ed865e260e7829d3f8ebbf128d18842cc92fe66e3aabbea",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Substitute the given points to pin unknown parameters, then re-verify. Read the stated vector relation literally in coordinates, put the unknown point on the curve, and subtract the two curve equations so one exponentiation clears the logarithms; expect a factorable quadratic. Reject roots repeating a given point. List every vertex in cyclic order, apply shoelace once.",
+      "mutation": "keep-subtract-then-exponentiate-restore-shoelace-in-cyclic-order",
+      "subagent_summary": "Seven of eight rollouts were correct; the lone failure never subtracted the two curve equations, folded the constant output difference into the logarithm term by term, produced an irrational discriminant, and burned all 16384 tokens with no boxed value. Every success ran one identical chain: pin parameters and verify, translate the vector relation into coordinates, subtract the two curve equations so a single exponentiation clears the logs, factor the resulting quadratic, drop the root reproducing a given point, then shoelace over all four vertices in cyclic order. My discarded rounds 2 and 3 replaced that last step with a cross product at one vertex, which no success uses, and both lost training accuracy while gaining held-out. This revision keeps the transferable subtraction move and restores the shoelace finish the successes rely on, at incumbent length.",
+      "sampling_slurm_job_id": "148.81",
+      "tokens": 73,
+      "hint_hash": "e05b57c7d669a0db1886b3c4e959885aeb66901d7bb3967f5a8aced472e428ee",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Treat items relayed between ordered piles as a step-by-step random process. Track the ordered contents of source, buffer and destination after every move; a pile's bottom is whatever arrived first, its top whatever arrived last. Key point: for a chosen item to arrive somewhere first it must be uncovered, so every item above it must be moved out of the way first. The event is thus a whole prescribed run of moves, not one lucky choice, and costs far less than 1/2 or 1/4. Write that run out and price it move by move: probability 1 where only one move is legal (empty buffer forces a load, empty source forces an unload), 1/2 only where both are legal; multiply along the run, then add over alternative runs giving the event. Never substitute symmetry like \"each item is equally likely to arrive first\", nor a bare 1/k. Answer each part separately and box each result.",
+      "mutation": "uncovering-first: chosen item must be uncovered, so the event is a multi-move run to write out and price, not one coin flip",
+      "subagent_summary": "All 8 fresh rollouts scored 0, and every one mis-priced part (b): six treated \"a chosen item arrives at the destination first\" as a single coin flip or a symmetry claim and answered 1/2, 1/4 or 1/k, while two declared it outright impossible. None noticed that the item must first be uncovered, i.e. that the items above it have to be relayed out of the way, so the event is a multi-move run rather than one choice. The incumbent already supplies bottom-equals-arrived-first and the forced-move weight, so this edit adds the missing uncovering step and requires the run to be written out and priced move by move, a general habit for any relay/shunting process rather than a fact about one problem.",
+      "sampling_slurm_job_id": "148.82",
+      "tokens": 193,
+      "hint_hash": "968771af184b8f79eb55626dc9d8f2a232d3e8bba1d01623922e841b4a91ff3a",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "67d122a90af2e0710ab939322c2a6639c7d9434bfc510d8f18475e267a2103c9"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Before any theory: shrink the huge parameter to 2, 3, 4, solve each tiny case by plain elimination, tabulate the requested value. Three exact entries, then generalize. Never pack the unknowns into one polynomial and never work at full size symbolically; both stall. Read the value off the table and confirm it on the next size.",
+      "mutation": "front-load-three-small-cases-and-ban-full-size-symbolic-work",
+      "subagent_summary": "Fresh round-4 rollouts under the incumbent scored 1/8. The only winner was also the only rollout that reached three exact small cases and tabulated the requested value before generalizing; every zero either stopped after two cases or delayed the shrink until deep into the trace after long symbolic work at full size, and four hit the generation cap. The incumbent's ban on the single-polynomial model is now partly obeyed, but students substitute an equally fatal habit: manipulating the huge parameter symbolically. This edit makes the shrink the literal first action, sets a concrete quota of three tabulated entries before generalizing, and extends the ban to full-size symbolic work, going 78 to 73 tokens since shorter has won every kept round.",
+      "sampling_slurm_job_id": "148.79",
+      "tokens": 73,
+      "hint_hash": "74f69952b9f10938e319d80089c7d99dc7fc02f1799860576f387015e63ac6ae",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "b2294ffb06fe64f3e4a994bbe4afab5fca8a5e3f5ff31f073862a0e8ad1b932e"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Write the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count. Mark each given number as a total for a group or an amount per item.\n\nIf per-item amounts must be whole or equal, that unknown count divides every such total at once, so the candidates are their common divisors. Rule a candidate out only when it breaks a stated condition, never because another number in the text looks more plausible.\n\nWrite each percent or ratio as a multiplier and name the base it acts on.\n\nSubstitute numbers once, at the end. Then confirm every stated condition holds and the unit is the one requested.",
+      "mutation": "swap-grouping-clause-for-no-plausibility-elimination-rule",
+      "subagent_summary": "Fresh round-4 rollouts on the incumbent scored 5/8, and all three failures shared one mechanism: they divided the stage totals by a grouping count stated in the text and justified it as the more realistic figure; two had already derived the full common-divisor list and abandoned it, one skipped divisibility outright. The incumbent's grouping-count sentence is abstract bookkeeping and demonstrably does not stop this, so I swapped it for a reusable elimination discipline: a candidate may only be discarded by a stated condition, never by apparent plausibility. Round 3 taught me that patching this failure with an added tiebreak rule saturates train but destroys transfer, while compressing and deleting wins; this revision adds no rule and lands at 133 tokens versus 136.",
+      "sampling_slurm_job_id": "148.83",
+      "tokens": 133,
+      "hint_hash": "538dabf979d737299b46ec9cccc3220992771aaa6fd508db51e4942a55bdc867",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "5d81acfa76bdabfdb99f63430333dd6dd355a1f99836aca600e4e52914a2ac08"
+    },
+    {
+      "hint_id": 9,
+      "hint": "For maps tied by a composition or functional identity, do not expand coefficient by coefficient; that exhausts your budget. Match degrees, leading and constant terms, then hunt a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, requiring g(s - x) = s - g(x); that one reflection identity implies the commuting identity and leaves a single free parameter. Derive s from the given data, never by averaging the inputs you are asked to evaluate. Also substitute a requested input into the identity itself: it often collapses to a fixed-point equation in one unknown, solvable by rational roots. If an ansatz fails, try a different symmetry instead of concluding nothing exists. A leftover free coefficient is normal; it cancels. Verify once at a small input, then box the requested values immediately; never re-expand the composition to recheck.",
+      "mutation": "add-fixed-point-substitution-of-requested-input-and-stop-and-commit-rule",
+      "subagent_summary": "Fresh training on the incumbent scored 4/8 and all four failures ran to the 16384-token cap. Two derived the reflection constant by averaging the inputs they were asked to evaluate instead of from the given data, one abandoned the symmetry for multinomial coefficient matching, and one actually reached the correct values through a fixed-point equation but then burned the rest of its budget re-expanding the composition numerically and never committed an answer. The edit keeps the involution ansatz that earns the current score and adds the two general moves the failures lacked: plug a requested input into the identity itself, which typically reduces to a solvable fixed-point equation in one unknown, and stop after one small symmetry check rather than re-verifying the composition.",
+      "sampling_slurm_job_id": "148.80",
+      "tokens": 189,
+      "hint_hash": "c5373efff4f0b30022f9f0d189b5f89014ec39efc94ef09d9d12af2eed5b6aef",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076"
+    },
+    {
+      "hint_id": 10,
+      "hint": "One application means all the stages, in order, each acting on what the previous stage produced. On the smallest instance with distinct labels, apply that whole unit again and again and count applications until the start returns. Record the count against the parameter, do one size up, then stop simulating: fit a formula to the recorded counts and commit. Never read the composite period off one stage, and do not switch to symbolic position algebra to shortcut the count - that loop is where the budget dies. Two measured counts outrank any elegant argument.",
+      "mutation": "count-applications-until-return-and-ban-the-symbolic-position-algebra-detour",
+      "subagent_summary": "Fresh round-4 rollouts under the incumbent scored 4/8. All three cap-exhausted failures abandoned their literal run partway and looped inside symbolic transposition and cycle bookkeeping, re-deriving jargon instead of counting; the one finished failure declared the stages disjoint transpositions and read the period off a single stage. Every success instead re-applied the entire operation repeatedly on the two smallest sizes, counted applications until the state returned, and fit the parameter. The incumbent's 'describe it as a single map and check the two agree' clause is what invites that fatal symbolic detour, so I replace it with an explicit count-applications-until-return loop plus a ban on position algebra, holding length at 108 tokens because my two long caution-list proposals both cut held-out.",
+      "sampling_slurm_job_id": "148.84",
+      "tokens": 108,
+      "hint_hash": "6ee9b632ef42deca7cc0a228d4445631081f7c08f4ff76cb9717535f772a841a",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565"
+    }
+  ]
+}
