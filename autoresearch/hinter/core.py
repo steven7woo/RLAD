@@ -486,7 +486,7 @@ def _validate_config(config: dict[str, Any]) -> None:
         "gpu_binding": "dispatcher_cuda_visible_devices_one_gpu_per_slot",
         "cpus_per_step": 6,
         "memory": "0",
-        "time": "1-00:00:00",
+        "time": "7-00:00:00",
     }:
         raise RuntimeError(
             f"two-node allocation changed for lambda={objective_lambda}"

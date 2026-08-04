@@ -9,7 +9,11 @@
 #SBATCH --cpus-per-task=6
 #SBATCH --mem=0
 #SBATCH --exclusive
-#SBATCH --time=1-00:00:00
+# A 20-round run takes ~41h at observed round times, so the pool must outlive a
+# single day.  Both partitions report MaxTime=UNLIMITED; 7d is a deliberate
+# backstop so an abandoned dispatcher cannot hold 16 GPUs indefinitely.
+# The dispatcher passes --time from config.json; keep both in sync.
+#SBATCH --time=7-00:00:00
 
 set -euo pipefail
 
