@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import time
@@ -11,9 +12,9 @@ import pytest
 from autoresearch.hinter import core, pool, publish, state
 
 
-# Stand-in for the hostnames Slurm grants at run time; the pool no longer pins
-# nodes by name, so allocations record whichever nodes the scheduler assigned.
-GRANTED_NODES = ["ip-10-1-173-179", "ip-10-1-184-205"]
+# The pool pins its node pair per lambda so concurrent runs stay disjoint, so an
+# allocation must record exactly the pair the effective config names.
+GRANTED_NODES = list(core.ALLOWED_ALLOCATIONS[1][1])
 
 
 class FakeTokenizer:
@@ -38,16 +39,18 @@ def test_config_matches_contract(config: dict) -> None:
         core.HELDOUT_POSITIONS
     )
     assert config["slurm"]["pool_slots"] == 16
-    assert config["slurm"]["node_count"] == 2
+    assert len(config["slurm"]["nodes"]) == 2
     assert (
-        config["slurm"]["node_count"] * config["slurm"]["gpus_per_node"]
+        len(config["slurm"]["nodes"]) * config["slurm"]["gpus_per_node"]
         == config["slurm"]["pool_slots"]
     )
-    # p4d.24xlarge has 48 CPUs per node, so the per-node task fan-out must fit.
+    # p4d.24xlarge has 48 CPUs per node (p5.48xlarge has 96), so the per-node
+    # task fan-out must fit the smaller of the two.
     assert config["slurm"]["gpus_per_node"] * config["slurm"]["cpus_per_step"] <= 48
-    assert "nodes" not in config["slurm"]
     assert config["sampling"]["rollouts"] == 8
     assert config["sampling"]["max_tokens"] == 16384
+    assert config["budget"] == {"max_rounds": 20}
+    assert config["objective"]["lambda"] == 1
 
 
 def test_pool_requests_no_gpu_gres() -> None:
@@ -69,7 +72,76 @@ def test_pool_requests_no_gpu_gres() -> None:
     assert "#SBATCH --exclusive" in sources[0]
 
 
-def test_agent_sbatch_does_not_consume_h100_pool() -> None:
+@pytest.mark.parametrize(
+    ("objective_lambda", "partition", "nodes"),
+    [
+        (
+            2,
+            "ml.p4d.24xlarge",
+            ["ip-10-1-173-179", "ip-10-1-184-205"],
+        ),
+        (
+            5,
+            "ml.p4d.24xlarge",
+            ["ip-10-1-196-96", "ip-10-1-226-48"],
+        ),
+        (
+            10,
+            "ml.p5.48xlarge",
+            ["ip-10-1-38-11", "ip-10-1-81-8"],
+        ),
+    ],
+)
+def test_lambda_launch_config_overrides(
+    config: dict,
+    monkeypatch: pytest.MonkeyPatch,
+    objective_lambda: int,
+    partition: str,
+    nodes: list[str],
+) -> None:
+    monkeypatch.setenv("RLAD_AUTORESEARCH_LAMBDA", str(objective_lambda))
+    monkeypatch.setenv("RLAD_AUTORESEARCH_PARTITION", partition)
+    monkeypatch.setenv("RLAD_AUTORESEARCH_NODES", ",".join(nodes))
+    effective = core._apply_environment_overrides(config)
+    core._validate_config(effective)
+    assert effective["objective"]["lambda"] == objective_lambda
+    assert effective["slurm"]["partition"] == partition
+    assert effective["slurm"]["nodes"] == nodes
+    assert f"lambda-{objective_lambda}" in effective["publication"][
+        "commit_prefix"
+    ]
+
+
+def test_lambda_launchers_are_isolated_and_executable() -> None:
+    expected = {
+        2: (
+            "work_zsw_lambda2",
+            "ip-10-1-173-179,ip-10-1-184-205",
+        ),
+        5: (
+            "work_zsw_lambda5",
+            "ip-10-1-196-96,ip-10-1-226-48",
+        ),
+        10: (
+            "work_zsw_lambda10",
+            "ip-10-1-38-11,ip-10-1-81-8",
+        ),
+    }
+    for objective_lambda, (workspace, nodes) in expected.items():
+        path = (
+            core.REPO_ROOT
+            / "autoresearch"
+            / f"run_lambda_{objective_lambda}.sh"
+        )
+        script = path.read_text(encoding="utf-8")
+        assert os.access(path, os.X_OK)
+        assert f"RLAD_AUTORESEARCH_LAMBDA={objective_lambda}" in script
+        assert workspace in script
+        assert nodes in script
+        assert "python -m autoresearch.run_hinter_agent" in script
+
+
+def test_agent_sbatch_does_not_consume_gpu_pool() -> None:
     script = (
         core.REPO_ROOT / "autoresearch/jobs/hinter_agent.sbatch"
     ).read_text(encoding="utf-8")
@@ -83,7 +155,9 @@ def test_agent_sbatch_does_not_consume_h100_pool() -> None:
     assert not any("--partition=" in line for line in directives)
     assert not any("--gpus" in line or "--gres" in line for line in directives)
     assert not any("--nodelist" in line for line in directives)
-    assert "ml.p4d.24xlarge|ml.p5.48xlarge" in script
+    assert "ml.p5.48xlarge" in script
+    assert "ml.p4d.24xlarge" in script
+    assert "ip-10-1-38-11|ip-10-1-81-8" in script
     assert script.index("trap cleanup_on_exit EXIT") < script.index(
         "gh auth status"
     )
@@ -119,6 +193,108 @@ def test_exact_metrics_and_tie_break() -> None:
     value["J_i"] += 0.01
     with pytest.raises(ValueError, match="count-derived"):
         core.validate_private_metrics(value)
+    assert core.exact_metrics(
+        2,
+        20,
+        objective_lambda=10,
+    )["J_numerator"] == 220
+    lambda_ten = {
+        "schema_version": 1,
+        "hint_id": 1,
+        "hint_hash": "x",
+        "config_hash": "c",
+        **core.exact_metrics(2, 20, objective_lambda=10),
+    }
+    core.validate_private_metrics(lambda_ten, objective_lambda=10)
+    with pytest.raises(ValueError, match="count-derived"):
+        core.validate_private_metrics(lambda_ten, objective_lambda=1)
+
+
+def test_round_twenty_task_ids_are_valid() -> None:
+    core.validate_task_identity("r20-train-h10", "train")
+    core.validate_task_identity("r20-private-h01", "private")
+    with pytest.raises(ValueError, match="invalid"):
+        core.validate_task_identity("r21-train-h01", "train")
+
+
+def test_zero_keep_streak_never_stops_before_round_twenty(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+    config: dict,
+) -> None:
+    metrics = [
+        {"round": round_number, "aggregates": {"num_kept": 0}}
+        for round_number in range(1, 4)
+    ]
+    monkeypatch.setattr(state, "RESEARCH_ROOT", tmp_path)
+    monkeypatch.setattr(
+        state,
+        "load_config",
+        lambda require_frozen=True: (config, "config-hash"),
+    )
+    monkeypatch.setattr(
+        state,
+        "_completed_round_metrics",
+        lambda config_hash: metrics,
+    )
+    status = state.stopping_status()
+    assert status["consecutive_zero_keep_rounds"] == 3
+    assert status["should_stop"] is False
+    assert status["reason"] is None
+
+    metrics[:] = [
+        {"round": round_number, "aggregates": {"num_kept": 0}}
+        for round_number in range(1, 21)
+    ]
+    status = state.stopping_status()
+    assert status["should_stop"] is True
+    assert status["reason"] == "round_budget_exhausted"
+
+
+def test_publication_ignores_only_other_lambda_workspace_changes(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    repo = Path("/tmp/rlad-publication-scope-test")
+    monkeypatch.setattr(publish, "REPO_ROOT", repo)
+    monkeypatch.setattr(publish, "WORK_ROOT", repo / "work_zsw_lambda2")
+    monkeypatch.setattr(
+        publish,
+        "_changed_paths",
+        lambda: {
+            "work_zsw_lambda2/research/current_book.json",
+            "work_zsw_lambda5/research/current_book.json",
+            "docs/plan/hinter.md",
+        },
+    )
+    assert publish._unexpected_changes(set()) == [
+        "docs/plan/hinter.md",
+        "work_zsw_lambda2/research/current_book.json",
+    ]
+
+
+def test_publication_waits_for_other_workspace_recovery(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    (tmp_path / ".git").mkdir()
+    transaction = (
+        tmp_path
+        / "work_zsw_lambda5"
+        / "publication"
+        / "git_transaction.json"
+    )
+    transaction.parent.mkdir(parents=True)
+    transaction.write_text("{}\n", encoding="utf-8")
+    monkeypatch.setattr(publish, "REPO_ROOT", tmp_path)
+    monkeypatch.setattr(publish, "WORK_ROOT", tmp_path / "work_zsw_lambda2")
+    monkeypatch.setattr(
+        publish,
+        "_git",
+        lambda *args, **kwargs: ".git",
+    )
+    with pytest.raises(RuntimeError, match="recover"):
+        with publish._repo_publication_lock():
+            pytest.fail("lock should reject an outstanding transaction")
 
 
 def test_hint_limits_and_leak_gate() -> None:
@@ -692,6 +868,18 @@ def test_full_round_state_machine(
     partial.mkdir(parents=True)
     round_dir = state.prepare_round(1)
     assert len(list(partial.glob("hint_*.json"))) == 10
+    first_history = core.load_json(
+        round_dir / "worker_history" / "hint_01.json"
+    )
+    assert first_history["hint_id"] == 1
+    assert first_history["objective_lambda"] == 1
+    assert first_history["config_hash"] == config_hash
+    assert first_history["prior_rounds"] == []
+    assert len(first_history["baseline_artifacts"]) == 3
+    assert all(
+        artifact["path"].endswith("hint_01.json")
+        for artifact in first_history["baseline_artifacts"]
+    )
     packet_path = partial / "hint_01.json"
     original_packet = core.load_json(packet_path)
     changed_packet = {**original_packet, "problem": "mutated question"}
@@ -795,14 +983,28 @@ def test_full_round_state_machine(
             "config_hash": config_hash,
             "commit": "a" * 40,
             "remote": config["publication"]["remote"],
-            "branch": "research",
-            "paths": [
-                "work_zsw/research/rounds/001/metrics.json",
-            ],
+                "branch": "research",
+                "paths": [
+                    f"{tmp_path.name}/research/rounds/001/metrics.json",
+                ],
             "pushed_epoch": time.time(),
         },
     )
-    assert state.prepare_round(2).name == "002"
+    second_round = state.prepare_round(2)
+    assert second_round.name == "002"
+    second_history = core.load_json(
+        second_round / "worker_history" / "hint_01.json"
+    )
+    assert len(second_history["incumbent_history"]) == 2
+    assert [row["round"] for row in second_history["prior_rounds"]] == [1]
+    prior = second_history["prior_rounds"][0]
+    assert prior["decision_record"]["hint_id"] == 1
+    assert prior["history_row"]["hint_id"] == 1
+    prior_paths = [artifact["path"] for artifact in prior["artifacts"]]
+    assert len(prior_paths) == 8
+    assert all("hint_01.json" in path for path in prior_paths)
+    assert not any("hint_02" in path for path in prior_paths)
+    assert not any("private-h01" in path for path in prior_paths)
     final = state.seal_final_book(human_stop=True)
     assert final["stopping_status"]["reason"] == "human_stop"
     assert state.stopping_status()["reason"] == "human_stop"

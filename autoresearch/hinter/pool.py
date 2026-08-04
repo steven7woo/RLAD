@@ -76,10 +76,10 @@ def _queue_state(job_id: str) -> str | None:
 def _granted_nodes() -> list[str]:
     """Return the hostnames Slurm actually granted this allocation.
 
-    Nodes are requested by count rather than by name, so the concrete nodelist
-    is only known once the job is running.  ``SLURM_JOB_NODELIST`` is in
-    compressed form (``ip-10-1-[38-11,81-8]``), so expand it via
-    ``scontrol show hostnames`` instead of parsing it here.
+    The pool is pinned with ``--nodelist``, so this exists to verify Slurm
+    honoured that request rather than to discover the nodes.
+    ``SLURM_JOB_NODELIST`` is in compressed form (``ip-10-1-[38-11,81-8]``), so
+    expand it via ``scontrol show hostnames`` instead of parsing it here.
     """
     nodelist = os.environ.get("SLURM_JOB_NODELIST", "").strip()
     if not nodelist:
@@ -149,23 +149,28 @@ def start_pool(*, restart: bool = False) -> dict[str, Any]:
             STOP_PATH.unlink()
 
     slurm = config["slurm"]
-    node_count = int(slurm["node_count"])
+    nodes = ",".join(slurm["nodes"])
+    pool_slots = int(slurm["pool_slots"])
     gpus_per_node = int(slurm["gpus_per_node"])
     command = [
         "sbatch",
         "--parsable",
         f"--partition={slurm['partition']}",
-        f"--nodes={node_count}",
-        f"--ntasks={node_count * gpus_per_node}",
+        "--nodes=2",
+        f"--nodelist={nodes}",
+        f"--ntasks={pool_slots}",
         f"--ntasks-per-node={gpus_per_node}",
-        # This cluster defines no GPU gres, so --gpus-* / --gres requests are
-        # rejected at submit time.  Whole exclusive nodes are how GPUs are
-        # obtained here; each task is confined to one GPU by the dispatcher via
-        # CUDA_VISIBLE_DEVICES instead of by Slurm.
+        # This cluster defines no GPU gres (GresTypes is unset), so --gpus-* /
+        # --gres requests are rejected at submit time.  Whole exclusive nodes
+        # are how GPUs are obtained here; each task is confined to one GPU by
+        # the dispatcher via CUDA_VISIBLE_DEVICES instead of by Slurm.  The
+        # node pair is pinned so concurrent lambda pools stay disjoint.
         f"--cpus-per-task={slurm['cpus_per_step']}",
         f"--mem={slurm['memory']}",
         "--exclusive",
         f"--time={slurm['time']}",
+        f"--output={WORK_ROOT / 'logs' / 'pool_%j.out'}",
+        f"--error={WORK_ROOT / 'logs' / 'pool_%j.err'}",
         "--export="
         + ",".join(
             [
@@ -177,12 +182,19 @@ def start_pool(*, restart: bool = False) -> dict[str, Any]:
         ),
         str(SBATCH_SCRIPT),
     ]
+    environment = os.environ.copy()
+    environment["RLAD_AUTORESEARCH_LAMBDA"] = str(
+        config["objective"]["lambda"]
+    )
+    environment["RLAD_AUTORESEARCH_PARTITION"] = slurm["partition"]
+    environment["RLAD_AUTORESEARCH_NODES"] = nodes
     completed = subprocess.run(
         command,
         check=True,
         capture_output=True,
         text=True,
         cwd=REPO_ROOT,
+        env=environment,
     )
     raw = completed.stdout.strip()
     job_id = raw.split(";", 1)[0]
@@ -192,9 +204,10 @@ def start_pool(*, restart: bool = False) -> dict[str, Any]:
         "schema_version": 1,
         "job_id": job_id,
         "partition": slurm["partition"],
-        # Empty until the dispatcher records the nodes Slurm actually granted;
-        # a submitted job is still pending and has no nodelist yet.
-        "nodes": [],
+        # The allocation is pinned to a specific node pair via --nodelist, so
+        # the expected hostnames are known at submit time.  The dispatcher still
+        # asserts Slurm granted exactly these (see _recover/dispatch below).
+        "nodes": list(slurm["nodes"]),
         "pool_slots": slurm["pool_slots"],
         "exclusive": True,
         "gpus_per_node": slurm["gpus_per_node"],
@@ -215,7 +228,7 @@ def start_pool(*, restart: bool = False) -> dict[str, Any]:
 def _inside_work(path: Path) -> Path:
     resolved = path.resolve()
     if not resolved.is_relative_to(WORK_ROOT):
-        raise ValueError(f"pool path escapes work_zsw: {resolved}")
+        raise ValueError(f"pool path escapes autoresearch workspace: {resolved}")
     return resolved
 
 
@@ -646,22 +659,18 @@ def dispatch() -> int:
     active = load_pool_allocation(config, config_hash)
     if active["job_id"] != allocation:
         raise RuntimeError("dispatcher job does not match the active allocation")
+    # The allocation is pinned with --nodelist, so Slurm must have granted
+    # exactly the configured pair.  Assert it rather than trusting the request:
+    # a mismatch would mean tasks run outside the node set this lambda run owns,
+    # which is how two concurrent pools could silently share GPUs.
     granted = _granted_nodes()
-    if len(granted) != int(config["slurm"]["node_count"]):
+    expected_nodes = list(config["slurm"]["nodes"])
+    # Compare as sets: Slurm's compressed SLURM_JOB_NODELIST may order the pair
+    # differently from config.json, which is not a fault.
+    if sorted(granted) != sorted(expected_nodes):
         raise RuntimeError(
-            "Slurm granted "
-            f"{len(granted)} nodes, expected {config['slurm']['node_count']}"
+            f"Slurm granted nodes {granted}, expected {expected_nodes}"
         )
-    if active["nodes"] and active["nodes"] != granted:
-        raise RuntimeError("allocation nodes do not match the granted nodelist")
-    if not active["nodes"]:
-        active = {**active, "nodes": granted}
-        validate_pool_allocation(
-            active,
-            config=config,
-            config_hash=config_hash,
-        )
-        atomic_write_json(ALLOCATION_PATH, active)
     _make_dirs()
     _recover_running()
     processes: dict[
@@ -680,7 +689,7 @@ def dispatch() -> int:
         for gpu_index in range(int(config["slurm"]["gpus_per_node"]))
     ]
     if len(slots) != max_active:
-        raise RuntimeError("granted GPU slot count is inconsistent")
+        raise RuntimeError("configured GPU slot count is inconsistent")
     while True:
         for task_id, (
             process,

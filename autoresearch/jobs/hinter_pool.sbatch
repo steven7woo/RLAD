@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --job-name=rlad-hinter-pool
-#SBATCH --output=work_zsw/logs/pool_%j.out
-#SBATCH --error=work_zsw/logs/pool_%j.err
-#SBATCH --partition=ml.p4d.24xlarge
+# The dispatcher supplies partition, nodelist, and workspace-specific log paths.
+#SBATCH --output=/tmp/rlad-hinter-pool-%j.out
+#SBATCH --error=/tmp/rlad-hinter-pool-%j.err
 #SBATCH --nodes=2
 #SBATCH --ntasks=16
 #SBATCH --ntasks-per-node=8
