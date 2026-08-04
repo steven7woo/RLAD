@@ -871,8 +871,16 @@ def test_terminal_allocation_validates_after_intentional_config_change(
         )
 
     # Relaxing the config check must NOT relax hardware pinning: a pool may
-    # never adopt another lambda run's node pair.
-    hijacked = {**allocation, "nodes": ["ip-10-1-196-96", "ip-10-1-226-48"]}
+    # never adopt another lambda run's node pair.  Pick the foreign pair
+    # relative to the effective config rather than hardcoding one lambda's
+    # nodes, or this assertion silently passes for every lambda except the one
+    # whose own nodes were named here.
+    foreign_nodes = next(
+        list(nodes)
+        for _, nodes in core.ALLOWED_ALLOCATIONS.values()
+        if list(nodes) != list(effective_config["slurm"]["nodes"])
+    )
+    hijacked = {**allocation, "nodes": foreign_nodes}
     with pytest.raises(ValueError, match="stale nodes"):
         core.validate_pool_allocation(
             hijacked,
