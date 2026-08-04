@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 4,
+  "generation": 3,
   "hints": [
     {
       "hint_id": 1,
@@ -23,9 +23,9 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Union = sum of areas minus overlap, so minimize overlap. Put the shared point at the origin. A corner touching a point covers only a wedge there: never conclude one shape lies inside the other from bounding-box extents. Decide every point's membership by signed half-plane tests. Key fact: a corner of angle 2*pi/k placed at a k-fold rotational-symmetry center of the other shape cuts off exactly one of its k congruent parts, so the overlap is 1/k of it at every rotation. Check this by computing the overlap at one aligned and one rotated orientation using the same membership tests. If they agree, the overlap is constant, so it is both the minimum and the maximum: report the union and stop. Only if they disagree build a piecewise area function and test its breakpoints and endpoints.",
-      "tokens": 165,
-      "hint_hash": "12ca35d8eb1c90348cad76d7ffd06b60ac04aa2e8bf55dff87141c5343e05d37"
+      "hint": "Union = sum of areas minus overlap, so maximize the union by minimizing overlap. Before optimizing over the angle, test whether the overlap is angle-independent. Criterion: if the shared point is a center of k-fold rotational symmetry of one shape, and the other shape meets it as a wedge of angle 2*pi/k whose two edges reach past that shape (so only those rays cut it), then the k rotated copies of the wedge tile around the point and cut the symmetric shape into k congruent pieces, so the overlap is the same fraction 1/k at every angle. Verify by computing the overlap at one aligned and one skewed orientation; if they match, that value is both the minimum and maximum, so skip calculus and case analysis, report the union, and stop. Build a piecewise area function only if the two test values disagree.",
+      "tokens": 169,
+      "hint_hash": "a3268d480f0c74f9a8026bf5c2b6dd432a3ba1363673f43d20f5ae1256a63607"
     },
     {
       "hint_id": 4,
@@ -63,9 +63,9 @@
       "hint_id": 8,
       "train_position": 35,
       "train_qid": "23443",
-      "hint": "Let N be the unstated count of identical units, and recover it from integrality rather than from the story: if every per-unit share must be a whole number, N divides each listed total, so the admissible N are their common divisors and the intended one is the maximum feasible count, namely their gcd. Wording about identical equal groups only requires N to be a multiple of the group count; verify it and do not treat it as fixing N. Decide once whether each listed figure is a grand total or a per-unit amount, then stop revisiting it. Finally add all component amounts, divide by N, and apply any stated markup or discount as a single multiplicative factor; scaling and dividing commute, so either order is fine. Check that every per-unit value is a whole number and that the units match what was asked.",
-      "tokens": 169,
-      "hint_hash": "631be8eed5f087f7cdab1dec25cead2e9d0ae8ea0b579379c5e58836f770dc11"
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, apply the stated markup multiplicatively, and check integrality and units.",
+      "tokens": 77,
+      "hint_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
     },
     {
       "hint_id": 9,
@@ -84,6 +84,6 @@
       "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
     }
   ],
-  "total_tokens": 1526,
-  "book_hash": "c969b2d3faac98a1c697962b5788533699c290678445852213aa48c861ea53c7"
+  "total_tokens": 1438,
+  "book_hash": "26a80824a9743529ff715d0ae8f7f8ed68339fc9d250345e537438c81549fb24"
 }
