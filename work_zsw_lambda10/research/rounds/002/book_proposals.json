@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "round": 2,
+  "book_hash_before": "53987718a56afa8f169994dcbb3c734d7bb7c2535ef1f62e9347f1cf432c2013",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "List the finite set of scenarios consistent with the public facts, leaving open anything the people inside the problem cannot see. Group scenarios by what one speaker privately knows; \"I cannot tell\" keeps groups with several survivors, \"I can tell\" keeps singletons. Apply statements in the order spoken, re-filtering after each; never argue from the pre-announcement set. Keep only candidates whose implied values are all legal.\n\nWork to a budget. Write each case once, in a short table, and never re-argue a settled case; repeating a paragraph means you are looping, so stop and change something. If every branch contradicts, the culprit is an assumption you added that the speakers do not share: relax the weakest one and continue. Always end with one final boxed answer, choosing the best surviving candidate rather than none.",
+      "mutation": "add-budget-and-anti-loop-commit-discipline-to-information-set-elimination",
+      "subagent_summary": "Fresh rollouts (execution 148.33) scored 0 of 8: four runs burned the entire 16384-token cap re-arguing the same two or three cases verbatim and never emitted a boxed answer, and the four that stopped all declared every branch contradictory yet still committed to one wrong survivor. The incumbent gives the elimination recipe but no budget, no loop-detection, and no rule for what to do when all branches look impossible, so the student spends its context restating settled cases instead of relaxing the extra assumption it imposed. This edit keeps the ordered information-set filtering, adds a legality check on implied values, forbids re-arguing settled cases, tells the student to relax its own added assumption when everything contradicts, and requires one final boxed answer - all failure modes that recur in any multi-round announcement puzzle, so it should transfer.",
+      "sampling_slurm_job_id": "148.33",
+      "tokens": 167,
+      "hint_hash": "bb0df50d9f37d4e4da6b89751c01c40bfcea3ba9139ef8bda99f82d0bd5a2f97",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable and introduce the ratio w=(z-1)/z. The equation then restricts w to a fixed finite set on a circle. Solve the Möbius relation for z in terms of w, and characterize the image locus geometrically (or by an equation in x and y). The image is generally not centered at the origin, so |z| is not constant: eliminate the parameter to get the full quadratic, divide by the common x^2, y^2 coefficient, then complete the square to read off center and radius. Use all allowed roots and check exceptional values before extracting the requested circle parameter; confirm with one explicitly computed root.",
+      "mutation": "keep-incumbent-verbatim-append-nonorigin-warning-and-normalize-quadratic-before-completing-square",
+      "subagent_summary": "Fresh round-2 rollouts (execution_id 148.34) again scored 8/8, so the incumbent's substitution-plus-Mobius-image scaffold is exactly what works and must be preserved; the only leverage left is transfer. Six of eight traces spent effort on the false premise that the image is origin-centered (that |z| is constant), and the 13153-token outlier burned roughly double the median budget discovering and repairing that error mid-solution, while all eight landed on a quadratic whose x^2 and y^2 coefficients were not 1, the precise place a radius gets misread. This revision therefore leaves every word of the incumbent intact and only appends the non-origin warning plus an explicit normalize-then-complete-the-square step and a one-root check, unlike round 1's discarded rewrite which deleted the scaffold in favour of a generalized modulus shortcut and more than halved held-out accuracy.",
+      "sampling_slurm_job_id": "148.34",
+      "tokens": 139,
+      "hint_hash": "65a3143b67c4efefc96c6cb7ecb00f78c29056919869d624e8a4915786db8f07",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union of fixed-area pieces: covered = sum of areas - overlap, so maximizing coverage means minimizing overlap. When a placement condition pins a point of one shape inside the other, the overlap can never vanish, so never hunt for a tangency, separation, or degenerate placement; that search does not terminate. Instead put the shared point at the origin, compute the overlap exactly in the simplest allowed orientation, and box that total right away as your working answer. Then use symmetry: if rotating the picture about the shared point maps the region onto itself, the overlap is identical for every orientation, so the boxed value is already the extremum and no case analysis is needed. Only if that fails, check the few orientations where the boundary combinatorics change, using explicit intersection coordinates, not prose. Later exploration must either beat the boxed value with a complete computation or end by restating it. Never finish unboxed.",
+      "mutation": "ban-the-tangency-search-name-the-rotation-invariance-and-box-the-first-exact-value",
+      "subagent_summary": "Fresh round-2 rollouts scored 1/8: 7 of 8 hit the 16384-token cap and 5 of 8 emitted no boxed answer at all, yet 6 of 8 had already computed the exact overlap and correct total within the first 8-17 percent of the trace before abandoning it, so the bottleneck is still termination, not method. The dominant sink is a non-terminating search for a tangency or degenerate placement (20-70 tangency mentions and 28-53 'Alternatively' restarts per rollout); the single success was the one rollout that instead argued rotation cannot reduce the overlap and answered. The incumbent's abstract two-position invariance test was never actually executed (zero shoelace or invariance mentions), so this revision names the specific dead end to refuse, states the rotation-about-the-pinned-point argument that makes the overlap orientation-independent, and replaces 'commit at the end' with boxing the first exact value immediately.",
+      "sampling_slurm_job_id": "148.35",
+      "tokens": 183,
+      "hint_hash": "01a6e3920855c7b7b53bd6e8e1441abd27cbc980f4388c788c6ef7a9d4af953c",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "918623ddf49b0ec8c88e8becd4d23b6c8423864ccda8f888c55e8989ee25135c"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of a required arithmetic (or linear) sequence may come from any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not difference terms produced by different polynomials; that mixes unrelated functions and stalls. Because inputs are consecutive, index and input are interchangeable, so every written value equals one common affine L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each is a root of P(x)-L(x), nonzero of degree deg P because subtracting an affine function cannot kill a higher leading term, so one polynomial serves at most deg P inputs. Crucially each polynomial covers a whole block, not a single term, so the bound is menu size TIMES deg P: never answer with the menu size itself. Realise it by letting each polynomial interpolate L on its own block of deg P consecutive inputs. Once the bound and construction match, report that product and stop re-deriving.",
+      "mutation": "add-block-not-one-term-guard-ban-menu-size-answer-and-stop-rederiving",
+      "subagent_summary": "Fresh round-2 rollouts (execution 148.36) scored 5/8, up from 0/8 at round 0, confirming the kept round-1 hint eliminated the cross-polynomial differencing dead end. All three remaining failures share one residual error: after correctly deriving the per-polynomial cap of deg P roots, and in one case even writing the menu-size-times-degree product, they collapse to the menu size because they treat each polynomial as supplying a single term rather than a whole block; the two that hit the 16384-token ceiling spent the tail looping over that same already-settled doubt. The revision keeps the working scaffold and adds the block-not-one-term correction, an explicit ban on answering the menu size, and a stop-re-deriving instruction to reclaim the truncated budget.",
+      "sampling_slurm_job_id": "148.36",
+      "tokens": 192,
+      "hint_hash": "768ae73eec274d285f5cc219e658f36224d2075b963213d15b2a3ebc4fd9def9",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "3f7a40ea94795e85eeacaf7eb371e77a133709fb15b5eb9c6c9aea2f3cc76b62"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Pin unknown parameters first: substitute each given point into the defining equation, rewrite logs or exponentials in algebraic form, solve, then re-verify against every given point.\n\nTreat the stated relation as the only extra constraint and read it literally in coordinates: equal vectors mean one point is another plus a fixed difference. Do not assume a special shape or that diagonals bisect. If such an assumption forces a contradiction, discard the assumption, not your algebra.\n\nForce the unknown point onto the curve to get one equation in one unknown, clear denominators pairwise, respect the domain, and reject roots that reproduce a given point or degenerate the figure.\n\nFor area prefer the absolute cross product of two edge vectors at one vertex; shoelace term pairing is easy to botch. Verify once, then box a single value.",
+      "mutation": "literal-constraint-reading-plus-cross-product-area",
+      "subagent_summary": "All eight rollouts were correct but every one burned thousands of tokens on two avoidable detours: inventing an unstated structural assumption (a named special shape / bisecting diagonals), hitting a contradiction, and then doubting the correct algebra instead of the assumption; and mis-pairing shoelace terms so the sum came out zero before a rescue via the cross product. The edit keeps the incumbent's concrete setup-then-area skeleton but replaces problem-specific machinery with two transferable rules - read only the stated constraint, and get area from a cross product at one vertex - so unseen constrained-points-on-a-curve problems avoid the same two dead ends.",
+      "sampling_slurm_job_id": "148.37",
+      "tokens": 166,
+      "hint_hash": "a3b6361f353d9c8dd3faaacd4881b9116e80c389b939e0bd3b1c1e3dfa48c10a",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Model relay-through-a-buffer tasks as stack shunting over ordered source, buffer, and destination stacks; encode a run as a word of pushes and pops. Randomness picks only the direction, never the item: a push moves the source top, a pop moves the buffer's newest item. Crucially, pushes and pops interleave freely and the buffer may hold several items, so never assume alternation or that all pushes precede all pops; many interleavings are reachable, so declare nothing impossible or certain before trying to exhibit an admissible word. The destination's bottom is whatever arrived first, so \"lands at the bottom\" constrains only the earliest moves: the event is decided by a short prefix, later moves irrelevant. Its probability is the product along that prefix, one at forced steps (empty buffer forces a push, empty source forces a pop) and one half at free steps. Also reject any bare 1/k: words and final orders are not equally likely.",
+      "mutation": "reachability-first: free interleaving of pushes/pops, no premature impossible/certain, short-prefix decides bottom",
+      "subagent_summary": "All 8 fresh round-2 rollouts scored 0/8, and the round-1 uniform-permutation error was largely suppressed: only one rollout still used 1/k, while the new dominant failure was a reachability error in the opposite direction, four rollouts asserting the buffer must be fully drained in truck order and so declared the target outcome outright impossible (probability 0) or the reverse order certain (probability 1), and two more looped to the length limit oscillating over the same claim. The revision therefore keeps the stack-shunting word framing and the bottom-equals-arrived-first rule but front-loads the missing fact that pushes and pops interleave freely with several items buffered, forbids declaring an outcome impossible or certain before exhibiting an admissible word, and states that the bottom event is settled by a short prefix so the student stops enumerating whole runs and terminates.",
+      "sampling_slurm_job_id": "148.38",
+      "tokens": 196,
+      "hint_hash": "ba7bff8965bae28c2a663b88f024c7f1573b40f6e286b803162f69bce9ff8b17",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "67d122a90af2e0710ab939322c2a6639c7d9434bfc510d8f18475e267a2103c9"
+    },
+    {
+      "hint_id": 7,
+      "hint": "First restate the given conditions and the single quantity requested, and count constraints against unknowns. If your setup looks contradictory or leaves a free parameter, your model of the problem is wrong: re-read the conditions rather than pushing on or guessing.\n\nThen seek leverage instead of brute force. Look for one evaluation point, substitution, or auxiliary polynomial/identity that makes the given relations cancel every term except the one you want; a suspiciously large parameter, a full range of exponents, or symmetry usually signals such a shortcut. Work symbolically with a general parameter n, never with the huge literal.\n\nVerify before finishing: substitute your candidate into the strongest given condition and check sign, degree, and magnitude.\n\nBudget discipline: pick one route early, never restart it, never settle for an unconfirmed pattern, and end with one exact simplified value in a box.",
+      "mutation": "drop-domain-machinery-for-general-setup-check-leverage-verify-commit",
+      "subagent_summary": "All 8 rollouts scored 0: six ran to the 16k generation cap without producing an answer, several built a wrong model of the setup (treating the unknown weights as polynomial coefficients) and then thrashed after deriving a contradiction or a free parameter, and the two that stopped guessed a value from an unconfirmed small-case pattern. Round 1 showed that adding more domain-specific interpolation machinery lowered held-out accuracy, so this edit removes the narrow vocabulary and instead installs a general procedure -- restate and count constraints, distrust a contradictory setup, hunt for one cancelling substitution rather than brute force, verify against the strongest given condition, and commit to one exact boxed value within budget -- which targets the thrash-and-overrun failure mode that should recur across unseen problems.",
+      "sampling_slurm_job_id": "148.39",
+      "tokens": 172,
+      "hint_hash": "e7c324836b08be85943644739effd86f1e05d5ef2b2b0b5e5c1eea42055a7b1a",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Tag each given as a group total or a per-item amount, and name the unknown never stated outright, usually a count. Write the target symbolically; substitute numbers once.\n\nHidden integrality: integer, whole, identical, or equal parts means an unknown count must divide several totals at the same time. Compute the gcd of those totals; the candidates are its divisors.\n\nNever mistake a number that merely names subgroups (streets, rows, boxes, teams) for the unknown total. It only forces the total to be a multiple of it, so use it to filter candidates, never to replace them.\n\nIf several candidates survive yet one answer is expected, take the largest admissible count, often the gcd itself; test it first and stop once every per-item amount is a legal integer.\n\nTurn each percent or ratio into a multiplier and state its base: a percent of cost multiplies cost, not price. Sum parts, divide once, then multiply; report in the requested unit.",
+      "mutation": "add-subgroup-count-trap-rule-and-largest-admissible-tiebreak",
+      "subagent_summary": "Fresh round-2 rollouts on the current incumbent scored 4/8, and all four failures shared one mechanism: the rollout read the stated subgroup count as the unknown item count, so it divided the totals by that number instead of by an admissible common divisor; two of them even skipped the gcd step entirely. The successes all did the same two extra things, which the incumbent only implied: they treated the stated subgroup count purely as a multiple-of filter on candidate counts, and when several divisors survived they resolved the ambiguity by taking the largest admissible one rather than guessing. This revision states both rules explicitly as reusable, noun-free checks while keeping the round-1 wins (gcd-of-totals divisibility, percent-base fixing, per-item integer back-check), which is the same generalization direction that raised held-out from 0.1125 to 0.1875.",
+      "sampling_slurm_job_id": "148.40",
+      "tokens": 199,
+      "hint_hash": "502f2cdeb5bc30eb92133a590d1858c6eed05992c152e2df31bf69be768e8526",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "b2978873c5591981a1c31bc9bd3f65c56e9dc8e7a037ff47aa156c6b908886d9"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Commuting same-degree polynomials: never expand the composition coefficient by coefficient, that alone burns the budget. Ansatz: the two maps sum to a constant, g = s - f. This forces f(x) + f(s - x) = s, so f is point-symmetric about (s/2, s/2), and it implies the commuting identity. Pin s immediately from the constant terms: s = f(0) + g(0). Never guess s from the inputs you are asked to evaluate. Then substitute u = x - s/2 and keep only odd powers: f = s/2 + A u^3 + B u; a given value ties A to B, leaving one free parameter that cancels out of the requested evaluations. As soon as it cancels, stop and report the values, do not expand f(g(x)) to double-check; one numeric test of the symmetry identity is enough.",
+      "mutation": "pin-s-from-constant-terms-plus-centered-odd-power-form-and-stop-when-free-parameter-cancels",
+      "subagent_summary": "The kept round-1 hint lifted fresh training from 0/8 to 4/8, and all four winners now terminate normally in 7.4k-10.8k tokens instead of every rollout hitting the 16384 cap, confirming that naming the involution ansatz concretely stopped the thrashing. The four residual failures split into three modes: one picked the reflection constant by guessing a midpoint of the two evaluation inputs rather than deriving it from the given constant terms, two abandoned the ansatz and reverted to multinomial coefficient matching of the composition, and one reached the correct values but then spent the rest of its cap re-verifying the composition with large numbers. This revision therefore gives the exact formula for the reflection constant, supplies the centered odd-power form that reduces the map to a single free parameter, and adds an explicit stopping rule once that parameter cancels.",
+      "sampling_slurm_job_id": "148.41",
+      "tokens": 191,
+      "hint_hash": "a436d35c2b78fbe7459d53249929d9f5eeb139f8522429f13885ff1454a2ea1e",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Do not chase an abstract closed form first; get exact small-case data. Write the smallest instance out with distinct labels and carry out the operation literally, sub-step by sub-step in the stated order, each sub-step acting on what the previous one produced. If the question asks when a state recurs, reapply the whole operation and count repetitions until the start returns; that count is ground truth for that size. Such runs are short and terminate, unlike open-ended symbolic derivation. Tabulate the two or three smallest sizes, fit a formula in the parameter to the measured counts, and confirm it on a size you did not fit. If a slick structural shortcut disagrees with your counts, the shortcut is wrong: trust the counts, state the formula, and stop.",
+      "mutation": "simulate-and-count-ground-truth-then-fit-and-confirm-instead-of-symbolic-derivation",
+      "subagent_summary": "In the fresh round-2 rollouts under the incumbent (2/8 correct) five of the six failures exhausted the completion cap: steered by the incumbent toward symbolic positional/bitwise algebra they mis-derived cycle structures, oscillated between rival closed forms, and never committed to an answer; the one finishing failure trusted an unverified decomposition and reported the period of a single sub-step. Budget exhaustion from abstract derivation now dominates, so this revision replaces that directive with one bounded concrete procedure - simulate literally on the smallest sizes, count repetitions to recurrence, fit and then confirm on an unused size - and treats measured counts as overruling any structural shortcut. Round 1 showed that stacking problem-specific cautions raised train but cut held-out, so this is phrased operation-agnostically and kept short.",
+      "sampling_slurm_job_id": "148.42",
+      "tokens": 152,
+      "hint_hash": "c206aa15732f30d374b40ee630b700b8e21bf5c784000cb8b6f36baa3aa980e1",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}
