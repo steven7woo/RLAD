@@ -136,6 +136,12 @@ with EXACTLY these five keys and nothing else:
     subagent_summary        1-3 sentences: the failure mode you saw in your 8 rollouts and why this edit should transfer. Do NOT quote full rollouts.
     sampling_slurm_job_id   the receipt's execution_id, as a string
 
+HARD LENGTH LIMITS enforced by collect-proposals. Exceed either and the ENTIRE
+round is rejected, so count characters (not words) before writing:
+
+    subagent_summary   <= 1000 characters  (aim for <= 800)
+    mutation           <=  500 characters  (a short hyphenated label)
+
 Write it with a small Python snippet using json.dump so the file is valid JSON
 (a heredoc is fine, but avoid shell quoting pitfalls - verify by reading it
 back and json.load-ing it).
