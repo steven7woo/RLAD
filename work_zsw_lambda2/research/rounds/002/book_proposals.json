@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+  "round": 2,
+  "book_hash_before": "46f60325156387099517ecec7a371f1f27bf0b2265d24568c115afcda352f8f6",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Keep the candidate set finite and apply announcements in chronological order, recomputing information sets after each. Critical: if a displayed number is not labelled (e.g. could be the sum or the product), the speakers share that ambiguity, so a candidate is (my own value, which reading holds). \"I don't know\" then means my own value still admits two or more distinct partners, counting across readings; turn that into an arithmetic test on my own value (divisibility, positivity, range) and keep only values that pass. If every reading seems contradictory, you wrongly assumed the speakers knew the label. Never box a number just because it appeared in your enumeration: check the survivor satisfies every statement first.",
+      "mutation": "reframe 'I don't know' as a divisibility/range test on the speaker's own value under an unlabelled displayed quantity, and forbid boxing an enumerated candidate without checking it",
+      "subagent_summary": "Fresh sampling with the incumbent hint scored 2/8; five of the six failures enumerated the factor pairs of the displayed number, declared both readings contradictory, then boxed an arbitrary member of that enumeration, and one ran to the token cap. The incumbent tells the student to prune information sets but never says the displayed quantity's own label is ambiguous nor how to convert 'I don't know' into a concrete arithmetic test on the speaker's private value, so I added both and an explicit ban on boxing an unverified enumerated candidate.",
+      "sampling_slurm_job_id": "150.33",
+      "tokens": 144,
+      "hint_hash": "cbbaaafa1907efc60835e2a44f805271c9a2f4cd4fe5d3988c244caa7b7e5f7b",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable and introduce the ratio w=(z-1)/z; the equation then restricts w to a finite set on a circle. Solve that relation for z in terms of w and describe the locus by an equation in x and y. Sign slips are the real danger: derive the parametrization once, carefully, then test it on one explicitly computed root. If a check disagrees with your symbolic locus, do not spiral through restarts. Instead fit x^2+y^2+Dx+Ey+F=0 to three exact roots, solve, complete the square, and commit. Box your best result early rather than looping until you run out of room.",
+      "mutation": "keep incumbent ratio/locus setup, add sign-check discipline plus a non-looping recovery route (fit general circle to explicit points) and a commit-early boxing rule",
+      "subagent_summary": "Seven of eight fresh rollouts were correct; the single failure exhausted the 16384-token cap after a sign error made one explicitly computed root disagree with its own correct symbolic locus, triggering dozens of self-doubting restarts and no committed result. Round 1 showed that stripping the concrete substitution hurt transfer, so I kept the incumbent setup and appended the transferable fix: verify the parametrization on one explicit instance, and when a spot-check conflicts, recover by fitting the general conic form to a few exact points instead of relitigating, then commit and box early.",
+      "sampling_slurm_job_id": "150.34",
+      "tokens": 142,
+      "hint_hash": "c0bacc962b5d9b008c7653bdcfcdd8ab80563aa93224e9cd27a6854775c4ea78",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Fix coordinates once, pinned point at the origin; never restart the setup. For fixed-area pieces, union = sum minus overlap, so maximize the union by minimizing overlap. Beware the trap of assuming the bigger shape swallows the smaller one: a polygon vertex is only a wedge of its interior angle, so beyond that apex the shape covers nothing. Test one concrete point on the far side before concluding containment. When the apex sits at a center of n-fold rotational symmetry, that 2pi/n wedge cuts off exactly 1/n of the region at every rotation angle, so there is nothing to optimize. Then commit to one exact fraction and stop.",
+      "mutation": "add explicit anti-containment check: a vertex is only an interior-angle wedge, verify with a test point",
+      "subagent_summary": "Four of eight rollouts solved it; every one of the four failures came from the same wrong belief that the larger square contains the smaller one in all orientations, so they concluded the overlap equals the whole small square and reported a union that was too small (two of them even asserted this confidently and stopped). The incumbent's invariance advice alone did not stop this, so the revision names the geometric trap directly: a vertex only spans its interior angle, verify non-containment with one concrete test point, and only then use the n-fold-symmetry wedge argument to get the overlap fraction without any angle sweep.",
+      "sampling_slurm_job_id": "150.35",
+      "tokens": 131,
+      "hint_hash": "e73c55e27100ae936358bb7823761096f52d3e52bbb1bf81a9e7298441eeb331",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "6895075b3c8d3022684325973d416c0c6de5eaefdb3216294c5b27ade783a059"
+    },
+    {
+      "hint_id": 4,
+      "hint": "In \"longest possible run\" problems the answer counts indices, never the number of available functions. Write the target as one closed form in the index (AP = A+B*n), then group indices by which function produced them. In one group f(n)-(A+B*n) is a nonzero degree-d polynomial, so at most d roots: cap d indices per function, not d+1. Summing over groups gives total <= (number of functions) x d. Commit to that product; do not shrink back to d or to the function count. Never require a single function's own consecutive difference to be constant - consecutive terms may come from different functions, so nothing is impossible here. If a branch reaches \"contradiction\", drop it in one sentence instead of relooping. Finish by splitting the range into consecutive blocks of length d, one function interpolating each block.",
+      "mutation": "kill the single-function consecutive-difference contradiction loop; state the caps-product as the answer and forbid retreating to d or the function count",
+      "subagent_summary": "All 8 fresh rollouts scored 0: four hit the 16384-token limit while relooping on a self-inflicted \"contradiction\" that one polynomial's consecutive difference cannot be constant, and the four that stopped answered with the function count or a single function's root cap. One rollout actually derived the correct caps-product but then talked itself back down to a single function's cap, so the revision names the product as the intended answer, bans the retreat, explicitly dissolves the consecutive-difference contradiction (consecutive terms may use different functions), and orders early abandonment of impossibility branches to cut truncation.",
+      "sampling_slurm_job_id": "150.36",
+      "tokens": 178,
+      "hint_hash": "f26aaa574972ad6e146cbf8e3aaa50dcf4ebfa771b9c5642659422047d4beca7",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Translate each given condition into an exact equation with named unknowns before computing; most dead ends trace to a mistranslated condition, not to arithmetic. Combine the conditions to reduce to a single unknown, and stay in exact fractions, not decimals. List validity constraints up front -- nonzero denominators, positive log and root arguments, required signs or ordering -- and reject any root violating them, since extraneous roots are common. When a relation links two unknown objects, use it to express one through the other instead of adding variables. If no valid solution appears, recheck the translation once rather than recomputing. Substitute back into every original condition, then state the exact simplified value.",
+      "mutation": "replace problem-specific procedure with general condition-translation, exact-fraction, and validity-constraint discipline",
+      "subagent_summary": "All eight fresh rollouts solved the training question correctly at roughly 9.5k completion tokens each, so train accuracy is saturated and the only remaining lever is transfer, where the incumbent scores low because its wording is tied to one specific setup (logarithmic fractional-linear parameters, oriented vectors, determinant area). The prior round's failure mode was a rollout that mistranslated the point-pairing condition, hit an empty solution set, and then looped on recomputation until it ran out of tokens, so I kept an anti-loop and substitute-back rule but expressed the whole hint as domain-general discipline: translate conditions exactly, reduce to one unknown, keep exact fractions, enumerate validity constraints, and reject extraneous roots.",
+      "sampling_slurm_job_id": "150.37",
+      "tokens": 136,
+      "hint_hash": "9e3a1cd5e980ec635ebcb8c91cc9fc684f4d427ff4cc4cab8f563f32be17c13e",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Trap: asserting symmetry. \"Each item is equally likely in any position\", or \"n! orderings so 1/n!\", is a guess. A process random over MOVES is rarely uniform over OUTCOMES.\n\nInstead: (1) Pin mechanics first — what move is legal, which item it touches (top of stack only?), and whether the target position means the FIRST or LAST arrival. Derive that from the stacking rule; never guess. (2) Turn the event into an exact constraint on the move sequence, e.g. \"moves strictly alternate\" or \"exactly k source-moves precede the first sink-move\". (3) Count only genuinely free 50/50 choices; forced moves (source or sink empty) contribute factor 1, giving 1/2^(free choices), not 1/n or 1/n!. (4) Check n=2 by full enumeration. Re-derive each part from scratch — same setup, different constraint.",
+      "mutation": "pin mechanics/first-vs-last arrival, then convert event to an exact move-sequence constraint counted only over free 50/50 choices",
+      "subagent_summary": "Fresh sampling with the incumbent gave 2/8; all eight rollouts terminated normally with 11k-16k tokens, so length is not the bottleneck. The incumbent already suppressed 1/n! on part (a) (four rollouts derived 1/2^(n-1) there) but every failure then reverted to an asserted 'each item equally likely in any position' shortcut on the second part, and several also mixed up whether the target position corresponds to the first or the last arrival on the stack. The revision therefore demands the mechanics and the first-vs-last mapping be pinned before counting, that the event be restated as an exact constraint on the move sequence, that only genuinely free 50/50 branches be multiplied (forced moves contribute 1), and that each part be re-derived independently.",
+      "sampling_slurm_job_id": "150.38",
+      "tokens": 200,
+      "hint_hash": "45b2c0df517f87901f5a1ad921b228f3059ad2ca08158d9c5eb6939a11ecf4b4",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "0ac1224b31d00697e03ba5c0028a103aff26fa7b283c8ea589f0aad96efd31e0"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Compute before theorizing. Replace the large size by n = 2, then 3; write that tiny system out and solve it exactly. Express each answer as a signed rational and factor it: 1/k!, a binomial, a product of differences. Two agreeing cases suggest the form; confirm on a third. Treat any structural claim (\"the only solution is...\", \"that coefficient vanishes\") as a guess and test it on n = 2 before building on it. If a derivation stalls or contradicts itself, abandon it rather than restarting -- the checked small cases already fix the pattern. State the closed form with its sign and index shift.",
+      "mutation": "small-case-first computation with claim-testing and a no-restart stall rule",
+      "subagent_summary": "Fresh sampling under the incumbent hint scored 0 of 8, and 7 of 8 rollouts hit the 16384-token cap without ever emitting an answer; the abstract functional/Vandermonde/Lagrange framing sent them into long symbolic derivations that repeatedly self-contradicted and restarted. The single rollout that terminated asserted an unchecked structural claim and answered from it, and the only prior success instead solved the smallest instances by hand and read off the pattern. The revision therefore front-loads exact small-case computation, demands that structural claims be tested on the smallest case, and forbids restarting a stalled derivation so the budget is spent on verifiable arithmetic.",
+      "sampling_slurm_job_id": "150.39",
+      "tokens": 132,
+      "hint_hash": "970826b6d808a016748fe1e6cda39b71098679265ead772ffa8f52eeb6eaed54",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "First label every given number with its scope: per-unit, or total for the whole collection, and note exactly which quantity is asked. Let H be the number of houses; integer per-house stage costs force H to divide every listed stage total, so take the gcd of those totals and use the largest admissible H. Sum all stage costs before dividing by H, and apply a p% markup as a multiplier (1+p/100), never an addition. Check by multiplying back: per-unit cost times H must reproduce each total. Report the requested quantity and its units.",
+      "mutation": "keep question-anchored divisibility scaffold, prepend per-unit-vs-total scope labeling and add back-multiplication check",
+      "subagent_summary": "All 8 fresh rollouts scored reward 1 and stopped cleanly in 2.9-4.6k tokens, so train_i is saturated and gains must come from transfer; last round's fully de-specialized checklist rewrite collapsed train to 0.25 and also lost held-out ground, so I kept the incumbent's concrete anchoring instead of abstracting it away. The dominant observable waste in the rollouts is a long stretch of re-reading to decide whether each listed figure is a per-unit amount or a whole-collection total, so I prepended that scope-labeling step and replaced the vague integrality/units clause with a concrete back-multiplication check, both reusable moves rather than problem-specific facts.",
+      "sampling_slurm_job_id": "150.40",
+      "tokens": 117,
+      "hint_hash": "83bf5428d92045ed33fa45e2c5c0acd34c8e20775308e12d640c1599d9ee2f6b",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Never open with a full set of unknown coefficients; that path always runs out of tokens. For an identity required to hold for all x, do not match coefficients. Instead guess a small structured family that satisfies it identically, then fit the given numbers. Ask what forces such maps to agree: a shared center c with each map of the form c plus or minus a*(x-c)^k, one map equal to the other plus a constant, or both iterates of a single map. Two unknowns plus the two given values is usually the whole problem. Also substitute the given special inputs into the identity for a free scalar equation, and check whether a requested input is itself the center, which makes its value immediate. When the problem asserts a unique answer, one family member meeting every stated condition suffices: verify it by direct substitution, then read off what is asked. A contradiction means the family is wrong, not the arithmetic; switch families instead of expanding further.",
+      "mutation": "replace coefficient-matching guidance with a commit-to-a-structured-family-then-fit recipe, plus special-input substitution and center-check shortcuts",
+      "subagent_summary": "All 8 fresh rollouts scored 0 and every one hit the 16384-token cap; each opened by naming eight unknown coefficients for the two cubics and then spent the whole budget expanding the degree-9 composition, looping on contradictory coefficient relations without ever finishing. The incumbent hint told the student to avoid full expansion but still pointed at term matching, so the revision forbids the unknown-coefficient opening outright and gives a concrete alternative: posit a minimal structured family that satisfies the identity automatically, fit it to the two given values, and verify once by substitution.",
+      "sampling_slurm_job_id": "150.41",
+      "tokens": 195,
+      "hint_hash": "2bcb5d3e6fb5734eebdd781a83717282b26d1535b8a1350660140759e3a7d0f7",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "eab27d3627aae1499f17984f65024e2ab712331f9350f11716df1e8621e3725f"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Repetitions-to-return is the order of one composed map: the lcm of its cycle lengths, and any single orbit's length is a lower bound. Skip the symbolic closed-form index formula; it eats the budget. Simulate instead: at the smallest size write distinct labels in a row and apply each stage to the arrangement the previous stage just produced, never to the original positions. That sequencing slip is the usual cause of impossible cycle lengths. Then iterate the full map, counting, until the row returns. Get exact counts for two or three sizes, since the tiniest case fits many formulas, and compare them to the size parameter before generalizing. Commit a pattern rather than stopping mid-derivation.",
+      "mutation": "replace symbolic index-formula derivation with concrete label-row simulation, warn that stages compose on the previous result, and require exact counts at two-plus sizes",
+      "subagent_summary": "Only 2 of 8 rollouts were correct and 5 of the 6 failures hit the 16384-token cap while still attempting a symbolic map from index to index, several explicitly abandoning small-case checks as 'too abstract' or 'too long'; the sixth finished but asserted a uniform cycle length one power too small without ever counting. The recurring mechanical error was applying each stage to the original positions instead of to the arrangement the previous stage produced, which yielded impossible cycle lengths and triggered endless re-derivation. The revision therefore swaps the incumbent's bitwise-affine-permutation framing for concrete label-row simulation, names the stage-composition slip as the cause of implausible cycle lengths, and demands exact counts at two or more sizes since the tiniest case underdetermines the pattern.",
+      "sampling_slurm_job_id": "150.42",
+      "tokens": 143,
+      "hint_hash": "448feecd44967af4e06e82d05f4476054234e6e1a16befcf517979d41ef5805f",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}
