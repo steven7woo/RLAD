@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 3,
+  "generation": 2,
   "hints": [
     {
       "hint_id": 1,
@@ -15,9 +15,9 @@
       "hint_id": 2,
       "train_position": 28,
       "train_qid": "30302",
-      "hint": "Divide by the appropriate power of the variable and set w=(z-1)/z. The equation restricts w to a finite set on a circle. Solve the Möbius relation for z and characterize the image locus geometrically or by an equation in x and y. Use all roots and check exceptional values before extracting the requested circle parameter.",
-      "tokens": 70,
-      "hint_hash": "a2617d5cf40e8a99a8f74a784b3ae2a8d34000cee46fba8c99104d13b42a8740"
+      "hint": "Divide by the appropriate power of the variable and introduce the ratio w=(z-1)/z. The equation then restricts w to a fixed finite set on a circle. Solve the Möbius relation for z in terms of w, and characterize the image locus geometrically (or by an equation in x and y). Use all allowed roots and check exceptional values before extracting the requested circle parameter.",
+      "tokens": 81,
+      "hint_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
     },
     {
       "hint_id": 3,
@@ -31,9 +31,9 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "When each term of a required linear pattern may come from any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not difference terms across different polynomials. Because inputs are consecutive, index and input are interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each is a root of P(x)-L(x), nonzero of degree deg P since subtracting an affine map keeps the leading term, so a polynomial serves at most deg P inputs, one more forcing P=L. The quantity wanted is the total count of inputs, so sum that capacity across the whole menu, never reporting one factor alone; attain it by letting each polynomial match L on its own block.",
-      "tokens": 153,
-      "hint_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469"
+      "hint": "When each term of a required arithmetic (or linear) sequence may be produced by any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not chase consecutive differences across different polynomials; that mixes unrelated functions and stalls. Because the inputs are consecutive, position and input are interchangeable, so every written value must equal one common affine function L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each such input is a root of P(x)-L(x). Subtracting a degree-one function cannot kill a higher leading term, so that difference is nonzero of degree deg P, capping each group at deg P inputs. Multiply by the menu size for the bound, then construct a matching example by making each polynomial agree with L on its own block of inputs.",
+      "tokens": 162,
+      "hint_hash": "3f7a40ea94795e85eeacaf7eb371e77a133709fb15b5eb9c6c9aea2f3cc76b62"
     },
     {
       "hint_id": 5,
@@ -55,17 +55,17 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Do not model unknowns as coefficients of a single polynomial in x; expanding such a polynomial burns the whole budget with nothing to show. First move: replace the huge parameter by its smallest values, solve each tiny system exactly by elimination, and tabulate the quantity asked for. Read the pattern off that table, recheck it on one small case, then state it at the given size.",
-      "tokens": 78,
-      "hint_hash": "b2294ffb06fe64f3e4a994bbe4afab5fca8a5e3f5ff31f073862a0e8ad1b932e"
+      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
+      "tokens": 82,
+      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
     },
     {
       "hint_id": 8,
       "train_position": 35,
       "train_qid": "23443",
-      "hint": "Start by writing the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count. Mark each given number as a total for a group or an amount per item.\n\nIf the problem says per-item amounts are whole or equal, that unknown count must divide every such total at once, so the candidates are their common divisors. A count the problem does state describes a grouping; it constrains the unknown count without being it.\n\nWrite each percent or ratio as a multiplier and name the base it acts on.\n\nSubstitute numbers once, at the end. Then confirm the result meets every stated condition and is in the requested unit.",
-      "tokens": 136,
-      "hint_hash": "5d81acfa76bdabfdb99f63430333dd6dd355a1f99836aca600e4e52914a2ac08"
+      "hint": "Before computing, name every unknown the problem leaves implicit, tag each given with its unit, and mark which numbers are group totals versus per-item amounts. Write the target symbolically first, substitute numbers once.\n\nWatch for hidden integrality: words like integer, whole, identical, or equal parts usually force an unknown count to divide several given totals at once. Take the gcd of those totals, list its divisors, drop candidates that break a stated condition, and let the problem's extremal wording pick among the rest.\n\nTurn each percent or ratio into a multiplier and say which base it multiplies; a percent of cost multiplies cost, not price.\n\nSum the parts before dividing once. Then substitute back, check every per-unit amount is legal, and report in the requested unit.",
+      "tokens": 157,
+      "hint_hash": "b2978873c5591981a1c31bc9bd3f65c56e9dc8e7a037ff47aa156c6b908886d9"
     },
     {
       "hint_id": 9,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Ground the general argument in one verified small case. Run the process literally on the smallest nontrivial instance with distinct labels and write out the whole resulting state; separately describe it as a single map and check the two agree. A mismatch means a convention slipped: repair it once, keep it fixed, and move on instead of re-deriving it. A composite of steps does not inherit the period of its parts, so measure the composite, never the pieces. Confirm one size up, fit a formula in the parameter, and commit.",
-      "tokens": 108,
-      "hint_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565"
+      "hint": "Treat each switcheroo as a permutation of positions. Label positions by fixed-width binary strings and determine which bit or block each stage changes; test the rule on the smallest sizes to fix indexing conventions. Compose the stages into one bitwise affine permutation. Determine its order from the cycle structure and prove minimality by exhibiting a position with the full cycle length.",
+      "tokens": 72,
+      "hint_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
     }
   ],
-  "total_tokens": 1179,
-  "book_hash": "40e575e7deec146f9fed1cf6fc75e4fa046c297bc820fd98422b2c1254fa4a7a"
+  "total_tokens": 1188,
+  "book_hash": "53987718a56afa8f169994dcbb3c734d7bb7c2535ef1f62e9347f1cf432c2013"
 }

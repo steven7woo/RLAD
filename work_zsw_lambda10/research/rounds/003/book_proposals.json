@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "round": 3,
+  "book_hash_before": "53987718a56afa8f169994dcbb3c734d7bb7c2535ef1f62e9347f1cf432c2013",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Before arguing abstractly, write the candidate list down. Fix the quantity you are actually given and enumerate the values it permits for the unknown, one entry per case the given information leaves open, including cases about which quantity a stated number even is. Claims about knowledge are then just counts: cannot determine means two or more entries survive, can determine means exactly one. Apply the given statements in the order they occur, re-counting after each, and report the last survivor. Never report an entry you already eliminated.",
+      "mutation": "shorten-and-force-explicit-candidate-list-with-count-based-knowledge-test",
+      "subagent_summary": "In the fresh rollouts (execution 148.55, 2 of 8 correct) no run ever built the candidate list the incumbent asks for: each treated the open readings of the revealed number as two whole branches, argued abstractly that a speaker's own value pins the partner down, declared both branches contradictory, then committed to a guessed pair, and three of eight ran to the 16384-token cap doing so. Both prior revisions targeted this but were long (150 and 167 tokens) and each lost held-out accuracy against the 77-token incumbent, so this round stays near incumbent length and only makes the first move concrete: enumerate the list explicitly, treat can/cannot-determine as counting written entries, re-count after each statement in order, and never report an eliminated entry.",
+      "sampling_slurm_job_id": "148.55",
+      "tokens": 102,
+      "hint_hash": "fca4bd1d6a9f67c25921a76afac302fc18734f80ffaa1504e69fd9c50b977430",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable and set w=(z-1)/z. The equation restricts w to a finite set on a circle. Solve the Möbius relation for z and characterize the image locus geometrically or by an equation in x and y. Use all roots and check exceptional values before extracting the requested circle parameter.",
+      "mutation": "lossless-compression-of-incumbent-same-steps-70-tokens-instead-of-81",
+      "subagent_summary": "Fresh round-3 rollouts (execution_id 148.56) again scored 8/8, so every step of the incumbent scaffold is load-bearing and nothing on train is failing; round 1 showed that narrowing the scaffold to a modulus/distance-ratio route cut held-out from 0.200 to 0.0875, and round 2 showed that appending guards ties J and held-out exactly yet still loses the shortness tie-break at 139 tokens. The only remaining lever is therefore length, so this proposal preserves all six semantic elements (divide by the power, name the ratio, w confined to a finite set on a circle, invert the Möbius relation, characterize the image locus geometrically or via an x-y equation, use all roots and check exceptional values before extracting the parameter) while cutting redundant wording, giving 70 tokens against the incumbent's 81.",
+      "sampling_slurm_job_id": "148.56",
+      "tokens": 70,
+      "hint_hash": "a2617d5cf40e8a99a8f74a784b3ae2a8d34000cee46fba8c99104d13b42a8740",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint": "When a figure can move and you must optimize something, do not solve for the best parameter symbolically: that gives transcendental equations that eat your whole budget. Instead evaluate the quantity exactly at two or three concrete positions, the simplest one first and then a tilted one, using coordinates rather than prose. Compare those numbers and keep the best. For unions, use sum of parts minus overlap. Equal values mean a symmetry keeps the quantity constant, so every position is optimal. Then box the best value you actually computed; a long search that boxes nothing scores zero.",
+      "hint_id": 3,
+      "mutation": "shorten-to-evaluate-a-few-concrete-positions-and-box-the-best",
+      "sampling_slurm_job_id": "148.57",
+      "subagent_summary": "Fresh round-3 rollouts under the 147-token incumbent scored 2/8: both successes stopped normally near 13.6k tokens after boxing a value, while all six failures hit the 16384-token cap and four boxed nothing, even though six of eight had already computed the correct exact value within the first 8-17 percent of the trace before abandoning it. The sink is an unbounded hunt for a better rotation or tangency placement (20-59 tangency mentions, 34-53 'Alternatively' restarts), and the incumbent's invariance/shoelace machinery was essentially never executed (at most one mention per trace), so this revision drops the unused recipe for a shorter, more actionable rule: refuse symbolic parameter optimization, score two or three concrete positions, keep the best, and box it. Round 2 taught that lengthening a working hint with extra prohibitions lost both train and held-out, so this proposal is 112 tokens against the incumbent's 147.",
+      "tokens": 112,
+      "hint_hash": "ea0de89d46159fe72a241356863ce6ba7e423c83cc4601c4c42002382aefb1f8",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "918623ddf49b0ec8c88e8becd4d23b6c8423864ccda8f888c55e8989ee25135c"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of a required linear pattern may come from any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not difference terms across different polynomials. Because inputs are consecutive, index and input are interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each is a root of P(x)-L(x), nonzero of degree deg P since subtracting an affine map keeps the leading term, so a polynomial serves at most deg P inputs, one more forcing P=L. The quantity wanted is the total count of inputs, so sum that capacity across the whole menu, never reporting one factor alone; attain it by letting each polynomial match L on its own block.",
+      "mutation": "shorten-and-fix-per-polynomial-cap-off-by-one-plus-total-count-framing",
+      "subagent_summary": "Fresh round-3 rollouts (execution 148.58) scored 4/8 with the incumbent. Every one of the four failures reports a single factor instead of the product: two derive the correct per-polynomial root cap and then answer that cap itself, one takes the cap as degree-plus-one (points that determine the polynomial) and one reverts to cross-polynomial differencing and answers the menu size; the two truncated rollouts loop on that settled doubt to the token ceiling. The revision is shorter than the incumbent (153 vs 162 tokens), replaces the vague multiply instruction with an explicit statement that the quantity sought is the total input count summed across the menu, and adds the one-line root-cap tightening that matching at one more input would force the polynomial to equal the affine target.",
+      "sampling_slurm_job_id": "148.58",
+      "tokens": 153,
+      "hint_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "3f7a40ea94795e85eeacaf7eb371e77a133709fb15b5eb9c6c9aea2f3cc76b62"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Substitute given points to pin unknown parameters. If two unknown points on one curve have outputs differing by a known constant, subtract their equations and exponentiate once: the argument ratio equals the base to that difference. Expect a factorable quadratic; an ugly discriminant means a wrong exponent sign. Discard roots repeating a given point; area is one cross product.",
+      "mutation": "subtract-equations-then-exponentiate-once",
+      "subagent_summary": "Six of eight rollouts were correct. Both failures shared one mechanism: instead of subtracting the two curve equations, they resubstituted the shifted coordinate and folded the constant output difference into the logarithm term by term, misplacing the base and producing a quadratic with an irrational or negative discriminant, then burned the whole 16384-token budget on those radicals with no boxed value. Every success instead subtracted the two equations, exponentiated once to get a ratio equation, and hit a cleanly factorable quadratic, so the revision names that subtraction as the concrete first move, flags a bad discriminant as a sign error rather than a reason to press on, and points at a single cross product for area, which also removes the redundant vertex-ordering and shoelace re-derivations that cost thousands of tokens in every rollout.",
+      "sampling_slurm_job_id": "148.59",
+      "tokens": 72,
+      "hint_hash": "d4ed5b8b4121e56b651045c8a380123b014402abb0b4e03e47e95fbbc58e1658",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Model relay-through-a-buffer tasks as three ordered stacks: source, buffer, destination. A run is a word of pushes (source top onto buffer) and pops (buffer top onto destination); each item is pushed once and popped once, so a run has 2n moves, not n, and no prefix holds more pops than pushes. A demanded destination order pins the word uniquely: rebuild it greedily, popping when the buffer's top is the item needed next, else pushing; if that item is buried, the order is unreachable. Then price that word move by move: probability 1 when forced (empty buffer forces a push, empty source forces a pop), 1/2 only when both are nonempty, so free steps are strictly fewer than moves. Which item reaches the destination's bottom depends only on how many pushes precede the first pop. Never use 2^n, 1/k, or 1/n!.",
+      "mutation": "constructive-word-reconstruction: 2n-move ballot word, greedy unique word for a target order, forced-vs-free step pricing",
+      "subagent_summary": "All 8 fresh round-3 rollouts scored 0. Two distinct errors dominated: three rollouts undercounted a run as n moves and returned 1/2^n or a bare 1/k for both parts, while three others asserted the worker has no real choice and declared the reversed order certain and the target placement impossible; two of those looped to the token limit re-arguing that claim. The incumbent already forbids bare 1/k and states the forced-move rule, so the revision instead adds the two missing constructive facts: a run is a 2n-move push/pop word whose prefixes never have more pops than pushes, and a demanded destination order determines that word uniquely by a greedy rebuild, which both supplies a terminating procedure and settles reachability without guessing.",
+      "sampling_slurm_job_id": "148.60",
+      "tokens": 188,
+      "hint_hash": "15733a313be67302fbdaf7568ee30f896eca907ed8c7a070db51b1d5bb1c9ea2",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "67d122a90af2e0710ab939322c2a6639c7d9434bfc510d8f18475e267a2103c9"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Do not model unknowns as coefficients of a single polynomial in x; expanding such a polynomial burns the whole budget with nothing to show. First move: replace the huge parameter by its smallest values, solve each tiny system exactly by elimination, and tabulate the quantity asked for. Read the pattern off that table, recheck it on one small case, then state it at the given size.",
+      "mutation": "forbid-single-polynomial-model-order-small-case-elimination-first",
+      "subagent_summary": "Fresh round-3 rollouts under the incumbent scored 2/8, and the split is unambiguous: both winners immediately replaced the huge parameter by its smallest values, solved each tiny system by exact elimination, tabulated the requested quantity and generalized, while all six zeros instead built a single polynomial in x out of the unknowns and ground through interpolation and Vandermonde expansions until they hit the 16384-token generation cap. The incumbent actively supplies that losing machinery, so this edit bans the single-polynomial model in one clause and names exactly one concrete first move, staying at 78 tokens versus the incumbent's 82 after two longer procedure-list revisions were already discarded.",
+      "sampling_slurm_job_id": "148.61",
+      "tokens": 78,
+      "hint_hash": "b2294ffb06fe64f3e4a994bbe4afab5fca8a5e3f5ff31f073862a0e8ad1b932e",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint": "Start by writing the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count. Mark each given number as a total for a group or an amount per item.\n\nIf the problem says per-item amounts are whole or equal, that unknown count must divide every such total at once, so the candidates are their common divisors. A count the problem does state describes a grouping; it constrains the unknown count without being it.\n\nWrite each percent or ratio as a multiplier and name the base it acts on.\n\nSubstitute numbers once, at the end. Then confirm the result meets every stated condition and is in the requested unit.",
+      "hint_id": 8,
+      "mutation": "compress-to-symbolic-first-move-drop-extremal-crutch",
+      "sampling_slurm_job_id": "148.62",
+      "subagent_summary": "Fresh round-3 rollouts on the incumbent scored 4/8, and all four failures shared one mechanism: they divided the totals by the stated grouping count instead of by an admissible common divisor, and three derived the divisor list first and then abandoned it, so the incumbent's vague 'let the problem's extremal wording pick' clause does no work and reads as license to swap in an arbitrary stated number. Round 2 showed that patching this with an explicit trap rule plus a largest-admissible tiebreak saturated train at 8/8 but cut held-out from 0.1875 to 0.1125, so this revision instead deletes the crutch and duplicated unit bookkeeping, keeping only the moves that earned the round-1 transfer gain (symbolic target first, whole-per-item means simultaneous divisibility, percent base named, substitute once, verify), and folds the grouping-versus-unknown distinction into one noun-free sentence. At 136 tokens versus 157 it also wins the shortness tie-break both prior ties turned on.",
+      "tokens": 136,
+      "hint_hash": "5d81acfa76bdabfdb99f63430333dd6dd355a1f99836aca600e4e52914a2ac08",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "b2978873c5591981a1c31bc9bd3f65c56e9dc8e7a037ff47aa156c6b908886d9"
+    },
+    {
+      "hint_id": 9,
+      "hint": "For polynomials linked by a composition identity like p of q equals q of p, do not expand the composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That reflection identity implies the composition identity and collapses the unknowns. Derive s from the supplied data, never by trying candidate numbers, and then keep it. Expect the remaining system to stay underdetermined: a surviving free coefficient is normal, not a contradiction, and an equation that seems to force a degenerate leading term is usually redundant, so recheck it before abandoning a symmetry that already fit the data. Substitute your coefficient relations into the requested quantities and watch the free parameter cancel; once it cancels, report those values and stop.",
+      "mutation": "keep-involution-ansatz-add-derive-s-underdetermined-free-parameter-cancels-no-restart",
+      "subagent_summary": "Fresh training on the incumbent scored 3/8, and all five failures ran to the 16384-token cap; the three correct rollouts each derived the reflection constant from the given data, accepted that one coefficient stayed free, and let it cancel in the requested values. Failures either guessed candidate reflection constants numerically or, after getting the constant right, hit an equation that appeared to force a degenerate leading coefficient, declared a contradiction, and restarted with brute-force multinomial coefficient matching. The revision keeps the involution ansatz that earned the current score and adds only the two general rules the failures lacked: derive the constant instead of guessing, and treat a leftover free coefficient or an apparently degenerate equation as expected rather than grounds to abandon the ansatz.",
+      "sampling_slurm_job_id": "148.63",
+      "tokens": 195,
+      "hint_hash": "711d5e7644026d5e43c141d175eda0e0090c6dbd4850e756369e42c0c9056cfc",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Ground the general argument in one verified small case. Run the process literally on the smallest nontrivial instance with distinct labels and write out the whole resulting state; separately describe it as a single map and check the two agree. A mismatch means a convention slipped: repair it once, keep it fixed, and move on instead of re-deriving it. A composite of steps does not inherit the period of its parts, so measure the composite, never the pieces. Confirm one size up, fit a formula in the parameter, and commit.",
+      "mutation": "cross-check-literal-run-against-single-map-then-commit",
+      "subagent_summary": "Under the incumbent the fresh round-3 rollouts scored 2/8: four exhausted the 16384-token cap after their literal run and their symbolic composition disagreed, whereupon they looped indefinitely re-deriving mapping direction and indexing instead of settling it, and the two finishing failures skipped composing altogether and declared the parts independent so the period equalled a single part's. Both successes hit the same literal-versus-symbolic mismatch but reconciled it once and continued. This revision therefore prescribes running both descriptions on one small instance, resolving a disagreement once and freezing the convention, and forbids reading the composite's period off its pieces; it is kept short and operation-agnostic because my two prior long caution-list proposals each lifted train but lowered held-out.",
+      "sampling_slurm_job_id": "148.64",
+      "tokens": 108,
+      "hint_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}
