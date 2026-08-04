@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+  "generation": 1,
+  "hints": [
+    {
+      "hint_id": 1,
+      "train_position": 163,
+      "train_qid": "28054",
+      "hint": "When the problem never says which quantity the public number is, that role is itself unknown to the speakers: keep every reading alive in one candidate table rather than committing up front. Let a candidate be (my number, other number, role). Group candidates by the value a speaker privately holds; \"I don't know\" means that group still holds two or more possibilities, so delete size-one groups. Discard a reading only if it dies for every private value, not merely for one. Apply announcements in chronological order, regrouping after each deletion. If you keep re-deriving one contradiction, your state is missing a hidden variable: add it instead of guessing.",
+      "tokens": 135,
+      "hint_hash": "0fa96053d79aac037ffbeaa924500a0114b1fad8dab76251534170a8d16f138f"
+    },
+    {
+      "hint_id": 2,
+      "train_position": 28,
+      "train_qid": "30302",
+      "hint": "For equations like (z-a)^n = c(z-b)^n, do not enumerate the n roots. Take moduli first: every root obeys the single condition |z-a| = k|z-b|, where k = |c|^(1/n). If k = 1 the locus is the perpendicular bisector of a and b (a line, not a circle); otherwise it is an Apollonius circle. Get its data algebraically: put z = x+iy, square both sides, expand, collect the (1-k^2)(x^2+y^2) term, divide by that coefficient, and complete the square to read off center and radius. Expect a center away from the origin, so |z| varies along the locus; varying |z| does NOT mean the locus fails to be a circle. Confirm dividing by (z-b)^n dropped no root, then report exactly the quantity asked (radius, center, or diameter).",
+      "tokens": 199,
+      "hint_hash": "65a545bc36267d194340d7e9cea8a5fc006f707b001219525d3396c4903feb34"
+    },
+    {
+      "hint_id": 3,
+      "train_position": 6,
+      "train_qid": "8554",
+      "hint": "Union = sum of areas minus overlap, so maximize the union by minimizing overlap. Before optimizing over the angle, test whether the overlap is angle-independent. Criterion: if the shared point is a center of k-fold rotational symmetry of one shape, and the other shape meets it as a wedge of angle 2*pi/k whose two edges reach past that shape (so only those rays cut it), then the k rotated copies of the wedge tile around the point and cut the symmetric shape into k congruent pieces, so the overlap is the same fraction 1/k at every angle. Verify by computing the overlap at one aligned and one skewed orientation; if they match, that value is both the minimum and maximum, so skip calculus and case analysis, report the union, and stop. Build a piecewise area function only if the two test values disagree.",
+      "tokens": 169,
+      "hint_hash": "a3268d480f0c74f9a8026bf5c2b6dd432a3ba1363673f43d20f5ae1256a63607"
+    },
+    {
+      "hint_id": 4,
+      "train_position": 189,
+      "train_qid": "25003",
+      "hint": "Each term of the required pattern may come from any one of several functions, so do not impose the pattern's condition on adjacent terms: neighbours can use different functions, and that route yields no bound. Instead write the target explicitly as T(n) in the index n (affine in n for an arithmetic progression). Group the indices by which function was used. For a fixed P, every index in its group is a root of P - T. This difference is not identically zero, because subtracting an affine T cannot kill a leading term of degree >= 2, so it has at most deg P roots: that caps how many indices one function can serve. Bound = (number of functions) x (that cap). Finally prove tightness by giving each function its own consecutive block of indices and interpolating it through the values the pattern needs there.",
+      "tokens": 172,
+      "hint_hash": "d21f8fdfb7b030dd855ee44da6cf4c805a32548098ce56539000ab07255c6b86"
+    },
+    {
+      "hint_id": 5,
+      "train_position": 70,
+      "train_qid": "30418",
+      "hint": "Fit unknown parameters first: rewrite each given point in exponential form (log_c u = y means u = c^y) and solve the resulting system. For the unknown vertices, use the vector condition to write one as a translation of a variable point, then subtract the two log equations so only a ratio of arguments survives: a y-difference d becomes argument factor c^d. With base under 1 this inverts the naive direction, so test that ratio relation on the known points before solving. A negative discriminant, or roots outside the domain, means an orientation, sign, or branch choice is wrong: flip it and redo once instead of re-verifying the same arithmetic. Get the area as the absolute cross product of adjacent edge vectors.",
+      "tokens": 151,
+      "hint_hash": "bf462b403f17cd428257353852dc46039314abb29f7a1232a8b7b962384878f2"
+    },
+    {
+      "hint_id": 6,
+      "train_position": 62,
+      "train_qid": "26989",
+      "hint": "Describe a configuration by the ordered contents of the truck, gate, and shed rather than by informal move sequences. Legal moves form a small state graph; at each state, attach the actual transition probability, noting that it changes when only one move is available. Propagate probabilities by dynamic programming while retaining enough label order to test the requested final event. Check that probabilities, rather than merely path counts, sum to one.",
+      "tokens": 83,
+      "hint_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "train_position": 57,
+      "train_qid": "3836",
+      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
+      "tokens": 82,
+      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "train_position": 35,
+      "train_qid": "23443",
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, apply the stated markup multiplicatively, and check integrality and units.",
+      "tokens": 77,
+      "hint_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "train_position": 188,
+      "train_qid": "3980",
+      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, do not grind the degree-n^2 coefficient system - that is where these attempts stall and run out of room. Instead look for a common fixed point r and try the jointly centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing gives AB^n and BA^n as leading coefficients, so A^(n-1)=B^(n-1); for odd n the distinct choice is B=-A. Now use the two given values: adding them cancels the (x-r)^n parts and pins r, subtracting them pins A. Verify p(r)=q(r)=r and check the identity at one spare point. Then substitute only the requested inputs; exploit the (x-r)^n symmetry instead of expanding.",
+      "tokens": 175,
+      "hint_hash": "8c6cf2ad54328ef6d5d7727c427a0f3b4e2872fcbd87df2e3a186687f9e272bd"
+    },
+    {
+      "hint_id": 10,
+      "train_position": 26,
+      "train_qid": "3843",
+      "hint": "For \"how many repeats restore the original\" problems, take the order of one COMPLETE operation, not of a single stage. Build a table: list positions, apply every stage of one full operation in the given order, record where each position lands. Then split that table into disjoint cycles and take the lcm of their lengths, so one short cycle or fixed point does not become your answer. Tabulate the two or three smallest sizes into actual numbers, guess the closed form, and confirm it on the next size up. Do not chase an abstract index or bit-string formula before the small cases are done, and never assert a cycle length you have not traced position by position.",
+      "tokens": 135,
+      "hint_hash": "f5e98cb83b7d21cc59c0ef6c4bdd6b70731bf33bd4636ee98ff25a9b5546eb9d"
+    }
+  ],
+  "total_tokens": 1378,
+  "book_hash": "d0c57cf9fb5b08070bd78a7936ae8587916aa36a0326ee83507b13b8e20db984"
+}

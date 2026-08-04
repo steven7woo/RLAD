@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+  "round": 1,
+  "book_hash_before": "7527c5c39ef66c0fe5435b3186101571196653269bb8748d952f1258399650e2",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "When the problem never says which quantity the public number is, that role is itself unknown to the speakers: keep every reading alive in one candidate table rather than committing up front. Let a candidate be (my number, other number, role). Group candidates by the value a speaker privately holds; \"I don't know\" means that group still holds two or more possibilities, so delete size-one groups. Discard a reading only if it dies for every private value, not merely for one. Apply announcements in chronological order, regrouping after each deletion. If you keep re-deriving one contradiction, your state is missing a hidden variable: add it instead of guessing.",
+      "mutation": "model-unknown-role-as-hidden-variable",
+      "subagent_summary": "With the incumbent hint 2/8 public rollouts scored 1; the six failures all committed early to one reading of the public number, found that reading self-contradictory for a single private value, and then either looped to the token cap (3 of 8 hit the length limit) or emitted a guessed divisor. The revision makes the sum-vs-product role an explicit hidden coordinate of the candidate state and adds the rule that a branch dies only when it fails for every private value, which is exactly the step the wrong rollouts skipped.",
+      "sampling_slurm_job_id": "149.13",
+      "tokens": 135,
+      "hint_hash": "0fa96053d79aac037ffbeaa924500a0114b1fad8dab76251534170a8d16f138f",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "For equations like (z-a)^n = c(z-b)^n, do not enumerate the n roots. Take moduli first: every root obeys the single condition |z-a| = k|z-b|, where k = |c|^(1/n). If k = 1 the locus is the perpendicular bisector of a and b (a line, not a circle); otherwise it is an Apollonius circle. Get its data algebraically: put z = x+iy, square both sides, expand, collect the (1-k^2)(x^2+y^2) term, divide by that coefficient, and complete the square to read off center and radius. Expect a center away from the origin, so |z| varies along the locus; varying |z| does NOT mean the locus fails to be a circle. Confirm dividing by (z-b)^n dropped no root, then report exactly the quantity asked (radius, center, or diameter).",
+      "mutation": "generalize-to-apollonius-modulus-first",
+      "subagent_summary": "All 8 training rollouts were correct, so the incumbent's weakness is transfer (heldout 0.125), not this question: it prescribes the problem-specific substitution w=(z-1)/z and a Mobius image argument rather than a portable rule. The successful rollouts all converged only after reducing to a modulus condition |z-1|=2|z| and completing the square, while the longest ones burned 8k-12.5k tokens enumerating the six roots and fitting a circle through sampled points, hitting self-contradictions; none named the Apollonius circle. One rollout nearly rejected the circle because |z| was not constant, so the revision moves modulus-first to step one, names the Apollonius/perpendicular-bisector dichotomy, and warns that a non-origin-centered circle has varying |z|.",
+      "sampling_slurm_job_id": "149.14",
+      "tokens": 199,
+      "hint_hash": "65a545bc36267d194340d7e9cea8a5fc006f707b001219525d3396c4903feb34",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union = sum of areas minus overlap, so maximize the union by minimizing overlap. Before optimizing over the angle, test whether the overlap is angle-independent. Criterion: if the shared point is a center of k-fold rotational symmetry of one shape, and the other shape meets it as a wedge of angle 2*pi/k whose two edges reach past that shape (so only those rays cut it), then the k rotated copies of the wedge tile around the point and cut the symmetric shape into k congruent pieces, so the overlap is the same fraction 1/k at every angle. Verify by computing the overlap at one aligned and one skewed orientation; if they match, that value is both the minimum and maximum, so skip calculus and case analysis, report the union, and stop. Build a piecewise area function only if the two test values disagree.",
+      "mutation": "replace-angle-minimization-with-rotational-symmetry-invariance-check",
+      "subagent_summary": "All 8 rollouts framed union = 5 - overlap correctly, but 6 of 6 failures ended with finish_reason=length at the 16384-token cap and the 2 successes only barely finished (~15.5-15.9k tokens), so the failure mode is budget exhaustion, not a wrong setup. The incumbent hint's instruction to parameterize the angle and minimize a piecewise triangle/sector expression drove exactly that: failures looped over trial angles and tangency guesses (30+ 'but how' restarts each, repeated 'too complex to visualize') and never reached a closing computation. The revision replaces the open-ended minimization with a decisive invariance test at the k-fold symmetry center plus an explicit stop condition, which is the step both winners stumbled onto only after heavy flailing.",
+      "sampling_slurm_job_id": "149.15",
+      "tokens": 169,
+      "hint_hash": "a3268d480f0c74f9a8026bf5c2b6dd432a3ba1363673f43d20f5ae1256a63607",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "00f433b6ea19dfe2336efbb3476fea529c0993179016a67ce16e4288905f3cd0"
+    },
+    {
+      "hint_id": 4,
+      "hint": "Each term of the required pattern may come from any one of several functions, so do not impose the pattern's condition on adjacent terms: neighbours can use different functions, and that route yields no bound. Instead write the target explicitly as T(n) in the index n (affine in n for an arithmetic progression). Group the indices by which function was used. For a fixed P, every index in its group is a root of P - T. This difference is not identically zero, because subtracting an affine T cannot kill a leading term of degree >= 2, so it has at most deg P roots: that caps how many indices one function can serve. Bound = (number of functions) x (that cap). Finally prove tightness by giving each function its own consecutive block of indices and interpolating it through the values the pattern needs there.",
+      "mutation": "group-by-function-not-adjacent-differences",
+      "subagent_summary": "All 8 public rollouts scored 0 (three ran out of tokens). Every one applied the equal-spacing condition to adjacent board entries, which may come from different polynomials, derived the vacuous contradiction 'a degree-5 polynomial would have to be constant', then guessed a small number (2, 5, 6, 10) or declared the count unbounded. None ever partitioned the indices by which polynomial was chosen, so the per-polynomial root bound and the multiply-by-family-size step never happened; the revised hint forbids the adjacent-difference move explicitly and spells out the grouping, non-degeneracy, product bound, and tightness construction.",
+      "sampling_slurm_job_id": "149.16",
+      "tokens": 172,
+      "hint_hash": "d21f8fdfb7b030dd855ee44da6cf4c805a32548098ce56539000ab07255c6b86",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "93b35723e9cc953d39ac835ae67c34590b0c25060143ab50c99c75c21cbb1ff2"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Fit unknown parameters first: rewrite each given point in exponential form (log_c u = y means u = c^y) and solve the resulting system. For the unknown vertices, use the vector condition to write one as a translation of a variable point, then subtract the two log equations so only a ratio of arguments survives: a y-difference d becomes argument factor c^d. With base under 1 this inverts the naive direction, so test that ratio relation on the known points before solving. A negative discriminant, or roots outside the domain, means an orientation, sign, or branch choice is wrong: flip it and redo once instead of re-verifying the same arithmetic. Get the area as the absolute cross product of adjacent edge vectors.",
+      "mutation": "fix-log-base-direction-and-contradiction-recovery",
+      "subagent_summary": "7/8 public rollouts were correct; the single failure ran out of tokens after inverting the argument-ratio direction when converting the y-difference of two base-1/2 logs, which produced a negative discriminant. It then spent thousands of tokens re-verifying identical algebra and finally guessed, so the hint now names the base<1 direction trap, adds a cheap ratio sanity-check on the known points, and converts 'no real/in-domain root' into a signal to flip the sign/branch assumption once rather than loop.",
+      "sampling_slurm_job_id": "149.17",
+      "tokens": 151,
+      "hint_hash": "bf462b403f17cd428257353852dc46039314abb29f7a1232a8b7b962384878f2",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Avoid two traps: assuming the final order is forced, and assuming outcomes are equally likely. Model the middle pile as a stack; moves are pushes and pops, and every legal push/pop word can occur, so many final orders are possible. Label the items and fix the convention that the first item delivered sits at the bottom, the last on top, then recheck which position is asked about. Weight each step by its real branch probability: 1/2 only when both a push and a pop are legal, 1 when one side is empty so the move is forced. So paths are not equiprobable and counting favorable-over-total is invalid. Multiply along each branch, sum the branches meeting the event, and check leaf probabilities total 1.",
+      "mutation": "name-stack-model-and-forbid-forced-outcome-and-uniformity-fallacies",
+      "subagent_summary": "All 8 training rollouts scored 0. Five concluded the delivery order is deterministically reversed (answering 1 and 0), and three instead assumed every item is equally likely to be last (answering 1/4), with several also treating the last item delivered as the bottom of the pile rather than the top. The incumbent hint's abstract state-graph advice did not stop these; the revision names the stack push/pop model, states the bottom/top orientation rule, and explicitly rejects both the forced-outcome and equiprobable-path fallacies while keeping the forced-move probability-1 weighting.",
+      "sampling_slurm_job_id": "149.18",
+      "tokens": 151,
+      "hint_hash": "7ef0fd480030bf7c9b5776821dda74bdc16df94504e48835f37a89ccc5d66a91",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Keep roles straight: the summation index is a NODE, the exponent is the CONDITION number. Do not treat the unknowns as coefficients of a polynomial -- that swaps the roles and stalls.\nDefine L(p) = sum_i a_i*p(node_i). The zero rows kill x,...,x^(N-1); the last gives L(x^N)=1. Constants are never constrained, so for any p with zero constant term, L(p) equals p's x^N coefficient.\nTo extract one weight a_t, build a monic degree-N test polynomial with no constant term that vanishes at every node except node_t: x times (x - node_j) for all j != t. Then a_t = 1/p(node_t), a signed product of node differences. Check the recipe on a tiny same-shape analogue first.",
+      "mutation": "functional-vs-coefficient-role-fix+single-node-test-polynomial",
+      "subagent_summary": "All 8 rollouts (0/8) collapsed the same way: they set P(x)=sum a_i x^i and read the rows as P(k)=0, swapping node with exponent, then burned the budget hunting a spurious extra root or chasing the x-coefficient of a Vandermonde product (six hit the 16384-token cap; one concluded a_1=0, another 1/2005). The revised hint forbids that role swap, states explicitly that the unconstrained constant term is why L(p) reads off the top coefficient, and gives a one-node test-polynomial recipe plus a small-case check so the same technique transfers to any moment/weight system.",
+      "sampling_slurm_job_id": "149.19",
+      "tokens": 171,
+      "hint_hash": "305096a438d4e11c68dbda3282e218455add06b84f8a6d7051bb154a4218232f",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "When a needed count is not given, call it N and mine the wording for constraints on it. Two common ones: if every per-unit amount must be a whole number, N divides each given total, so take the gcd of the totals and list its divisors; and wording about identical groups or equal parts forces N to be a multiple of the group count. Intersect these, and if candidates remain, pick the one the wording singles out and state that choice. Then aggregate before splitting: sum all components, apply any percent markup or discount as a single factor, and only then divide by N. Confirm each per-unit value is a whole number and the units match the question.",
+      "mutation": "generalize-to-portable-constraint-mining",
+      "subagent_summary": "All 8 public rollouts scored reward 1 (train_i = 1.0), so the training question is saturated and the only headroom is transfer, where the incumbent scores just 9/80. The incumbent's phrasing is bound to this item's surface features ('equal-street layout', 'every listed stage total', 'maximum-feasible-count interpretation'), and rollouts spent long stretches re-litigating that undefined jargon (4-15 restatements plus 6-23 'wait' backtracks each, up to 6928 tokens), so it reads as item-specific scaffolding rather than portable method. I replaced it with the same underlying procedure stated generically - name the hidden count, derive it from integrality/gcd plus structural grouping constraints, state the tie-break assumption, then aggregate-scale-divide and sanity-check - which should carry to unseen problems of this class.",
+      "sampling_slurm_job_id": "149.20",
+      "tokens": 137,
+      "hint_hash": "7c7fa7f0c104bcb95dc03ff1ead192815a99a1a1e4438e98dd9be61ec3b01523",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, do not grind the degree-n^2 coefficient system - that is where these attempts stall and run out of room. Instead look for a common fixed point r and try the jointly centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing gives AB^n and BA^n as leading coefficients, so A^(n-1)=B^(n-1); for odd n the distinct choice is B=-A. Now use the two given values: adding them cancels the (x-r)^n parts and pins r, subtracting them pins A. Verify p(r)=q(r)=r and check the identity at one spare point. Then substitute only the requested inputs; exploit the (x-r)^n symmetry instead of expanding.",
+      "mutation": "name-centered-fixed-point-ansatz-and-forbid-brute-coefficient-grind",
+      "subagent_summary": "All 8 rollouts scored 0 and 7 of 8 hit the 16384-token cap: every one set up p=ax^3+bx^2+cx-24, q=ex^3+fx^2+gx+30 and tried to match all ten coefficients of the degree-9 composition, then looped on self-contradictions (a^2=a, 3a^2=0) it could not resolve. The incumbent hint gestured vaguely at 'a shared affine coordinate' but never told the student what that coordinate is, so nobody tried a centered ansatz; the revision names the common-fixed-point substitution, gives the leading-coefficient consequence that forces the odd-degree sign flip, and says to recover the center by adding the two supplied values.",
+      "sampling_slurm_job_id": "149.22",
+      "tokens": 175,
+      "hint_hash": "8c6cf2ad54328ef6d5d7727c427a0f3b4e2872fcbd87df2e3a186687f9e272bd",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "d95dbbc2898bc6c58c3684891a45d7c76fe4e0835ddd91bed1a4955ddf89942a"
+    },
+    {
+      "hint_id": 10,
+      "hint": "For \"how many repeats restore the original\" problems, take the order of one COMPLETE operation, not of a single stage. Build a table: list positions, apply every stage of one full operation in the given order, record where each position lands. Then split that table into disjoint cycles and take the lcm of their lengths, so one short cycle or fixed point does not become your answer. Tabulate the two or three smallest sizes into actual numbers, guess the closed form, and confirm it on the next size up. Do not chase an abstract index or bit-string formula before the small cases are done, and never assert a cycle length you have not traced position by position.",
+      "mutation": "tabulate-permutation-then-cycle-lcm",
+      "subagent_summary": "Only 2/8 rollouts were correct and five of the six failures hit the token cap while trying to derive an abstract bitwise/affine formula for the composed permutation, exactly what the incumbent hint asks for first. The failures that did terminate asserted cycle structures they never traced (order 2 for the size-4 case, a bogus odd-length cycle for size 8), so the revision front-loads concrete tabulation of one full operation plus an explicit disjoint-cycle lcm step and defers any symbolic formula.",
+      "sampling_slurm_job_id": "149.21",
+      "tokens": 135,
+      "hint_hash": "f5e98cb83b7d21cc59c0ef6c4bdd6b70731bf33bd4636ee98ff25a9b5546eb9d",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "95005ec62835dbef2cc6b52c26e1bc8efa75d3d939090ada63716aa06be7a5b5"
+    }
+  ]
+}
