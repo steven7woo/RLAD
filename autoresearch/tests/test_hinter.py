@@ -48,6 +48,38 @@ def test_config_matches_contract(config: dict) -> None:
     assert config["objective"]["lambda"] == 1
 
 
+def test_concurrent_lambda_pools_use_disjoint_node_pairs() -> None:
+    """Pools that can be live simultaneously must never share a node.
+
+    Pinning is load-bearing: two pools on one node would contend for the same
+    GPUs.  lambda=1 and lambda=10 intentionally share the p5 pair (the finished
+    lambda=1 run handed its nodes over), so they are sequenced, not concurrent.
+    Every pair that CAN be live at once -- the active sweep 2/5/10 -- must be
+    disjoint, and each pair must itself name two distinct nodes.
+    """
+    for objective_lambda, (_partition, nodes) in (
+        core.ALLOWED_ALLOCATIONS.items()
+    ):
+        assert len(set(nodes)) == len(nodes) == 2, objective_lambda
+
+    concurrent = [2, 5, 10]
+    seen: dict[str, int] = {}
+    for objective_lambda in concurrent:
+        _partition, nodes = core.ALLOWED_ALLOCATIONS[objective_lambda]
+        for node in nodes:
+            assert node not in seen, (
+                f"lambda {objective_lambda} shares node {node} with "
+                f"concurrently-runnable lambda {seen.get(node)}"
+            )
+            seen[node] = objective_lambda
+
+    # The documented lambda=1 -> lambda=10 hand-off: same pair, so these two
+    # must never be launched at the same time.
+    assert (
+        core.ALLOWED_ALLOCATIONS[1] == core.ALLOWED_ALLOCATIONS[10]
+    ), "lambda 1/10 hand-off changed; update the sequencing note in core.py"
+
+
 def test_pool_requests_no_gpu_gres() -> None:
     """This cluster defines no GPU gres; --gpus-*/--gres fail at submit time."""
     sources = [
@@ -1512,3 +1544,52 @@ def test_round_zero_human_stop_is_publishable(
     assert "work_zsw/research/final_book.json" in names
     assert "work_zsw/research/STOPPED.json" in names
     assert (repo / "work_zsw/pool/control/STOP").is_file()
+
+
+def test_agent_prompt_never_points_outside_its_own_workspace() -> None:
+    """The jailbreak-adjacent case: the prompt must not name another workspace.
+
+    The lambda sweep runs several isolated workspaces concurrently and the
+    prompt forbids reading or writing any other one.  An earlier revision
+    hardcoded the OPEN_QUESTIONS.md fallback path to `work_zsw/`, which for
+    every non-default lambda run is *another run's* workspace -- so following
+    the prompt literally would have violated the isolation rule it states two
+    paragraphs earlier.  Assert the jail is self-consistent for each variant.
+    """
+    import importlib
+
+    for workspace, objective_lambda in sorted(core.WORKSPACE_LAMBDAS.items()):
+        # Each lambda variant owns a pinned, disjoint node pair; the env must
+        # describe that variant's own hardware or _validate_config rejects it.
+        partition, nodes = core.ALLOWED_ALLOCATIONS[objective_lambda]
+        env = {
+            "RLAD_AUTORESEARCH_WORK": str(core.REPO_ROOT / workspace),
+            "RLAD_AUTORESEARCH_LAMBDA": str(objective_lambda),
+            "RLAD_AUTORESEARCH_PARTITION": partition,
+            "RLAD_AUTORESEARCH_NODES": ",".join(nodes),
+        }
+        with pytest.MonkeyPatch.context() as patch:
+            for key, value in env.items():
+                patch.setenv(key, value)
+            jail = importlib.reload(
+                importlib.import_module("autoresearch.hinter.core")
+            )
+            agent = importlib.reload(
+                importlib.import_module("autoresearch.run_hinter_agent")
+            )
+            assert jail.WORK_ROOT.name == workspace
+            prompt = agent._build_prompt()
+
+            assert f"`{workspace}/OPEN_QUESTIONS.md`" in prompt
+            assert f"J_i = train_i + {objective_lambda} * heldout_i" in prompt
+
+            # No other lambda workspace may be named anywhere in the prompt.
+            for other in core.WORKSPACE_LAMBDAS:
+                if other == workspace:
+                    continue
+                assert f"`{other}/" not in prompt
+                assert f" {other}/" not in prompt
+
+    # Restore the modules to the ambient test environment.
+    importlib.reload(importlib.import_module("autoresearch.hinter.core"))
+    importlib.reload(importlib.import_module("autoresearch.run_hinter_agent"))

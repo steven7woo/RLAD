@@ -43,8 +43,21 @@ CONFIG_PATH = AUTORESEARCH_ROOT / "config.json"
 LOCK_PATH = WORK_ROOT / "experiment.lock.json"
 
 ROUND_ID_PATTERN = r"(?:0[1-9]|1[0-9]|20)"
+# Each lambda run owns a PINNED two-node pool, and `_validate_config` requires
+# the config's slurm block to equal its entry exactly -- so hardware cannot be
+# repointed by environment alone, only by editing this table.
+#
+# lambda 1 and lambda 10 deliberately SHARE the p5 pair: the lambda=1 run
+# finished (6 rounds) and handed its nodes to lambda=10, which is why the two
+# can never be scheduled concurrently.  That is a sequencing constraint, not a
+# GPU-sharing hazard: the pool requests whole `--exclusive` nodes, so Slurm
+# refuses to co-place a second pool on them and a stray concurrent run would sit
+# PENDING rather than silently share GPUs.  The 2/5/10 pairs -- i.e. every pair
+# that can actually be live at the same time -- are mutually disjoint.
 ALLOWED_ALLOCATIONS = {
     1: (
+        # Superseded by the lambda=10 run below; kept so the completed lambda=1
+        # workspace still validates on resume/inspection.
         "ml.p5.48xlarge",
         ("ip-10-1-38-11", "ip-10-1-81-8"),
     ),
