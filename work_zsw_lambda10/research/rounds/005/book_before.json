@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 5,
+  "generation": 4,
   "hints": [
     {
       "hint_id": 1,
@@ -23,9 +23,9 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Only a boxed value written after your reasoning block closes is graded, so a trace that never closes scores zero. Close the reasoning as soon as you hold one exact value plus one confirming check. Then write the boxed value as the very first thing after closing, and put any explanation after the box, never before it, so being cut off costs nothing. Never restart the derivation in the write-up. Do not reopen a settled value; only a finished rival computation beats it, unease does not. Set up in coordinates first and write each object's extent; do not assume one figure sits inside another. If a rotation or offset stays free, ask whether the answer depends on it: a symmetry swapping congruent pieces makes every allowed value give the same result, so use the easiest one. For coverings, covered = sum of parts - overlap.",
-      "tokens": 169,
-      "hint_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566"
+      "hint": "Only what you write after your reasoning ends gets graded, so reasoning that never ends scores zero. Stop reasoning by the halfway mark, then write one line: the value in a box. Do not re-derive anything after closing; that write-up gets cut off. Keep the first exact value you compute; unease is no reason to reopen, only a finished rival computation is. Ask early whether the free parameter matters: a wedge of angle 360/k at the centre of a k-fold symmetric shape cuts off exactly area/k in any orientation. For unions, covered = sum of parts minus overlap.",
+      "tokens": 122,
+      "hint_hash": "696e4bd374fc53e4ff449724af00cf5f5446cd0eea489d9ede25197ca26e394b"
     },
     {
       "hint_id": 4,
@@ -55,17 +55,17 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Numbers before symbols: set the huge parameter to 2, then 3, then 4, solve each tiny integer system by elimination, record the asked value. Divide consecutive entries, tracking signs separately; that ratio exposes the rule. Never build a polynomial in x, never leave the table for theory. Confirm on one more size, then commit.",
-      "tokens": 70,
-      "hint_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067"
+      "hint": "Before any theory: shrink the huge parameter to 2, 3, 4, solve each tiny case by plain elimination, tabulate the requested value. Three exact entries, then generalize. Never pack the unknowns into one polynomial and never work at full size symbolically; both stall. Read the value off the table and confirm it on the next size.",
+      "tokens": 73,
+      "hint_hash": "74f69952b9f10938e319d80089c7d99dc7fc02f1799860576f387015e63ac6ae"
     },
     {
       "hint_id": 8,
       "train_position": 35,
       "train_qid": "23443",
-      "hint": "Write the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count; substitute numbers only at the end. Mark each given number as a total for a group or an amount per item.\n\nIf per-item amounts must be whole or equal, that unknown count divides every such total at once, so the candidates are the divisors of their gcd. A count the problem does state describes a grouping; it constrains the unknown count without being it.\n\nMake each percent or ratio a multiplier on the base it acts on, then check the result against every stated condition.",
-      "tokens": 123,
-      "hint_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e"
+      "hint": "Start by writing the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count. Mark each given number as a total for a group or an amount per item.\n\nIf the problem says per-item amounts are whole or equal, that unknown count must divide every such total at once, so the candidates are their common divisors. A count the problem does state describes a grouping; it constrains the unknown count without being it.\n\nWrite each percent or ratio as a multiplier and name the base it acts on.\n\nSubstitute numbers once, at the end. Then confirm the result meets every stated condition and is in the requested unit.",
+      "tokens": 136,
+      "hint_hash": "5d81acfa76bdabfdb99f63430333dd6dd355a1f99836aca600e4e52914a2ac08"
     },
     {
       "hint_id": 9,
@@ -84,6 +84,6 @@
       "hint_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565"
     }
   ],
-  "total_tokens": 1180,
-  "book_hash": "e7bbbf5d893358eeee8c3344227a889c839797219093683f3675500e3daa0469"
+  "total_tokens": 1149,
+  "book_hash": "7f7b0c5cedda760e0688b77c39d89d49b12177c9d824464ea36def74d71a9198"
 }

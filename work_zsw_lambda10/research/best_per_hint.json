@@ -128,6 +128,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.85"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "1dddd1e17dcd95dc1b2789115965f70e98122231b9c369c964c52ef0b1a67374",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "1dddd1e17dcd95dc1b2789115965f70e98122231b9c369c964c52ef0b1a67374",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 180,
+            "J_denominator": 80,
+            "J_i": 2.25
+          },
+          "proposal_eval_slurm_job_id": "148.105"
         }
       ]
     },
@@ -257,6 +278,27 @@
             "J_i": 2.5
           },
           "proposal_eval_slurm_job_id": "148.86"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "4a89494a227f7fa7f0b563bd8ed91ca13e8cbc2d904191b3095f912ba7f7f570",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "4a89494a227f7fa7f0b563bd8ed91ca13e8cbc2d904191b3095f912ba7f7f570",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 190,
+            "J_denominator": 80,
+            "J_i": 2.375
+          },
+          "proposal_eval_slurm_job_id": "148.106"
         }
       ]
     },
@@ -264,23 +306,23 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Only what you write after your reasoning ends gets graded, so reasoning that never ends scores zero. Stop reasoning by the halfway mark, then write one line: the value in a box. Do not re-derive anything after closing; that write-up gets cut off. Keep the first exact value you compute; unease is no reason to reopen, only a finished rival computation is. Ask early whether the free parameter matters: a wedge of angle 360/k at the centre of a k-fold symmetric shape cuts off exactly area/k in any orientation. For unions, covered = sum of parts minus overlap.",
-      "tokens": 122,
-      "hint_hash": "696e4bd374fc53e4ff449724af00cf5f5446cd0eea489d9ede25197ca26e394b",
+      "hint": "Only a boxed value written after your reasoning block closes is graded, so a trace that never closes scores zero. Close the reasoning as soon as you hold one exact value plus one confirming check. Then write the boxed value as the very first thing after closing, and put any explanation after the box, never before it, so being cut off costs nothing. Never restart the derivation in the write-up. Do not reopen a settled value; only a finished rival computation beats it, unease does not. Set up in coordinates first and write each object's extent; do not assume one figure sits inside another. If a rotation or offset stays free, ask whether the answer depends on it: a symmetry swapping congruent pieces makes every allowed value give the same result, so use the easiest one. For coverings, covered = sum of parts - overlap.",
+      "tokens": 169,
+      "hint_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566",
       "metrics": {
         "schema_version": 1,
         "hint_id": 3,
-        "hint_hash": "696e4bd374fc53e4ff449724af00cf5f5446cd0eea489d9ede25197ca26e394b",
+        "hint_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566",
         "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-        "train_correct": 6,
+        "train_correct": 5,
         "train_total": 8,
-        "train_i": 0.75,
-        "heldout_correct": 12,
+        "train_i": 0.625,
+        "heldout_correct": 18,
         "heldout_total": 80,
-        "heldout_i": 0.15,
-        "J_numerator": 180,
+        "heldout_i": 0.225,
+        "J_numerator": 230,
         "J_denominator": 80,
-        "J_i": 2.25
+        "J_i": 2.875
       },
       "history": [
         {
@@ -386,6 +428,27 @@
             "J_i": 2.25
           },
           "proposal_eval_slurm_job_id": "148.87"
+        },
+        {
+          "round": 5,
+          "decision": "kept",
+          "proposal_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 18,
+            "heldout_total": 80,
+            "heldout_i": 0.225,
+            "J_numerator": 230,
+            "J_denominator": 80,
+            "J_i": 2.875
+          },
+          "proposal_eval_slurm_job_id": "148.107"
         }
       ]
     },
@@ -515,6 +578,27 @@
             "J_i": 1.875
           },
           "proposal_eval_slurm_job_id": "148.88"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "e11dccc361594c956709f8afc2bcb33f5efef9a15844d6f72ae6684b8d4f1a50",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "e11dccc361594c956709f8afc2bcb33f5efef9a15844d6f72ae6684b8d4f1a50",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 180,
+            "J_denominator": 80,
+            "J_i": 2.25
+          },
+          "proposal_eval_slurm_job_id": "148.108"
         }
       ]
     },
@@ -644,6 +728,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.89"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "2594a66b434a98d51cbfafd00c73846710ca34d7235ea242704b58838a65b1f7",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "2594a66b434a98d51cbfafd00c73846710ca34d7235ea242704b58838a65b1f7",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 150,
+            "J_denominator": 80,
+            "J_i": 1.875
+          },
+          "proposal_eval_slurm_job_id": "148.109"
         }
       ]
     },
@@ -773,6 +878,27 @@
             "J_i": 1.875
           },
           "proposal_eval_slurm_job_id": "148.90"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "3e3e99381f8c91d94f8968669b8bbd91d9ac9cab895dd77b3beaf94c4494739e",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "3e3e99381f8c91d94f8968669b8bbd91d9ac9cab895dd77b3beaf94c4494739e",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 120,
+            "J_denominator": 80,
+            "J_i": 1.5
+          },
+          "proposal_eval_slurm_job_id": "148.110"
         }
       ]
     },
@@ -780,23 +906,23 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Before any theory: shrink the huge parameter to 2, 3, 4, solve each tiny case by plain elimination, tabulate the requested value. Three exact entries, then generalize. Never pack the unknowns into one polynomial and never work at full size symbolically; both stall. Read the value off the table and confirm it on the next size.",
-      "tokens": 73,
-      "hint_hash": "74f69952b9f10938e319d80089c7d99dc7fc02f1799860576f387015e63ac6ae",
+      "hint": "Numbers before symbols: set the huge parameter to 2, then 3, then 4, solve each tiny integer system by elimination, record the asked value. Divide consecutive entries, tracking signs separately; that ratio exposes the rule. Never build a polynomial in x, never leave the table for theory. Confirm on one more size, then commit.",
+      "tokens": 70,
+      "hint_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067",
       "metrics": {
         "schema_version": 1,
         "hint_id": 7,
-        "hint_hash": "74f69952b9f10938e319d80089c7d99dc7fc02f1799860576f387015e63ac6ae",
+        "hint_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067",
         "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-        "train_correct": 1,
+        "train_correct": 2,
         "train_total": 8,
-        "train_i": 0.125,
-        "heldout_correct": 10,
+        "train_i": 0.25,
+        "heldout_correct": 14,
         "heldout_total": 80,
-        "heldout_i": 0.125,
-        "J_numerator": 110,
+        "heldout_i": 0.175,
+        "J_numerator": 160,
         "J_denominator": 80,
-        "J_i": 1.375
+        "J_i": 2.0
       },
       "history": [
         {
@@ -902,6 +1028,27 @@
             "J_i": 1.375
           },
           "proposal_eval_slurm_job_id": "148.91"
+        },
+        {
+          "round": 5,
+          "decision": "kept",
+          "proposal_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 160,
+            "J_denominator": 80,
+            "J_i": 2.0
+          },
+          "proposal_eval_slurm_job_id": "148.111"
         }
       ]
     },
@@ -909,23 +1056,23 @@
       "hint_id": 8,
       "train_position": 35,
       "train_qid": "23443",
-      "hint": "Start by writing the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count. Mark each given number as a total for a group or an amount per item.\n\nIf the problem says per-item amounts are whole or equal, that unknown count must divide every such total at once, so the candidates are their common divisors. A count the problem does state describes a grouping; it constrains the unknown count without being it.\n\nWrite each percent or ratio as a multiplier and name the base it acts on.\n\nSubstitute numbers once, at the end. Then confirm the result meets every stated condition and is in the requested unit.",
-      "tokens": 136,
-      "hint_hash": "5d81acfa76bdabfdb99f63430333dd6dd355a1f99836aca600e4e52914a2ac08",
+      "hint": "Write the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count; substitute numbers only at the end. Mark each given number as a total for a group or an amount per item.\n\nIf per-item amounts must be whole or equal, that unknown count divides every such total at once, so the candidates are the divisors of their gcd. A count the problem does state describes a grouping; it constrains the unknown count without being it.\n\nMake each percent or ratio a multiplier on the base it acts on, then check the result against every stated condition.",
+      "tokens": 123,
+      "hint_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e",
       "metrics": {
         "schema_version": 1,
         "hint_id": 8,
-        "hint_hash": "5d81acfa76bdabfdb99f63430333dd6dd355a1f99836aca600e4e52914a2ac08",
+        "hint_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e",
         "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
         "train_correct": 6,
         "train_total": 8,
         "train_i": 0.75,
-        "heldout_correct": 12,
+        "heldout_correct": 13,
         "heldout_total": 80,
-        "heldout_i": 0.15,
-        "J_numerator": 180,
+        "heldout_i": 0.1625,
+        "J_numerator": 190,
         "J_denominator": 80,
-        "J_i": 2.25
+        "J_i": 2.375
       },
       "history": [
         {
@@ -1031,6 +1178,27 @@
             "J_i": 1.75
           },
           "proposal_eval_slurm_job_id": "148.92"
+        },
+        {
+          "round": 5,
+          "decision": "kept",
+          "proposal_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 190,
+            "J_denominator": 80,
+            "J_i": 2.375
+          },
+          "proposal_eval_slurm_job_id": "148.112"
         }
       ]
     },
@@ -1160,6 +1328,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.93"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "b49f49fadf6eb7b4728a14dfbe1e15c6a420466740868567eaeb50fe6da94dff",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "b49f49fadf6eb7b4728a14dfbe1e15c6a420466740868567eaeb50fe6da94dff",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 160,
+            "J_denominator": 80,
+            "J_i": 2.0
+          },
+          "proposal_eval_slurm_job_id": "148.113"
         }
       ]
     },
@@ -1289,6 +1478,27 @@
             "J_i": 1.25
           },
           "proposal_eval_slurm_job_id": "148.94"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "9cdd67d9e170af475974f25e0fade36078ce543ee23df7b3981101311f96d0a7",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "9cdd67d9e170af475974f25e0fade36078ce543ee23df7b3981101311f96d0a7",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 8,
+            "heldout_total": 80,
+            "heldout_i": 0.1,
+            "J_numerator": 100,
+            "J_denominator": 80,
+            "J_i": 1.25
+          },
+          "proposal_eval_slurm_job_id": "148.114"
         }
       ]
     }

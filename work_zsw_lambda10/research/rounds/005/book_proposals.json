@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "round": 5,
+  "book_hash_before": "7f7b0c5cedda760e0688b77c39d89d49b12177c9d824464ea36def74d71a9198",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "List the candidates the given data allows, leaving open anything it does not fix. Test each candidate on its own terms, using only the information the relevant person or step actually has there, not the public data alone: a stated inability to determine a value kills every candidate in which that person's own information already forces it. Each stated condition must eliminate something; if one eliminates nothing you have mismodelled what is known, so repair the model instead of re-arguing settled candidates. Box the survivor.",
+      "mutation": "evaluate-candidates-by-local-private-information-and-require-each-condition-to-eliminate",
+      "subagent_summary": "Execution 148.95 scored 2 of 8: four rollouts hit the 16384-token cap (three with no boxed answer) and the others concluded that every candidate pair is equally consistent, then named an arbitrary one. The shared error is checking a stated inability to determine against the shared public number alone, which is vacuous, instead of against what that person privately holds inside each candidate; nothing then gets eliminated, so the model loops or guesses. Rounds 1-4 all lost held-out with longer, puzzle-flavoured rewrites, so this stays terse (101 tokens) and adds two generic moves: evaluate each candidate using only the information available at that point, and treat a condition that eliminates nothing as evidence the setup is mismodelled. Both habits help ordinary constraint problems too.",
+      "sampling_slurm_job_id": "148.95",
+      "tokens": 101,
+      "hint_hash": "1dddd1e17dcd95dc1b2789115965f70e98122231b9c369c964c52ef0b1a67374",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable and set w=(z-1)/z, confined to a finite set on a circle. Solve the Möbius relation for z and characterize the image locus geometrically or by an x,y equation. Use all roots and check exceptional values before extracting the requested circle parameter.",
+      "mutation": "lossless-compression-of-70-token-incumbent-to-64-tokens-all-six-steps-kept",
+      "subagent_summary": "Fresh round-5 rollouts (execution_id 148.96) scored 7/8; clause-tracing all eight shows every surviving element is load-bearing (divide by the power, the w substitution, w on a circle, inverting the Mobius relation, the x-y locus equation, exceptional values) and no clause goes unused, so nothing can honestly be deleted. The single miss was a length-cap stall, not a missing instruction: it had the correct locus quadratic early and re-derived the same center and radius at the end. Round 3 won by compressing 81 to 70 tokens with every step intact while round 1 (169 tok), round 2 (139 tok) and round 4 (147 tok) all expanded and lost held-out, so the only lever left is length. This proposal restates the identical six steps in 64 tokens, six below the incumbent.",
+      "sampling_slurm_job_id": "148.96",
+      "tokens": 64,
+      "hint_hash": "4a89494a227f7fa7f0b563bd8ed91ca13e8cbc2d904191b3095f912ba7f7f570",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "a2617d5cf40e8a99a8f74a784b3ae2a8d34000cee46fba8c99104d13b42a8740"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Only a boxed value written after your reasoning block closes is graded, so a trace that never closes scores zero. Close the reasoning as soon as you hold one exact value plus one confirming check. Then write the boxed value as the very first thing after closing, and put any explanation after the box, never before it, so being cut off costs nothing. Never restart the derivation in the write-up. Do not reopen a settled value; only a finished rival computation beats it, unease does not. Set up in coordinates first and write each object's extent; do not assume one figure sits inside another. If a rotation or offset stays free, ask whether the answer depends on it: a symmetry swapping congruent pieces makes every allowed value give the same result, so use the easiest one. For coverings, covered = sum of parts - overlap.",
+      "mutation": "box-first-then-explain-after-closing-plus-coordinate-extent-setup",
+      "subagent_summary": "Round-5 rollouts under the incumbent scored 5/8, and all three failures were output-protocol failures, not method failures: two never closed the reasoning block at all and one closed it at 97 percent of its budget then started a fresh derivation and was truncated mid-calculation, even though it already held the correct exact value. The five successes closed late too, so the incumbent's 'stop by the halfway mark' instruction is never obeyed and its 'do not re-derive' clause is not enough. This revision makes the boxed value the first token after closing with all prose placed after the box, so late closing and truncation become harmless; it also adds a coordinate-and-extent setup step because one failure drifted into assuming one figure was wholly contained in the other, and keeps the reusable invariance and covered-equals-sum-minus-overlap rules.",
+      "sampling_slurm_job_id": "148.97",
+      "tokens": 169,
+      "hint_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "696e4bd374fc53e4ff449724af00cf5f5446cd0eea489d9ede25197ca26e394b"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When terms of a required linear pattern may each come from any of finitely many fixed-degree polynomials fed consecutive integers, consecutive inputs make index and input interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. A polynomial need only agree with L pointwise at the inputs it is handed, not be linear there: those inputs are roots of P(x)-L(x), nonzero of degree deg P because an affine subtraction keeps the leading term, so at most deg P inputs, one more forcing P=L. Sum that capacity over the whole menu for the total input count wanted, never one factor alone; attain it by letting each polynomial match L on its own block.",
+      "mutation": "cut-jam-clearing-jsoncross-differencing-ban-and-grouping-clause-add-pointwise-only-agreement-142-vs-153-tokens",
+      "subagent_summary": "Fresh round-5 rollouts (execution 148.98) scored 5/8 with the incumbent. All three failures share one jam: they demand that a polynomial serving several inputs be affine on that stretch or have constant consecutive differences, which is impossible above degree one, so they override the deg-P root cap they already derived and report one factor alone (a cap of two, the menu size, or a coefficient-count of six). Both truncated rollouts spent their tail oscillating there. The revision is 142 tokens versus 153: it drops the cross-polynomial differencing ban and the grouping instruction, which every rollout already performs unaided, and spends the freed words on the single clause that agreement with the shared affine target is required only pointwise at the inputs actually handed to the polynomial.",
+      "sampling_slurm_job_id": "148.98",
+      "tokens": 142,
+      "hint_hash": "e11dccc361594c956709f8afc2bcb33f5efef9a15844d6f72ae6684b8d4f1a50",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Exponentiate each given point to a linear equation; solve the parameters, verify. Copy the stated vector relation in exact letter order. Put both unknowns on the curve and subtract: one exponentiation clears the logs and the quadratic factors. Surd discriminant or zero shoelace sum means flipped direction, not bad algebra; relabel, reject repeated points.",
+      "mutation": "flipped-direction-diagnostic-on-surd-discriminant-or-zero-area",
+      "subagent_summary": "Five of eight rollouts scored. All three failures shared one new mechanism: they flipped the direction of the stated vector relation, then either hit an irrational discriminant and burned the full token budget grinding radicals, or got a shoelace sum of zero and declared a contradiction instead of relabeling. Every success ran the same chain: exponentiate the two given points into linear equations, solve and verify the parameters, copy the vector relation in the exact letter order given, force both unknowns onto the curve, subtract the two equations so one exponentiation clears the logs, factor the quadratic, drop the root reproducing a given point, then shoelace in cyclic order. This revision keeps that chain and adds the one diagnostic the failures needed: a surd discriminant or vanishing area signals a flipped direction, not broken algebra. Held at incumbent length; a 186-token draft sitting at my path was replaced since every long proposal so far has lost.",
+      "sampling_slurm_job_id": "148.99",
+      "tokens": 73,
+      "hint_hash": "2594a66b434a98d51cbfafd00c73846710ca34d7235ea242704b58838a65b1f7",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Turn a multi-step random process into states, legal options, and true conditional probabilities. A state is the ordered contents of every location; update it move by move rather than from a vague story. At each state list only the options actually available: weight 1 when a single option is legal, one half only where two genuinely are. So step probabilities depend on the state, and a run can be longer than the number of items. For an event, exhibit each path realizing it, multiply along the path, add over paths. Never guess 1/k, 1/k! or 1/2^k from \"all outcomes are equally likely\", and never call an outcome impossible or certain without an argument. Where order matters, whatever is placed first ends up at the bottom, and reaching a covered item means clearing what lies above it. Settle a doubtful claim by building one explicit path or testing the smallest case. Then box an answer for each part.",
+      "mutation": "generalize-to-state-and-path-pricing: drop stack jargon, require explicit path construction and small-case check before claiming impossible/certain",
+      "subagent_summary": "All 8 rollouts scored 0 and none built a state at all: four priced the target as one or two isolated coin flips (1/2^n, 1/4, 1/2), two flipped to bare symmetry (1/n), and two asserted the worker has no real choice and returned certain/impossible, with two runs looping to the token limit re-arguing that claim. The incumbent's stack-shunting/push-pop-word vocabulary was simply not used, so this edit drops the domain jargon and states the transferable habit instead: name the state as ordered contents, price each step from the options legal in that state, build an explicit path or a small case before declaring anything impossible, and stop and box each part.",
+      "sampling_slurm_job_id": "148.101",
+      "tokens": 193,
+      "hint_hash": "3e3e99381f8c91d94f8968669b8bbd91d9ac9cab895dd77b3beaf94c4494739e",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "67d122a90af2e0710ab939322c2a6639c7d9434bfc510d8f18475e267a2103c9"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Numbers before symbols: set the huge parameter to 2, then 3, then 4, solve each tiny integer system by elimination, record the asked value. Divide consecutive entries, tracking signs separately; that ratio exposes the rule. Never build a polynomial in x, never leave the table for theory. Confirm on one more size, then commit.",
+      "mutation": "say-what-to-extract-from-the-table-ratio-plus-sign-and-forbid-leaving-it",
+      "subagent_summary": "Fresh round-5 rollouts under the incumbent scored 2/8, up from 1/8. Both winners got three exact numeric small cases and read the rule off them. The six zeros split into two habits: three ignored the shrink order for tens of thousands of characters while manipulating a polynomial in x, and three obeyed the shrink but then abandoned their table for polynomial and Vandermonde theory and thrashed to the 16384-token cap or guessed. So the incumbent's shrink order now lands, but it never says what to do with the table, which is where students bail out. This edit keeps the ban on the polynomial model, adds an explicit extraction step (ratio of consecutive entries with the sign tracked separately), and forbids leaving the table for theory, at 70 tokens versus the incumbent's 73 since shorter has won every kept round.",
+      "sampling_slurm_job_id": "148.100",
+      "tokens": 70,
+      "hint_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "74f69952b9f10938e319d80089c7d99dc7fc02f1799860576f387015e63ac6ae"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Write the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count; substitute numbers only at the end. Mark each given number as a total for a group or an amount per item.\n\nIf per-item amounts must be whole or equal, that unknown count divides every such total at once, so the candidates are the divisors of their gcd. A count the problem does state describes a grouping; it constrains the unknown count without being it.\n\nMake each percent or ratio a multiplier on the base it acts on, then check the result against every stated condition.",
+      "mutation": "restore-gcd-handle-fold-substitute-once-delete-unit-clause",
+      "subagent_summary": "Fresh round-5 rollouts on the incumbent scored 3/8, and the split is mechanical: all three successes computed the gcd of the stage totals, took its divisors as the candidate counts, and used the stated grouping count only as a consistency filter; three of the five failures never derived a candidate set at all and two abandoned one for the stated grouping count. So the incumbent's abstract phrase 'the candidates are their common divisors' is not converting into a computation, while naming the gcd (present in the round-1 wording that scored my best held-out, 0.1875) does. This revision restores only that concrete handle, keeps the grouping clause whose deletion cost 0.625 of train in round 4, folds substitute-once into the opening sentence, and deletes the requested-unit reminder no rollout ever needed. 123 tokens versus 136, with no new rule added.",
+      "sampling_slurm_job_id": "148.104",
+      "tokens": 123,
+      "hint_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "5d81acfa76bdabfdb99f63430333dd6dd355a1f99836aca600e4e52914a2ac08"
+    },
+    {
+      "hint_id": 9,
+      "hint": "An identity that must hold for every input is a symmetry statement, not an expansion exercise: brute-force matching of all coefficients will run you out of room. Extract the cheap invariants first, degree, leading coefficient, and the given values. Then look for one symmetry that makes the identity automatic, such as two maps being reflections of each other about a constant, f(s - x) = s - f(x); derive that constant from the given data, never by guessing. Underdetermined is expected: a leftover free parameter normally cancels from the requested quantities. If an equation looks contradictory, recheck its algebra before switching methods. Budget half your space for setup; then evaluate what the relations already give and box an answer. An unfinished derivation scores zero, so always commit.",
+      "mutation": "generalize-to-any-for-all-inputs-identity-plus-half-budget-cutoff-and-always-commit-boxed-answer",
+      "subagent_summary": "All eight fresh rollouts on the incumbent scored 0 and every one died on the 16384-token cap without ever emitting a boxed answer: they used the reflection idea only as narration, slid back into coefficient-by-coefficient matching of the composition, then looped on 'contradiction'/'mistake' self-corrections and re-derivations of the same lines. Prior rounds show that adding more problem-specific machinery (191-195 tokens) hurt held-out, so this edit instead shortens and generalises: it frames any for-all-inputs identity as a symmetry-hunt with cheap invariants first, keeps the derive-the-constant and free-parameter-cancels rules, adds recheck-the-line-before-switching, and adds an explicit half-budget cutoff plus an always-commit-a-boxed-answer rule aimed straight at the no-answer length failures.",
+      "sampling_slurm_job_id": "148.102",
+      "tokens": 156,
+      "hint_hash": "b49f49fadf6eb7b4728a14dfbe1e15c6a420466740868567eaeb50fe6da94dff",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Never assert a structure or pattern you have not exhibited. Work the smallest nontrivial case fully and literally, writing out the whole state or configuration it produces, and check that it still meets every stated constraint. Each entry in your table of small cases must be a run you actually carried out, never one you recall or call obvious. Only then name a structure, and certify it: substitute or re-apply your claimed result and see the required condition actually hold. Properties of the parts need not survive composition, so always measure the whole object. When a written-out case contradicts an elegant claim, keep the case and drop the claim; do not relitigate it. Confirm one size up, fit a formula in the parameter, then state that one closed form and stop.",
+      "mutation": "require-exhibited-and-certified-structure-ban-unrun-table-entries",
+      "subagent_summary": "Fresh round-5 rollouts under the incumbent scored 1/8. Four failures never wrote out any case: they simply declared the composite a product of disjoint transpositions and reported a period read off a single part. A fifth tabulated small-case values it had not actually run, then fit a formula to those invented numbers. Only two failures were cap exhaustion. So the dominant error is asserting or fabricating structure rather than exhibiting it, which the incumbent's 'describe it as a single map' clause licenses. This revision bans unexhibited structure, requires every tabulated value to be a run actually carried out, and requires certifying any named structure by substituting it back - all phrased for any construct-and-verify problem, not this operation, since my long problem-specific caution lists have repeatedly cut held-out.",
+      "sampling_slurm_job_id": "148.103",
+      "tokens": 156,
+      "hint_hash": "9cdd67d9e170af475974f25e0fade36078ce543ee23df7b3981101311f96d0a7",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565"
+    }
+  ]
+}
