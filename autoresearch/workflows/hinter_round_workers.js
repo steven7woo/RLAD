@@ -58,42 +58,46 @@ one training problem but does not generalize will LOSE. Your incumbent will be
 replaced only if the proposal scores higher J (tie-break: higher held-out, then
 shorter). So write a REUSABLE STRATEGY, not a solution.
 
-## What eight rounds of evidence say actually wins (read this first)
+## What nine rounds of evidence say (read this first)
 
 Keep counts: r1 5/10, r2 0/10, r3 5/10, r4 2/10, r5 3/10, r6 2/10, r7 0/10,
-r8 1/10. Book mean J: 2.0125 -> 2.2625 -> 2.2625 -> 2.3750 -> 2.4000 -> 2.5375
--> 2.6250 -> 2.6250 -> 2.6875.
+r8 1/10, r9 0/10. Book mean J: 2.0125 -> ... -> 2.6875 (unchanged for two rounds).
 
-THE INCUMBENTS ARE MATURE AND HARD TO BEAT. Over rounds 6-8 only 3 of 30
-proposals survived. The book's mean held-out is now 0.215, and the overwhelming
-majority of proposals score BELOW their incumbent on held-out - including many
-careful, well-reasoned, evidence-backed edits. Assume by default that your
-incumbent is good and that a change is more likely to hurt than help.
+THE SEARCH HAS SATURATED UNDER SMALL EDITS. Only 3 of the last 40 proposals
+survived. In rounds 7 and 9 every single proposal lost held-out, and in round 9
+the losses were large (several fell 0.10-0.11 below their incumbent). Your
+incumbent has repelled 8 or 9 consecutive challengers. The base rate for a
+careful marginal edit succeeding is now under 10 percent.
 
-Critically, DELETION IS NOT AUTOMATICALLY SAFE. Round 8 tested it directly:
-several workers found a clause their rollouts provably never executed, deleted
-only that clause, kept everything else byte-identical - and still lost held-out
-(one fell 0.2250 -> 0.1375 by removing 32 tokens of "inert" text). A clause the
-student never visibly acts on can still be shaping its behaviour. So "the
-rollouts never mention it" is weaker evidence than it looks.
+The important consequence: SMALL SAFE-LOOKING EDITS ARE NOT SAFE. They are the
+single most-tested and most-failed category in this book. Specifically these have
+all been tried repeatedly and lost:
+  - swapping one vague clause for a sharper-sounding one
+  - deleting a clause your rollouts never visibly execute (round 8: lost 0.2250
+    -> 0.1375 doing exactly this)
+  - trimming a token or two with no change of meaning
+  - changing a closing verb, or re-ordering steps
+  - adding a caution, prohibition, slogan, or problem-specific trap rule
 
-The three mutation styles with a real track record:
-  (a) LOSSLESS COMPRESSION - same strategy, same steps, fewer tokens, nothing
-      dropped (hint 2 round 3: 81 -> 70 tokens, J 3.00 -> 3.25). Rewording, not
-      removing content.
-  (b) NAMING A CONCRETE EXECUTABLE FIRST MOVE where the hint previously only
-      gestured (hint 9 round 1, the book's biggest gain; hint 5 round 6,
-      J 2.50 -> 3.25).
-  (c) REPLACING A DEAD-END DIRECTIVE the failures visibly follow into a wall
-      with a constructive alternative (hint 6 round 8, J 2.125 -> 2.750 after
-      seven straight losses).
+So do not spend this round on a cosmetic tweak. You have two genuinely useful
+options, and picking either honestly is fine:
 
-What keeps failing: appended cautions, prohibitions, slogans, problem-specific
-trap rules, generic procedure checklists, and cosmetic rewording of an
-already-sharp hint.
+  OPTION A - PROPOSE A DIFFERENT STRATEGY. Ask what a strong solver would
+  actually DO on this class of problem, and whether your hint names that. The
+  book's real wins all came from naming a concrete executable move that replaced
+  a vague gesture (hint 9 round 1; hint 5 round 6, J 2.50 -> 3.25) or from
+  replacing a directive the failures visibly follow into a wall (hint 6 round 8,
+  J 2.125 -> 2.750 after seven straight losses). If your rollouts keep dying the
+  same way, ask whether your hint's core approach is itself the problem - not
+  whether its wording can be polished.
 
-Submit your single best honest attempt. If you judge the incumbent hard to beat,
-say so plainly in your summary - that is useful information, not a failure.
+  OPTION B - PROPOSE A CAREFUL LOSSLESS COMPRESSION. Same strategy, same steps,
+  provably nothing dropped, fewer tokens. This wins ties and has won outright
+  (hint 2 round 3: 81 -> 70 tokens, J 3.00 -> 3.25).
+
+Whichever you choose, state honestly in your summary how likely you think it is
+to beat the incumbent and why. A well-reasoned near-miss with an accurate
+self-assessment is a good outcome; the incumbent surviving is not a failure.
 
 Findings that hold across all ten hints:
 
