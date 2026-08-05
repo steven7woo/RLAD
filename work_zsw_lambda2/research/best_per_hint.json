@@ -107,6 +107,27 @@
             "J_i": 0.225
           },
           "proposal_eval_slurm_job_id": "150.63"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "6419f76dc4d52b79fc8a0deba5d7ecd03475115312c18e19e259990f6a704c1d",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "6419f76dc4d52b79fc8a0deba5d7ecd03475115312c18e19e259990f6a704c1d",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 32,
+            "J_denominator": 80,
+            "J_i": 0.4
+          },
+          "proposal_eval_slurm_job_id": "150.83"
         }
       ]
     },
@@ -114,23 +135,23 @@
       "hint_id": 2,
       "train_position": 28,
       "train_qid": "30302",
-      "hint": "Divide by the appropriate power of the variable and introduce the ratio w=(z-1)/z. The equation then restricts w to a fixed finite set on a circle. Solve the Möbius relation for z in terms of w, and characterize the image locus geometrically (or by an equation in x and y). Use all allowed roots and check exceptional values before extracting the requested circle parameter.",
-      "tokens": 81,
-      "hint_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917",
+      "hint": "Divide by the appropriate power of the variable to introduce the ratio w=(z-1)/z; the equation then pins w to a finite set on a circle. Solve for z in terms of w and turn the locus into an equation in x and y, completing the square to read off center and radius. Generally: substitute so the relation depends on one quantity, and keep every value exact.\n\nA spot-check that disagrees with your derivation almost always means arithmetic inside the check, not a broken problem. Recheck that one line only; never restart from scratch or declare the setup inconsistent. Two exact points plus a symmetry axis pin a circle faster than solving a large linear system. State your simplified result as soon as you have one, then use leftover room to confirm it.",
+      "tokens": 155,
+      "hint_hash": "64b0f516c4150af456f05fd043eae6476f571e240a578af063256e2ea28e9e9a",
       "metrics": {
         "schema_version": 1,
         "hint_id": 2,
-        "hint_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917",
+        "hint_hash": "64b0f516c4150af456f05fd043eae6476f571e240a578af063256e2ea28e9e9a",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-        "train_correct": 7,
+        "train_correct": 8,
         "train_total": 8,
-        "train_i": 0.875,
-        "heldout_correct": 10,
+        "train_i": 1.0,
+        "heldout_correct": 14,
         "heldout_total": 80,
-        "heldout_i": 0.125,
-        "J_numerator": 90,
+        "heldout_i": 0.175,
+        "J_numerator": 108,
         "J_denominator": 80,
-        "J_i": 1.125
+        "J_i": 1.35
       },
       "history": [
         {
@@ -215,6 +236,27 @@
             "J_i": 1.075
           },
           "proposal_eval_slurm_job_id": "150.64"
+        },
+        {
+          "round": 4,
+          "decision": "kept",
+          "proposal_hash": "64b0f516c4150af456f05fd043eae6476f571e240a578af063256e2ea28e9e9a",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "64b0f516c4150af456f05fd043eae6476f571e240a578af063256e2ea28e9e9a",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 108,
+            "J_denominator": 80,
+            "J_i": 1.35
+          },
+          "proposal_eval_slurm_job_id": "150.84"
         }
       ]
     },
@@ -323,6 +365,27 @@
             "J_i": 0.85
           },
           "proposal_eval_slurm_job_id": "150.65"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "8f7191662e1d335fcd3228c9812ab2b66042a86fe092a64954cf3fb7eeaf9353",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "8f7191662e1d335fcd3228c9812ab2b66042a86fe092a64954cf3fb7eeaf9353",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 18,
+            "heldout_total": 80,
+            "heldout_i": 0.225,
+            "J_numerator": 66,
+            "J_denominator": 80,
+            "J_i": 0.825
+          },
+          "proposal_eval_slurm_job_id": "150.85"
         }
       ]
     },
@@ -330,23 +393,23 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "Extremal \"how long / how many at most\" problems need two halves: an upper bound and a matching construction. State both targets before computing. For bounds, express the required pattern as one closed form in the index (an arithmetic progression is A+B*index), subtract it from each candidate function, and count zeros: a degree-d polynomial minus an affine function is still degree d and not identically zero, so it can match at most d indices. When several functions are available, each contributes its own cap, so add the caps over all functions - do not stop at one function's cap, and do not use the function count alone. Do not chase consecutive differences; that only limits reuse of a single function. Then realize the bound by cutting the index range into consecutive blocks and interpolating one function per block. Commit to this route early instead of enumerating cases.",
-      "tokens": 177,
-      "hint_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763",
+      "hint": "For \"at most how many\" extremal problems do both halves: an upper bound and a construction attaining it. Name a count early, before you run long.\n\nPosit ONE unknown affine target for the whole pattern (an arithmetic progression is A+B*n), shared by every piece. Index n is then usable by piece f exactly when n is a root of f(x)-(A+Bx): a pointwise condition. Never demand that one piece's own consecutive difference be constant - neighbouring terms may come from different pieces, and that false identity is what makes the task look impossible.\n\nEach such difference is a nonzero degree-d polynomial, so at most d roots. The root sets are disjoint and together fill the single progression, so budgets add: total <= (number of pieces) x d, already in the units asked for, not a per-piece cap.\n\nAttain it by cutting the range into consecutive blocks, one piece interpolating each.",
+      "tokens": 189,
+      "hint_hash": "40644c5ad3884d8dd2e32629b2968c787adfe9e53d2fb9166561d803c1e485f1",
       "metrics": {
         "schema_version": 1,
         "hint_id": 4,
-        "hint_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763",
+        "hint_hash": "40644c5ad3884d8dd2e32629b2968c787adfe9e53d2fb9166561d803c1e485f1",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-        "train_correct": 2,
+        "train_correct": 5,
         "train_total": 8,
-        "train_i": 0.25,
-        "heldout_correct": 18,
+        "train_i": 0.625,
+        "heldout_correct": 13,
         "heldout_total": 80,
-        "heldout_i": 0.225,
-        "J_numerator": 56,
+        "heldout_i": 0.1625,
+        "J_numerator": 76,
         "J_denominator": 80,
-        "J_i": 0.7
+        "J_i": 0.95
       },
       "history": [
         {
@@ -431,6 +494,27 @@
             "J_i": 0.45
           },
           "proposal_eval_slurm_job_id": "150.66"
+        },
+        {
+          "round": 4,
+          "decision": "kept",
+          "proposal_hash": "40644c5ad3884d8dd2e32629b2968c787adfe9e53d2fb9166561d803c1e485f1",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "40644c5ad3884d8dd2e32629b2968c787adfe9e53d2fb9166561d803c1e485f1",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 76,
+            "J_denominator": 80,
+            "J_i": 0.95
+          },
+          "proposal_eval_slurm_job_id": "150.86"
         }
       ]
     },
@@ -539,6 +623,27 @@
             "J_i": 1.225
           },
           "proposal_eval_slurm_job_id": "150.67"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "1039fe19deec2f56c5ce10d9aabf74936beb1b44df4f55a2eacc1ed0ca7ea829",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "1039fe19deec2f56c5ce10d9aabf74936beb1b44df4f55a2eacc1ed0ca7ea829",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 54,
+            "J_denominator": 80,
+            "J_i": 0.675
+          },
+          "proposal_eval_slurm_job_id": "150.87"
         }
       ]
     },
@@ -647,6 +752,27 @@
             "J_i": 0.45
           },
           "proposal_eval_slurm_job_id": "150.68"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "0c7aee72f2faf607792938b8a1024425a40b808664e635aa0864bfeb7d7cd997",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "0c7aee72f2faf607792938b8a1024425a40b808664e635aa0864bfeb7d7cd997",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 20,
+            "J_denominator": 80,
+            "J_i": 0.25
+          },
+          "proposal_eval_slurm_job_id": "150.88"
         }
       ]
     },
@@ -755,6 +881,27 @@
             "J_i": 0.4
           },
           "proposal_eval_slurm_job_id": "150.69"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "1223caf49db1e29b027539ab6c3d26a6f21a2251b15bfccca3f51467b3abc2fa",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "1223caf49db1e29b027539ab6c3d26a6f21a2251b15bfccca3f51467b3abc2fa",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 8,
+            "heldout_total": 80,
+            "heldout_i": 0.1,
+            "J_numerator": 26,
+            "J_denominator": 80,
+            "J_i": 0.325
+          },
+          "proposal_eval_slurm_job_id": "150.89"
         }
       ]
     },
@@ -863,6 +1010,27 @@
             "J_i": 1.275
           },
           "proposal_eval_slurm_job_id": "150.70"
+        },
+        {
+          "round": 4,
+          "decision": "discarded",
+          "proposal_hash": "63b3a9fe36af68021b3a687f112ab4f8fc6cc03d9e123b50064e9677527ee0a9",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "63b3a9fe36af68021b3a687f112ab4f8fc6cc03d9e123b50064e9677527ee0a9",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 98,
+            "J_denominator": 80,
+            "J_i": 1.225
+          },
+          "proposal_eval_slurm_job_id": "150.90"
         }
       ]
     },
@@ -870,23 +1038,23 @@
       "hint_id": 9,
       "train_position": 188,
       "train_qid": "3980",
-      "hint": "Never name a full set of unknown coefficients and never expand a composed or high-degree identity; that always exhausts your budget. Instead recenter: shift to coordinates about an unknown center c and try the smallest symmetric ansatz, e.g. for an identity in two same-degree maps take f=c+a(x-c)^k and g=c-a(x-c)^k, where odd k makes both sides collapse identically. The two supplied values then differ only in the sign of the a-term: add them to isolate c, subtract to isolate a. Verify by that symmetry, not by expanding. Ask whether a requested input is itself the center or a fixed point, making its value immediate. Ugly fractions or divisor-hunting mean the ansatz is wrong, not the arithmetic: switch once, then commit, state your result, and stop re-deriving.",
-      "tokens": 172,
-      "hint_hash": "3bc4a8fb988c1eb05c38ceb4f4bd0bb3b1f52a692bff540b0be46ed42b51bd06",
+      "hint": "Never name a full set of unknown coefficients and never expand a composed or high-degree identity; that exhausts your budget. Recenter: put both maps about one shared unknown center c, f=c+a(x-c)^k and g=c-a(x-c)^k with odd k, so the identity collapses by symmetry. Take the opposite-sign branch first; same-sign is degenerate. Carry no extra offset and never factor c out. The two supplied values are then c-a*c^k and c+a*c^k: adding them must cancel the a-term, leaving one linear equation for c; subtracting isolates a. A quadratic or irrational center means your signs are wrong: fix that one line, never by expanding. Ask whether a requested input equals c or a fixed point, making its value immediate. Verify by symmetry, commit, state your result early, and stop re-deriving.",
+      "tokens": 180,
+      "hint_hash": "652ee8dc58008e69bb7e90163e071e0708bc579422e2fd3d5a546ca1fb63ccad",
       "metrics": {
         "schema_version": 1,
         "hint_id": 9,
-        "hint_hash": "3bc4a8fb988c1eb05c38ceb4f4bd0bb3b1f52a692bff540b0be46ed42b51bd06",
+        "hint_hash": "652ee8dc58008e69bb7e90163e071e0708bc579422e2fd3d5a546ca1fb63ccad",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-        "train_correct": 5,
+        "train_correct": 8,
         "train_total": 8,
-        "train_i": 0.625,
-        "heldout_correct": 19,
+        "train_i": 1.0,
+        "heldout_correct": 20,
         "heldout_total": 80,
-        "heldout_i": 0.2375,
-        "J_numerator": 88,
+        "heldout_i": 0.25,
+        "J_numerator": 120,
         "J_denominator": 80,
-        "J_i": 1.1
+        "J_i": 1.5
       },
       "history": [
         {
@@ -971,6 +1139,27 @@
             "J_i": 1.1
           },
           "proposal_eval_slurm_job_id": "150.71"
+        },
+        {
+          "round": 4,
+          "decision": "kept",
+          "proposal_hash": "652ee8dc58008e69bb7e90163e071e0708bc579422e2fd3d5a546ca1fb63ccad",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "652ee8dc58008e69bb7e90163e071e0708bc579422e2fd3d5a546ca1fb63ccad",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 20,
+            "heldout_total": 80,
+            "heldout_i": 0.25,
+            "J_numerator": 120,
+            "J_denominator": 80,
+            "J_i": 1.5
+          },
+          "proposal_eval_slurm_job_id": "150.91"
         }
       ]
     },
@@ -978,23 +1167,23 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Before trusting an elegant shortcut, try to falsify it. At the smallest nontrivial size write distinct labels and carry the process out literally, each stated step acting on the previous step's output, never on the original arrangement. Then check the shortcut's prediction against that trace; if they disagree, discard the shortcut rather than launching a general symbolic derivation. Return-to-start questions ask for an order: reapply the whole process, counting, until the start reappears. Get exact counts at two different sizes and compare them to the size parameter before generalizing. Do not assume the period is 2 merely because each stage looks like a swap; composing swaps usually does not have period 2. Commit your result early, then stop.",
-      "tokens": 148,
-      "hint_hash": "ae55ce3989859ea6f512c3e2c3fa5c48cffc4b29cf1ba69ccbf46e955fbe0f0d",
+      "hint": "Trace concretely, not symbolically: write a row of distinct labels and rewrite the whole row after each stated step, each step acting on the previous row, never on the original. Never mix a \"goes to\" map with a \"comes from\" map. Any map you build by hand must be a bijection; if two inputs share an output, or one is missing, that is bookkeeping error, not exotic structure, so redo that trace. Return-to-start questions want an order: reapply the whole process, counting, until the row repeats. When the problem promises one formula in a parameter but your cases force a piecewise split, the odd case is almost surely mis-traced: recheck it, and trust the clean pattern rather than reporting a split or looping. Swap-shaped stages need not have period 2. Commit your result early, then stop.",
+      "tokens": 178,
+      "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb",
       "metrics": {
         "schema_version": 1,
         "hint_id": 10,
-        "hint_hash": "ae55ce3989859ea6f512c3e2c3fa5c48cffc4b29cf1ba69ccbf46e955fbe0f0d",
+        "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-        "train_correct": 2,
+        "train_correct": 5,
         "train_total": 8,
-        "train_i": 0.25,
-        "heldout_correct": 16,
+        "train_i": 0.625,
+        "heldout_correct": 13,
         "heldout_total": 80,
-        "heldout_i": 0.2,
-        "J_numerator": 52,
+        "heldout_i": 0.1625,
+        "J_numerator": 76,
         "J_denominator": 80,
-        "J_i": 0.65
+        "J_i": 0.95
       },
       "history": [
         {
@@ -1079,6 +1268,27 @@
             "J_i": 0.65
           },
           "proposal_eval_slurm_job_id": "150.72"
+        },
+        {
+          "round": 4,
+          "decision": "kept",
+          "proposal_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 76,
+            "J_denominator": 80,
+            "J_i": 0.95
+          },
+          "proposal_eval_slurm_job_id": "150.92"
         }
       ]
     }

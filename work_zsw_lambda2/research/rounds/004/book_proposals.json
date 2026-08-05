@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+  "round": 4,
+  "book_hash_before": "f93552fce0b96f517f09ee4b14565befa4817ba961101f0bcda9348141d9c50e",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Turn each statement into an arithmetic test on one unknown: divisibility, a bound, positivity. When a displayed quantity's role is left unstated, each reading is a live branch; a speaker is uncertain exactly when two or more branches stay feasible for their own value. Crucially, the later speaker must also demand that the partner value each branch implies itself passes the earlier speaker's test -- that chained condition is what pins the answer down. A contradiction means you fixed a branch too early, not that the setup is broken. Never re-derive a case you already did; commit to a candidate quickly, then check it against every statement.",
+      "mutation": "chain the second speaker's test through the first speaker's test, and forbid re-deriving cases that caused truncation",
+      "subagent_summary": "Fresh sampling with the incumbent hint scored 1/8 and 5 of 8 truncated at the token cap; every failure enumerated the divisor pairs, noticed each speaker's own value pins the partner within one reading, declared both readings contradictory, and then re-derived the same two cases until truncation or emitted an arbitrary divisor. The incumbent names the label ambiguity but never says the second statement must be evaluated against the first speaker's constraint, so I added that chaining rule plus an explicit ban on re-deriving a case already handled, which is what burned the budget.",
+      "sampling_slurm_job_id": "150.73",
+      "tokens": 128,
+      "hint_hash": "6419f76dc4d52b79fc8a0deba5d7ecd03475115312c18e19e259990f6a704c1d",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "cbbaaafa1907efc60835e2a44f805271c9a2f4cd4fe5d3988c244caa7b7e5f7b"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable to introduce the ratio w=(z-1)/z; the equation then pins w to a finite set on a circle. Solve for z in terms of w and turn the locus into an equation in x and y, completing the square to read off center and radius. Generally: substitute so the relation depends on one quantity, and keep every value exact.\n\nA spot-check that disagrees with your derivation almost always means arithmetic inside the check, not a broken problem. Recheck that one line only; never restart from scratch or declare the setup inconsistent. Two exact points plus a symmetry axis pin a circle faster than solving a large linear system. State your simplified result as soon as you have one, then use leftover room to confirm it.",
+      "mutation": "keep the ratio/locus setup; replace round-2 circle-fitting recovery with a no-restart rule that treats a failing spot-check as arithmetic in the check, plus a symmetry shortcut and early commit",
+      "subagent_summary": "Seven of eight fresh rollouts were correct in 5k-12k tokens; the single failure derived the roots and the correct structure, then hit an arithmetic slip while solving a general-circle linear system, concluded the problem was contradictory, and burned the full 16384-token cap on ~50 self-doubt cycles without ever committing a result. Round 2 showed that appending recovery/commit discipline to the incumbent setup raised transfer sharply while its explicit circle-fitting route cost train accuracy, so I keep the setup and the discipline but redirect it: treat a conflicting spot-check as a bug in the check, recheck only that line instead of restarting, use symmetry to pin the locus rather than a large linear system, and state the simplified result before the budget runs low.",
+      "sampling_slurm_job_id": "150.74",
+      "tokens": 155,
+      "hint_hash": "64b0f516c4150af456f05fd043eae6476f571e240a578af063256e2ea28e9e9a",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "e926ca1d6f04d597d4b99af9d15b2597417b40fc28c3c0397d67f147cfa99917"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Fix one coordinate frame with the pinned point at the origin; never rebuild it. For fixed-area pieces, union = sum minus overlap, so maximize the union by minimizing overlap. Do not assume the bigger shape swallows the smaller: a vertex spans only its interior angle, so test one concrete point past that wedge. For an extremal quantity, do not scan parameters. Certify instead: derive one bound on the overlap that holds for every configuration, then exhibit a configuration meeting it. Bound plus witness is a proof of optimality, so no further angle or case can beat it. Once you hold both, state the exact value and close the reasoning block immediately.",
+      "mutation": "replace open-ended parameter scanning with a bound-plus-witness optimality certificate that licenses stopping",
+      "subagent_summary": "Four of eight rollouts were correct; all eight reached the right value very early (within the first ~4.5k characters of reasoning), and every failure was purely a truncation failure - it kept re-testing rotations (100+ mentions of rotation, 50-77 'Wait' restarts) until the 16384-token cap hit with the reasoning block still open, so nothing was graded. The incumbent's containment warning is working and is kept, but its 'commit and stop' clause gives no logical reason to stop, so the revision supplies one: a bound valid for all configurations plus a witness attaining it is a complete optimality proof, which makes further scanning provably pointless.",
+      "sampling_slurm_job_id": "150.75",
+      "tokens": 133,
+      "hint_hash": "8f7191662e1d335fcd3228c9812ab2b66042a86fe092a64954cf3fb7eeaf9353",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "e73c55e27100ae936358bb7823761096f52d3e52bbb1bf81a9e7298441eeb331"
+    },
+    {
+      "hint_id": 4,
+      "hint": "For \"at most how many\" extremal problems do both halves: an upper bound and a construction attaining it. Name a count early, before you run long.\n\nPosit ONE unknown affine target for the whole pattern (an arithmetic progression is A+B*n), shared by every piece. Index n is then usable by piece f exactly when n is a root of f(x)-(A+Bx): a pointwise condition. Never demand that one piece's own consecutive difference be constant - neighbouring terms may come from different pieces, and that false identity is what makes the task look impossible.\n\nEach such difference is a nonzero degree-d polynomial, so at most d roots. The root sets are disjoint and together fill the single progression, so budgets add: total <= (number of pieces) x d, already in the units asked for, not a per-piece cap.\n\nAttain it by cutting the range into consecutive blocks, one piece interpolating each.",
+      "mutation": "recast the cap as a pointwise root condition on one shared affine target; dissolve the same-piece consecutive-difference identity and justify why the disjoint root budgets add to the asked-for length",
+      "subagent_summary": "Of 8 fresh rollouts only 1 was correct: two hit the 16384-token limit, three declared the task impossible or nearly so by forcing a single piece's own consecutive difference to be constant, and one answered the interpolation point count instead. Most tellingly, one rollout derived the summed per-piece budget and then rejected it because the pattern is a single progression rather than several, so the revision replaces the same-piece difference identity with a pointwise root condition on one shared affine target and states why the disjoint root budgets add to the quantity requested.",
+      "sampling_slurm_job_id": "150.76",
+      "tokens": 189,
+      "hint_hash": "40644c5ad3884d8dd2e32629b2968c787adfe9e53d2fb9166561d803c1e485f1",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "9ad17434e90ac5fbf9203596a47b29dac7558e85f253b13129bb54f81a831763"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Name your unknowns and turn each given condition into one exact equation; solve for the constants first, then re-substitute to confirm them before going on. Reduce to a single variable, keep exact fractions, and discard roots that are degenerate or violate the domain. If a condition looks unsatisfiable, suspect your setup or constants, not your arithmetic: recheck them once, never plug in guessed numbers and never restart from scratch. Budget the work -- drive the computation to a number and state the exact value, then stop.",
+      "mutation": "replace vague cross-check clause with confirm-constants-early plus a no-guessing, no-restart token-budget rule",
+      "subagent_summary": "Six of eight fresh rollouts were correct in 8-10k tokens; both failures were identical budget deaths at the 16384 cap with finish_reason length, never reaching an area at all. One derived the constants wrongly and only recovered near the cap; the other declared the system unsolvable and burned the remainder substituting guessed numeric values. The incumbent's 'verify with a second, different method' clause invites exactly that extra pass, so I traded it for confirming the constants immediately after solving for them and an explicit ban on numeric guessing and restarting, which targets non-termination generically rather than this setup.",
+      "sampling_slurm_job_id": "150.77",
+      "tokens": 106,
+      "hint_hash": "1039fe19deec2f56c5ce10d9aabf74936beb1b44df4f55a2eacc1ed0ca7ea829",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "83c896bc82082c6ed4cb8791f9d2a555f90a25b05e0dc438a5532b3b8a6282c8"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Refuse two guesses: asserted symmetry (\"each item is equally likely in any position\"; \"1/n!\"; \"each remaining item is equally likely to move last\") and asserted determinism (\"the order is forced, so 0 or 1\"). Randomness over MOVES rarely means uniformity over OUTCOMES.\n\nInstead: (1) Pin mechanics: which item a move may touch (top of stack only?), and whether the target slot is the FIRST or LAST arrival there; derive it from the stacking rule. (2) Restate the event as an exact constraint on the move sequence, e.g. strict alternation, or k source-moves before the first sink-move. (3) Multiply step by step: 1/2 only where both moves are legal, 1 where forced, so 1/2^(free choices). (4) Keep numerator and denominator in ONE sample space; never mix permutation counts with branch counts. (5) Enumerate 2 items.",
+      "mutation": "add asserted-determinism (0/1) trap and a one-sample-space rule; name the 'remaining k equally likely to move last' shortcut explicitly",
+      "subagent_summary": "Fresh sampling with the incumbent scored 0/8; seven rollouts terminated normally at 11k-16k tokens and one hit the cap while dithering, so length is only marginal. The second part failed in three recurring ways: two rollouts declared the whole process deterministic and reported certainty or impossibility, four fell back on an asserted 'each of the remaining items is equally likely to be moved last' shortcut giving 1/n or 1/(n-1), and one divided a permutation count by a branch-sequence count. The revision therefore names asserted determinism as a second trap alongside asserted symmetry, calls out the 'equally likely to move last' variant by name, keeps the pin-mechanics and free-versus-forced 1/2 machinery that transferred well in earlier rounds, and adds a same-sample-space check on the ratio.",
+      "sampling_slurm_job_id": "150.78",
+      "tokens": 200,
+      "hint_hash": "0c7aee72f2faf607792938b8a1024425a40b808664e635aa0864bfeb7d7cd997",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "45b2c0df517f87901f5a1ad921b228f3059ad2ca08158d9c5eb6939a11ecf4b4"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Shrink the huge parameter to n = 2, 3, but design the reduction before computing: one condition per unknown, so the tiny system has a unique solution. If a small case comes out redundant or inconsistent, your index range is off by one -- repair the indexing, never conclude no solution exists, and do not re-derive that count later. Solve each tiny case by plain elimination and factor the result: 1/k!, a binomial, a product of differences. To read one coefficient off a factored polynomial, evaluate or differentiate at a convenient point such as 0; do not expand the product. Two agreeing cases suffice: commit that closed form with its sign and index shift, then stop.",
+      "mutation": "add off-by-one repair rule for degenerate small cases plus evaluate-don't-expand coefficient extraction",
+      "subagent_summary": "Fresh sampling scored 2 of 8; the 6 failures all hit the token cap, and every one of them stalled at the same place: setting up the reduced instance. They wrote a small case with one condition too many or too few, got a redundant or inconsistent tiny system, then spent thousands of tokens debating whether a solution existed instead of fixing the index range. Two failures additionally burned the remaining budget expanding a long product term by term to extract a single low-order coefficient and kept getting contradictory values, so the revision adds an explicit off-by-one repair rule and tells the student to get that coefficient by evaluating or differentiating at a convenient point rather than expanding.",
+      "sampling_slurm_job_id": "150.79",
+      "tokens": 145,
+      "hint_hash": "1223caf49db1e29b027539ab6c3d26a6f21a2251b15bfccca3f51467b3abc2fa",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "970826b6d808a016748fe1e6cda39b71098679265ead772ffa8f52eeb6eaed54"
+    },
+    {
+      "hint_id": 8,
+      "hint": "First label every given number with its scope: per-unit, or total for the whole collection, and settle that reading once before computing. Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, apply the stated markup multiplicatively as (1+p/100), and check integrality and units.",
+      "mutation": "prepend one-sentence per-unit-vs-total scope-labeling opener to the verbatim incumbent and gloss the markup as an explicit (1+p/100) multiplier",
+      "subagent_summary": "All 8 fresh rollouts scored reward 1 with clean stops at 2.7-5.6k tokens, so train_i is saturated at 1.0 and every remaining gain must come from transfer. The rollouts still burn their first 1-2k tokens oscillating over whether each listed figure is a per-unit amount or a whole-collection total before any arithmetic starts, and the scope-labeling opener is the one mutation whose earlier trial coincided with the best transfer score seen so far, so I add exactly that sentence plus an explicit percent-as-multiplier gloss while leaving the incumbent's train-preserving sentences untouched, since the two prior wholesale rewrites each collapsed train.",
+      "sampling_slurm_job_id": "150.82",
+      "tokens": 112,
+      "hint_hash": "63b3a9fe36af68021b3a687f112ab4f8fc6cc03d9e123b50064e9677527ee0a9",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Never name a full set of unknown coefficients and never expand a composed or high-degree identity; that exhausts your budget. Recenter: put both maps about one shared unknown center c, f=c+a(x-c)^k and g=c-a(x-c)^k with odd k, so the identity collapses by symmetry. Take the opposite-sign branch first; same-sign is degenerate. Carry no extra offset and never factor c out. The two supplied values are then c-a*c^k and c+a*c^k: adding them must cancel the a-term, leaving one linear equation for c; subtracting isolates a. A quadratic or irrational center means your signs are wrong: fix that one line, never by expanding. Ask whether a requested input equals c or a fixed point, making its value immediate. Verify by symmetry, commit, state your result early, and stop re-deriving.",
+      "mutation": "force the opposite-sign centered branch with no extra offset, and make the add-the-two-values step a cancellation check that must yield a linear center equation, treating a quadratic/irrational center as a sign bug",
+      "subagent_summary": "Six of eight fresh rollouts were correct, all finishing under 13k tokens by committing early to a single shared-center antisymmetric pair and solving the two given values by adding and subtracting them; both failures ran to the 16384-token cap after mis-parameterizing that ansatz - one carried separate centers/offsets and derived a quadratic for the center with irrational roots, then abandoned the structure for full expansion of the composition, and the other explored inverse/same-sign variants and coefficient matching before ever fixing the signs. The revision therefore pins the exact centered form to use, forbids extra offsets and same-sign branches, and reframes the add-the-two-values step as a cancellation check whose failure signals a sign error to repair in place rather than a cue to expand.",
+      "sampling_slurm_job_id": "150.80",
+      "tokens": 180,
+      "hint_hash": "652ee8dc58008e69bb7e90163e071e0708bc579422e2fd3d5a546ca1fb63ccad",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3bc4a8fb988c1eb05c38ceb4f4bd0bb3b1f52a692bff540b0be46ed42b51bd06"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Trace concretely, not symbolically: write a row of distinct labels and rewrite the whole row after each stated step, each step acting on the previous row, never on the original. Never mix a \"goes to\" map with a \"comes from\" map. Any map you build by hand must be a bijection; if two inputs share an output, or one is missing, that is bookkeeping error, not exotic structure, so redo that trace. Return-to-start questions want an order: reapply the whole process, counting, until the row repeats. When the problem promises one formula in a parameter but your cases force a piecewise split, the odd case is almost surely mis-traced: recheck it, and trust the clean pattern rather than reporting a split or looping. Swap-shaped stages need not have period 2. Commit your result early, then stop.",
+      "mutation": "add bijection self-check on hand-built maps and rule that a piecewise split contradicting the clean small-case pattern means a mis-traced case, not a real split",
+      "subagent_summary": "3 of 8 rollouts were correct; all 5 failures hit the 16384-token cap, and every one of them first got the two smallest cases right, then mis-traced the next-larger case into a claimed period of 2 and spent the rest of the budget oscillating over a piecewise formula it knew could not be the intended single expression. Two of those traces were visibly non-bijective (an element with two images, absurd cycle lengths), which the student read as exotic structure instead of bookkeeping error. The revision therefore keeps the concrete rewrite-the-row discipline but adds a bijection self-check and an explicit rule to distrust the odd larger case rather than the clean pattern, so the student resolves the contradiction and commits instead of looping.",
+      "sampling_slurm_job_id": "150.81",
+      "tokens": 178,
+      "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "ae55ce3989859ea6f512c3e2c3fa5c48cffc4b29cf1ba69ccbf46e955fbe0f0d"
+    }
+  ]
+}
