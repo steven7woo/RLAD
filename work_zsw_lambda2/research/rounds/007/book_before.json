@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 7,
+  "generation": 6,
   "hints": [
     {
       "hint_id": 1,
       "train_position": 163,
       "train_qid": "28054",
-      "hint": "Turn every condition, including what a person says about what they know, into an explicit constraint on your unknowns: divisibility, an inequality, a bound, a count. Impose them in the order spoken. If some quantity's role is left ambiguous and no single reading lets a speaker be uncertain, uncertainty needs several readings live at once: intersect their constraints on that speaker's own value rather than testing each reading alone and rejecting all. A contradiction is a deduction, not a dead end -- it kills one assumption you added, so note which died and move on; never restart or re-derive a settled case. Never import a remembered value from a similar-looking classic puzzle, and never pick a candidate because it looks intended or is merely the smallest -- write each condition out and check it. Commit to your result early, verify once, stop.",
-      "tokens": 170,
-      "hint_hash": "fda1791300f21976dd72f9eebe700de3cfaba1edb06bf4fc0339ea25871f6960"
+      "hint": "Keep the candidate set finite and apply announcements in chronological order, recomputing information sets after each. Critical: if a displayed number is not labelled (e.g. could be the sum or the product), the speakers share that ambiguity, so a candidate is (my own value, which reading holds). \"I don't know\" then means my own value still admits two or more distinct partners, counting across readings; turn that into an arithmetic test on my own value (divisibility, positivity, range) and keep only values that pass. If every reading seems contradictory, you wrongly assumed the speakers knew the label. Never box a number just because it appeared in your enumeration: check the survivor satisfies every statement first.",
+      "tokens": 144,
+      "hint_hash": "cbbaaafa1907efc60835e2a44f805271c9a2f4cd4fe5d3988c244caa7b7e5f7b"
     },
     {
       "hint_id": 2,
@@ -84,6 +84,6 @@
       "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
     }
   ],
-  "total_tokens": 1457,
-  "book_hash": "5ed7bd34f1b2cefc0f54a9b43a28c35ac34067c5666e656261484787d1ce2a1f"
+  "total_tokens": 1431,
+  "book_hash": "b9b0df07b8c96725388473dca68d3084c3bf6b56d78c4314e963399e6f81fb8c"
 }
