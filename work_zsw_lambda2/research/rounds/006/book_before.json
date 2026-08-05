@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 6,
+  "generation": 5,
   "hints": [
     {
       "hint_id": 1,
@@ -47,9 +47,9 @@
       "hint_id": 6,
       "train_position": 62,
       "train_qid": "26989",
-      "hint": "Trap: asserting symmetry. \"Each item is equally likely in any position\", or \"n! orderings so 1/n!\", is a guess. A process random over MOVES is rarely uniform over OUTCOMES.\n\nInstead build ONE sample space and reuse it for EVERY part. Its atoms are the genuinely FREE 50/50 choices: a step is 1/2 only when both options are legal, and forced steps count 1, so there are 2^(free) atoms — not 2^(all moves), not n!. First pin mechanics: which item a move may touch, and whether the asked slot is the FIRST or LAST arrival there.\n\nEach part is then (atoms meeting its constraint)/2^(free). Later parts are where work drifts: never divide a permutation count by a branch count, and never retreat to 1/n. Calibrate on n=2.",
-      "tokens": 182,
-      "hint_hash": "605dd6784c9f1f6f9bb9f5068b8e9744aad3781c1b1d0e9028b48e9692b555e2"
+      "hint": "Trap: asserting symmetry. \"Each item is equally likely in any position\", or \"n! orderings so 1/n!\", is a guess. A process random over MOVES is rarely uniform over OUTCOMES.\n\nInstead: (1) Pin mechanics first — what move is legal, which item it touches (top of stack only?), and whether the target position means the FIRST or LAST arrival. Derive that from the stacking rule; never guess. (2) Turn the event into an exact constraint on the move sequence, e.g. \"moves strictly alternate\" or \"exactly k source-moves precede the first sink-move\". (3) Count only genuinely free 50/50 choices; forced moves (source or sink empty) contribute factor 1, giving 1/2^(free choices), not 1/n or 1/n!. (4) Check n=2 by full enumeration. Re-derive each part from scratch — same setup, different constraint.",
+      "tokens": 200,
+      "hint_hash": "45b2c0df517f87901f5a1ad921b228f3059ad2ca08158d9c5eb6939a11ecf4b4"
     },
     {
       "hint_id": 7,
@@ -84,6 +84,6 @@
       "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
     }
   ],
-  "total_tokens": 1431,
-  "book_hash": "b9b0df07b8c96725388473dca68d3084c3bf6b56d78c4314e963399e6f81fb8c"
+  "total_tokens": 1449,
+  "book_hash": "b905c4af0c91390f0ec746d7de141e8cb6c596b964ad5ccbe2124e64368ab64d"
 }
