@@ -296,6 +296,27 @@
             "J_i": 1.125
           },
           "proposal_eval_slurm_job_id": "149.248"
+        },
+        {
+          "round": 13,
+          "decision": "discarded",
+          "proposal_hash": "66d05542448bd705d51663a5296ac978341367faa744ac432accd7a5c908e60a",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "66d05542448bd705d51663a5296ac978341367faa744ac432accd7a5c908e60a",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 75,
+            "J_denominator": 80,
+            "J_i": 0.9375
+          },
+          "proposal_eval_slurm_job_id": "149.268"
         }
       ]
     },
@@ -303,23 +324,23 @@
       "hint_id": 2,
       "train_position": 28,
       "train_qid": "30302",
-      "hint": "To locate all roots on one circle or line, find one necessary condition, not the n roots. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar equation: |z-a| = k|z-b|, k^n = |c|; never apply the 1/n while nth powers still stand. k = 1 gives a line, their bisector. Else go straight to coordinates: z = x+iy, square, collect the x^2+y^2 term, divide through by its coefficient, complete the square, read off center and radius. Skip midpoint or diameter shortcuts; they invite sign errors. Radii are lengths, so a negative result just means a negative divisor: take its magnitude. That locus IS the answer; test one root at most. Report what is asked.",
-      "tokens": 190,
-      "hint_hash": "59b3d8b787e142b5557010de60e2aaf179f67e91a57adadbbb61e6f1a74bd7e2",
+      "hint": "To find where ALL solutions lie, derive one necessary condition, not the solutions. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar: |z-a| = k|z-b|, k^n = |c|. Get k by writing |c| as a prime power and dividing its exponent by n. Then clear moduli with |w|^2 = w*wbar, never with x+iy: (z-a)(zbar-abar) = k^2 (z-b)(zbar-bbar). Expand and collect z*zbar; a zero coefficient means a line, else divide by it and complete the square to |z-z0|^2 = r^2, giving center z0 and radius r > 0. That locus IS the answer; skip roots of unity.",
+      "tokens": 189,
+      "hint_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80",
       "metrics": {
         "schema_version": 1,
         "hint_id": 2,
-        "hint_hash": "59b3d8b787e142b5557010de60e2aaf179f67e91a57adadbbb61e6f1a74bd7e2",
+        "hint_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
         "train_correct": 8,
         "train_total": 8,
         "train_i": 1.0,
-        "heldout_correct": 15,
+        "heldout_correct": 16,
         "heldout_total": 80,
-        "heldout_i": 0.1875,
-        "J_numerator": 155,
+        "heldout_i": 0.2,
+        "J_numerator": 160,
         "J_denominator": 80,
-        "J_i": 1.9375
+        "J_i": 2.0
       },
       "history": [
         {
@@ -593,6 +614,27 @@
             "J_i": 1.75
           },
           "proposal_eval_slurm_job_id": "149.249"
+        },
+        {
+          "round": 13,
+          "decision": "kept",
+          "proposal_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 160,
+            "J_denominator": 80,
+            "J_i": 2.0
+          },
+          "proposal_eval_slurm_job_id": "149.269"
         }
       ]
     },
@@ -890,6 +932,27 @@
             "J_i": 1.5
           },
           "proposal_eval_slurm_job_id": "149.250"
+        },
+        {
+          "round": 13,
+          "decision": "discarded",
+          "proposal_hash": "7d21868f47a0bedc77bad233d3867dbbaba721c653dbb1a0d47bcf89e48d22b4",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "7d21868f47a0bedc77bad233d3867dbbaba721c653dbb1a0d47bcf89e48d22b4",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 100,
+            "J_denominator": 80,
+            "J_i": 1.25
+          },
+          "proposal_eval_slurm_job_id": "149.270"
         }
       ]
     },
@@ -1187,6 +1250,27 @@
             "J_i": 1.8125
           },
           "proposal_eval_slurm_job_id": "149.251"
+        },
+        {
+          "round": 13,
+          "decision": "discarded",
+          "proposal_hash": "4866979d164e32f6cce13be88373d98019f929af56b6cc00e1d64d5caffa0fda",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "4866979d164e32f6cce13be88373d98019f929af56b6cc00e1d64d5caffa0fda",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 135,
+            "J_denominator": 80,
+            "J_i": 1.6875
+          },
+          "proposal_eval_slurm_job_id": "149.271"
         }
       ]
     },
@@ -1484,6 +1568,27 @@
             "J_i": 1.375
           },
           "proposal_eval_slurm_job_id": "149.252"
+        },
+        {
+          "round": 13,
+          "decision": "discarded",
+          "proposal_hash": "dd070f95d027a3c202cc5aa7f3c051775ffb4649512505b186415266a36af365",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "dd070f95d027a3c202cc5aa7f3c051775ffb4649512505b186415266a36af365",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 120,
+            "J_denominator": 80,
+            "J_i": 1.5
+          },
+          "proposal_eval_slurm_job_id": "149.272"
         }
       ]
     },
@@ -1491,23 +1596,23 @@
       "hint_id": 6,
       "train_position": 62,
       "train_qid": "26989",
-      "hint": "Turn the requested event into a constraint on the sequence of moves, never into a symmetry claim: do not assume each item is equally likely to reach each position. Fix orientation once, since the earliest item placed on a pile stays at its bottom. Then see which steps the constraint forces and which are still genuine two-option choices; weight 1/2 per genuine choice and 1 per forced step, multiply along a sequence, and add the qualifying sequences.",
-      "tokens": 91,
-      "hint_hash": "466facab1208fc7a47986ab237293f5be9ec980670b8f43f1612be39eae83ed6",
+      "hint": "Turn the requested event into a constraint on the order of moves, never into a symmetry claim: reachable outcomes are not equally likely, so 1/n and 1/n! are wrong for every part of the problem. Fix orientation once: a pile's bottom item is whichever arrived there first and its top whichever arrived last, so read each named position as an arrival rank. Then write the deciding moves out in order as an explicit word, and mark every step in it: forced, because only one move is legal, weight 1; or a genuine two-option step that the event resolves, weight 1/2. Freeing a deeply buried item early costs one genuine step for each item lying above it, so expect a run of several 1/2 factors rather than a single one. Multiply along the word, then add over the words that satisfy the event.",
+      "tokens": 175,
+      "hint_hash": "40f95ed4950fe23e751bafb0454b3a7b04b2370e997c7f4b8f29907ec9bc480e",
       "metrics": {
         "schema_version": 1,
         "hint_id": 6,
-        "hint_hash": "466facab1208fc7a47986ab237293f5be9ec980670b8f43f1612be39eae83ed6",
+        "hint_hash": "40f95ed4950fe23e751bafb0454b3a7b04b2370e997c7f4b8f29907ec9bc480e",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-        "train_correct": 0,
+        "train_correct": 3,
         "train_total": 8,
-        "train_i": 0.0,
-        "heldout_correct": 17,
+        "train_i": 0.375,
+        "heldout_correct": 16,
         "heldout_total": 80,
-        "heldout_i": 0.2125,
-        "J_numerator": 85,
+        "heldout_i": 0.2,
+        "J_numerator": 110,
         "J_denominator": 80,
-        "J_i": 1.0625
+        "J_i": 1.375
       },
       "history": [
         {
@@ -1781,6 +1886,27 @@
             "J_i": 0.9375
           },
           "proposal_eval_slurm_job_id": "149.253"
+        },
+        {
+          "round": 13,
+          "decision": "kept",
+          "proposal_hash": "40f95ed4950fe23e751bafb0454b3a7b04b2370e997c7f4b8f29907ec9bc480e",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "40f95ed4950fe23e751bafb0454b3a7b04b2370e997c7f4b8f29907ec9bc480e",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 110,
+            "J_denominator": 80,
+            "J_i": 1.375
+          },
+          "proposal_eval_slurm_job_id": "149.273"
         }
       ]
     },
@@ -2078,6 +2204,27 @@
             "J_i": 1.0
           },
           "proposal_eval_slurm_job_id": "149.254"
+        },
+        {
+          "round": 13,
+          "decision": "discarded",
+          "proposal_hash": "c35fc3b27d5643b21b15f7398e48796deffed09c908798e3800d89841173b869",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "c35fc3b27d5643b21b15f7398e48796deffed09c908798e3800d89841173b869",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 5,
+            "heldout_total": 80,
+            "heldout_i": 0.0625,
+            "J_numerator": 35,
+            "J_denominator": 80,
+            "J_i": 0.4375
+          },
+          "proposal_eval_slurm_job_id": "149.274"
         }
       ]
     },
@@ -2085,20 +2232,20 @@
       "hint_id": 8,
       "train_position": 35,
       "train_qid": "23443",
-      "hint": "Let N be the unstated count of identical units, and recover it from integrality rather than from the story: if every per-unit share must be a whole number, N divides each listed total, so the admissible N are their common divisors and the intended one is the maximum feasible count, namely their gcd. When the story counts groups (streets, rows, batches), the units per group are also unknown, so write N = (number of groups) x (units per group) and solve for the second factor; a group count is never N by itself, even if every total happens to divide by it. Decide once whether each listed figure is a grand total or a per-unit amount, then stop revisiting it. Then add all component amounts, divide by N, and apply any markup or discount as one factor. Check each per-unit value is whole and answer the question asked.",
-      "tokens": 181,
-      "hint_hash": "c95e850295d7d46363b417a65c65f3fccae7a2862d061e29125d32dbcaa06131",
+      "hint": "Let N be the unstated count of identical units; recover it from integrality, not from the story. If every per-unit share must be whole, N divides each listed total, so admissible N are their common divisors. Then select deliberately: if the text bounds the count (a range, at least, at most, roughly), keep only divisors inside that window; otherwise take the maximum feasible count, their gcd. When the story counts groups (streets, rows, batches), write N = groups x units-per-group and solve for the second factor; a group count is never N by itself, even if every total divides by it. Decide once whether each figure is a grand total or a per-unit amount, then stop revisiting it. Finally sum all components, divide by N, apply any markup or discount as one factor, check each per-unit value is whole, and answer the question asked.",
+      "tokens": 185,
+      "hint_hash": "d6e761f5cca43ef948238db65074ea53c3f8953ec6c1f76a4fc7f307db54c5db",
       "metrics": {
         "schema_version": 1,
         "hint_id": 8,
-        "hint_hash": "c95e850295d7d46363b417a65c65f3fccae7a2862d061e29125d32dbcaa06131",
+        "hint_hash": "d6e761f5cca43ef948238db65074ea53c3f8953ec6c1f76a4fc7f307db54c5db",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-        "train_correct": 8,
+        "train_correct": 7,
         "train_total": 8,
-        "train_i": 1.0,
-        "heldout_correct": 12,
+        "train_i": 0.875,
+        "heldout_correct": 14,
         "heldout_total": 80,
-        "heldout_i": 0.15,
+        "heldout_i": 0.175,
         "J_numerator": 140,
         "J_denominator": 80,
         "J_i": 1.75
@@ -2375,6 +2522,27 @@
             "J_i": 1.5625
           },
           "proposal_eval_slurm_job_id": "149.255"
+        },
+        {
+          "round": 13,
+          "decision": "kept",
+          "proposal_hash": "d6e761f5cca43ef948238db65074ea53c3f8953ec6c1f76a4fc7f307db54c5db",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "d6e761f5cca43ef948238db65074ea53c3f8953ec6c1f76a4fc7f307db54c5db",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 140,
+            "J_denominator": 80,
+            "J_i": 1.75
+          },
+          "proposal_eval_slurm_job_id": "149.275"
         }
       ]
     },
@@ -2672,6 +2840,27 @@
             "J_i": 1.625
           },
           "proposal_eval_slurm_job_id": "149.256"
+        },
+        {
+          "round": 13,
+          "decision": "discarded",
+          "proposal_hash": "82215cd78d801feb42a5bb10c60683020fdda63252eac25d6872aa82e51b0cc4",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "82215cd78d801feb42a5bb10c60683020fdda63252eac25d6872aa82e51b0cc4",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 150,
+            "J_denominator": 80,
+            "J_i": 1.875
+          },
+          "proposal_eval_slurm_job_id": "149.276"
         }
       ]
     },
@@ -2969,6 +3158,27 @@
             "J_i": 1.6875
           },
           "proposal_eval_slurm_job_id": "149.257"
+        },
+        {
+          "round": 13,
+          "decision": "discarded",
+          "proposal_hash": "f4937c3e63bb3d174b6b3e34671bca28c3055aabef5214d284bee549d9db04f4",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "f4937c3e63bb3d174b6b3e34671bca28c3055aabef5214d284bee549d9db04f4",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 85,
+            "J_denominator": 80,
+            "J_i": 1.0625
+          },
+          "proposal_eval_slurm_job_id": "149.277"
         }
       ]
     }

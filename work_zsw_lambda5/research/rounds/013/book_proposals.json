@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+  "round": 13,
+  "book_hash_before": "d3674a8dde1d215ea2be51b23ecb1333e983fc34dd8477f86e20e58986a95fc3",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "In \"I don't know\" puzzles, first name every detail the problem leaves unresolved, such as which of two quantities got published; it is unknown to the speakers too. For a speaker holding private value v, resolve that detail each possible way, compute the partner each way, and delete resolutions breaking the domain rules (natural number, exact division). Two or more surviving partners means that speaker cannot know, so v pinning the partner under one resolution alone is never a contradiction. Next, the step usually skipped: convert each announcement into a membership test its own speaker's value must pass, then require every partner in a later speaker's list to pass that same test before recounting. Never break a tie with an unstated criterion like primality, size, or looking special; if several values survive you dropped an announcement or a resolution. Sweep once, do not restart, and check whether the two private values may be equal.",
+      "mutation": "propagate-first-speaker-membership-test-plus-ban-aesthetic-tiebreakers",
+      "subagent_summary": "My 8 rollouts scored 1/8 (execution 149.258). The failures split two ways: three hit the 16384-token cap looping on \"but he could just divide, so this case is impossible\", and four boxed a value chosen by an unstated aesthetic criterion (143 three times as the factor pair that merely looked special, 13 once justified explicitly by primality). Not one rollout converted the first announcement into a membership condition on that speaker's value and then applied it as a filter to the second speaker's candidate partners; every rollout evaluated the second announcement against the raw factor list only. Even the single correct rollout reached its answer by elimination-then-assertion, not by that filter. So the revision keeps the pooled per-value counting frame but makes the propagate-the-earlier-test step concrete, adds an explicit ban on unstated tie-breakers (naming primality and looking special, the two seen), and keeps the sweep-once rule that curbs the cap-burning loop.",
+      "sampling_slurm_job_id": "149.258",
+      "tokens": 186,
+      "hint_hash": "66d05542448bd705d51663a5296ac978341367faa744ac432accd7a5c908e60a",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "a3a9805f3b37695536ecf7628ac6a588215a3f9ca6cb77ede20cc39aa1b660f1"
+    },
+    {
+      "hint_id": 2,
+      "hint": "To find where ALL solutions lie, derive one necessary condition, not the solutions. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar: |z-a| = k|z-b|, k^n = |c|. Get k by writing |c| as a prime power and dividing its exponent by n. Then clear moduli with |w|^2 = w*wbar, never with x+iy: (z-a)(zbar-abar) = k^2 (z-b)(zbar-bbar). Expand and collect z*zbar; a zero coefficient means a line, else divide by it and complete the square to |z-z0|^2 = r^2, giving center z0 and radius r > 0. That locus IS the answer; skip roots of unity.",
+      "mutation": "prime-power-exponent-rule-for-k-plus-conjugate-expansion-replaces-x-plus-iy",
+      "subagent_summary": "7/8 correct. The one failure (18 'Wait' hedges, 5.6k tokens) obeyed the incumbent's ordering rule perfectly but botched k: it rewrote |c| as a cube rather than a 6th power and read k off that base, doubling it. It then ran a flawless completing-the-square and produced a self-consistent circle, so nothing downstream caught it, and its own root enumeration was never checked against the original equation. All 7 correct rollouts got the same k from mental recall, not a procedure. So the incumbent's weak link is the unspecified 'k^n=|c|' step. The revision replaces recall with an exponent-arithmetic rule (factor |c| to a prime power, divide the exponent by n), which is portable to any n and any constant. It also swaps the verbose x+iy expansion for w*wbar, cutting algebra and the sign errors that made a negative-radius guard necessary.",
+      "sampling_slurm_job_id": "149.259",
+      "tokens": 189,
+      "hint_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "59b3d8b787e142b5557010de60e2aaf179f67e91a57adadbbb61e6f1a74bd7e2"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union = summed areas minus overlap, so minimize overlap. Put the shared point at the origin with axes along the two edges meeting there; the cover is then the wedge x >= 0, y >= 0, membership is two sign tests, and far edges sit a full side away, so ignore them. Now tile: k rotated copies of a wedge of angle 2*pi/k fill the plane about the origin, so the pieces they cut from S sum to area(S). If the origin is a k-fold rotation center of S those pieces are congruent, so one wedge holds area(S)/k at every angle; a wedge holding all of S would force a total of k*area(S), a contradiction, so containment is impossible. Reach, half-diagonals, and origin-to-side distances never say which side of a line a point is on; drop them and tangency. Compute that one piece in the easiest orientation, keep the union, stop.",
+      "mutation": "replace-containment-ban-with-tiling-sum-contradiction",
+      "subagent_summary": "Round-13 training scored 6/8 (all rollouts finish_reason=stop, so no budget loss). Both failures die identically and never test coverage at all: each places the shared point at the origin, then compares a reach radius (max origin-to-vertex distance of S, ~0.707) against the big shape's half-diagonal (~1.414), concludes S is wholly inside, sets overlap = area(S), and answers summed-areas-minus-area(S). One failure even had the correct axis-aligned coordinates in hand and overwrote them with an origin-to-side distance argument that silently treats the corner as a center. The incumbent already bans containment verdicts and point-to-side distances, but a bare prohibition loses to a concrete-looking radius number. This revision converts the ban into an arithmetic contradiction the student can execute: the k rotated wedges tile around the origin, so their pieces of S must sum to area(S); containment would force k*area(S), which is absurd, and the same tiling delivers the constant fraction.",
+      "sampling_slurm_job_id": "149.260",
+      "tokens": 194,
+      "hint_hash": "7d21868f47a0bedc77bad233d3867dbbaba721c653dbb1a0d47bcf89e48d22b4",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "e706044d3f2b50b5b56d612f00e693ef4bbb86f0d16e53200f96da94b7c7109e"
+    },
+    {
+      "hint_id": 4,
+      "hint": "A maximum count is an upper bound meeting a matching construction; produce both but keep them apart: a construction shows attainability only, it never caps, so one reaching merely N must not shrink the bound. With each term from any of N functions, never chain adjacent terms: neighbours may differ, so nothing follows. Write the target at index n as T(n); group indices by the function used. On P's group, P - T vanishes but is not identically zero, since low-degree T cannot cancel P's leading term: at most d = deg P indices per group. Finitely many agreements are equations, not an identity. That cap is per group, so Bound = N x d, never N alone. Concretely give each function a block n_1..n_d and set P = T + c(x-n_1)...(x-n_d), c nonzero: full degree, equals T there. Then answer.",
+      "mutation": "separate-roles-construction-attains-bound-caps",
+      "subagent_summary": "My 8 rollouts scored 5/8. All three failures shared one root cause: they treated a construction as if it capped the count. Two built the shift family P_{k+1} = P_k + d across adjacent board entries, saw it work for exactly N terms, and reported N (one stopped there, one truncated arguing N+1 impossible) - they never grouped indices by function, so the per-group root cap never appeared. The third had already derived the per-group product, then called it 'very high', reopened the construction to re-verify, and truncated mid-check. So a working-but-small scheme is being mistaken for an upper bound, and a proven bound is being re-litigated against it. Rather than add prohibitions (round 11's reject-rules collapsed to 3/8), this revision keeps the proven skeleton and adds one portable role separation up front: constructions prove attainability only, they never cap, so a scheme reaching merely N cannot shrink the bound.",
+      "sampling_slurm_job_id": "149.261",
+      "tokens": 190,
+      "hint_hash": "4866979d164e32f6cce13be88373d98019f929af56b6cc00e1d64d5caffa0fda",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "71bbac004964e95216c81767dcfcedba54fed6a04125845418ad992501b8e093"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Base 1/k: height y means argument k^-y, so an argument BELOW 1 gives a POSITIVE height. Settle that sign once. Fit parameters from the given points. A vector equality is ONE constraint: read the displacement (dx,dy) off it. The closure is f(t+dx)=f(t)+dy, a real equation in t, not a tautology; never add a midpoint or diagonal condition for a second one, which over-determines t and collapses the figure onto a given point. A gap dy becomes one factor k^-dy on the argument, giving a rational equation. Test a given vertex's x in it first: that coincident vertex fits everything, so it MUST be a root. Nonzero means your factor is inverted, not your expansion. If zero, divide it out; the rest is linear. Take each height from f. Area = |cross product| of edges.",
+      "mutation": "small-argument-positive-height, closure-as-f(t+dx)=f(t)+dy with midpoint ban, failed-root-test blames the factor",
+      "subagent_summary": "5/8 correct; all 3 failures hit the 16384-token cap, each on a different step of the incumbent's pipeline. One reduced correctly and found both roots, then read log_{1/2} of an argument below 1 as a NEGATIVE height, so its vertex fell off the graph and it wrote 16 lines about the problem being contradictory. One judged the on-curve closure a tautology, decided the system was under-determined, and manufactured a second equation from equal diagonal midpoints (28 mentions), which forced the unknown vertex onto a given one and collapsed the figure. One inverted the argument factor into a square, got a cubic, tested the given vertex's x and got nonzero, then re-verified its expansion instead of suspecting the reduction. So the revision adds the small-argument positive-height rule, states the closure as f(t+dx)=f(t)+dy and bans a second midpoint condition, and routes a failed root test to the factor rather than the algebra.",
+      "sampling_slurm_job_id": "149.262",
+      "tokens": 189,
+      "hint_hash": "dd070f95d027a3c202cc5aa7f3c051775ffb4649512505b186415266a36af365",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "85f213d578062adcf883b7f1f27d6adaf1b87fd1ff0c18c817da13cc0a477ef6"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Turn the requested event into a constraint on the order of moves, never into a symmetry claim: reachable outcomes are not equally likely, so 1/n and 1/n! are wrong for every part of the problem. Fix orientation once: a pile's bottom item is whichever arrived there first and its top whichever arrived last, so read each named position as an arrival rank. Then write the deciding moves out in order as an explicit word, and mark every step in it: forced, because only one move is legal, weight 1; or a genuine two-option step that the event resolves, weight 1/2. Freeing a deeply buried item early costs one genuine step for each item lying above it, so expect a run of several 1/2 factors rather than a single one. Multiply along the word, then add over the words that satisfy the event.",
+      "mutation": "mark-each-step-forced-or-free-in-explicit-move-word-plus-arrival-rank-and-run-of-choices",
+      "subagent_summary": "0/8; the graded quantity is the last sub-answer and all 8 botched it, even those whose earlier part used sane branch counting. Two clusters: (i) five (idx 0,1,2,4,7) called the destination order a uniformly random permutation and read the answer off as 1/4 or 1/24, and four of those also inverted the pile, calling the destination bottom the LAST item carried instead of the first, which makes the asked position untestable; (ii) two (idx 5,6) stayed probabilistic but priced the whole event with one lone 1/2, as if only the final step mattered. Some also miscounted run length, jumping to 1/2^n. So the live defects are the orientation flip, importing symmetry for a later part, and undercounting how many genuine choices the event pins. This revision keeps the incumbent's near-minimal length and 1/2-per-free-step pricing, adding only arrival-rank orientation plus step-by-step forced/free marking of an explicit move word, making the run of choices visible.",
+      "sampling_slurm_job_id": "149.263",
+      "tokens": 175,
+      "hint_hash": "40f95ed4950fe23e751bafb0454b3a7b04b2370e997c7f4b8f29907ec9bc480e",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "466facab1208fc7a47986ab237293f5be9ec980670b8f43f1612be39eae83ed6"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Huge indexed system, one entry asked: never compute at the stated size, and never expand a full-size symbolic product to read a coefficient off it -- that expansion is where these attempts die. Work small.\nFix the toy once by count-matching: n unknowns, n conditions, exponents 1..n, the nonzero right-hand side last. Write it down; never renegotiate the scaling mid-solve, and a toy is never inconsistent.\nKeep toy arithmetic small: use only the zero conditions to express every unknown as a multiple of one chosen unknown, then use the single nonzero condition just to fix that scale. Verify by substituting back into a zero condition you did not use.\nDo n=2,3,4. If one toy fights the simple law the others show, that toy's elimination is miscomputed -- redo it; never widen the formula family to fit it. Then substitute the stated size and finish.",
+      "mutation": "ban-full-size-symbolic-expansion-detour+scale-last-elimination-order+back-substitute-check",
+      "subagent_summary": "3/8 correct. The 3 winners (7.6k-12.4k tokens) all did the same thing: solve n=2,3,4 toys, read the law, substitute. Failures split three ways. Two rollouts abandoned the small-case ladder for a full-size symbolic product and hit the 16384 cap trying to extract one coefficient from its expansion. One solved n=2 and n=3 correctly, then botched the n=4 elimination into a nonsense denominator and spent the rest of the budget inventing formula families to justify it rather than redoing the arithmetic. Others burned thousands of tokens re-arguing how many conditions the toy should have before any algebra. So this revision bans the full-size expansion detour outright, prescribes an elimination order that keeps toy arithmetic small (zero conditions fix ratios, the nonzero one fixes scale) plus a back-substitution check, and rules that a toy clashing with the law is miscomputed.",
+      "sampling_slurm_job_id": "149.264",
+      "tokens": 188,
+      "hint_hash": "c35fc3b27d5643b21b15f7398e48796deffed09c908798e3800d89841173b869",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "b2a22f64742db6de717ce4677f47425adbfad7620c3372bf9f96e9c222adbfaa"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let N be the unstated count of identical units; recover it from integrality, not from the story. If every per-unit share must be whole, N divides each listed total, so admissible N are their common divisors. Then select deliberately: if the text bounds the count (a range, at least, at most, roughly), keep only divisors inside that window; otherwise take the maximum feasible count, their gcd. When the story counts groups (streets, rows, batches), write N = groups x units-per-group and solve for the second factor; a group count is never N by itself, even if every total divides by it. Decide once whether each figure is a grand total or a per-unit amount, then stop revisiting it. Finally sum all components, divide by N, apply any markup or discount as one factor, check each per-unit value is whole, and answer the question asked.",
+      "mutation": "add-bounded-count-divisor-selection-branch",
+      "subagent_summary": "All 8 public rollouts scored reward 1 (train_i=1.0), so training is saturated and the only headroom is transfer (incumbent 12/80). The waste is not arithmetic: rollouts ran 2.5k-6.7k tokens with 7-22 'wait' backtracks, and nearly every backtrack re-litigated two things - what the integrality clause constrains, and which surviving common divisor to take. The group-factoring clause works (rollouts do reach N = groups x per-group), but after listing candidates they stall comparing them and pick the largest only because the hint asserts it. History shows that merely justifying maximality (r11, r12) did not transfer. So I added the missing selection branch: many unseen items of this class bound the count in words (a range, at least/at most/about), where the right pick is the divisor inside that window, not the gcd. That converts a hardcoded 'always gcd' rule into a two-case filter, generalising while keeping the gcd default that holds train at 8/8.",
+      "sampling_slurm_job_id": "149.265",
+      "tokens": 185,
+      "hint_hash": "d6e761f5cca43ef948238db65074ea53c3f8953ec6c1f76a4fc7f307db54c5db",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "c95e850295d7d46363b417a65c65f3fccae7a2862d061e29125d32dbcaa06131"
+    },
+    {
+      "hint_id": 9,
+      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, skip the degree-n^2 coefficient system. Prove the shared center, do not guess or re-search it: the finite set where p=q is p-invariant, so it holds a point r fixed by both. Center there: p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing forces AB^n=BA^n; factor once as AB(A^(n-1)-B^(n-1))=0 and carry both branches, since B=A collapses to p=q; let data, not a guessed sign, kill one. The identity then holds automatically - expect that, not underdetermination; match free parameters to independent givens. Combine givens symmetrically: two differing only in one sign add to pin one unknown, subtract to pin the other. Evaluate the asked inputs centered.",
+      "mutation": "justify-the-shared-center-by-invariance-of-the-p-equals-q-root-set",
+      "subagent_summary": "All 8 rollouts correct (3.5k-8.6k tokens, none truncated), so training is saturated and every remaining point is transfer. The dominant residual waste is doubt about the centered ansatz itself: 'fixed point' appears 5-29 times per rollout, 'another fixed point / another center' 1-6 times in 6 of 8 tails, and three rollouts relitigate whether assuming the centered form is even legitimate. Each reaches the answer at 45-70% of its trace, then spends the rest re-searching a center it already forced. The 8.6k outlier also mis-nested the composition (BA^9, so B=+-A^4) and chased that corrupted branch. Rounds 9, 10 and 12 tried exponent-audit and p+q wording and all lost heldout, so this revision keeps the proven trigger, centered ansatz, factored both-branch condition, parameter-count closure and symmetric-combination steps, changing only the fixed point from an unexplained assumption into a one-line existence argument that removes the cause of the re-search.",
+      "sampling_slurm_job_id": "149.266",
+      "tokens": 190,
+      "hint_hash": "82215cd78d801feb42a5bb10c60683020fdda63252eac25d6872aa82e51b0cc4",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3e5130251127f1cdd38d0a1bb8dd4fb0acfb2a10ba7588ffd823b20e7a983801"
+    },
+    {
+      "hint_id": 10,
+      "hint": "For \"how many repeats restore the original\" problems, simulate; don't theorize. One repeat = ALL listed sub-steps in order, each acting on what the previous produced. Write the state as distinct labels and rewrite it whole per sub-step: swapping two adjacent length-L blocks concatenates them in the other order, rest copied verbatim. Never multiply sub-steps as independent cycles: they share slots, and a length-L block swap is L parallel swaps, not one transposition. Count each size by tracing ONE slot under the FULL repeat until it returns; that time divides the count, the lcm over slots. Every count must come from a real trace; never invent one to fit a pattern. Fit gate: the formula must reproduce EVERY counted size, smallest included. If it misses one, discard the formula and retrace that size once; never excuse a size as special. Counts shrinking as size grows mean a tracing error, not a piecewise answer.",
+      "mutation": "trace-one-slot-orbit-plus-fit-gate-forbidding-special-cases-invented-counts-and-shrinking-counts",
+      "subagent_summary": "4/8 correct. All four failures shared one new fault the incumbent does not catch: they assembled a table of per-size counts that was largely fabricated, then boxed a formula contradicting their own entries. Two boxed 2^(n-1) while explicitly writing that it disagrees with their own smallest-size count and calling that a permissible special case. One asserted a large count for a mid size it never traced, then fit an exponent pattern to it. One produced counts that shrank as size grew (order 2 for the two largest sizes, 4 for a smaller one) and answered piecewise. Every failure invented cycle structures ('four transpositions', 'cycles 2,4,2') rather than tracing, so the incumbent's minimality/lcm advice had nothing real to act on. The revision replaces expensive whole-state repetition with tracing one slot's orbit and adds an explicit fit gate: no invented counts, formula must match every size including the smallest, no special-case excuses, shrinking counts signal a tracing error.",
+      "sampling_slurm_job_id": "149.267",
+      "tokens": 194,
+      "hint_hash": "f4937c3e63bb3d174b6b3e34671bca28c3055aabef5214d284bee549d9db04f4",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85"
+    }
+  ]
+}

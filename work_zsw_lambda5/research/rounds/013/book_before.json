@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 13,
+  "generation": 12,
   "hints": [
     {
       "hint_id": 1,
@@ -15,9 +15,9 @@
       "hint_id": 2,
       "train_position": 28,
       "train_qid": "30302",
-      "hint": "To find where ALL solutions lie, derive one necessary condition, not the solutions. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar: |z-a| = k|z-b|, k^n = |c|. Get k by writing |c| as a prime power and dividing its exponent by n. Then clear moduli with |w|^2 = w*wbar, never with x+iy: (z-a)(zbar-abar) = k^2 (z-b)(zbar-bbar). Expand and collect z*zbar; a zero coefficient means a line, else divide by it and complete the square to |z-z0|^2 = r^2, giving center z0 and radius r > 0. That locus IS the answer; skip roots of unity.",
-      "tokens": 189,
-      "hint_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80"
+      "hint": "To locate all roots on one circle or line, find one necessary condition, not the n roots. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar equation: |z-a| = k|z-b|, k^n = |c|; never apply the 1/n while nth powers still stand. k = 1 gives a line, their bisector. Else go straight to coordinates: z = x+iy, square, collect the x^2+y^2 term, divide through by its coefficient, complete the square, read off center and radius. Skip midpoint or diameter shortcuts; they invite sign errors. Radii are lengths, so a negative result just means a negative divisor: take its magnitude. That locus IS the answer; test one root at most. Report what is asked.",
+      "tokens": 190,
+      "hint_hash": "59b3d8b787e142b5557010de60e2aaf179f67e91a57adadbbb61e6f1a74bd7e2"
     },
     {
       "hint_id": 3,
@@ -47,9 +47,9 @@
       "hint_id": 6,
       "train_position": 62,
       "train_qid": "26989",
-      "hint": "Turn the requested event into a constraint on the order of moves, never into a symmetry claim: reachable outcomes are not equally likely, so 1/n and 1/n! are wrong for every part of the problem. Fix orientation once: a pile's bottom item is whichever arrived there first and its top whichever arrived last, so read each named position as an arrival rank. Then write the deciding moves out in order as an explicit word, and mark every step in it: forced, because only one move is legal, weight 1; or a genuine two-option step that the event resolves, weight 1/2. Freeing a deeply buried item early costs one genuine step for each item lying above it, so expect a run of several 1/2 factors rather than a single one. Multiply along the word, then add over the words that satisfy the event.",
-      "tokens": 175,
-      "hint_hash": "40f95ed4950fe23e751bafb0454b3a7b04b2370e997c7f4b8f29907ec9bc480e"
+      "hint": "Turn the requested event into a constraint on the sequence of moves, never into a symmetry claim: do not assume each item is equally likely to reach each position. Fix orientation once, since the earliest item placed on a pile stays at its bottom. Then see which steps the constraint forces and which are still genuine two-option choices; weight 1/2 per genuine choice and 1 per forced step, multiply along a sequence, and add the qualifying sequences.",
+      "tokens": 91,
+      "hint_hash": "466facab1208fc7a47986ab237293f5be9ec980670b8f43f1612be39eae83ed6"
     },
     {
       "hint_id": 7,
@@ -63,9 +63,9 @@
       "hint_id": 8,
       "train_position": 35,
       "train_qid": "23443",
-      "hint": "Let N be the unstated count of identical units; recover it from integrality, not from the story. If every per-unit share must be whole, N divides each listed total, so admissible N are their common divisors. Then select deliberately: if the text bounds the count (a range, at least, at most, roughly), keep only divisors inside that window; otherwise take the maximum feasible count, their gcd. When the story counts groups (streets, rows, batches), write N = groups x units-per-group and solve for the second factor; a group count is never N by itself, even if every total divides by it. Decide once whether each figure is a grand total or a per-unit amount, then stop revisiting it. Finally sum all components, divide by N, apply any markup or discount as one factor, check each per-unit value is whole, and answer the question asked.",
-      "tokens": 185,
-      "hint_hash": "d6e761f5cca43ef948238db65074ea53c3f8953ec6c1f76a4fc7f307db54c5db"
+      "hint": "Let N be the unstated count of identical units, and recover it from integrality rather than from the story: if every per-unit share must be a whole number, N divides each listed total, so the admissible N are their common divisors and the intended one is the maximum feasible count, namely their gcd. When the story counts groups (streets, rows, batches), the units per group are also unknown, so write N = (number of groups) x (units per group) and solve for the second factor; a group count is never N by itself, even if every total happens to divide by it. Decide once whether each listed figure is a grand total or a per-unit amount, then stop revisiting it. Then add all component amounts, divide by N, and apply any markup or discount as one factor. Check each per-unit value is whole and answer the question asked.",
+      "tokens": 181,
+      "hint_hash": "c95e850295d7d46363b417a65c65f3fccae7a2862d061e29125d32dbcaa06131"
     },
     {
       "hint_id": 9,
@@ -84,6 +84,6 @@
       "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85"
     }
   ],
-  "total_tokens": 1875,
-  "book_hash": "c80208f6719125bb56697d939fcfdda9d51ebdcae4a2d1028d34026d92c33445"
+  "total_tokens": 1788,
+  "book_hash": "d3674a8dde1d215ea2be51b23ecb1333e983fc34dd8477f86e20e58986a95fc3"
 }
