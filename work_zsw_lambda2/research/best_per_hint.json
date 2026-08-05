@@ -212,6 +212,27 @@
             "J_i": 0.3
           },
           "proposal_eval_slurm_job_id": "150.164"
+        },
+        {
+          "round": 9,
+          "decision": "discarded",
+          "proposal_hash": "1dcc9c6ac5f9ba5eeb7069956f7599027c6c8b5a1ac67ca2583ba0690ec8f0bd",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "1dcc9c6ac5f9ba5eeb7069956f7599027c6c8b5a1ac67ca2583ba0690ec8f0bd",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 34,
+            "J_denominator": 80,
+            "J_i": 0.425
+          },
+          "proposal_eval_slurm_job_id": "150.184"
         }
       ]
     },
@@ -425,6 +446,27 @@
             "J_i": 1.1
           },
           "proposal_eval_slurm_job_id": "150.165"
+        },
+        {
+          "round": 9,
+          "decision": "discarded",
+          "proposal_hash": "d4e3c82d127a97a23ded4e4ecb1613caaeff80b3563e31f696ef5bb412580bca",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "d4e3c82d127a97a23ded4e4ecb1613caaeff80b3563e31f696ef5bb412580bca",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 94,
+            "J_denominator": 80,
+            "J_i": 1.175
+          },
+          "proposal_eval_slurm_job_id": "150.185"
         }
       ]
     },
@@ -432,23 +474,23 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Fix coordinates once, pinned point at the origin; never restart the setup. For fixed-area pieces, union = sum minus overlap, so maximize the union by minimizing overlap. Beware the trap of assuming the bigger shape swallows the smaller one: a polygon vertex is only a wedge of its interior angle, so beyond that apex the shape covers nothing. Test one concrete point on the far side before concluding containment. When the apex sits at a center of n-fold rotational symmetry, that 2pi/n wedge cuts off exactly 1/n of the region at every rotation angle, so there is nothing to optimize. Then commit to one exact fraction and stop.",
-      "tokens": 131,
-      "hint_hash": "e73c55e27100ae936358bb7823761096f52d3e52bbb1bf81a9e7298441eeb331",
+      "hint": "Fix one setup once and never rebuild it. When fixed pieces overlap, total = sum minus overlap, so maximize coverage by minimizing overlap; the same inclusion-exclusion bookkeeping serves counting. Never assume a big object swallows a small one: a vertex spans only its interior angle, so test one concrete point past that wedge. For an extremal claim, stop sweeping the free parameter and certify: one bound valid in every configuration plus one configuration attaining it is a complete proof, so no later case can beat it. Then write the visible solution by transcribing the numbers you already settled. Re-deriving it from scratch, or restating the problem again, is what runs you out of room before your result ever appears.",
+      "tokens": 146,
+      "hint_hash": "a69022206f815aa610531eaf90a55d289cb8cba855d7fdd86219bae38ef15efe",
       "metrics": {
         "schema_version": 1,
         "hint_id": 3,
-        "hint_hash": "e73c55e27100ae936358bb7823761096f52d3e52bbb1bf81a9e7298441eeb331",
+        "hint_hash": "a69022206f815aa610531eaf90a55d289cb8cba855d7fdd86219bae38ef15efe",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-        "train_correct": 4,
+        "train_correct": 5,
         "train_total": 8,
-        "train_i": 0.5,
+        "train_i": 0.625,
         "heldout_correct": 16,
         "heldout_total": 80,
         "heldout_i": 0.2,
-        "J_numerator": 72,
+        "J_numerator": 82,
         "J_denominator": 80,
-        "J_i": 0.9
+        "J_i": 1.025
       },
       "history": [
         {
@@ -638,6 +680,27 @@
             "J_i": 0.625
           },
           "proposal_eval_slurm_job_id": "150.166"
+        },
+        {
+          "round": 9,
+          "decision": "kept",
+          "proposal_hash": "a69022206f815aa610531eaf90a55d289cb8cba855d7fdd86219bae38ef15efe",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "a69022206f815aa610531eaf90a55d289cb8cba855d7fdd86219bae38ef15efe",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 82,
+            "J_denominator": 80,
+            "J_i": 1.025
+          },
+          "proposal_eval_slurm_job_id": "150.186"
         }
       ]
     },
@@ -645,23 +708,23 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "For \"at most how many\" extremal problems do both halves: an upper bound and a construction attaining it. Name a count early, before you run long.\n\nPosit ONE unknown affine target for the whole pattern (an arithmetic progression is A+B*n), shared by every piece. Index n is then usable by piece f exactly when n is a root of f(x)-(A+Bx): a pointwise condition. Never demand that one piece's own consecutive difference be constant - neighbouring terms may come from different pieces, and that false identity is what makes the task look impossible.\n\nEach such difference is a nonzero degree-d polynomial, so at most d roots. The root sets are disjoint and together fill the single progression, so budgets add: total <= (number of pieces) x d, already in the units asked for, not a per-piece cap.\n\nAttain it by cutting the range into consecutive blocks, one piece interpolating each.",
-      "tokens": 189,
-      "hint_hash": "40644c5ad3884d8dd2e32629b2968c787adfe9e53d2fb9166561d803c1e485f1",
+      "hint": "For \"at most how many\" questions give both halves: an upper bound and an example reaching it. Name a count early, before you run long.\n\nPosit ONE unknown affine target for the whole pattern (an arithmetic progression is A+B*n), shared by every piece. Index n is usable by piece f exactly when the residual f(x)-(A+Bx) vanishes at n. Never demand that one piece alone give consecutive terms; neighbours may come from different pieces, and that false demand makes the task look impossible.\n\nA nonzero degree-d residual has at most d roots - but that caps ONE piece, not the pattern. Pieces are reusable, each with its own residual and disjoint root set, so budgets ADD over all m pieces: total <= m*d.\n\nBefore stopping, check your count uses every number given; if it is only the degree, or only the piece count, you dropped a factor.\n\nAttain the bound with consecutive blocks, one piece each.",
+      "tokens": 194,
+      "hint_hash": "2f7b2098363b9a53549fa724b1dc1c9431fbed1120452254cacf4f6a7a8218ff",
       "metrics": {
         "schema_version": 1,
         "hint_id": 4,
-        "hint_hash": "40644c5ad3884d8dd2e32629b2968c787adfe9e53d2fb9166561d803c1e485f1",
+        "hint_hash": "2f7b2098363b9a53549fa724b1dc1c9431fbed1120452254cacf4f6a7a8218ff",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-        "train_correct": 5,
+        "train_correct": 7,
         "train_total": 8,
-        "train_i": 0.625,
-        "heldout_correct": 13,
+        "train_i": 0.875,
+        "heldout_correct": 11,
         "heldout_total": 80,
-        "heldout_i": 0.1625,
-        "J_numerator": 76,
+        "heldout_i": 0.1375,
+        "J_numerator": 92,
         "J_denominator": 80,
-        "J_i": 0.95
+        "J_i": 1.15
       },
       "history": [
         {
@@ -851,6 +914,27 @@
             "J_i": 0.5
           },
           "proposal_eval_slurm_job_id": "150.167"
+        },
+        {
+          "round": 9,
+          "decision": "kept",
+          "proposal_hash": "2f7b2098363b9a53549fa724b1dc1c9431fbed1120452254cacf4f6a7a8218ff",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "2f7b2098363b9a53549fa724b1dc1c9431fbed1120452254cacf4f6a7a8218ff",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 92,
+            "J_denominator": 80,
+            "J_i": 1.15
+          },
+          "proposal_eval_slurm_job_id": "150.187"
         }
       ]
     },
@@ -1064,6 +1148,27 @@
             "J_i": 0.675
           },
           "proposal_eval_slurm_job_id": "150.168"
+        },
+        {
+          "round": 9,
+          "decision": "discarded",
+          "proposal_hash": "69ebb1dc78d1975711028d73f63543fa35630f76f61be8a6fd7d776fede4b09c",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "69ebb1dc78d1975711028d73f63543fa35630f76f61be8a6fd7d776fede4b09c",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 80,
+            "J_denominator": 80,
+            "J_i": 1.0
+          },
+          "proposal_eval_slurm_job_id": "150.188"
         }
       ]
     },
@@ -1277,6 +1382,27 @@
             "J_i": 0.45
           },
           "proposal_eval_slurm_job_id": "150.169"
+        },
+        {
+          "round": 9,
+          "decision": "discarded",
+          "proposal_hash": "80481592530c062c239dfb2d2332b47de5dff526a57a940eed6ec83b0b001016",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "80481592530c062c239dfb2d2332b47de5dff526a57a940eed6ec83b0b001016",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 32,
+            "J_denominator": 80,
+            "J_i": 0.4
+          },
+          "proposal_eval_slurm_job_id": "150.189"
         }
       ]
     },
@@ -1284,20 +1410,20 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Compute before theorizing. Replace the large size by n = 2, then 3; write that tiny system out and solve it exactly. Express each answer as a signed rational and factor it: 1/k!, a binomial, a product of differences. Two agreeing cases suggest the form; confirm on a third. Treat any structural claim (\"the only solution is...\", \"that coefficient vanishes\") as a guess and test it on n = 2 before building on it. If a derivation stalls or contradicts itself, abandon it rather than restarting -- the checked small cases already fix the pattern. State the closed form with its sign and index shift.",
-      "tokens": 132,
-      "hint_hash": "970826b6d808a016748fe1e6cda39b71098679265ead772ffa8f52eeb6eaed54",
+      "hint": "Reach a stated result early, then spend the rest of your effort checking it: reasoning that never lands scores nothing. Get the cheapest foothold first -- if the problem is posed at a large or symbolic size, solve the smallest genuine instance exactly and compare a few confirmed values against factorials, binomials, powers, and products of differences, watching the sign and any off-by-one shift. Fix notation once; no symbol may serve as both an index and an exponent. If one tabulated value breaks a pattern the others obey, recheck that value's arithmetic instead of inventing a new theory. Extract a single coefficient by evaluating or differentiating at a convenient point, never by expanding a long product. Verify by substituting into the original conditions, and never re-solve a settled case or restate your work from the top.",
+      "tokens": 168,
+      "hint_hash": "624bd880b5b94320846e50c68a8c4de3ea35b048ba853273064bcd1c17d0a2db",
       "metrics": {
         "schema_version": 1,
         "hint_id": 7,
-        "hint_hash": "970826b6d808a016748fe1e6cda39b71098679265ead772ffa8f52eeb6eaed54",
+        "hint_hash": "624bd880b5b94320846e50c68a8c4de3ea35b048ba853273064bcd1c17d0a2db",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-        "train_correct": 2,
+        "train_correct": 1,
         "train_total": 8,
-        "train_i": 0.25,
-        "heldout_correct": 9,
+        "train_i": 0.125,
+        "heldout_correct": 14,
         "heldout_total": 80,
-        "heldout_i": 0.1125,
+        "heldout_i": 0.175,
         "J_numerator": 38,
         "J_denominator": 80,
         "J_i": 0.475
@@ -1490,6 +1616,27 @@
             "J_i": 0.275
           },
           "proposal_eval_slurm_job_id": "150.170"
+        },
+        {
+          "round": 9,
+          "decision": "kept",
+          "proposal_hash": "624bd880b5b94320846e50c68a8c4de3ea35b048ba853273064bcd1c17d0a2db",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "624bd880b5b94320846e50c68a8c4de3ea35b048ba853273064bcd1c17d0a2db",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 38,
+            "J_denominator": 80,
+            "J_i": 0.475
+          },
+          "proposal_eval_slurm_job_id": "150.190"
         }
       ]
     },
@@ -1703,6 +1850,27 @@
             "J_i": 1.4
           },
           "proposal_eval_slurm_job_id": "150.171"
+        },
+        {
+          "round": 9,
+          "decision": "discarded",
+          "proposal_hash": "2246b9ea8c67515f5197a75646546b66396451d208578f85b38f454b664db5ac",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "2246b9ea8c67515f5197a75646546b66396451d208578f85b38f454b664db5ac",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 108,
+            "J_denominator": 80,
+            "J_i": 1.35
+          },
+          "proposal_eval_slurm_job_id": "150.191"
         }
       ]
     },
@@ -1916,6 +2084,27 @@
             "J_i": 1.25
           },
           "proposal_eval_slurm_job_id": "150.172"
+        },
+        {
+          "round": 9,
+          "decision": "discarded",
+          "proposal_hash": "81f4d2bb8dae0eac5e7d8bd1d69a48b40c94b267076e9e439b98ea78f96f78c1",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "81f4d2bb8dae0eac5e7d8bd1d69a48b40c94b267076e9e439b98ea78f96f78c1",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 17,
+            "heldout_total": 80,
+            "heldout_i": 0.2125,
+            "J_numerator": 114,
+            "J_denominator": 80,
+            "J_i": 1.425
+          },
+          "proposal_eval_slurm_job_id": "150.192"
         }
       ]
     },
@@ -2129,6 +2318,27 @@
             "J_i": 0.675
           },
           "proposal_eval_slurm_job_id": "150.173"
+        },
+        {
+          "round": 9,
+          "decision": "discarded",
+          "proposal_hash": "d0801b4dbae545645f0f8c981c1e6d90ae83514eee538836aba3a37a531c8597",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "d0801b4dbae545645f0f8c981c1e6d90ae83514eee538836aba3a37a531c8597",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 17,
+            "heldout_total": 80,
+            "heldout_i": 0.2125,
+            "J_numerator": 64,
+            "J_denominator": 80,
+            "J_i": 0.8
+          },
+          "proposal_eval_slurm_job_id": "150.193"
         }
       ]
     }
