@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 14,
+  "generation": 13,
   "hints": [
     {
       "hint_id": 1,
@@ -47,9 +47,9 @@
       "hint_id": 6,
       "train_position": 62,
       "train_qid": "26989",
-      "hint": "Model relay-through-a-buffer stack tasks as stack shunting: fix one labeling, items named bottom-to-top; keep ordered source, buffer and destination stacks; describe a run by its word of pushes and pops. Restate the target event as a condition on that word: a destination's top is whatever arrived last, its bottom whatever arrived first, so \"lands at the bottom\" constrains the earliest moves, not the latest. Never assume all n! final orders or all words are equally likely: stack rules leave many orders unreachable and forced moves make branches unequal, so a bare 1/k or 1/k! is a red flag. Multiply true per-step probabilities along each admissible word, one where a move is forced (empty buffer forces a push, empty source forces a pop) and one half only at free steps; check each state's branches sum to one.",
-      "tokens": 176,
-      "hint_hash": "e64f97e23626cd3b726aa52d8740f627fe7f8a230645491fa857bd91465c19e1"
+      "hint": "Model relay-through-a-buffer stack tasks as stack shunting: fix one labeling, items named bottom-to-top; keep ordered source, buffer and destination stacks; describe a run by its word of pushes and pops. Restate the target event as a condition on that word: a destination's bottom is whatever arrived first, its top whatever arrived last, so \"lands at the bottom\" constrains the earliest moves, not the latest. Never assume all n! final orders or all words are equally likely: stack rules leave many orders unreachable and forced moves make branches unequal, so a bare 1/k or 1/k! is a red flag. Multiply true per-step probabilities along each admissible word, one where a move is forced (empty buffer forces a push, empty source forces a pop) and one half only at free steps; check each state's branch probabilities sum to one.",
+      "tokens": 177,
+      "hint_hash": "95b6a4b6d1196cbe4413c62b9b8de2f2fc8e18a7553bd9c85f62337bf84d3d7e"
     },
     {
       "hint_id": 7,
@@ -84,6 +84,6 @@
       "hint_hash": "8f7b8e1d1d6e2d9340e42495d567be9a197bd3fa8ed7642d587f47ff305db523"
     }
   ],
-  "total_tokens": 1150,
-  "book_hash": "f5b6294a2a1e974bd2c186b50032707d337813a5b0a0dc052644a7c186d74753"
+  "total_tokens": 1151,
+  "book_hash": "e2bdae8fea0a68742a1ca89c35fd5a33a32d4fa42e81cc2b2a7f71dacce90391"
 }
