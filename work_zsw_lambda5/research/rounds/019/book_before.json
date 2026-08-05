@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 19,
+  "generation": 18,
   "hints": [
     {
       "hint_id": 1,
       "train_position": 163,
       "train_qid": "28054",
-      "hint": "In \"I don't know\" puzzles, reason from one speaker's seat, never from the public number. Fix that speaker's own value v and pool into ONE list every partner v admits across all options the problem leaves unstated, such as which quantity was published; keep only legal entries and allow the two private values to be equal. Work by contrapositive: first find the v whose pooled list holds exactly one entry, since those are exactly the speakers who would know, and the announcement of ignorance deletes precisely those v. To certify a v as ignorant you must exhibit two distinct legal partners for it, so a v pinned under one option alone is no contradiction. Carry the surviving condition forward: a later speaker's candidate partners are the earlier speaker's value, so each must satisfy it. Answer the coordinate common to all survivors; never decide by primality or looks.",
-      "tokens": 175,
-      "hint_hash": "63a89f2cd0ed76608369f4f83dfd2ebf423fba103da365f212bc744abc7f10b2"
+      "hint": "In \"I don't know\" puzzles, judge knowledge only from what one speaker holds. Fix that speaker's private value v and list every scenario consistent with v plus the public data, carrying any choice the problem leaves unstated, such as which quantity was published, inside the scenario, and allowing the two private values to be equal. Drop scenarios breaking the domain rules. One survivor means that speaker knows; two or more means they do not, so v pinning the partner under one unstated choice is never a contradiction. Key step: turn each announcement into an explicit predicate on that speaker's own value, list the values satisfying it, then enforce that same predicate on whichever slot that speaker occupies in every remaining scenario. Take announcements in order, re-listing between them, and answer with a coordinate of a scenario surviving all of them. If none survives, widen the unstated choices rather than boxing a plausible factor.",
+      "tokens": 184,
+      "hint_hash": "a3a9805f3b37695536ecf7628ac6a588215a3f9ca6cb77ede20cc39aa1b660f1"
     },
     {
       "hint_id": 2,
@@ -84,6 +84,6 @@
       "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85"
     }
   ],
-  "total_tokens": 1870,
-  "book_hash": "5ce188613d42877c415bbcb3baa4326ab3ed1c2aa5674868244de2e44df887d1"
+  "total_tokens": 1879,
+  "book_hash": "3609e57ab6f9a536f57b134cf65b8477e8117931d099da4400c2aeacd97713d8"
 }
