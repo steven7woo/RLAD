@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 18,
+  "generation": 17,
   "hints": [
     {
       "hint_id": 1,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Prefer literal computation to compact notation. Run the stated procedure on the smallest instance step by step, each step acting on the previous step's output, never on the original data, and write the whole state after each step. That worked run outranks everything else. When a formula, a tidier notation, or a claim about structure disagrees with it, do not repair the model and do not suspect the run: drop that language entirely and finish by plain repetition, applying the whole procedure again and again and counting. You owe no decomposition and no general proof. Then let the requested form police the result: an expression in a parameter must move with that parameter, and the smallest instance you trust must satisfy it; if it does not, shift the exponent, not the instance. Calling the setup confusing, or repeating a line, means stop and state the value your instances support.",
-      "tokens": 175,
-      "hint_hash": "181de074d76a20fc0bc384bdc26a17c1f9701c3a217430261cb7e7887a18aee0"
+      "hint": "Let the requested shape of the result police your work. When the problem asks for an expression in a parameter, the value must move with that parameter, so small cases coming out constant are mis-traced: repair them before fitting anything, and require your formula to reproduce every case you trust, including the smallest. Get cases cheaply and concretely: run the stated procedure literally on one small instance, each step acting on the previous step's output, never on the original data. Keep that instance as your anchor; an elegant structural shortcut stays a conjecture until the anchor confirms it, and if they disagree the shortcut dies, not the anchor. A map you build by hand that sends two things to one place is a bookkeeping slip; redo it, do not theorize. Length, not difficulty, defeats problems like this: once a value fits your cases, state it plainly and stop.",
+      "tokens": 180,
+      "hint_hash": "c6b2f9561c1e6af3526f6a1e843cacc706a6ef966672074d7847253f229087de"
     }
   ],
-  "total_tokens": 1616,
-  "book_hash": "e80d2fe8a666cdc42b7d9ae7a3f0a088675e37730ea3357e93167aaa2689c1d4"
+  "total_tokens": 1621,
+  "book_hash": "f25f9a3bf1118e663f1442b42f2e9a69a29f58a57d2b74f84c22f4edda86719d"
 }
