@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+  "round": 13,
+  "book_hash_before": "8517812548134fbfeb82fc92a51e7aa3561f7e9f78f0d5bf0262e0783f364161",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Do algebra, not case-walking. Name the unknown, write each requirement as an equation, a divisibility, or an inequality, and solve them together. Impose every requirement on BOTH quantities of a pair, including the partner a case forces -- when a value and its complement must each meet the same requirement, that is severe, so test the symmetric case where the two unknowns are equal, plus the extremes, before enumerating. Once a candidate passes every condition, that is your result: do not overturn it with a later vague objection, recheck the objection instead. Never report a value you already refuted. If every candidate looks impossible you added an assumption never given -- usually extra knowledge, or a choice the wording leaves open. Name it, drop it, do not restart. Say your result before you run long, verify once, stop.",
+      "mutation": "lead with algebra-over-enumeration and add a no-second-guessing rule: a candidate that already passed every condition must not be discarded on a vague later objection",
+      "subagent_summary": "Fresh sampling with the incumbent scored 0/8; two rollouts died at the token cap mid-enumeration, and the other six ground through case lists then reported a value their own text had just called impossible. The decisive new evidence: one rollout constructed the equal-split symmetric pair, said it satisfied the constraints, then abandoned it on a hand-waved objection and reported something else. So the incumbent's ban on false assumptions is not the binding failure any more -- self-sabotage after a correct check is. I replaced the branch-intersection language with (a) solve constraints simultaneously rather than walking cases, (b) apply each constraint to both members so the symmetric candidate surfaces early, and (c) once a candidate survives every condition, keep it and audit the objection instead.",
+      "sampling_slurm_job_id": "150.254",
+      "tokens": 172,
+      "hint_hash": "c96a30c737d0ed4fe76566d7a4497c527907d41206e1c913ddf513133154d833",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "fda1791300f21976dd72f9eebe700de3cfaba1edb06bf4fc0339ea25871f6960"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable to introduce the ratio w=(z-1)/z; the equation then pins w to a finite set on a circle. Solve for z in terms of w and turn the locus into an equation in x and y, completing the square to read off center and radius. Generally: substitute so the relation depends on one quantity, and keep every value exact.\n\nTreat ballooning algebra as a signal to switch routes, not to push harder. Nested fractions, a parameter you must kill with trig identities, or growing case work all mean a shorter equivalent condition on the same unknown exists: take absolute values, exploit a symmetry, or compare degrees. One small equation often replaces the whole computation. A clashing check hides its own slip, not a broken setup: recheck that line, then state your value.",
+      "mutation": "replace the target/form-specification clause with a route-switching trigger: name the concrete symptoms of ballooning algebra and the cheaper equivalent conditions (moduli, symmetry, degree comparison) to switch to",
+      "subagent_summary": "Seven of eight fresh rollouts were correct at 4.6k-10k tokens each; the single failure was the only one to hit the 16384 cap. It took the parametrize-by-angle route, carried x and y as ratios in cos(theta), and produced a degree-4 mess it could not reduce, then burned the rest of the budget re-verifying sample points and repeatedly declaring the setup impossible. Every winner instead noticed the pinned modulus and reduced the whole problem to one small equation in x and y. Prior rounds already tried tuning the recheck loop and pre-specifying the requested form without gains, so I targeted the earlier decision point: name the symptoms of ballooning algebra as a trigger to switch to a cheaper equivalent condition rather than grinding the expensive route.",
+      "sampling_slurm_job_id": "150.255",
+      "tokens": 170,
+      "hint_hash": "2e550a4ab5ddede32b7c6cedb18ddf270ba420037782f08c452f2209152dbb67",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "64b0f516c4150af456f05fd043eae6476f571e240a578af063256e2ea28e9e9a"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Fix one setup and never rebuild it. When pieces overlap or are double counted, total = sum minus overlap; that bookkeeping serves areas and counting alike. Never assume a big object swallows a small one: a vertex spans only its interior angle, so test one concrete point past that wedge. A continuous free parameter has only finitely many regimes, since the formula changes only where boundaries start meeting differently. Name the regimes once, evaluate one interior point of each plus the switch points, and the search is over: extra sampled values cannot reveal a case you never named, so keep going only while some regime is unnamed. Then write the visible solution by transcribing settled numbers, doing the combining arithmetic in your first step, before any setup recap. Re-describing the picture there is what runs you out of room before your result appears.",
+      "mutation": "replace the abstract bound-plus-witness stop licence with a finite-regime enumeration criterion that makes further parameter sampling provably uninformative, and move the combining arithmetic ahead of any setup recap in the write-up",
+      "subagent_summary": "Only 2 of 8 scored, both by a short write-up that reached the combining step. No failure was mathematical: 7 of 8 held the right overlap inside the first 3-7k of ~52-62k characters, then spent 98-182 rotation re-tests and 45-79 restarts. Four never closed reasoning at all. The two decisive cases did close it but opened with a full setup recap plus multi-heading preamble and were truncated one line short of combining the numbers; one even wrote the correct minimal overlap and then hedged that rotation might reduce it further. So the incumbent's certify clause is too abstract to fire against continuous rotation. This revision gives a concrete, checkable halting test (a continuous parameter has finitely many regimes; once each is named and sampled, more values cannot inform) and orders the write-up so the arithmetic precedes any recap.",
+      "sampling_slurm_job_id": "150.256",
+      "tokens": 168,
+      "hint_hash": "552399db595a487e42f6a3b467b1e55d8a70567c97573f5a34f4ac14de74978e",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "a69022206f815aa610531eaf90a55d289cb8cba855d7fdd86219bae38ef15efe"
+    },
+    {
+      "hint_id": 4,
+      "hint": "For \"at most how many\" questions give both halves: an upper bound and an example reaching it. Name a count early.\n\nPosit ONE unknown affine target for the whole pattern (an arithmetic progression is A+B*n), shared by every piece. Index n is usable by piece f exactly when the residual f(x)-(A+Bx) vanishes at n. Never demand that one piece alone give consecutive terms; neighbours may come from different pieces, and that false demand makes the task look impossible.\n\nA nonzero degree-d residual has at most d roots - that caps ONE piece, not the pattern. Reuse is permitted unless forbidden, so each of the m pieces brings a disjoint root set and budgets ADD: total <= m*d.\n\nThen trust that product. Its feeling too large, or unlike any number handed to you, is no evidence against it; a lone d or a lone m dropped a factor.\n\nAttain the bound with consecutive blocks, one piece each.",
+      "mutation": "state that reuse is permitted unless forbidden, and add a trust-the-derived-product directive against retreating from a bound that looks larger than the given numbers",
+      "subagent_summary": "Fresh 8 rollouts with the incumbent scored 3/8. Two failures argued each polynomial could serve only one called number and answered with the polynomial count; two more computed the per-piece root cap one too low and reported that smaller product; one truncated after explicitly writing the correct product but calling it \"too large\" and hunting for a smaller intended value. So the residual-degree audit already in the hint is not the binding leak - the leaks are an invented single-use restriction and a refusal to keep a bound that looks bigger than the numbers in the statement. The revision states that reuse is permitted unless the problem forbids it, keeps the per-piece root cap, and adds an explicit instruction to trust the derived product rather than retreat to a rounder or smaller value.",
+      "sampling_slurm_job_id": "150.257",
+      "tokens": 194,
+      "hint_hash": "a1195db8cbc63a285dfb8112c002dedf87e96103a5b715d268381337f3ce5abf",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "2f7b2098363b9a53549fa724b1dc1c9431fbed1120452254cacf4f6a7a8218ff"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Name your unknowns and turn each given condition into one exact equation; solve for any constants first. Reduce to a single variable and keep exact fractions. Screen each root by substituting the number into the domain condition itself, not into an interval you wrote earlier. Discard a root only when it fails that check or collapses the described object; if that leaves you with a degenerate or trivial outcome, you screened wrongly -- go back and keep the other root. Verify with a second, different method rather than repeating the first. State your result early, then stop.",
+      "mutation": "make root screening concrete (substitute into the stated domain condition, not a remembered interval) and add a reversal rule when only a degenerate root survives",
+      "subagent_summary": "Seven of eight fresh rollouts were correct at about 9k tokens; the one failure got the right reduced quadratic and both roots, then mis-screened them from a remembered domain interval, threw away the admissible negative-fraction root, kept the root that makes two named points coincide, and reported a collapsed figure as the value. Every correct rollout instead recognized that root as degenerate and took the other. So the incumbent clause \"discard roots that are degenerate or outside the domain\" is exactly what backfires: applied from memory it can eliminate the wanted root. I made screening concrete (substitute the number into the stated condition) and added a reversal rule: a degenerate or trivial outcome means the screening was wrong, so restore the other root rather than reporting the collapse.",
+      "sampling_slurm_job_id": "150.258",
+      "tokens": 113,
+      "hint_hash": "2b5ce33046e871dc5060ec87e8093bc1ed2ddab237247abaf5fc824156aca424",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "83c896bc82082c6ed4cb8791f9d2a555f90a25b05e0dc438a5532b3b8a6282c8"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Randomness over STEPS rarely gives uniformity over OUTCOMES, so 1/n and 1/n! are guesses. Price branches honestly: 1/2 only where both options are legal, 1 where forced.\n\nThe real killer is a bad paraphrase of the asked position. Do NOT trust a restatement like \"the lowest one is whatever was handled last.\" TEST it: simulate one concrete run, write the destination out in arrival order, and read off which item truly occupies the asked slot. Things stack upward, so the lowest is the EARLIEST arrival. Only a restatement surviving that test may be counted.\n\nNever price \"a named item reaches a named slot\" as 1/n. Turn the surviving condition into a condition on the step sequence; a short opening segment usually forces it, so pay only for free steps inside. Two parts may honestly share a value. Enumerating the smallest instance vetoes any formula it contradicts.",
+      "mutation": "require the asked-slot paraphrase to be validated against one simulated concrete run before any counting, instead of merely stating the arrival-order fact",
+      "subagent_summary": "Fresh sampling with the incumbent gave 0/8, down from 0.25 two rounds ago; six of eight rollouts finished normally, so length is not the block. Part (a) is now largely solved: five rollouts derived the correct branch-count denominator from free 50/50 steps. Every single failure was the second part, and always the same one: the student verbally restates the asked slot as \"the item handled last\", then prices that as 1/n by asserted symmetry. Prior hints stated the arrival-order orientation fact declaratively and the student read past it. This revision instead makes the restatement itself a checkable step: simulate one concrete run, write the destination out in arrival order, and confirm which item occupies the asked slot before any counting begins, and forbids pricing a named-item-in-named-slot event as 1/n.",
+      "sampling_slurm_job_id": "150.259",
+      "tokens": 194,
+      "hint_hash": "7bd47787b8912e8f11fc63e5258291951a02bb8f37fd33c91ff591fc1ea8ba72",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "605dd6784c9f1f6f9bb9f5068b8e9744aad3781c1b1d0e9028b48e9692b555e2"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Reach a stated result early, then spend the rest of your effort checking it: reasoning that never lands scores nothing. Cheapest foothold first -- at a large or symbolic size, solve the smallest genuine instances exactly and match those confirmed values against factorials, binomials, powers, and products of differences, watching sign and off-by-one shifts. Fix notation once; no symbol may serve as both index and exponent. If a general form you posit leaves a free parameter, some stated condition is still unused: an absent term, a degree bound, or a value at a special point each pin one, so hunt for it. Never declare the data insufficient and never set an unknown to zero for convenience. Read a single coefficient by evaluating or differentiating at a convenient point, not by expanding a long product. Check any candidate formula on a case you solved by hand; do not restart from the top.",
+      "mutation": "add free-parameter diagnostic: an unpinnable constant means an unused given, and block the insufficient-data / set-to-zero exits",
+      "subagent_summary": "Fresh sampling under the incumbent scored 2 of 8. Both successes solved the three smallest instances exactly, read off the signed reciprocal-factorial pattern, and landed. All six failures instead posited a general product-times-linear-factor form with two unspecified constants and tried to pin both from the single non-vanishing condition: five ran to the token cap looping on that, several explicitly concluded there was an infinite family or insufficient data, one forced a constant to zero and gave a wrong value, and the one that terminated dropped a legitimate constraint and landed just off. The revision keeps commit-then-verify and small-instance grounding, but adds the missing diagnostic: a leftover free parameter means an unused given (an absent term, a degree bound, or a value at a special point), and blocks both the insufficient-data and set-it-to-zero exits.",
+      "sampling_slurm_job_id": "150.260",
+      "tokens": 181,
+      "hint_hash": "6bac2fd42e26d50953594b182de87d09a590cdce20b2bd3acfc1d37ebcbb151b",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "624bd880b5b94320846e50c68a8c4de3ea35b048ba853273064bcd1c17d0a2db"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, and apply the stated markup multiplicatively. In general, when a direct attack stalls, work the smallest cases by hand and read off the pattern or invariant rather than pushing a long computation. Treat arithmetic, not strategy, as the likeliest place to lose: recompute each multi-digit product, quotient or factorisation once by a different decomposition, and distrust any number whose size looks implausible. State your result plainly as soon as you have it, then check it once.",
+      "mutation": "keep the train-safe opening and small-cases clause verbatim; replace the never-exercised exact-fractions clause with an arithmetic-reliability rule (recompute each product/quotient/factorisation by a second decomposition, magnitude plausibility check)",
+      "subagent_summary": "All 8 fresh rollouts scored reward 1 with clean stops at 3.0-6.0k tokens, so train is saturated and every gain must come from transfer; twelve rounds of scope-labeling, gcd-naming, representation-switching, output-form and uniqueness-forcing edits all failed, and the incumbent's exact-fractions clause is never exercised (no rollout keeps anything as a fraction). What the rollouts actually do is heavy integer work: 11-29 divisor/gcd mentions each, factorisations redone repeatedly, and 5-23 self-interruptions that are almost all arithmetic re-verification rather than strategy doubt. So I swapped the dead clause for the reliability habit the student is already improvising: recompute each multi-digit product, quotient or factorisation by a second decomposition and sanity-check magnitude. Token count 158, measured with the pinned tokenizer.",
+      "sampling_slurm_job_id": "150.261",
+      "tokens": 158,
+      "hint_hash": "47a8dc10e45e97cc3566dd12d784d1d6d0122f75f1e6fc0ec22c06636a61df6d",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "8a6dfd748e0553b9accc3ad13afe0c4aa08f94103b64259ab984bac22622e13d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Never name unknown coefficients and never expand a composed or high-degree identity; that exhausts your budget. Recenter: put both maps about one shared unknown center c, f=c+a(x-c)^k and g=c-a(x-c)^k with odd k, opposite signs, no extra offset, so the identity collapses by symmetry; same-sign is degenerate. The two supplied values are then c-a*c^k and c+a*c^k: adding them cancels the a-term, leaving c as half the sum of those two given numbers; subtracting isolates a. A degenerate or irrational center means your signs are wrong: fix that one line, never by expanding. A requested input equal to c or a fixed point is immediate. Verify by symmetry and commit early. Keep values exact, not decimal, simplify, and give exactly the quantity asked in the form and order requested.",
+      "mutation": "state the add-step outcome constructively (c is half the sum of the two given numbers) so the numbers cannot be zeroed, name a degenerate center as a sign slip, and reinvest the compressed opening in generic output discipline (exact values, requested form and order)",
+      "subagent_summary": "Seven of eight fresh rollouts were correct, finishing in 4.5k-13k tokens by committing to the shared-center antisymmetric pair and solving the two supplied values by sum and difference. The lone failure reached that exact form immediately, then added the two values as if their right-hand sides were zero, obtained a center of zero, and read that as refutation; it next manufactured a parity objection by dropping the outer sign, and spent the rest of the budget naming coefficients and expanding the degree-nine composition. The revision therefore replaces the passive 'adding must cancel' phrasing with the constructive outcome that the center is half the sum of the two given numbers, so those numbers cannot be discarded, labels a degenerate center a sign slip, and spends tokens freed by compression on guidance that fires on any problem: keep values exact and report precisely what was asked.",
+      "sampling_slurm_job_id": "150.262",
+      "tokens": 179,
+      "hint_hash": "670a8fc2e3a15f7371cde551ae963b0247071e58c3a4435288f7091287ad8bf1",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "652ee8dc58008e69bb7e90163e071e0708bc579422e2fd3d5a546ca1fb63ccad"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Do not build the whole position map; that is where these attempts die. For a return-to-start count, label the items, pick ONE label, apply the entire procedure to it again and again, and count applications until it comes home. Each application acts on the previous result, never the original. If a map you wrote sends two items to one place, or leaves one unreached, it is wrong: redo the trace, do not invent structure to explain it. A tidy claim like \"disjoint swaps, so two rounds undo it\" stays a conjecture until iteration confirms it, and such composites rarely undo in two. Count whole applications, not internal steps, and expect the count to scale with the number of items, not the steps. Trace the two smallest sizes, fit one formula to both, then state what your orbit shows and stop.",
+      "mutation": "ban whole-map construction and replace it with following one single label until it returns, keeping the untraced-disjoint-swaps warning and adding an item-count scaling expectation",
+      "subagent_summary": "3 of 8 correct. Two clean failure modes. One rollout asserted \"a product of disjoint transpositions, so the order is 2\" and answered without ever iterating; three more abandoned row tracing to build an explicit position map, produced non-bijective garbage (one index sent to two places), then burned the 16384-token cap re-deriving it, one degenerating into thousands of tokens of literal repetition of the same product. A fifth mis-counted the small sizes and fitted a wrong exponent to them. The incumbent already forbids period-2 talk and demands bijections, but it still invites the whole-map construction that drives the loops, so this revision bans map-building outright and substitutes following one single label until it returns home: cheap, self-checking, and it yields the count directly.",
+      "sampling_slurm_job_id": "150.263",
+      "tokens": 172,
+      "hint_hash": "1b464dd9d32a5cf196af5c78291d8370f02119ff0ef65136733f3d14269dff84",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
+    }
+  ]
+}
