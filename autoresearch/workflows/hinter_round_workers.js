@@ -58,22 +58,26 @@ one training problem but does not generalize will LOSE. Your incumbent will be
 replaced only if the proposal scores higher J (tie-break: higher held-out, then
 shorter). So write a REUSABLE STRATEGY, not a solution.
 
-## What ten rounds of evidence say (read this first)
+## What eleven rounds of evidence say (read this first)
 
 Keep counts: r1 5/10, r2 0/10, r3 5/10, r4 2/10, r5 3/10, r6 2/10, r7 0/10,
-r8 1/10, r9 0/10, r10 1/10. Book mean J: 2.0125 -> ... -> 2.7125.
+r8 1/10, r9 0/10, r10 1/10, r11 1/10. Book mean J: 2.0125 -> ... -> 2.7375.
 
-THE SEARCH HAS SATURATED UNDER SMALL EDITS. Only 2 of the last 30 proposals
-survived, and BOTH won on the LENGTH TIE-BREAK - identical held-out, fewer
-tokens - not by improving transfer. No proposal has raised held-out above its
-incumbent since round 8. Your incumbent has repelled 9 or 10 consecutive
-challengers. The base rate for a careful marginal edit succeeding is under 10
-percent.
+THE SEARCH HAS SATURATED UNDER SMALL EDITS. Only 3 of the last 40 proposals
+survived, and they won by tying held-out and being SHORTER - not by improving
+transfer. Your incumbent has repelled 10 or 11 consecutive challengers. The base
+rate for a careful marginal edit succeeding is under 10 percent.
 
-Note what that tie-break fact implies: when you cannot find a real strategy
-improvement, a STRICTLY LOSSLESS COMPRESSION is not a consolation prize - it is
-the mutation that has actually been winning lately. Same steps, same meaning,
-same order, fewer tokens. Both round-8 and round-10 keeps were exactly that.
+Consequence: when you cannot find a real strategy improvement, a STRICTLY
+LOSSLESS COMPRESSION is not a consolation prize - it is the mutation that has
+actually been winning. Same steps, same meaning, same order, fewer tokens.
+
+WHERE THE REMAINING HEADROOM IS. Held-out per hint is now: h1 0.250, h2 0.225,
+h3 0.225, h4 0.225, h5 0.250, h6 0.250, h7 0.175, h8 0.163, h9 0.263, h10 0.150.
+If you are hint 7, 8 or 10 your transfer is well below the rest of the book, so a
+genuine strategy improvement is both more plausible and more valuable for you -
+prefer Option A and be ambitious. If you are hint 1, 2, 5, 6 or 9 you are at or
+near the book ceiling; prefer Option B and protect what works.
 
 The important consequence: SMALL SAFE-LOOKING EDITS ARE NOT SAFE. They are the
 single most-tested and most-failed category in this book. Specifically these have
