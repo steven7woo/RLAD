@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 16,
+  "generation": 15,
   "hints": [
     {
       "hint_id": 1,
@@ -23,9 +23,9 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Union = summed areas minus overlap, so minimize overlap. Frame it on the covering shape's own edges: from the shared point take the two edge directions leaving it as axes, so the cover is the wedge x >= 0, y >= 0. A corner spans only the plus side of both directions, so never extend that shape a full side both ways from the point and never treat the point as its center. Sign-test each vertex of the other shape S: covered iff both coordinates are >= 0. One negative coordinate kills containment; the point lying inside S kills disjointness. Overlap is S clipped to the wedge; compute that one area in the easiest orientation and record the union. If rotating the wedge by its own angle carries each clipped piece to the next, the pieces are congruent, overlap is constant in the angle, and your union is already optimal: state it and stop. No second orientation, no tangency.",
-      "tokens": 189,
-      "hint_hash": "2d11bf4a5b7189e1adf872d81d0aa917b7c4dfdc59258854a4b0dc37d27a2c46"
+      "hint": "Union = summed areas minus overlap, so minimize overlap. Put the shared point at the origin with axes along the two edges meeting there; the cover is then the wedge x >= 0, y >= 0, membership is two sign tests, and far edges never matter. A corner at an interior point of S covers a positive-angle sector of S while its edge lines cross S, so overlap is strictly between 0 and area(S): reject every disjoint verdict and every containment verdict. Distance from a point to a side proves nothing, since the origin is a corner, not a center; skip tangency. Compute the overlap in the easiest orientation and keep that union as your working answer, replaceable only by another computed area. If the origin is a k-fold rotation center of S and the wedge angle is 2*pi/k, rotation permutes k congruent pieces, so overlap is constant and your value is optimal. State it and stop.",
+      "tokens": 190,
+      "hint_hash": "e706044d3f2b50b5b56d612f00e693ef4bbb86f0d16e53200f96da94b7c7109e"
     },
     {
       "hint_id": 4,
@@ -84,6 +84,6 @@
       "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85"
     }
   ],
-  "total_tokens": 1880,
-  "book_hash": "81e54eb0104f9c89a2ee8d6dfcaf2a0b28f3aaf3da53148590cb27e058116cda"
+  "total_tokens": 1881,
+  "book_hash": "0c09ad02d160e62baa6463736ba0b46c506f0fd0515330bdc8d38e9435bcbc62"
 }
