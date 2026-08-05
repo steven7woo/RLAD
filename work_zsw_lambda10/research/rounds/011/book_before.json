@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 11,
+  "generation": 10,
   "hints": [
     {
       "hint_id": 1,
@@ -71,9 +71,9 @@
       "hint_id": 9,
       "train_position": 188,
       "train_qid": "3980",
-      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation rather than solving for every coefficient. Reflect the maps, not the argument x: substituting s - x into the given identity only reproduces it.",
-      "tokens": 147,
-      "hint_hash": "391f18d0a38c1a07058f9782b12c580bfb7fb5aae04b069b173f7d17d3e75563"
+      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation rather than solving for every coefficient. If an ansatz fails, test a different symmetry instead of concluding no such polynomials exist, then verify the identity at one numeric input.",
+      "tokens": 152,
+      "hint_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076"
     },
     {
       "hint_id": 10,
@@ -84,6 +84,6 @@
       "hint_hash": "8f7b8e1d1d6e2d9340e42495d567be9a197bd3fa8ed7642d587f47ff305db523"
     }
   ],
-  "total_tokens": 1158,
-  "book_hash": "1597742b7ff9175fa5ad7ff7715b36ebf69f86e43993b472965d1453bc1ea9a0"
+  "total_tokens": 1163,
+  "book_hash": "493675db1f81bd9369c600d4f7790970542419b0d1a629380b0ea06ea0000af4"
 }
