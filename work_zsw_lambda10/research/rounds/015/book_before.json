@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 15,
+  "generation": 14,
   "hints": [
     {
       "hint_id": 1,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Settle what one pass of the process does, and what is asked, first. Then carry the smallest nontrivial case out fully and literally, writing the actual objects with distinct labels, not arguing abstractly, until the asked quantity is in front of you. If the answer is wanted in terms of a parameter, do two more sizes the same way, each row from a case you wrote out, not a structural argument. Fit one formula, check every row, and box it, not rivals.",
-      "tokens": 101,
-      "hint_hash": "b4625f41b606ccf2c7016dbf4b2ecc78323f2a9c9491361dc7cea908b65814ce"
+      "hint": "One application means the whole prescribed sequence of steps, never a single step; settle that first. Run it literally on the smallest nontrivial instance with distinct labels, writing out each state until the original returns, and count. Build a table of the parameter against the measured count and fill three rows the same way before attempting any general argument. A composite does not inherit the period of its parts. Then fit one formula to the table, check it reproduces every row, and box it rather than listing rivals.",
+      "tokens": 102,
+      "hint_hash": "8f7b8e1d1d6e2d9340e42495d567be9a197bd3fa8ed7642d587f47ff305db523"
     }
   ],
-  "total_tokens": 1149,
-  "book_hash": "ad4f752af49048a59170071561ba8824dc55228071811c046006f2c0d519d159"
+  "total_tokens": 1150,
+  "book_hash": "f5b6294a2a1e974bd2c186b50032707d337813a5b0a0dc052644a7c186d74753"
 }
