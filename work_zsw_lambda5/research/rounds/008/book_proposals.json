@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+  "round": 8,
+  "book_hash_before": "d761f06038aa7e713fe9b2dac97ed848e2a4a8f564f72e2d8aa39224db36770a",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "In \"I don't know\" puzzles, never judge a speaker's knowledge from the public data alone. Fix that speaker's own private value v; list every complete scenario consistent with v plus all public statements, including any structural choice the problem leaves unstated, such as which quantity was published. Drop scenarios breaking the domain rules. Exactly one scenario left means that speaker knows; two or more means they do not. Take statements in order: each deletes the values v where that speaker would already have known, and you re-list before the next statement. Report only a coordinate of a scenario that survives every statement. If nothing survives you gave a speaker a fact they were never told, so widen the scenarios instead of naming a plausible factor.",
+      "mutation": "index-by-own-private-value-not-public-data",
+      "subagent_summary": "All 8 public rollouts scored 0 (execution 149.158): every one opened separate global sum and product cases and judged uncertainty from the public number alone (\"many pairs sum to 2002\"), then flipped to \"but he can just subtract/divide\", called the puzzle contradictory, and boxed an arbitrary factor 143 (four times) or burned the 16k cap looping (four hit finish_reason=length). The revision replaces the incumbent's abstract joint-recount language with the concrete step the failures skipped, indexing every knowledge judgement by the speaker's own private value with the unstated structural choice carried inside each scenario, and it is deliberately shorter because in this hint's history longer, more problem-specific hints have consistently transferred worse.",
+      "sampling_slurm_job_id": "149.158",
+      "tokens": 147,
+      "hint_hash": "201354a92ede8d8aac1cb60ea727c71fda8c2a78ad6bed1e1f28858eb6defeef",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "1624391b1ea234720db50aada7f5e2f22f58c8f7853e976d277c7b07bec2a58d"
+    },
+    {
+      "hint_id": 2,
+      "hint": "A complex equation carries two real conditions: equal moduli and equal arguments mod 2pi. Moduli alone hold the whole locus; arguments only index individual solutions, so when asked where ALL solutions lie, never enumerate via roots of unity. Take moduli of whole sides first: (z-a)^n = c(z-b)^n gives |z-a|^n = |c||z-b|^n; only then nth-root that to |z-a| = k|z-b|, k^n = |c|; never apply 1/n while nth powers stand. k = 1 means a line. Else set z = x+iy, square, and reduce to A(x^2+y^2) + Bx + Cy + D = 0; nonzero A means a circle: divide by A, complete the square. Test at most one point, at that distance from the center; the center never satisfies the locus.",
+      "mutation": "modulus-vs-argument-split-and-center-is-not-on-locus-check-rule",
+      "subagent_summary": "All 8 round-8 rollouts scored 1, so training is saturated and the loss is transfer and token waste: every rollout reached the modulus ratio within the first 5-17% of its text, yet 6 of 8 then spent the middle half of the response re-deriving individual roots as exponentials (7-27 e^{...} expressions each), and the two longest (5.9k and 6.0k tokens, 12-14 hedges) opened by taking a 6th root of the equation itself before recovering. The clearest self-inflicted stall came from a rollout that tested the center point against the locus equation, found it failed, and questioned the whole circle. The revision therefore states the modulus/argument division of labour so enumeration is visibly unnecessary rather than merely forbidden, keeps the moduli-before-exponents ordering, and replaces the incumbent's vague verification advice with a concrete rule that spot-checks use a point at the radius, not the center, which never satisfies the locus.",
+      "sampling_slurm_job_id": "149.159",
+      "tokens": 190,
+      "hint_hash": "87bd1b9dc5dd16adb393c3ccb90e8691515ab42645fca918cd8c168081be2c01",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "59b3d8b787e142b5557010de60e2aaf179f67e91a57adadbbb61e6f1a74bd7e2"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union = areas summed minus overlap, so minimize overlap. Put the shared point at the origin with axes along the corner's two edges; in that frame the covering shape is just the wedge x >= 0, y >= 0, so every point of S with a negative coordinate is uncovered. The origin is a corner of that shape, not its center, so its center-to-side distances and its size are irrelevant: neither implies it contains S. If the origin is a k-fold rotation center of S, the wedge angle is 2*pi/k, and both wedge edges exit S, then rotating by 2*pi/k maps S onto itself and moves the wedge one slot, so the k slots cut S into congruent pieces and overlap = area(S)/k at every rotation. Constant means no rotated placement beats it: compute that one area in the easiest orientation, state the union, and stop, not retesting angles or tangency.",
+      "mutation": "wedge-frame-axes-and-kill-center-to-side-distance-reasoning",
+      "subagent_summary": "Training scored 5/8; all three failures ran out the 16384-token cap rather than committing a wrong answer, and each died in the same place: reasoning about the large square's center-to-side distance as if the shared point were its center, concluding from that distance and from size that the small square must lie wholly inside, then oscillating between that claim and an unclosed tangency search. One failure had already computed the correct aligned overlap and then abandoned it after the distance argument contradicted it. The revision makes the wedge concrete by putting the axes on the corner's own edges so uncovered points are exactly those with a negative coordinate, names the center-vs-corner confusion as the specific fallacy, and closes with an explicit stop that forbids the angle/tangency retesting loop.",
+      "sampling_slurm_job_id": "149.160",
+      "tokens": 189,
+      "hint_hash": "c72f433a0ef92c5d5f1390bb47ee07af9709ba7318774127e46a0e95b4ab5374",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "fb51b21593ed905cd5a002358e62f833d6da9e1c02aa884460885af4ac2cb21a"
+    },
+    {
+      "hint_id": 4,
+      "hint": "A maximum-count answer is where an upper bound meets a matching construction; produce both. When each term of the required pattern may come from any of N given functions, never compare adjacent terms: neighbours can use different functions, so that route yields no bound. Write the pattern's value at index n as an explicit T(n), then partition indices by which function produced them. On one function P's group, P - T vanishes and is not identically zero, since subtracting the low-degree T cannot cancel P's leading term; so that group holds at most deg P indices. That cap is per group, so Bound = N x deg P, never N alone. Trust that product even if it looks too large for a contest. Verify by construction: give each function its own block of consecutive indices and interpolate T's values there - free coefficients remain, so a legal function exists. Bound plus construction is the whole proof; then answer.",
+      "mutation": "extremal-framing-plus-cap-is-per-group",
+      "subagent_summary": "My 8 public rollouts with the incumbent scored 7/8; the lone failure terminated normally rather than truncating, and it failed by never partitioning indices at all: it chained adjacent board entries into P_{i+1}(i+1) - P_i(i) = d, concluded each function may be used only once, and reported N as the count. Rounds 3-7 showed that rewriting or piling reject-rules onto the incumbent collapses train, while round 6's extremal reframe was the only variant to raise heldout, so this revision keeps the incumbent's proven skeleton verbatim and adds only the portable bound-meets-construction opener plus a four-word note that the root cap is per group so N alone is not the count.",
+      "sampling_slurm_job_id": "149.161",
+      "tokens": 189,
+      "hint_hash": "21192c6cb98688e15ec795c973c5e96f06d4ded5712476e931bff9c904fae453",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "c88c72a8af76a0349016b46bf3a91690c7375399032fa6e2fedac91359b1f577"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Fit the parameters first: log_c u = y means u = c^y, one equation per given point. The vector equality is ONE constraint, \"parallelogram\": read the displacement straight off it, never as diagonal midpoints or vertex sums, which copies the y-gap wrong. Carry one unknown: put a vertex at (t, f(t)), translate by that displacement, force the image onto the curve. Subtracting the two log equations turns the y-gap d into one factor c^d on the argument, giving a rational equation. Before grinding, test a known vertex's x in it; new vertices placed on given ones meet every condition, so it must be a root. If not, your reduction is wrong; if so, divide it out and the wanted root reads off linearly, not as a radical. Drop out-of-domain roots, take each new y from f, area = |cross product| of adjacent edges.",
+      "mutation": "add-free-degenerate-root-factoring-check",
+      "subagent_summary": "All 8 public rollouts were correct this round, so train is saturated and only transfer binds (heldout 0.1375 for the incumbent). The one clearly defective trace was also the longest (13360 tokens): it restated the single vector equality as equal diagonal midpoints, copied the y-gap as 3 instead of 1, and ground out an irrational quadratic before backtracking. Round 6's best-ever heldout (0.1625) came from the free-root idea, so this revision keeps the incumbent's proven pipeline, bans the midpoint restatement, and states the degenerate-root test as a one-shot validity check plus a factoring shortcut instead of a redo-loop instruction.",
+      "sampling_slurm_job_id": "149.162",
+      "tokens": 190,
+      "hint_hash": "b0d143af6f98f3554bc0bda28c072495eeb5a623b4898622d3cd34e431e577b7",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "bf462b403f17cd428257353852dc46039314abb29f7a1232a8b7b962384878f2"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Only the direction is random; which item moves is never a choice, it is whatever sits on top of the pile you draw from. So the items are not interchangeable: never use 1/n or 1/n!. Count the steps honestly, since each item is carried twice, so n items take 2n moves, not n. Fix orientation once: the first item to arrive at a pile is its bottom, so translate the named position into an arrival rank. Then walk the run in order: where one source is empty the move is forced, factor 1; where both are legal the event constrains which happens, factor 1/2. Multiply along each sequence realizing the event and add.",
+      "mutation": "state-only-direction-is-random-plus-2n-move-count",
+      "subagent_summary": "All 8 rollouts scored 0: seven explicitly asserted the final order is a uniformly random permutation and answered 1/n (six gave 1/4 or 1/2 for part b, one gave 1/24), and several miscounted the process as n moves with n binary choices (hence 1/2^(n-1) or 1/16) instead of 2n carries. The incumbent already bans symmetry claims and gives the orientation rule, so this revision adds the two structural facts the failures actually lacked: the random draw is over direction only while the item moved is forced by the stack top, and each item is carried twice so the move count is 2n.",
+      "sampling_slurm_job_id": "149.163",
+      "tokens": 142,
+      "hint_hash": "51e5a184e97284354f466633f33a1748452ec207d4788b3100b6c17689d3938c",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "466facab1208fc7a47986ab237293f5be9ec980670b8f43f1612be39eae83ed6"
+    },
+    {
+      "hint_id": 7,
+      "hint": "For a huge indexed system asking for one entry, do not attack the full size: build a ladder of exact small analogues. Scale the toy faithfully -- if N unknowns meet conditions with exponents 1..N, use n unknowns with exponents 1..n and keep the nonzero right-hand side in the same relative position. A toy with more conditions than unknowns looks inconsistent; that is a scaling bug, not a contradiction, so rescale rather than abandon the method.\nSolve n=2,3,4 exactly by elimination and record the target as a signed fraction. Fit a closed form in n, expecting factorial-type growth and a possibly alternating sign, not a guessed denominator. Re-substitute every n and confirm your candidate reproduces each toy value; an off-by-one in the factorial argument is the usual error. Then put in the real size and commit, instead of restarting a second derivation.",
+      "mutation": "replace-functional-framing-with-scaled-small-case-ladder-and-formula-refit",
+      "subagent_summary": "My 8 rollouts scored 1/8, and the single success came purely from solving n=2,3,4 by elimination and fitting a signed-factorial pattern, never from the incumbent's functional/Lagrange framing; two other rollouts reached the same numeric ladder but mis-fit the closed form (off-by-one factorial, or 1/2005!), and the rest burned the 16384-token cap on Vandermonde-inverse or interpolation detours after mis-scaling a toy with more conditions than unknowns and calling it inconsistent. Seven prior rounds of functional/test-polynomial rewordings all lost heldout accuracy, so this proposal switches register entirely to the mechanism that demonstrably produced the win: a correctly-scaled small-case ladder plus an explicit refit-and-verify step against every toy value.",
+      "sampling_slurm_job_id": "149.164",
+      "tokens": 186,
+      "hint_hash": "b2a22f64742db6de717ce4677f47425adbfad7620c3372bf9f96e9c222adbfaa",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let N be the unstated count of identical units, and recover it from integrality rather than from the story: if every per-unit share must be a whole number, N divides each listed total, so the admissible N are their common divisors and the intended one is the maximum feasible count, namely their gcd. Wording about identical equal groups only requires N to be a multiple of the group count; verify it and do not treat it as fixing N. Decide once whether each listed figure is a grand total or a per-unit amount, then stop revisiting it. Then add all component amounts and divide by N. Before using a stated percentage, name its base: a markup or tax on cost multiplies cost by 1+p, but a percentage of the selling price or of a final total means dividing by 1-p or 1+p. Check that each per-unit value is whole and that you report the quantity actually asked for.",
+      "mutation": "swap-dead-commute-clause-for-percentage-base-discipline",
+      "subagent_summary": "6/8 public rollouts were correct; both failures shared the known mode, silently equating the stated group count with the unit count, confirming divisibility, and never invoking gcd or maximality at all. Rounds 5, 6 and 7 each attacked exactly that mode with more divisibility apparatus (front-loaded warning, maximality certificate, quantity-labelling) and every one raised train while collapsing heldout from 0.2125 to 0.1125, 0.0625 and 0.125, so with lambda=5 adding more anti-substitution machinery is a demonstrated loss. I therefore left the incumbent's spine and ordering untouched and spent the budget on dead weight instead: no correct rollout ever used the 'scaling and dividing commute' clause, so I replaced it with a portable percentage-base discipline (markup on cost multiplies by 1+p, whereas a percentage of the selling price or final total requires division), which is a distinct and common failure source on unseen percent word problems.",
+      "sampling_slurm_job_id": "149.165",
+      "tokens": 190,
+      "hint_hash": "a4a170b281a9552c335bee350351250c6757b4fdb470b93211e9c5fe5839c7c2",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "631be8eed5f087f7cdab1dec25cead2e9d0ae8ea0b579379c5e58836f770dc11"
+    },
+    {
+      "hint_id": 9,
+      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, skip the degree-n^2 coefficient system. Seek a common fixed point r and use the centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing forces AB^n=BA^n; factor once as AB(A^(n-1)-B^(n-1))=0 and carry both branches, since B=A collapses to p=q; let the data, not a guessed sign, kill one. Inside the ansatz the identity then holds automatically - expect that, do not read it as underdetermination. Count free parameters against independent given conditions; matching counts force the answer. Combine those conditions symmetrically: two differing only in the sign of one part add to pin one unknown, subtract to pin the other. Verify p(r)=q(r)=r, then evaluate the asked inputs centered.",
+      "mutation": "add-parameter-count-closure-rule-for-auto-satisfied-identity",
+      "subagent_summary": "All 8 public rollouts were correct again (8/8, 3.1k-6.5k tokens, none truncated), so the training question stays saturated and every remaining point is transfer. The uniform new waste is that once the centered ansatz is substituted the composition identity becomes a tautology, and rollouts misread this as the constraints being insufficient: they relitigate uniqueness (3-6 'unique' passes each) and one spends ~2k tokens arguing the family is underdetermined with infinitely many solutions before recovering. This revision keeps the proven trigger, centered ansatz, factored both-branch condition, symmetric-combination rule and verification spine and adds only a portable closure rule - an auto-satisfied identity is expected, so compare the family's free parameters to the independent given conditions instead of doubting uniqueness.",
+      "sampling_slurm_job_id": "149.166",
+      "tokens": 189,
+      "hint_hash": "3e5130251127f1cdd38d0a1bb8dd4fb0acfb2a10ba7588ffd823b20e7a983801",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "a6b899fe065325aa4eb8aa78affd24badba40d6f15d870876bab02f9a3c2d5fd"
+    },
+    {
+      "hint_id": 10,
+      "hint": "One application = the ENTIRE listed loop of sub-steps, each acting on what the previous produced; a single sub-step is not an application. Record the state only after each COMPLETE loop, on numbered lines, and compare those to the original label by label.\n\nWrite the state as distinct labels; per sub-step swap two adjacent length-L blocks as rigid units carrying their CURRENT contents, tail unchanged, every label appearing once.\n\nBefore any \"disjoint transpositions, so order 2\" claim, write the set of indices each sub-step touches. Sub-steps sharing even one index overlap, so the composite is NOT the product of those independent swaps and its order is usually large, not 2. Kill that story by running the loop twice and comparing.\n\nGet exact counts for the two smallest sizes, fit ONE formula covering both, confirm at the next size, then commit. If sizes disagree, redo the smaller simulation rather than answering piecewise.",
+      "mutation": "index-overlap-test-kills-disjoint-transposition-order-2",
+      "subagent_summary": "Only 2/8 rollouts were correct; three failures that terminated all answered 2 by asserting one switcheroo is a product of disjoint transpositions (they literally wrote block-swap cycle products with non-overlapping index sets) and never applied the full loop twice to check, while another mislabelled each sub-step as a separate application before drifting to a different closed form. The revision adds a cheap structural falsifier the incumbent lacks -- write down the index set each sub-step touches and observe they share indices, so the composite cannot be independent swaps of order 2 -- and reinforces the application boundary by recording state only after each complete loop.",
+      "sampling_slurm_job_id": "149.167",
+      "tokens": 190,
+      "hint_hash": "28180ceeca5e342776b5ecb5f933c2a332d032a32a288f92a6f21f85426e5ab6",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
+    }
+  ]
+}

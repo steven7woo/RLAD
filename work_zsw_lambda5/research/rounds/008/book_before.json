@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 8,
+  "generation": 7,
   "hints": [
     {
       "hint_id": 1,
       "train_position": 163,
       "train_qid": "28054",
-      "hint": "In \"I don't know\" puzzles, never judge a speaker's knowledge from the public data alone. Fix that speaker's own private value v; list every complete scenario consistent with v plus all public statements, including any structural choice the problem leaves unstated, such as which quantity was published. Drop scenarios breaking the domain rules. Exactly one scenario left means that speaker knows; two or more means they do not. Take statements in order: each deletes the values v where that speaker would already have known, and you re-list before the next statement. Report only a coordinate of a scenario that survives every statement. If nothing survives you gave a speaker a fact they were never told, so widen the scenarios instead of naming a plausible factor.",
-      "tokens": 147,
-      "hint_hash": "201354a92ede8d8aac1cb60ea727c71fda8c2a78ad6bed1e1f28858eb6defeef"
+      "hint": "Treat announcement puzzles as elimination over one candidate set, never as separate global cases. A candidate fixes every unknown at once, including structure the problem leaves unstated, so a speaker's uncertainty can come from that coordinate alone even when their own value plus one fixed reading would pin the partner. Drop candidates breaking the domain rules. Someone can deduce iff exactly one candidate matches what they privately hold; \"I don't know\" deletes the candidates where their own value was already decisive. Apply statements in order, recounting after each deletion, then report only the coordinate asked for. If every reading looks contradictory you credited a speaker with knowledge they lack: recount across all coordinates jointly instead of naming a plausible-looking value.",
+      "tokens": 142,
+      "hint_hash": "1624391b1ea234720db50aada7f5e2f22f58c8f7853e976d277c7b07bec2a58d"
     },
     {
       "hint_id": 2,
@@ -31,9 +31,9 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "A maximum-count answer is where an upper bound meets a matching construction; produce both. When each term of the required pattern may come from any of N given functions, never compare adjacent terms: neighbours can use different functions, so that route yields no bound. Write the pattern's value at index n as an explicit T(n), then partition indices by which function produced them. On one function P's group, P - T vanishes and is not identically zero, since subtracting the low-degree T cannot cancel P's leading term; so that group holds at most deg P indices. That cap is per group, so Bound = N x deg P, never N alone. Trust that product even if it looks too large for a contest. Verify by construction: give each function its own block of consecutive indices and interpolate T's values there - free coefficients remain, so a legal function exists. Bound plus construction is the whole proof; then answer.",
-      "tokens": 189,
-      "hint_hash": "21192c6cb98688e15ec795c973c5e96f06d4ded5712476e931bff9c904fae453"
+      "hint": "When each term of the required pattern may come from any of N given functions, never compare adjacent terms: neighbours can use different functions, so that route yields no bound. Write the pattern's value at index n as an explicit T(n), then partition indices by which function produced them. On one function P's group, P - T vanishes and is not identically zero, since subtracting the low-degree T cannot cancel P's leading term; so that group holds at most deg P indices. Hence Bound = N x deg P. Trust that product even if it looks too large for a contest; do not shrink or re-derive it. Instead verify by construction: give each function its own block of consecutive indices and interpolate T's values there - matching that many points leaves coefficients free, so a legal function exists. Bound plus construction is the whole proof; then answer.",
+      "tokens": 176,
+      "hint_hash": "c88c72a8af76a0349016b46bf3a91690c7375399032fa6e2fedac91359b1f577"
     },
     {
       "hint_id": 5,
@@ -55,9 +55,9 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "For a huge indexed system asking for one entry, do not attack the full size: build a ladder of exact small analogues. Scale the toy faithfully -- if N unknowns meet conditions with exponents 1..N, use n unknowns with exponents 1..n and keep the nonzero right-hand side in the same relative position. A toy with more conditions than unknowns looks inconsistent; that is a scaling bug, not a contradiction, so rescale rather than abandon the method.\nSolve n=2,3,4 exactly by elimination and record the target as a signed fraction. Fit a closed form in n, expecting factorial-type growth and a possibly alternating sign, not a guessed denominator. Re-substitute every n and confirm your candidate reproduces each toy value; an off-by-one in the factorial argument is the usual error. Then put in the real size and commit, instead of restarting a second derivation.",
-      "tokens": 186,
-      "hint_hash": "b2a22f64742db6de717ce4677f47425adbfad7620c3372bf9f96e9c222adbfaa"
+      "hint": "Interpret the unknown coefficients as weights of a linear functional evaluated at distinct nodes. The vanishing moment conditions say that this functional annihilates a long range of monomials, while the next moment fixes its scale. Apply Lagrange interpolation after any useful index shift: the leading coefficient gives a product-of-node-differences formula for each weight. Simplify only the requested endpoint weight and verify the highest prescribed moment.",
+      "tokens": 82,
+      "hint_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
     },
     {
       "hint_id": 8,
@@ -71,9 +71,9 @@
       "hint_id": 9,
       "train_position": 188,
       "train_qid": "3980",
-      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, skip the degree-n^2 coefficient system. Seek a common fixed point r and use the centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing forces AB^n=BA^n; factor once as AB(A^(n-1)-B^(n-1))=0 and carry both branches, since B=A collapses to p=q; let the data, not a guessed sign, kill one. Inside the ansatz the identity then holds automatically - expect that, do not read it as underdetermination. Count free parameters against independent given conditions; matching counts force the answer. Combine those conditions symmetrically: two differing only in the sign of one part add to pin one unknown, subtract to pin the other. Verify p(r)=q(r)=r, then evaluate the asked inputs centered.",
+      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, do not grind the degree-n^2 coefficient system. Look for a common fixed point r and use the jointly centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing forces AB^n=BA^n; factor that once as AB(A^(n-1)-B^(n-1))=0 and carry both branches, since B=A collapses to p=q. Let the given data, not a guessed sign, kill a branch. Then combine the conditions symmetrically instead of solving them one at a time: when two constraints differ only in the sign of one part, their sum kills that part and pins one unknown while their difference pins the other. Verify p(r)=q(r)=r and the identity at one spare point, then evaluate only the requested inputs in centered form, never expanding.",
       "tokens": 189,
-      "hint_hash": "3e5130251127f1cdd38d0a1bb8dd4fb0acfb2a10ba7588ffd823b20e7a983801"
+      "hint_hash": "a6b899fe065325aa4eb8aa78affd24badba40d6f15d870876bab02f9a3c2d5fd"
     },
     {
       "hint_id": 10,
@@ -84,6 +84,6 @@
       "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
     }
   ],
-  "total_tokens": 1687,
-  "book_hash": "d084530373d8f79860471777d85e6c1e381f30a0cbb376b025eb3f7f354af164"
+  "total_tokens": 1565,
+  "book_hash": "d761f06038aa7e713fe9b2dac97ed848e2a4a8f564f72e2d8aa39224db36770a"
 }
