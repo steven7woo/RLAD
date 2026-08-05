@@ -275,6 +275,27 @@
             "J_i": 2.25
           },
           "proposal_eval_slurm_job_id": "148.226"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "272e1a438e83c1d7c8b5e3d3034a0d4c32184a613b352c2dc7891736c5ec2c00",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "272e1a438e83c1d7c8b5e3d3034a0d4c32184a613b352c2dc7891736c5ec2c00",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 140,
+            "J_denominator": 80,
+            "J_i": 1.75
+          },
+          "proposal_eval_slurm_job_id": "148.246"
         }
       ]
     },
@@ -551,6 +572,27 @@
             "J_i": 2.25
           },
           "proposal_eval_slurm_job_id": "148.227"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "16f3bb009c4ec812770e1682f39c2fb99da5f06d134d405532318b52cb7a6183",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "16f3bb009c4ec812770e1682f39c2fb99da5f06d134d405532318b52cb7a6183",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 170,
+            "J_denominator": 80,
+            "J_i": 2.125
+          },
+          "proposal_eval_slurm_job_id": "148.247"
         }
       ]
     },
@@ -827,6 +869,27 @@
             "J_i": 1.75
           },
           "proposal_eval_slurm_job_id": "148.228"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "4c19f8db163ff2491648d6bee2566b9c0435afe440bdeee382a9c009f6bbe448",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "4c19f8db163ff2491648d6bee2566b9c0435afe440bdeee382a9c009f6bbe448",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 150,
+            "J_denominator": 80,
+            "J_i": 1.875
+          },
+          "proposal_eval_slurm_job_id": "148.248"
         }
       ]
     },
@@ -834,13 +897,13 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "When each term of a required linear pattern may come from any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not difference terms across different polynomials. Because inputs are consecutive, index and input are interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each is a root of P(x)-L(x), nonzero of degree deg P since subtracting an affine map keeps the leading term, so a polynomial serves at most deg P inputs, one more forcing P=L. The quantity wanted is the total count of inputs, so sum that capacity across the whole menu, never reporting one factor alone; attain it by letting each polynomial match L on its own block.",
-      "tokens": 153,
-      "hint_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469",
+      "hint": "When each term of a required linear pattern may come from any of finitely many fixed-degree polynomials fed consecutive integers, do not difference terms across different polynomials. Consecutive inputs make index and input interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. Then ask of each menu polynomial how many inputs can satisfy the equation P(x)=A+Bx: it is a polynomial equation of degree deg P, so at most deg P inputs solve it, one more forcing P=L identically. The quantity wanted is the total count of inputs, so sum that capacity across the whole menu, never reporting one factor alone; attain it by letting each polynomial match L on its own block.",
+      "tokens": 146,
+      "hint_hash": "e0ca78c56f30a95ccffa6bbca03e866e7e92dfbb723570c1181e9524f64d335b",
       "metrics": {
         "schema_version": 1,
         "hint_id": 4,
-        "hint_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469",
+        "hint_hash": "e0ca78c56f30a95ccffa6bbca03e866e7e92dfbb723570c1181e9524f64d335b",
         "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
         "train_correct": 7,
         "train_total": 8,
@@ -1103,6 +1166,27 @@
             "J_i": 3.125
           },
           "proposal_eval_slurm_job_id": "148.229"
+        },
+        {
+          "round": 12,
+          "decision": "kept",
+          "proposal_hash": "e0ca78c56f30a95ccffa6bbca03e866e7e92dfbb723570c1181e9524f64d335b",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "e0ca78c56f30a95ccffa6bbca03e866e7e92dfbb723570c1181e9524f64d335b",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 18,
+            "heldout_total": 80,
+            "heldout_i": 0.225,
+            "J_numerator": 250,
+            "J_denominator": 80,
+            "J_i": 3.125
+          },
+          "proposal_eval_slurm_job_id": "148.249"
         }
       ]
     },
@@ -1379,6 +1463,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.230"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "7a2efe433f4d47502507ff8ca3bf845cbe407f8a9810a6d918cbd0cfb9d8b564",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "7a2efe433f4d47502507ff8ca3bf845cbe407f8a9810a6d918cbd0cfb9d8b564",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 150,
+            "J_denominator": 80,
+            "J_i": 1.875
+          },
+          "proposal_eval_slurm_job_id": "148.250"
         }
       ]
     },
@@ -1655,6 +1760,27 @@
             "J_i": 1.875
           },
           "proposal_eval_slurm_job_id": "148.231"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "394792ff67591ddc4df08ed26a7968a7d2f0b32ef64cdee0ff8f83e9e726541d",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "394792ff67591ddc4df08ed26a7968a7d2f0b32ef64cdee0ff8f83e9e726541d",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 160,
+            "J_denominator": 80,
+            "J_i": 2.0
+          },
+          "proposal_eval_slurm_job_id": "148.251"
         }
       ]
     },
@@ -1931,6 +2057,27 @@
             "J_i": 1.875
           },
           "proposal_eval_slurm_job_id": "148.232"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "5cbc7aa1d4672bbea864b0ce2cd4610b7b34a13ed5f61ef1d8300174496c7749",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "5cbc7aa1d4672bbea864b0ce2cd4610b7b34a13ed5f61ef1d8300174496c7749",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 110,
+            "J_denominator": 80,
+            "J_i": 1.375
+          },
+          "proposal_eval_slurm_job_id": "148.252"
         }
       ]
     },
@@ -2207,6 +2354,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.233"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "04e5bc2ec6dc12c63bd8898bfd763f263f5a45b1d844c077f2054e73a8d25421",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "04e5bc2ec6dc12c63bd8898bfd763f263f5a45b1d844c077f2054e73a8d25421",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 17,
+            "heldout_total": 80,
+            "heldout_i": 0.2125,
+            "J_numerator": 180,
+            "J_denominator": 80,
+            "J_i": 2.25
+          },
+          "proposal_eval_slurm_job_id": "148.253"
         }
       ]
     },
@@ -2483,6 +2651,27 @@
             "J_i": 3.0
           },
           "proposal_eval_slurm_job_id": "148.234"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "3304b5d1d770dab2177789c30ae034a3b88d8904cb99b4e930d5b49477a7a350",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "3304b5d1d770dab2177789c30ae034a3b88d8904cb99b4e930d5b49477a7a350",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 160,
+            "J_denominator": 80,
+            "J_i": 2.0
+          },
+          "proposal_eval_slurm_job_id": "148.254"
         }
       ]
     },
@@ -2759,6 +2948,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.235"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "7325b0a5db3bea0f75213a1861822560dcad6d64a54c58b03404a712381874a5",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "7325b0a5db3bea0f75213a1861822560dcad6d64a54c58b03404a712381874a5",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 150,
+            "J_denominator": 80,
+            "J_i": 1.875
+          },
+          "proposal_eval_slurm_job_id": "148.255"
         }
       ]
     }

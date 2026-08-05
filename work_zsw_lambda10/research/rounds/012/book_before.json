@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 12,
+  "generation": 11,
   "hints": [
     {
       "hint_id": 1,
@@ -31,9 +31,9 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "When each term of a required linear pattern may come from any of finitely many fixed-degree polynomials fed consecutive integers, do not difference terms across different polynomials. Consecutive inputs make index and input interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. Then ask of each menu polynomial how many inputs can satisfy the equation P(x)=A+Bx: it is a polynomial equation of degree deg P, so at most deg P inputs solve it, one more forcing P=L identically. The quantity wanted is the total count of inputs, so sum that capacity across the whole menu, never reporting one factor alone; attain it by letting each polynomial match L on its own block.",
-      "tokens": 146,
-      "hint_hash": "e0ca78c56f30a95ccffa6bbca03e866e7e92dfbb723570c1181e9524f64d335b"
+      "hint": "When each term of a required linear pattern may come from any member of a finite menu of fixed-degree polynomials fed consecutive integers, do not difference terms across different polynomials. Because inputs are consecutive, index and input are interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each is a root of P(x)-L(x), nonzero of degree deg P since subtracting an affine map keeps the leading term, so a polynomial serves at most deg P inputs, one more forcing P=L. The quantity wanted is the total count of inputs, so sum that capacity across the whole menu, never reporting one factor alone; attain it by letting each polynomial match L on its own block.",
+      "tokens": 153,
+      "hint_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469"
     },
     {
       "hint_id": 5,
@@ -84,6 +84,6 @@
       "hint_hash": "8f7b8e1d1d6e2d9340e42495d567be9a197bd3fa8ed7642d587f47ff305db523"
     }
   ],
-  "total_tokens": 1151,
-  "book_hash": "e2bdae8fea0a68742a1ca89c35fd5a33a32d4fa42e81cc2b2a7f71dacce90391"
+  "total_tokens": 1158,
+  "book_hash": "1597742b7ff9175fa5ad7ff7715b36ebf69f86e43993b472965d1453bc1ea9a0"
 }
