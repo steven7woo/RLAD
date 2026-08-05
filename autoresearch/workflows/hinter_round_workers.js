@@ -58,37 +58,46 @@ one training problem but does not generalize will LOSE. Your incumbent will be
 replaced only if the proposal scores higher J (tie-break: higher held-out, then
 shorter). So write a REUSABLE STRATEGY, not a solution.
 
-## What five rounds of evidence say actually wins (read this first)
+## What six rounds of evidence say actually wins (read this first)
 
 Book-wide keep counts: round 1 = 5/10, round 2 = 0/10, round 3 = 5/10,
-round 4 = 2/10, round 5 = 3/10. Book mean J: 2.0125 -> 2.2625 -> 2.2625 ->
-2.3750 -> 2.4000 -> 2.5375.
+round 4 = 2/10, round 5 = 3/10, round 6 = 2/10. Book mean J: 2.0125 -> 2.2625
+-> 2.2625 -> 2.3750 -> 2.4000 -> 2.5375 -> 2.6250.
 
-Two findings are robust across all ten hints:
+Findings that hold across all ten hints:
 
-1. LENGTH IS THE DOMINANT PREDICTOR OF LOSING. In round 2 every one of the ten
-   proposals was longer than its incumbent and ALL TEN were discarded. In round 4
-   every proposal longer than its incumbent lost, including two of the book's
-   three best hints. The clearest single win in the book was a LOSSLESS
-   COMPRESSION: hint 2 went 81 -> 70 tokens with every step preserved and J rose
-   3.00 -> 3.25. Because lambda multiplies held-out by 10, appended caution
-   lists, prohibitions, slogans and problem-specific "trap rules" reliably
-   destroy transfer even when each is individually true.
-   => Treat every added token as a cost you must justify. Prefer a proposal at or
-   below your incumbent's length. Deleting inert text is a legitimate and often
-   winning mutation. Do not pad.
+1. HELD-OUT DECIDES; THE 8-ROLLOUT TRAINING SIGNAL IS NOISE. Unchanged incumbents
+   have scored wildly different fresh training values between rounds (one hint
+   went 0/8, 4/8, 3/8, 4/8, 0/8 with no edit at all; another went 5/8 then 8/8).
+   Held-out is 80 samples and is weighted 10x.
+   => Never redesign your hint around one round's training miss. Target the
+   SYSTEMATIC weakness visible repeatedly across your own history.
 
-2. THE 8-ROLLOUT TRAINING SIGNAL IS NOISE-DOMINATED; HELD-OUT DECIDES. Unchanged
-   incumbents have scored wildly different fresh training values between rounds
-   (one hint went 0/8, 4/8, 3/8, 4/8, 0/8 with no edit at all; others went 7/8
-   then 2/8, or 8/8 then 5/8). Held-out is 80 samples and is weighted 10x.
-   => Do NOT redesign your hint around a single round's training miss. Target the
-   SYSTEMATIC, transferable weakness visible repeatedly across your history.
+2. LENGTH IS A REAL COST, BUT SHORTENING IS NOT A FREE WIN. Rounds 2 and 4 proved
+   the cost: every proposal longer than its incumbent lost (all ten in round 2).
+   But round 6 tested the converse - nine of ten proposals were SHORTER and only
+   two survived, several losing held-out badly (one fell 0.2500 -> 0.0875).
+   => Length is a tiebreaker and a tax, not the objective. Do not cut text merely
+   to be short. Cut only text you have EVIDENCE is inert (see 3), and never cut a
+   step the successful rollouts actually rely on - that is what caused round 6's
+   biggest losses.
 
-Useful diagnostic: check whether the rollouts actually DO what your hint says.
-Several hints contained clauses no rollout ever executed - that text is pure
-transfer tax and should be cut. Wording a 1.7B student will act on beats wording
-that is merely correct.
+3. THE HIGHEST-VALUE EDIT IS REMOVING A CLAUSE THE ROLLOUTS DEMONSTRABLY IGNORE,
+   OR NAMING A CONCRETE FIRST MOVE THEY LACK. Read your eight rollouts and check
+   which of your hint's clauses actually appear in their reasoning. A clause no
+   rollout ever executes is pure transfer tax. A vague gesture ("look for a
+   symmetry") that you can replace with one concrete, executable instruction has
+   produced the book's biggest gains. Wording a 1.7B student will act on beats
+   wording that is merely correct.
+
+4. WHAT HAS RELIABLY FAILED: appending caution lists, prohibitions, slogans,
+   problem-specific "trap rules", and generic multi-step procedure checklists.
+   These buy training accuracy and destroy transfer. If your only idea is to warn
+   the student about the mistake you just watched it make, that has lost across
+   the book many times - prefer a positive, constructive instruction instead.
+
+Your incumbent has already survived several challenges, so the bar is high. An
+honest small improvement beats an ambitious rewrite.
 
 ## Absolute rules (violating any of these invalidates the round)
 
