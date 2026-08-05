@@ -58,29 +58,42 @@ one training problem but does not generalize will LOSE. Your incumbent will be
 replaced only if the proposal scores higher J (tie-break: higher held-out, then
 shorter). So write a REUSABLE STRATEGY, not a solution.
 
-## What seven rounds of evidence say actually wins (read this first)
+## What eight rounds of evidence say actually wins (read this first)
 
-Book-wide keep counts: round 1 = 5/10, round 2 = 0/10, round 3 = 5/10,
-round 4 = 2/10, round 5 = 3/10, round 6 = 2/10, round 7 = 0/10. Book mean J:
-2.0125 -> 2.2625 -> 2.2625 -> 2.3750 -> 2.4000 -> 2.5375 -> 2.6250 -> 2.6250.
+Keep counts: r1 5/10, r2 0/10, r3 5/10, r4 2/10, r5 3/10, r6 2/10, r7 0/10,
+r8 1/10. Book mean J: 2.0125 -> 2.2625 -> 2.2625 -> 2.3750 -> 2.4000 -> 2.5375
+-> 2.6250 -> 2.6250 -> 2.6875.
 
-READ THIS FIRST: THE INCUMBENTS ARE NOW MATURE. In round 7 all ten proposals were
-discarded and every single one scored LOWER held-out than its incumbent (the book
-average is now 0.211; the ten proposals came in between 0.113 and 0.188). Most of
-them were small, sensible-looking edits: swap one vague clause for a sharper one,
-trim a token or two. That style of marginal tinkering with an already-good hint
-has now failed roughly thirty times across the book.
+THE INCUMBENTS ARE MATURE AND HARD TO BEAT. Over rounds 6-8 only 3 of 30
+proposals survived. The book's mean held-out is now 0.215, and the overwhelming
+majority of proposals score BELOW their incumbent on held-out - including many
+careful, well-reasoned, evidence-backed edits. Assume by default that your
+incumbent is good and that a change is more likely to hurt than help.
 
-So do not submit a cosmetic edit and hope. Only two kinds of proposal have ever
-actually won:
-  (a) a LOSSLESS COMPRESSION - identical strategy, provably nothing dropped,
-      fewer tokens (hint 2 round 3: 81 -> 70 tokens, J 3.00 -> 3.25); or
-  (b) a GENUINELY DIFFERENT AND MORE GENERAL strategy statement - naming a
-      concrete executable first move where the hint previously only gestured
-      (hint 9 round 1, the book's biggest gain; hint 5 round 6, J 2.50 -> 3.25).
-If you cannot honestly see either, prefer (a) done carefully, and say in your
-summary that you judged the incumbent hard to beat. An honest near-miss is far
-better than a confident rewrite that costs 0.1 held-out.
+Critically, DELETION IS NOT AUTOMATICALLY SAFE. Round 8 tested it directly:
+several workers found a clause their rollouts provably never executed, deleted
+only that clause, kept everything else byte-identical - and still lost held-out
+(one fell 0.2250 -> 0.1375 by removing 32 tokens of "inert" text). A clause the
+student never visibly acts on can still be shaping its behaviour. So "the
+rollouts never mention it" is weaker evidence than it looks.
+
+The three mutation styles with a real track record:
+  (a) LOSSLESS COMPRESSION - same strategy, same steps, fewer tokens, nothing
+      dropped (hint 2 round 3: 81 -> 70 tokens, J 3.00 -> 3.25). Rewording, not
+      removing content.
+  (b) NAMING A CONCRETE EXECUTABLE FIRST MOVE where the hint previously only
+      gestured (hint 9 round 1, the book's biggest gain; hint 5 round 6,
+      J 2.50 -> 3.25).
+  (c) REPLACING A DEAD-END DIRECTIVE the failures visibly follow into a wall
+      with a constructive alternative (hint 6 round 8, J 2.125 -> 2.750 after
+      seven straight losses).
+
+What keeps failing: appended cautions, prohibitions, slogans, problem-specific
+trap rules, generic procedure checklists, and cosmetic rewording of an
+already-sharp hint.
+
+Submit your single best honest attempt. If you judge the incumbent hard to beat,
+say so plainly in your summary - that is useful information, not a failure.
 
 Findings that hold across all ten hints:
 
