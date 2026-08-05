@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+  "round": 10,
+  "book_hash_before": "46a08735227eb02c031f4ec85c41c1c1524355d58eb2f1d3560d7b27ec9ce28a",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "In \"I don't know\" puzzles, never judge knowledge from public data alone. Treat any choice the problem leaves unstated, such as which quantity was published, as a hidden coordinate the speakers also lack. Fix a speaker's private value v and list the scenarios consistent with v and the public data, dropping ones that break the domain rules. Two or more survivors means that speaker cannot know; one means they can. So v pinning the partner under one fixed structural choice is never a contradiction, only evidence that choice is unsettled. Apply announcements in order and use each twice: it restricts the speaker's own value, and it also forces the partner coordinate of every surviving scenario to pass the same test. Build the candidate list once, sweep it once, answer from a survivor. Re-deriving one dead end means you over-credited a speaker, so widen the unstated choices; never restart the sweep or box a plausible value.",
+      "mutation": "propagate-announcement-to-partner-coordinate-plus-single-sweep",
+      "subagent_summary": "With the incumbent hint only 1/8 rollouts scored 1 and all seven failures hit finish_reason=length at the 16384-token cap (execution 149.198), so non-termination is the dominant failure: each one re-derived \"but that speaker could just subtract or divide, so this reading is impossible\", restarted the same two-reading enumeration, and either exhausted tokens or boxed an unjustified factor. The revision states explicitly that a private value pinning the partner under one fixed structural choice is not a contradiction, adds the mechanism the failures skipped of applying each announcement to the partner coordinate of surviving scenarios rather than only to the speaker's own value, and imposes a build-once/sweep-once budget rule with an explicit ban on restarting.",
+      "sampling_slurm_job_id": "149.198",
+      "tokens": 190,
+      "hint_hash": "289fc65da74cf0c66c5db0ccd20a54ee61c5be590ac064d63aa7e2f6a2b058a3",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "201354a92ede8d8aac1cb60ea727c71fda8c2a78ad6bed1e1f28858eb6defeef"
+    },
+    {
+      "hint_id": 2,
+      "hint": "To place all roots on one circle or line, find one necessary condition, not the n roots. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar: |z-a| = k|z-b|, k^n = |c|; never apply 1/n while nth powers stand. Set z = x+iy, square, and collect as A(x^2+y^2) + Bx + Cy + D = 0. Skip completing the square; read it off: A = 0 is a line, else center = (-B/(2A), -C/(2A)), radius = sqrt(B^2+C^2-4AD)/(2|A|). The |A| absorbs every sign. The center never lies on the locus; do not test it.",
+      "mutation": "general-conic-coefficient-formula-replaces-completing-the-square",
+      "subagent_summary": "All 8 round-10 rollouts scored 1 (2999-6016 tokens), so training is saturated and the loss is transfer plus token waste: every rollout reached the modulus ratio early, but the two longest (6016 and 5918 tokens, 12-14 hedges) burned their middle halves on the completing-the-square bookkeeping the incumbent prescribes and on a self-inflicted crisis from evaluating the center point against the locus and concluding the circle was wrong. The incumbent already forbids the sign-error-prone endpoint shortcut but leaves completing the square as a multi-step manual reduction, so this revision replaces it with the portable general-conic reading (A, B, C, D to center and radius with |A|), which is constant-work, sign-safe on any such locus, and diagnoses the line case by A = 0, and it states plainly that the center is not on the locus so spot-checks never land there.",
+      "sampling_slurm_job_id": "149.199",
+      "tokens": 190,
+      "hint_hash": "119e6c8839791946dfce05347bdc35c3bcdd9e51099a89789d386e1b5b150c8e",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "59b3d8b787e142b5557010de60e2aaf179f67e91a57adadbbb61e6f1a74bd7e2"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union = summed areas minus overlap, so minimize overlap. Put the shared point at the origin. Only the two edges meeting at that corner can reach the other shape S; the rest sit a full side length away. If that side length exceeds the farthest distance from the origin to S, drop the far edges and never compute their vertices: the cover is just the infinite wedge of the two edges through the origin, so coverage is two signed linear tests. Never argue from sizes, extents, or tangency. Both wedge lines cross S interior, so overlap is neither 0 nor all of S. If the origin is a k-fold rotation center of S and the wedge angle is 2*pi/k, rotating by 2*pi/k maps S to itself and shifts the wedge one slot, so the k slots cut S into congruent pieces and overlap = area(S)/k at every angle. Constant means done: compute that area once, state the union, stop.",
+      "mutation": "far-edges-out-of-range-so-cover-is-just-the-wedge",
+      "subagent_summary": "Training scored 3/8 and all five failures ended at the 16384-token cap rather than on a committed wrong answer; each burned its budget building the rotated big square's far vertices and edge lines (repeatedly deriving side vectors and lines like y=-x+2*sqrt(2)), then testing distances and tangency against them, and one had already reached the right union before losing it in that search. The incumbent asserts a corner covers only a wedge but gives no license to discard the other edges, so the student keeps carrying them. This revision supplies the checkable range condition (the non-adjacent edges lie a full side length from the corner, beyond the farthest point of S, so they cannot cut it) which collapses the cover to two signed linear tests and removes the vertex/tangency computation that consumed every failure.",
+      "sampling_slurm_job_id": "149.200",
+      "tokens": 194,
+      "hint_hash": "241663f940cdcbb94cae17260a498a09abd97fac29741a85a1f665c493d3bc6b",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "fb51b21593ed905cd5a002358e62f833d6da9e1c02aa884460885af4ac2cb21a"
+    },
+    {
+      "hint_id": 4,
+      "hint": "A maximum count is where an upper bound meets a matching construction; produce both. When each term may come from any of N functions, never compare adjacent terms: neighbours may use different functions, so no bound follows. Write the target at index n as explicit T(n); group indices by which function made them. On P's group, P - T vanishes and is not identically zero, since low-degree T cannot cancel P's leading term; so that group holds at most d = deg P indices. The cap is per group, so Bound = N x d, never N alone. For tightness, build rather than debate whether P can behave like T: give each function a block of d indices n_1..n_d and set P = T + c(x-n_1)...(x-n_d), c nonzero. P keeps full degree yet equals T across its block, killing the 'P must be low-degree' objection. Then answer.",
+      "mutation": "explicit-T-plus-c-times-product-tightness-device",
+      "subagent_summary": "My 8 public rollouts with the incumbent scored 6/8 and both failures were token-cap truncations, not wrong answers; each had already accepted the N x deg P bound and then stalled on the tightness step. Both looped on the same false obstruction, demanding that a single function's own values across its block themselves step by the progression's difference and concluding the function 'would have to be linear, which it isn't', so they discarded the construction and restarted. The revision keeps the proven bound skeleton verbatim but replaces the vague 'interpolate, free coefficients remain' clause with the explicit portable device P = T + c times the product of (x - n_j) over the block's d indices, which visibly keeps full degree while agreeing with the target exactly there.",
+      "sampling_slurm_job_id": "149.201",
+      "tokens": 193,
+      "hint_hash": "cfd221f96601c768c674155cae1b1bf5da8ceab825508c5ae2c116994550bf59",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "21192c6cb98688e15ec795c973c5e96f06d4ded5712476e931bff9c904fae453"
+    },
+    {
+      "hint_id": 5,
+      "hint": "With base 1/k, height y means argument k^-y; the reverse read kills signs, so match the argument to a power of the base AS WRITTEN, (1/k)^m gives height m. Never rewrite it as k^n and copy n; that flips the sign. Guard: base under 1 with argument under 1 forces POSITIVE height. Fit parameters from the given points. A vector equality is ONE constraint; read the displacement straight off it. Carry one unknown: a vertex at (t, f(t)), translated, forced back onto the curve. A height gap d becomes one factor k^-d on the argument, giving a rational equation in t. Test a given vertex's x in it first: the coincident vertex fits everything, so it MUST be a root. If not, a sign is wrong; if so, divide it out and the rest is linear. Take every height from f. Area = |cross product| of edges.",
+      "mutation": "add-inverse-log-read-rule-and-argument-magnitude-check",
+      "subagent_summary": "7/8 rollouts correct; the single failure did the whole pipeline right and died on one step, evaluating the recovered vertex height by rewriting the small argument as a power of the reciprocal base and copying that exponent, so it got a height of the wrong sign and an area from an off-graph point. All seven correct rollouts instead matched the argument to a power of the base as literally written (one visibly caught itself mid-slip), so the revision adds that inverse-direction read rule plus an argument-magnitude sign check, since the incumbent only covered the forward height-to-argument direction.",
+      "sampling_slurm_job_id": "149.202",
+      "tokens": 197,
+      "hint_hash": "9579cace08af3b27af893515979d4bdc68eb33ee73b60baabc07fb80b01be330",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "85f213d578062adcf883b7f1f27d6adaf1b87fd1ff0c18c817da13cc0a477ef6"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Reduce the asked event to the shortest prefix of moves that already decides it. A pile's bottom item is whichever arrived first, so \"item X ends k-th from the bottom\" means \"X is the k-th to arrive there\". Write that prefix out step by step and ask at each step which moves are legal: when the middle pile is empty only one move exists, factor 1; when two exist and the event picks one, factor 1/2. The probability is 1/2 raised to the number of genuine choices in that prefix, and steps after the event is settled contribute nothing. Run this same procedure separately for every part of the problem; never switch to an equally-likely-positions or favourable-over-total shortcut for a later part just because it looks easier.",
+      "mutation": "shortest-deciding-prefix-plus-reuse-same-method-per-part",
+      "subagent_summary": "My 8 rollouts scored 1/8: five reached 1/8 on part a by counting free binary steps but then abandoned that mechanism for part b, substituting an equally-likely-position shortcut (1/4) or a single lone 1/2, and two instead claimed the outcome is forced. So the incumbent's pricing rule is usable but the students drop it mid-problem and never bound the run they need to control. The revision names the shortest deciding prefix as the object to price, notes that later steps cost nothing, and demands the same procedure be reused on every sub-question.",
+      "sampling_slurm_job_id": "149.203",
+      "tokens": 158,
+      "hint_hash": "69c3d8421ef18a1390f89484b73fd3d076f565551bdb5e4b0d7a7270d9c9300e",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "466facab1208fc7a47986ab237293f5be9ec980670b8f43f1612be39eae83ed6"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Huge stated size, one quantity asked: do not compute at that size. Replace the size by a small n, shrinking every coupled count together so the toy is the same problem, not a truncation. Solve the smallest cases in exact fractions, and check each solved case by substituting it back into its own equations. A stall here is almost always a mis-solved toy, not a real contradiction, so recheck that arithmetic instead of switching methods. Fit a closed form in n -- factorial, binomial, power, alternating sign -- that reproduces every verified case, pin the off-by-one in its argument, then substitute the real size and box it at once. Do not solve any case twice.",
+      "mutation": "back-substitute-each-toy-before-fitting+shorten",
+      "subagent_summary": "My 8 rollouts scored 3/8 and all five failures hit the 16384-token cap, never a wrong-formula stop: three carried a botched small case forward (one produced a denominator of 791, one declared n=4 contradictory then looped re-solving it, one re-derived n=4 while already holding a candidate) and two drifted into polynomial-coefficient sign bookkeeping. So the ladder mechanism works but the toy solutions are unverified, and the incumbent only validates the fitted formula, never the individual cases feeding it. This revision inserts a per-case back-substitution check plus an explicit 'a stall means mis-solved toy, recheck arithmetic' rule, and trims 186 tokens to 143 since heldout accuracy across rounds 1-9 fell roughly monotonically with hint length.",
+      "sampling_slurm_job_id": "149.204",
+      "tokens": 143,
+      "hint_hash": "1b56f1e8e122cc01c9ffccbeb3be2b96f2982b973d24f1f669f85a93d148291f",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "b2a22f64742db6de717ce4677f47425adbfad7620c3372bf9f96e9c222adbfaa"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let N be the unstated count of identical units, and recover it from integrality rather than from the story: if every per-unit share must be a whole number, N divides each listed total, so the admissible N are their common divisors and the intended one is the maximum feasible count, namely their gcd. When the story counts groups (streets, rows, batches), the units per group are also unknown, so write N = (number of groups) x (units per group) and solve for the second factor; a group count is never N by itself, even if every total happens to divide by it. Decide once whether each listed figure is a grand total or a per-unit amount, then stop revisiting it. Then add all component amounts, divide by N, and apply any markup or discount as one factor. Check each per-unit value is whole and answer the question asked.",
+      "mutation": "factor-N-as-groups-times-per-group",
+      "subagent_summary": "6/8 public rollouts were correct; both failures shared one mode and neither was arithmetic: each asserted the stated number of equal groups as the number of units, divided every listed total by it, saw whole quotients, and never invoked gcd or maximality. The incumbent's grouping clause states the multiple constraint only as a prohibition and was ignored; rounds 5-9 all attacked this mode with extra prohibitions or divisibility apparatus at 187-190 tokens and every one collapsed heldout from 0.2125 to 0.0625-0.1375. So I kept the incumbent's spine, ordering and length and made the grouping clause constructive instead of prohibitive, naming the missing second factor via N = groups x units-per-group, and spent the budget by dropping the commute clause that no correct rollout used.",
+      "sampling_slurm_job_id": "149.205",
+      "tokens": 181,
+      "hint_hash": "c95e850295d7d46363b417a65c65f3fccae7a2862d061e29125d32dbcaa06131",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "631be8eed5f087f7cdab1dec25cead2e9d0ae8ea0b579379c5e58836f770dc11"
+    },
+    {
+      "hint_id": 9,
+      "hint": "If p(q(x))=q(p(x)) with p,q of equal degree n, skip the degree-n^2 coefficient system. Seek a common fixed point r; center as p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Solve for r symbolically; never guess integer centers. In y=x-r each map is y -> Cy^n, so composing multiplies coefficients and raises y only; a raised coefficient means you slipped. This forces AB^n=BA^n; factor as AB(A^(n-1)-B^(n-1))=0 and carry both branches, since B=A collapses to p=q; let data kill one. The identity then holds automatically - not underdetermination; match free parameters to independent givens. Add and subtract two conditions differing in one sign to decouple unknowns. Verify p(r)=q(r)=r, then evaluate asked inputs centered.",
+      "mutation": "derive-center-as-unknown-and-name-coefficient-vs-offset-raising",
+      "subagent_summary": "All 8 public rollouts were correct (8/8, 3.5k-8.6k tokens, none truncated), so the training question stays saturated and every remaining point is transfer. Two residual wastes are visible: the 8.6k outlier (roughly double the median) raised the inner coefficient as well as the offset when composing the centered maps, producing a lopsided relation whose spurious extra powers it then solved by guessing four integer centers before recovering; and six of eight rollouts, having verified the solution by roughly their midpoint, spent the tail hunting for 'another fixed point' or doubting that the centered form was a legitimate assumption. This revision keeps the proven trigger, centered ansatz, factored both-branch condition, parameter-count closure and symmetric-combination steps and adds only that the center is an unknown to solve for and that composition multiplies coefficients while raising the offset, so the exponent slip and the second-center hunt both lose their cause.",
+      "sampling_slurm_job_id": "149.206",
+      "tokens": 189,
+      "hint_hash": "212fecdf7fc451953eca143b5c201d115e3379b2ac6b9efe6f5df3985c33dfd5",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3e5130251127f1cdd38d0a1bb8dd4fb0acfb2a10ba7588ffd823b20e7a983801"
+    },
+    {
+      "hint_id": 10,
+      "hint": "For \"how many repeats restore the original\" problems, simulate; don't theorize. Write the state as distinct labels and rewrite the WHOLE state per listed sub-step, always from the line above: swap the exact blocks named, concatenated in the other order, and copy every slot outside them verbatim from that line. Keep ONE convention (slot i now holds X); never its inverse. Audit the composed operation: no label twice, and a slot some sub-step moved is fixed only if a later sub-step moved it back. When sub-steps act on nested growing blocks, each later one re-moves what earlier ones moved, so the composite is one long cycle, not independent swaps of order 2. Then apply the full operation repeatedly, counting until the state first equals the original; cross-check with the lcm of cycle lengths. Do the two smallest sizes, fit ONE closed form, confirm at the next size, box it.",
+      "mutation": "copy-untouched-slots-verbatim-plus-fixed-point-audit-and-nested-block-argument",
+      "subagent_summary": "3/8 correct with the incumbent; four of the five failures hit the 16384-token cap. The mechanical root causes were all in rewriting the state: one rollout swapped a block other than the listed one and then reported the state unchanged under further applications (impossible), one traced indices to immediate fixed points and could not settle the swap target, and the one failure that terminated dropped every sub-step but the last, got a pure involution, and answered 2. The revision therefore forces untouched slots to be copied verbatim from the previous line, adds a fixed-point/duplicate audit on the composed operation, gives the nested-growing-blocks reason the composite cannot be independent order-2 swaps, and caps rechecking at one pass before committing.",
+      "sampling_slurm_job_id": "149.207",
+      "tokens": 189,
+      "hint_hash": "e83a376f9f5f603c0eab98baa39b8fc1a5fea9c4d456c3ae07d720e2b6dea71d",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
+    }
+  ]
+}
