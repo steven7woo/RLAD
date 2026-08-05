@@ -6,13 +6,13 @@
       "hint_id": 1,
       "train_position": 163,
       "train_qid": "28054",
-      "hint": "Represent every interpretation consistent with the public statements as a finite candidate set. For each speaker, group candidates by the value that speaker privately knows. A claim of not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing information sets after every deletion; do not reason from the original set after later statements. The surviving candidate determines the requested quantity.",
-      "tokens": 77,
-      "hint_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8",
+      "hint": "Represent every interpretation consistent with the public statements as a finite candidate set. For each speaker, group candidates by the value that speaker privately knows. A claim of not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing information sets after every deletion, never from the original set. Report the requested quantity from the surviving candidate and stop.",
+      "tokens": 75,
+      "hint_hash": "2aa9278aefedda0e7142a8047ff9ea9f5a02992a20a5de22b770989cc8c5c6fe",
       "metrics": {
         "schema_version": 1,
         "hint_id": 1,
-        "hint_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8",
+        "hint_hash": "2aa9278aefedda0e7142a8047ff9ea9f5a02992a20a5de22b770989cc8c5c6fe",
         "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
         "train_correct": 1,
         "train_total": 8,
@@ -380,6 +380,27 @@
             "J_i": 2.125
           },
           "proposal_eval_slurm_job_id": "148.326"
+        },
+        {
+          "round": 17,
+          "decision": "kept",
+          "proposal_hash": "2aa9278aefedda0e7142a8047ff9ea9f5a02992a20a5de22b770989cc8c5c6fe",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "2aa9278aefedda0e7142a8047ff9ea9f5a02992a20a5de22b770989cc8c5c6fe",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 20,
+            "heldout_total": 80,
+            "heldout_i": 0.25,
+            "J_numerator": 210,
+            "J_denominator": 80,
+            "J_i": 2.625
+          },
+          "proposal_eval_slurm_job_id": "148.348"
         }
       ]
     },
@@ -761,6 +782,27 @@
             "J_i": 2.375
           },
           "proposal_eval_slurm_job_id": "148.327"
+        },
+        {
+          "round": 17,
+          "decision": "discarded",
+          "proposal_hash": "3b33f12f82aebc1eddbff187b91199e3b1236630704393a9bcb38de2e022112a",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "3b33f12f82aebc1eddbff187b91199e3b1236630704393a9bcb38de2e022112a",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 210,
+            "J_denominator": 80,
+            "J_i": 2.625
+          },
+          "proposal_eval_slurm_job_id": "148.349"
         }
       ]
     },
@@ -1142,6 +1184,27 @@
             "J_i": 1.75
           },
           "proposal_eval_slurm_job_id": "148.337"
+        },
+        {
+          "round": 17,
+          "decision": "discarded",
+          "proposal_hash": "4da4fc53185944b6dc25d029559083ac27b5073031ae19edd2c25612b6e37e98",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "4da4fc53185944b6dc25d029559083ac27b5073031ae19edd2c25612b6e37e98",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 6,
+            "heldout_total": 80,
+            "heldout_i": 0.075,
+            "J_numerator": 110,
+            "J_denominator": 80,
+            "J_i": 1.375
+          },
+          "proposal_eval_slurm_job_id": "148.350"
         }
       ]
     },
@@ -1523,6 +1586,27 @@
             "J_i": 3.0
           },
           "proposal_eval_slurm_job_id": "148.329"
+        },
+        {
+          "round": 17,
+          "decision": "discarded",
+          "proposal_hash": "8b7a9b45ebc743c76a107088f5674b1053bb2c2a188fad094ab2e385d616f72f",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "8b7a9b45ebc743c76a107088f5674b1053bb2c2a188fad094ab2e385d616f72f",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 200,
+            "J_denominator": 80,
+            "J_i": 2.5
+          },
+          "proposal_eval_slurm_job_id": "148.351"
         }
       ]
     },
@@ -1904,6 +1988,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.330"
+        },
+        {
+          "round": 17,
+          "decision": "discarded",
+          "proposal_hash": "f0951c575622a8ca8c401ef9db9722bd7e0178db4ab049dcf790f187ece7cfa5",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "f0951c575622a8ca8c401ef9db9722bd7e0178db4ab049dcf790f187ece7cfa5",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 210,
+            "J_denominator": 80,
+            "J_i": 2.625
+          },
+          "proposal_eval_slurm_job_id": "148.352"
         }
       ]
     },
@@ -2285,6 +2390,27 @@
             "J_i": 1.875
           },
           "proposal_eval_slurm_job_id": "148.331"
+        },
+        {
+          "round": 17,
+          "decision": "discarded",
+          "proposal_hash": "754c6b060a5cb6845de0a51bec58b9553d03e32f0c4169e01455f756768741f2",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "754c6b060a5cb6845de0a51bec58b9553d03e32f0c4169e01455f756768741f2",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 120,
+            "J_denominator": 80,
+            "J_i": 1.5
+          },
+          "proposal_eval_slurm_job_id": "148.353"
         }
       ]
     },
@@ -2666,6 +2792,27 @@
             "J_i": 1.0
           },
           "proposal_eval_slurm_job_id": "148.332"
+        },
+        {
+          "round": 17,
+          "decision": "discarded",
+          "proposal_hash": "f77e3fefd305b9fb2741483d73f2196d4c4f6e231616b54b7ec1b2b7c5533481",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "f77e3fefd305b9fb2741483d73f2196d4c4f6e231616b54b7ec1b2b7c5533481",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 100,
+            "J_denominator": 80,
+            "J_i": 1.25
+          },
+          "proposal_eval_slurm_job_id": "148.354"
         }
       ]
     },
@@ -3047,6 +3194,27 @@
             "J_i": 1.375
           },
           "proposal_eval_slurm_job_id": "148.333"
+        },
+        {
+          "round": 17,
+          "decision": "discarded",
+          "proposal_hash": "d99ec6b8b05e2cc64419bf4ae4d72be8a43cb6987166438c254697e0132a5eaf",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "d99ec6b8b05e2cc64419bf4ae4d72be8a43cb6987166438c254697e0132a5eaf",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 140,
+            "J_denominator": 80,
+            "J_i": 1.75
+          },
+          "proposal_eval_slurm_job_id": "148.355"
         }
       ]
     },
@@ -3054,23 +3222,23 @@
       "hint_id": 9,
       "train_position": 188,
       "train_qid": "3980",
-      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation rather than solving for every coefficient. Reflect the maps, not the argument x: substituting s - x into the given identity only reproduces it.",
-      "tokens": 147,
-      "hint_hash": "391f18d0a38c1a07058f9782b12c580bfb7fb5aae04b069b173f7d17d3e75563",
+      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation, pairing arguments that sum to s. Reflect the maps, not the argument x: substituting s - x into the given identity only reproduces it.",
+      "tokens": 146,
+      "hint_hash": "8d573a01e8dd8cdbf6fde199bcbfe58fbdf001268ee5af64c810b216a6f41526",
       "metrics": {
         "schema_version": 1,
         "hint_id": 9,
-        "hint_hash": "391f18d0a38c1a07058f9782b12c580bfb7fb5aae04b069b173f7d17d3e75563",
+        "hint_hash": "8d573a01e8dd8cdbf6fde199bcbfe58fbdf001268ee5af64c810b216a6f41526",
         "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-        "train_correct": 3,
+        "train_correct": 2,
         "train_total": 8,
-        "train_i": 0.375,
-        "heldout_correct": 21,
+        "train_i": 0.25,
+        "heldout_correct": 23,
         "heldout_total": 80,
-        "heldout_i": 0.2625,
-        "J_numerator": 240,
+        "heldout_i": 0.2875,
+        "J_numerator": 250,
         "J_denominator": 80,
-        "J_i": 3.0
+        "J_i": 3.125
       },
       "history": [
         {
@@ -3428,6 +3596,27 @@
             "J_i": 1.75
           },
           "proposal_eval_slurm_job_id": "148.334"
+        },
+        {
+          "round": 17,
+          "decision": "kept",
+          "proposal_hash": "8d573a01e8dd8cdbf6fde199bcbfe58fbdf001268ee5af64c810b216a6f41526",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "8d573a01e8dd8cdbf6fde199bcbfe58fbdf001268ee5af64c810b216a6f41526",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 23,
+            "heldout_total": 80,
+            "heldout_i": 0.2875,
+            "J_numerator": 250,
+            "J_denominator": 80,
+            "J_i": 3.125
+          },
+          "proposal_eval_slurm_job_id": "148.356"
         }
       ]
     },
@@ -3809,6 +3998,27 @@
             "J_i": 2.5
           },
           "proposal_eval_slurm_job_id": "148.335"
+        },
+        {
+          "round": 17,
+          "decision": "discarded",
+          "proposal_hash": "9bac2374283cf1f22a1a2fa42304d6735fea31b9eba8a72b048a5a136c03b4f4",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "9bac2374283cf1f22a1a2fa42304d6735fea31b9eba8a72b048a5a136c03b4f4",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 190,
+            "J_denominator": 80,
+            "J_i": 2.375
+          },
+          "proposal_eval_slurm_job_id": "148.357"
         }
       ]
     }

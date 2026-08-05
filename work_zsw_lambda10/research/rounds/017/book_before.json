@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 17,
+  "generation": 16,
   "hints": [
     {
       "hint_id": 1,
       "train_position": 163,
       "train_qid": "28054",
-      "hint": "Represent every interpretation consistent with the public statements as a finite candidate set. For each speaker, group candidates by the value that speaker privately knows. A claim of not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing information sets after every deletion, never from the original set. Report the requested quantity from the surviving candidate and stop.",
-      "tokens": 75,
-      "hint_hash": "2aa9278aefedda0e7142a8047ff9ea9f5a02992a20a5de22b770989cc8c5c6fe"
+      "hint": "Represent every interpretation consistent with the public statements as a finite candidate set. For each speaker, group candidates by the value that speaker privately knows. A claim of not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing information sets after every deletion; do not reason from the original set after later statements. The surviving candidate determines the requested quantity.",
+      "tokens": 77,
+      "hint_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
     },
     {
       "hint_id": 2,
@@ -71,9 +71,9 @@
       "hint_id": 9,
       "train_position": 188,
       "train_qid": "3980",
-      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation, pairing arguments that sum to s. Reflect the maps, not the argument x: substituting s - x into the given identity only reproduces it.",
-      "tokens": 146,
-      "hint_hash": "8d573a01e8dd8cdbf6fde199bcbfe58fbdf001268ee5af64c810b216a6f41526"
+      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation rather than solving for every coefficient. Reflect the maps, not the argument x: substituting s - x into the given identity only reproduces it.",
+      "tokens": 147,
+      "hint_hash": "391f18d0a38c1a07058f9782b12c580bfb7fb5aae04b069b173f7d17d3e75563"
     },
     {
       "hint_id": 10,
@@ -84,6 +84,6 @@
       "hint_hash": "f35723e4dc2afe2c9e6b06cc17fbe624bd14c7dc195ef432ec15398d3a5af454"
     }
   ],
-  "total_tokens": 1145,
-  "book_hash": "85094e81edbfa26e6aed0069a6ac6976046506f9a1f6bc9b5308c808dea7ed57"
+  "total_tokens": 1148,
+  "book_hash": "0f640bd6f9c69cc49e697e134faee0fe4e9982aba910f4586c5ce37ccbde0a85"
 }
