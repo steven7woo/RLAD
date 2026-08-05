@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 8,
+  "generation": 7,
   "hints": [
     {
       "hint_id": 1,
@@ -63,9 +63,9 @@
       "hint_id": 8,
       "train_position": 35,
       "train_qid": "23443",
-      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, and apply the stated markup multiplicatively. In general, when a direct attack stalls, work the smallest cases by hand and read off the pattern or invariant rather than pushing a long computation. Keep quantities exact as fractions or products and simplify only at the close. State your result plainly as soon as you have it, then check it once.",
-      "tokens": 130,
-      "hint_hash": "8a6dfd748e0553b9accc3ad13afe0c4aa08f94103b64259ab984bac22622e13d"
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, apply the stated markup multiplicatively, and check integrality and units.",
+      "tokens": 77,
+      "hint_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
     },
     {
       "hint_id": 9,
@@ -84,6 +84,6 @@
       "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
     }
   ],
-  "total_tokens": 1510,
-  "book_hash": "71b7d6a0c92712ccf5ab163515395c7e6f9a18c319832dc19b59555efd2ea1bf"
+  "total_tokens": 1457,
+  "book_hash": "5ed7bd34f1b2cefc0f54a9b43a28c35ac34067c5666e656261484787d1ce2a1f"
 }

@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+  "round": 8,
+  "book_hash_before": "5ed7bd34f1b2cefc0f54a9b43a28c35ac34067c5666e656261484787d1ce2a1f",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Turn every condition, including a remark about what someone knows, into an explicit constraint on your unknowns: divisibility, an inequality, a bound, a count. Impose them in the order spoken. When every branch you have tried looks contradictory, the fault is almost always a candidate list you built too narrow, not a broken problem -- widen it before concluding anything. In particular, if a quantity's role is ambiguous, each reading has its own candidate space: a multiplicative reading admits only divisors of the given number, while an additive one admits every value below it, including the balanced split into equal parts. Build that second list instead of reusing the first. A contradiction kills one assumption you added: note which died, move on, never re-derive a settled case. Never reuse a value recalled from a similar puzzle or pick one for looking intended. Commit to your result early, verify once, stop.",
+      "mutation": "diagnose all-branches-contradictory as an over-narrow candidate list and require building the additive candidate space (including the balanced split) rather than reusing the divisor list",
+      "subagent_summary": "Fresh sampling with the incumbent hint scored 1/8, with 2 of 8 truncating at the token cap; seven of eight rollouts enumerated only the divisor pairs of the displayed number, applied that same divisor list to both readings, concluded every branch was impossible, and then emitted an arbitrary divisor or a value they admitted was recalled or 'looks intended'. The single success was the only rollout that left the divisor list and considered a balanced additive split, so I replaced the incumbent's intersect-across-readings clause with an explicit diagnosis rule: all-branches-contradictory means the candidate space was built too narrow, and the additive reading must get its own list rather than inheriting the divisor list.",
+      "sampling_slurm_job_id": "150.154",
+      "tokens": 185,
+      "hint_hash": "154e19e61ee1d04be2e2c5c9a7b49a9d889b8df4ea6a218e9c34cf3923bbc70b",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "fda1791300f21976dd72f9eebe700de3cfaba1edb06bf4fc0339ea25871f6960"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable to introduce the ratio w=(z-1)/z; the equation then pins w to a finite set on a circle. Solve for z in terms of w and turn the locus into an equation in x and y, completing the square to read off center and radius. Generally: substitute so the relation depends on one quantity, and keep every value exact.\n\nVerify against the original relation, never against your own derived formula. Take one easy exact solution read off the problem and confirm your description contains it; a test point manufactured by the map you are testing proves nothing, and is the usual source of a check that seems to contradict a sound derivation. Suspect the check, not the problem: redo that one line only, never restart and never call the setup inconsistent. State your simplified result as soon as you have one.",
+      "mutation": "redirect verification to the original given relation using a solution read off the problem, since a self-manufactured test point cannot validate the map that produced it",
+      "subagent_summary": "Seven of eight fresh rollouts were correct in 5.8k-9.1k tokens; the lone failure derived the correct locus and center/radius, then tested it on a point it had itself produced by inverting its own map (with a botched complex reciprocal), so a sound derivation appeared to contradict its own check and it looped through dozens of self-audits until the 16384-token cap without stating a result. Rounds 5-7 tried to bound or repair that loop and all lost transfer, so instead I remove its trigger: verify against the original relation with an easy exact solution read off the problem, since a test point manufactured by the very map under test cannot confirm or refute it, while keeping the setup, the no-restart rule, and early commitment.",
+      "sampling_slurm_job_id": "150.155",
+      "tokens": 173,
+      "hint_hash": "fb4a7a9c8db894498ed4bd3a1fc94995aeb319f9f1ebfeabec416a49da95b201",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "64b0f516c4150af456f05fd043eae6476f571e240a578af063256e2ea28e9e9a"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Fix coordinates once, pinned point at the origin; never restart the setup. For fixed-area pieces, union = sum minus overlap, so maximize the union by minimizing overlap. A polygon vertex is only a wedge of its interior angle, so do not assume the bigger shape swallows the smaller; test one concrete point past that wedge. When the apex sits at a center of n-fold rotational symmetry, n congruent rotated copies of the clipped slice tile the whole region, so the slice is exactly 1/n at every angle; verify your fraction by that tiling count before using it. For an extremal claim, certify rather than scan: one bound valid for every configuration plus one configuration attaining it is a complete proof, so no remaining case can beat it. Record the exact value as soon as you hold both, then close.",
+      "mutation": "make the symmetry step self-checking (confirm the slice fraction by counting the n congruent copies that tile the region) and replace open-ended scanning with a bound-plus-witness certificate",
+      "subagent_summary": "Four of eight rollouts scored. The incumbent's wedge/anti-containment warning is working, but two failures jumped straight to an axis-aligned configuration and reported a slice fraction that was too large by a factor, then jointly reasoned the overlap wrong; the other two never reached a visible result because they kept re-deriving the setup and re-scanning rotations until the token cap. So the revision keeps the wedge and n-fold-symmetry core but makes the symmetry step verify its own fraction by counting the congruent rotated copies that tile the region, and replaces the bare stop instruction with a bound-plus-witness certificate that logically justifies halting.",
+      "sampling_slurm_job_id": "150.156",
+      "tokens": 167,
+      "hint_hash": "bc6433e44f38dc9b22298446fc340ddf28574ce81389297687ad41177dc08fe9",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "e73c55e27100ae936358bb7823761096f52d3e52bbb1bf81a9e7298441eeb331"
+    },
+    {
+      "hint_id": 4,
+      "hint": "Extremal counts need two halves: an upper bound and an example attaining it. Pin down which objects are being counted, then commit to the number in writing as soon as the bound is proved.\n\nPosit ONE closed form for the whole pattern (an arithmetic progression is A+B*n). A candidate f can serve index n exactly when its RESIDUAL f(x)-(A+Bx) vanishes at n. Say residual, never difference: the pattern's own step is a separate object, and demanding that one candidate alone produce consecutive terms is a false requirement that makes the task look impossible.\n\nA nonzero degree-d residual vanishes at most d times. One candidate may serve many indices, so the number of candidates on hand is never itself the count. Served index sets are disjoint, so per-candidate budgets ADD; never collapse that sum back to one.\n\nAttain the total with consecutive blocks, one candidate interpolating each.",
+      "mutation": "name the residual explicitly and forbid the word difference; state that a candidate may serve many indices so the candidate count is never the answer",
+      "subagent_summary": "Only 2 of 8 fresh rollouts were correct. Five of the six failures answered the number of available objects, each first asserting that every progression term needs its own distinct object, and one explicitly misread the hint by calling the constant step a zero-degree difference with no roots; a sixth reached the summed per-object budget and then collapsed it to a single object cap. The revision therefore renames the key quantity the residual and bans the word difference for it, and states plainly that one object may serve many indices so the object count on hand is never the count requested.",
+      "sampling_slurm_job_id": "150.157",
+      "tokens": 188,
+      "hint_hash": "79c2cf2694ad3184cc169433c18cfeef40c24cc249cc44d93e4f1d0cb0c9c999",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "40644c5ad3884d8dd2e32629b2968c787adfe9e53d2fb9166561d803c1e485f1"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Name your unknowns and turn each given condition into one exact equation; solve for any constants first. Absorbing a constant into a logarithm or exponent turns it into a multiplicative factor: check on one number which side that factor belongs, since misplacing it surfaces later as no admissible root -- then flip it instead of re-deriving. Once one coordinate is solved, recompute the others from the defining relation rather than reusing a given value. Discard degenerate roots. State your result early, then stop.",
+      "mutation": "replace the vague second-method check with a one-number test of where an absorbed multiplicative factor belongs, plus recompute-dependent-coordinates-from-the-relation",
+      "subagent_summary": "Only 3 of 8 fresh rollouts were correct: 3 hit the 16384-token cap mid-reduction and 2 terminated but wrong. Every failure traced to the same step -- moving an additive constant across the logarithm as a multiplicative factor on the wrong side -- which produced a different quadratic and then either a no-real-root contradiction that consumed the remaining budget or a plausible-looking wrong pair of vertices. One near-miss reduced correctly but then carried a given point's ordinate over to a new vertex instead of recomputing it from the function. So I replaced the incumbent's unspecific 'verify with a second, different method' clause, which rollouts satisfied cheaply without ever catching this slip, with a concrete one-number test of which side the absorbed factor belongs on, plus an instruction to recompute dependent coordinates from the defining relation. I kept the hint terse: every longer rewrite in rounds 1-7 lost transfer against this incumbent.",
+      "sampling_slurm_job_id": "150.158",
+      "tokens": 107,
+      "hint_hash": "7496d494abde98c93755f70a521ced021e5afcfaff9d3735773efcbd68effe2e",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "83c896bc82082c6ed4cb8791f9d2a555f90a25b05e0dc438a5532b3b8a6282c8"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Trap: asserting uniformity. \"Each item is equally likely in any slot\", 1/n, or 1/n!, is a guess. A process random over MOVES is rarely uniform over OUTCOMES.\n\nBuild ONE sample space and reuse it for every part. Its atoms are the genuinely FREE 50/50 steps: 1/2 only where both options are legal, forced steps count 1, so there are 2^(free) equally likely atoms.\n\nNow use that as a filter. Every part must come out an integer over 2^(free); a denominator that cannot divide it, like 1/n or 1/n!, proves you asserted something false, so go back.\n\nCheap route for a \"which item reaches slot k\" part: such an event is usually pinned by a short PREFIX of steps. Write the exact prefix it demands, pay 1/2 per free step inside, and let later steps count 1.",
+      "mutation": "turn 2^(free) into a divisibility filter that rejects any 1/n or 1/n! denominator, and route which-item-in-slot-k parts through a short move PREFIX instead of full-history enumeration",
+      "subagent_summary": "Fresh sampling with the incumbent gave 1/8; six rollouts terminated normally at 10k-16k tokens and two hit the cap while dithering, so length is secondary. Five of the eight reached the free-choice atom count on the first part and then abandoned that sample space on the later part, asserting every item is equally likely in every slot and reading off 1/n, while two never left the uniform-permutation framing at all. The revision therefore reuses the shared 2^(free) atom set as an explicit divisibility check that flags 1/n and 1/n! as proof of a false assumption, and gives a cheaper alternative to full enumeration by pinning a slot-occupancy event to a short prefix of steps whose free branches are the only ones priced.",
+      "sampling_slurm_job_id": "150.159",
+      "tokens": 194,
+      "hint_hash": "9e234289042c9f9535cc29bc5686714d664eeb471f7be4b4710ea2a55a84a869",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "605dd6784c9f1f6f9bb9f5068b8e9744aad3781c1b1d0e9028b48e9692b555e2"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Solve for the one quantity asked, not for everything. Hunt for a single combination of the given conditions that annihilates every other unknown: a weighting or substitution vanishing exactly where you do not want it, a telescoping difference, an exploitable symmetry. Such isolated quantities usually emerge as a reciprocal of a product, a factorial, or a binomial. Fix notation once before computing: the summation index and the varying exponent or parameter get separate names, and no letter may serve both roles -- quietly swapping them turns a short derivation into an endless one. If you shrink the problem to a two- or three-unknown instance, solve it by plain elimination, substitute back once, then treat it as settled and use it only to pin down signs and off-by-one conventions. Commit and box your result as soon as one instance confirms the shape.",
+      "mutation": "reframe as isolate-one-unknown-by-annihilation with a one-time notation contract, demoting small cases to a convention check",
+      "subagent_summary": "Fresh sampling under the incumbent scored 2 of 8, and all six failures ran to the 16384-token cap. The visible sink was not arithmetic difficulty but the incumbent's small-case-first framing itself: rollouts spent thousands of tokens renegotiating how many conditions the shrunken instance should carry, then let one symbol stand for both the summation index and the exponent, discovered the mismatch, and oscillated between readings while re-solving the same tiny system with different arithmetic each pass. The revision therefore leads with a transferable technique -- isolate the requested unknown by finding a combination that annihilates the rest -- pins the index-versus-exponent naming as a one-time contract, and demotes small cases to a single settled check for signs and off-by-one conventions so the budget goes to committing a result.",
+      "sampling_slurm_job_id": "150.160",
+      "tokens": 170,
+      "hint_hash": "47e3f3cf1401f2e2f5cd0fd07b7bc5880a4b255fb9813c0669b032b25e01ee52",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "970826b6d808a016748fe1e6cda39b71098679265ead772ffa8f52eeb6eaed54"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, and apply the stated markup multiplicatively. In general, when a direct attack stalls, work the smallest cases by hand and read off the pattern or invariant rather than pushing a long computation. Keep quantities exact as fractions or products and simplify only at the close. State your result plainly as soon as you have it, then check it once.",
+      "mutation": "keep the train-preserving opening verbatim, drop the unused integrality/units tail, and replace it with a domain-neutral small-cases/invariant plus exact-arithmetic heuristic instead of more divisibility or scope advice",
+      "subagent_summary": "All 8 fresh rollouts scored reward 1 with clean stops at 2.7-6.9k completion tokens, so train_i is saturated at 1.0 and every remaining point of J must come from transfer. Across seven rounds every append or rewrite that talked about scope labeling, gcd naming, or anti-rumination lost transfer ground while any change to the opening sentences collapsed train, and the one variant that merely deleted the unused integrality/units tail held transfer flat, which suggests the tail slot is free but that more divisibility/verification talk is off-topic for problems unlike this one. So this round keeps the opening verbatim and spends that slot on a genuinely different reusable lever the traces never exercise: reduce to small cases and extract the pattern or invariant instead of grinding a long computation, keep values exact until the end, and commit to a stated result before spending further tokens.",
+      "sampling_slurm_job_id": "150.161",
+      "tokens": 130,
+      "hint_hash": "8a6dfd748e0553b9accc3ad13afe0c4aa08f94103b64259ab984bac22622e13d",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "149cabea90724683bc818e06d11bef6dc0c07209cfe1b68f2300dc838be4613d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Never name unknown coefficients or expand a composed high-degree identity; that exhausts your budget. Recenter about one shared unknown center c: f=c+a(x-c)^k, g=c-a(x-c)^k, odd k, opposite signs, no extra offset, so the identity collapses by symmetry. A mere relation between the two maps is not enough; commit to that centered form. The supplied values are then c-a*c^k and c+a*c^k: adding them cancels the a-term and pins c linearly; subtracting isolates a. An irrational center is a sign slip: fix that line, never by expanding. Then you are done; leftover coefficients only look under-determined, so never hunt extra equations. Evaluate requested inputs inside the centered form, never by re-expanding into standard powers, which double-counts the given constant. Verify by symmetry, commit early.",
+      "mutation": "block the two observed exits from the centered form: stopping at a mere relation between the maps and then hunting extra equations, and re-expanding the solved centered form into standard powers to substitute",
+      "subagent_summary": "Only 3 of 8 fresh rollouts were correct this round, with four running to the 16384-token cap and one terminating wrong, and the failures share a single shape: each reached the shared-center antisymmetric structure but then left it. Two collapsed it into a bare relation between the two maps, declared the remaining coefficients under-determined, and burned the budget hunting extra equations via full coefficient expansion of the composition; one rewrote the already-solved centered form into standard powers and re-added the given constant that the center already encodes, producing a wrong component. The revision therefore names both exits explicitly, asserts that fixing the center and scale finishes the problem, and requires requested inputs to be evaluated inside the centered form rather than after re-expansion.",
+      "sampling_slurm_job_id": "150.162",
+      "tokens": 180,
+      "hint_hash": "8a56d4558e6f18faae62f9ca948b75f9656e50931604d92606df35ea4b7cc4ff",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "652ee8dc58008e69bb7e90163e071e0708bc579422e2fd3d5a546ca1fb63ccad"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Trace concretely, not symbolically: write a row of distinct labels and rewrite the whole row after each stated step, each step acting on the previous row, never on the original. A hand-built map must pair things one-to-one; a duplicated or missing image is bookkeeping error, not exotic structure. Beware degenerate small cases: if the two smallest sizes give equal answers, treat that as coincidence and push to the first size where every stage genuinely differs before generalizing. Never claim structure like \"disjoint swaps, so period two\" from vocabulary you did not trace; composed swaps rarely have period two, and a return count can far exceed the number of stages. If a trace contradicts your structural claim, the claim is dead: drop it and read the count off the trace. State your result before you run long, then stop.",
+      "mutation": "name the degenerate-small-case trap (equal answers at the two smallest sizes is coincidence, push to the first size where stages differ) and make a contradicting trace kill a structural claim immediately",
+      "subagent_summary": "4 of 8 rollouts scored. All four failures converged on the same wrong claim, that the composite is a product of disjoint transpositions and so has period two; two of them asserted it confidently and finished, and the two token-capped ones saw their own row traces refute period two yet kept relitigating the structural claim instead of trusting the trace. Every failure was seeded by the two smallest sizes coincidentally sharing the same return count, which the incumbent already treats as a clean pattern to trust, so the revision names that degeneracy, forces a push to the first size where the stages genuinely differ, and makes a contradicting trace kill a structural claim outright.",
+      "sampling_slurm_job_id": "150.163",
+      "tokens": 172,
+      "hint_hash": "66ba8a07b03a7a3021b10cba636c23e75c5cf8380c203638b5c67f75fdd0291c",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
+    }
+  ]
+}
