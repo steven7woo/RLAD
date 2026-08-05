@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 14,
+  "generation": 13,
   "hints": [
     {
       "hint_id": 1,
@@ -15,9 +15,9 @@
       "hint_id": 2,
       "train_position": 28,
       "train_qid": "30302",
-      "hint": "To find where ALL solutions lie, derive one necessary condition, not the solutions. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar: |z-a| = k|z-b|, k^n = |c|. Get k by writing |c| as a prime power and dividing its exponent by n. Clear moduli by squaring (z = x+iy, or w*wbar). Collect the coefficient of x^2+y^2; zero means a line, else divide by it and complete the square for center and radius r > 0. Then STOP and answer. Necessity alone closes it: every root is trapped in that locus, and containment is all that was asked, so the condition need NOT be sufficient. Listing solutions or roots of unity to confirm it only invents contradictions.",
-      "tokens": 192,
-      "hint_hash": "c608cf3e70986473f7ad7a491de9bfd43b306ba0d80aa9b5896943da5d065421"
+      "hint": "To find where ALL solutions lie, derive one necessary condition, not the solutions. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar: |z-a| = k|z-b|, k^n = |c|. Get k by writing |c| as a prime power and dividing its exponent by n. Then clear moduli with |w|^2 = w*wbar, never with x+iy: (z-a)(zbar-abar) = k^2 (z-b)(zbar-bbar). Expand and collect z*zbar; a zero coefficient means a line, else divide by it and complete the square to |z-z0|^2 = r^2, giving center z0 and radius r > 0. That locus IS the answer; skip roots of unity.",
+      "tokens": 189,
+      "hint_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80"
     },
     {
       "hint_id": 3,
@@ -55,9 +55,9 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Huge stated size, one entry asked: never do algebra at the stated size, and never carry that size as a symbol. Work with actual numbers in small cases.\nFix the toy once and never renegotiate it: n unknowns, n conditions, exponents 1..n, the nonzero right-hand side on the last condition. Solve n=2,3,4 in exact fractions, keeping signs, and check each answer back in its own equations.\nRead the law from ratios of consecutive answers: a simple ratio names the growth -- factorial, binomial, power -- and the sign at once.\nNumbers outrank formulas. If a candidate law disagrees with a computed case, the law is wrong and the case is never exceptional. If two laws still fit, compute one more case; never switch to a symbolic derivation at general size, and never name a theorem in place of a case.\nThen substitute the stated size once and stop.",
-      "tokens": 189,
-      "hint_hash": "bf8917df8e428960f80d51070d9c159b26a541b8cfec74724b518f1eb812f558"
+      "hint": "For a huge indexed system asking for one entry, do not attack the full size: build a ladder of exact small analogues. Scale the toy faithfully -- if N unknowns meet conditions with exponents 1..N, use n unknowns with exponents 1..n and keep the nonzero right-hand side in the same relative position. A toy with more conditions than unknowns looks inconsistent; that is a scaling bug, not a contradiction, so rescale rather than abandon the method.\nSolve n=2,3,4 exactly by elimination and record the target as a signed fraction. Fit a closed form in n, expecting factorial-type growth and a possibly alternating sign, not a guessed denominator. Re-substitute every n and confirm your candidate reproduces each toy value; an off-by-one in the factorial argument is the usual error. Then put in the real size and commit, instead of restarting a second derivation.",
+      "tokens": 186,
+      "hint_hash": "b2a22f64742db6de717ce4677f47425adbfad7620c3372bf9f96e9c222adbfaa"
     },
     {
       "hint_id": 8,
@@ -84,6 +84,6 @@
       "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85"
     }
   ],
-  "total_tokens": 1881,
-  "book_hash": "0c09ad02d160e62baa6463736ba0b46c506f0fd0515330bdc8d38e9435bcbc62"
+  "total_tokens": 1875,
+  "book_hash": "c80208f6719125bb56697d939fcfdda9d51ebdcae4a2d1028d34026d92c33445"
 }

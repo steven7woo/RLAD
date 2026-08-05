@@ -317,6 +317,27 @@
             "J_i": 0.9375
           },
           "proposal_eval_slurm_job_id": "149.268"
+        },
+        {
+          "round": 14,
+          "decision": "discarded",
+          "proposal_hash": "d5ad127de1a0489f9979273aeec66a30d7227b5f2c1ac16ac94f33b7b5602a77",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "d5ad127de1a0489f9979273aeec66a30d7227b5f2c1ac16ac94f33b7b5602a77",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 65,
+            "J_denominator": 80,
+            "J_i": 0.8125
+          },
+          "proposal_eval_slurm_job_id": "149.288"
         }
       ]
     },
@@ -324,23 +345,23 @@
       "hint_id": 2,
       "train_position": 28,
       "train_qid": "30302",
-      "hint": "To find where ALL solutions lie, derive one necessary condition, not the solutions. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar: |z-a| = k|z-b|, k^n = |c|. Get k by writing |c| as a prime power and dividing its exponent by n. Then clear moduli with |w|^2 = w*wbar, never with x+iy: (z-a)(zbar-abar) = k^2 (z-b)(zbar-bbar). Expand and collect z*zbar; a zero coefficient means a line, else divide by it and complete the square to |z-z0|^2 = r^2, giving center z0 and radius r > 0. That locus IS the answer; skip roots of unity.",
-      "tokens": 189,
-      "hint_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80",
+      "hint": "To find where ALL solutions lie, derive one necessary condition, not the solutions. From (z-a)^n = c(z-b)^n take moduli of whole sides: |z-a|^n = |c||z-b|^n. Only then nth-root that scalar: |z-a| = k|z-b|, k^n = |c|. Get k by writing |c| as a prime power and dividing its exponent by n. Clear moduli by squaring (z = x+iy, or w*wbar). Collect the coefficient of x^2+y^2; zero means a line, else divide by it and complete the square for center and radius r > 0. Then STOP and answer. Necessity alone closes it: every root is trapped in that locus, and containment is all that was asked, so the condition need NOT be sufficient. Listing solutions or roots of unity to confirm it only invents contradictions.",
+      "tokens": 192,
+      "hint_hash": "c608cf3e70986473f7ad7a491de9bfd43b306ba0d80aa9b5896943da5d065421",
       "metrics": {
         "schema_version": 1,
         "hint_id": 2,
-        "hint_hash": "d64c59d2b557d10973880b9db8d06fc37e7c9227ad8f286d5ed1578a4d2ebb80",
+        "hint_hash": "c608cf3e70986473f7ad7a491de9bfd43b306ba0d80aa9b5896943da5d065421",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
         "train_correct": 8,
         "train_total": 8,
         "train_i": 1.0,
-        "heldout_correct": 16,
+        "heldout_correct": 17,
         "heldout_total": 80,
-        "heldout_i": 0.2,
-        "J_numerator": 160,
+        "heldout_i": 0.2125,
+        "J_numerator": 165,
         "J_denominator": 80,
-        "J_i": 2.0
+        "J_i": 2.0625
       },
       "history": [
         {
@@ -635,6 +656,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "149.269"
+        },
+        {
+          "round": 14,
+          "decision": "kept",
+          "proposal_hash": "c608cf3e70986473f7ad7a491de9bfd43b306ba0d80aa9b5896943da5d065421",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "c608cf3e70986473f7ad7a491de9bfd43b306ba0d80aa9b5896943da5d065421",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 17,
+            "heldout_total": 80,
+            "heldout_i": 0.2125,
+            "J_numerator": 165,
+            "J_denominator": 80,
+            "J_i": 2.0625
+          },
+          "proposal_eval_slurm_job_id": "149.289"
         }
       ]
     },
@@ -953,6 +995,27 @@
             "J_i": 1.25
           },
           "proposal_eval_slurm_job_id": "149.270"
+        },
+        {
+          "round": 14,
+          "decision": "discarded",
+          "proposal_hash": "fc03b378a90f7d1b7bd03369c687040c43a7d30b264da0df907d49211412e809",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "fc03b378a90f7d1b7bd03369c687040c43a7d30b264da0df907d49211412e809",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 18,
+            "heldout_total": 80,
+            "heldout_i": 0.225,
+            "J_numerator": 130,
+            "J_denominator": 80,
+            "J_i": 1.625
+          },
+          "proposal_eval_slurm_job_id": "149.290"
         }
       ]
     },
@@ -1271,6 +1334,27 @@
             "J_i": 1.6875
           },
           "proposal_eval_slurm_job_id": "149.271"
+        },
+        {
+          "round": 14,
+          "decision": "discarded",
+          "proposal_hash": "f5f90c043608c07ddd9504666626fb515dc978572313001bf17abb93b3b5030a",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "f5f90c043608c07ddd9504666626fb515dc978572313001bf17abb93b3b5030a",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 130,
+            "J_denominator": 80,
+            "J_i": 1.625
+          },
+          "proposal_eval_slurm_job_id": "149.291"
         }
       ]
     },
@@ -1589,6 +1673,27 @@
             "J_i": 1.5
           },
           "proposal_eval_slurm_job_id": "149.272"
+        },
+        {
+          "round": 14,
+          "decision": "discarded",
+          "proposal_hash": "051ec9aa6fc5d9bdd4a80c1395fda3b8e9ece62f61d1cedf91385242a6d94fa4",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "051ec9aa6fc5d9bdd4a80c1395fda3b8e9ece62f61d1cedf91385242a6d94fa4",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 125,
+            "J_denominator": 80,
+            "J_i": 1.5625
+          },
+          "proposal_eval_slurm_job_id": "149.292"
         }
       ]
     },
@@ -1907,6 +2012,27 @@
             "J_i": 1.375
           },
           "proposal_eval_slurm_job_id": "149.273"
+        },
+        {
+          "round": 14,
+          "decision": "discarded",
+          "proposal_hash": "59c76237a5c51e6761287ff5255da6d064a12391b02b31cccf4c7905d6fd2273",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "59c76237a5c51e6761287ff5255da6d064a12391b02b31cccf4c7905d6fd2273",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 50,
+            "J_denominator": 80,
+            "J_i": 0.625
+          },
+          "proposal_eval_slurm_job_id": "149.293"
         }
       ]
     },
@@ -1914,20 +2040,20 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "For a huge indexed system asking for one entry, do not attack the full size: build a ladder of exact small analogues. Scale the toy faithfully -- if N unknowns meet conditions with exponents 1..N, use n unknowns with exponents 1..n and keep the nonzero right-hand side in the same relative position. A toy with more conditions than unknowns looks inconsistent; that is a scaling bug, not a contradiction, so rescale rather than abandon the method.\nSolve n=2,3,4 exactly by elimination and record the target as a signed fraction. Fit a closed form in n, expecting factorial-type growth and a possibly alternating sign, not a guessed denominator. Re-substitute every n and confirm your candidate reproduces each toy value; an off-by-one in the factorial argument is the usual error. Then put in the real size and commit, instead of restarting a second derivation.",
-      "tokens": 186,
-      "hint_hash": "b2a22f64742db6de717ce4677f47425adbfad7620c3372bf9f96e9c222adbfaa",
+      "hint": "Huge stated size, one entry asked: never do algebra at the stated size, and never carry that size as a symbol. Work with actual numbers in small cases.\nFix the toy once and never renegotiate it: n unknowns, n conditions, exponents 1..n, the nonzero right-hand side on the last condition. Solve n=2,3,4 in exact fractions, keeping signs, and check each answer back in its own equations.\nRead the law from ratios of consecutive answers: a simple ratio names the growth -- factorial, binomial, power -- and the sign at once.\nNumbers outrank formulas. If a candidate law disagrees with a computed case, the law is wrong and the case is never exceptional. If two laws still fit, compute one more case; never switch to a symbolic derivation at general size, and never name a theorem in place of a case.\nThen substitute the stated size once and stop.",
+      "tokens": 189,
+      "hint_hash": "bf8917df8e428960f80d51070d9c159b26a541b8cfec74724b518f1eb812f558",
       "metrics": {
         "schema_version": 1,
         "hint_id": 7,
-        "hint_hash": "b2a22f64742db6de717ce4677f47425adbfad7620c3372bf9f96e9c222adbfaa",
+        "hint_hash": "bf8917df8e428960f80d51070d9c159b26a541b8cfec74724b518f1eb812f558",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-        "train_correct": 6,
+        "train_correct": 5,
         "train_total": 8,
-        "train_i": 0.75,
-        "heldout_correct": 6,
+        "train_i": 0.625,
+        "heldout_correct": 8,
         "heldout_total": 80,
-        "heldout_i": 0.075,
+        "heldout_i": 0.1,
         "J_numerator": 90,
         "J_denominator": 80,
         "J_i": 1.125
@@ -2225,6 +2351,27 @@
             "J_i": 0.4375
           },
           "proposal_eval_slurm_job_id": "149.274"
+        },
+        {
+          "round": 14,
+          "decision": "kept",
+          "proposal_hash": "bf8917df8e428960f80d51070d9c159b26a541b8cfec74724b518f1eb812f558",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "bf8917df8e428960f80d51070d9c159b26a541b8cfec74724b518f1eb812f558",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 8,
+            "heldout_total": 80,
+            "heldout_i": 0.1,
+            "J_numerator": 90,
+            "J_denominator": 80,
+            "J_i": 1.125
+          },
+          "proposal_eval_slurm_job_id": "149.294"
         }
       ]
     },
@@ -2543,6 +2690,27 @@
             "J_i": 1.75
           },
           "proposal_eval_slurm_job_id": "149.275"
+        },
+        {
+          "round": 14,
+          "decision": "discarded",
+          "proposal_hash": "2640cac3c47582e5a1b883fa49849a547dc246732dafe270ce4d275ede7d85eb",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "2640cac3c47582e5a1b883fa49849a547dc246732dafe270ce4d275ede7d85eb",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 110,
+            "J_denominator": 80,
+            "J_i": 1.375
+          },
+          "proposal_eval_slurm_job_id": "149.295"
         }
       ]
     },
@@ -2861,6 +3029,27 @@
             "J_i": 1.875
           },
           "proposal_eval_slurm_job_id": "149.276"
+        },
+        {
+          "round": 14,
+          "decision": "discarded",
+          "proposal_hash": "d154b728d566b43723d258e73c12a723a3b026de4c8f67cd1a95d80ef439aa46",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "d154b728d566b43723d258e73c12a723a3b026de4c8f67cd1a95d80ef439aa46",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 155,
+            "J_denominator": 80,
+            "J_i": 1.9375
+          },
+          "proposal_eval_slurm_job_id": "149.296"
         }
       ]
     },
@@ -3179,6 +3368,27 @@
             "J_i": 1.0625
           },
           "proposal_eval_slurm_job_id": "149.277"
+        },
+        {
+          "round": 14,
+          "decision": "discarded",
+          "proposal_hash": "1b9bc8a8aea0a5a6e619df7118fee1bff92e28bac8a6fb1875aebead15bfa939",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "1b9bc8a8aea0a5a6e619df7118fee1bff92e28bac8a6fb1875aebead15bfa939",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 100,
+            "J_denominator": 80,
+            "J_i": 1.25
+          },
+          "proposal_eval_slurm_job_id": "149.297"
         }
       ]
     }
