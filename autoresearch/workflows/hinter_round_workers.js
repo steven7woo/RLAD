@@ -58,15 +58,29 @@ one training problem but does not generalize will LOSE. Your incumbent will be
 replaced only if the proposal scores higher J (tie-break: higher held-out, then
 shorter). So write a REUSABLE STRATEGY, not a solution.
 
-## What twelve rounds of evidence say (read this first)
+## What eighteen rounds of evidence say (read this first)
 
-Keep counts: r1 5/10, r2 0/10, r3 5/10, r4 2/10, r5 3/10, r6 2/10, r7 0/10,
-r8 1/10, r9 0/10, r10 1/10, r11 1/10, r12 1/10. Book mean J: 2.0125 -> 2.7375.
+Keep counts: r1 5, r2 0, r3 5, r4 2, r5 3, r6 2, r7 0, r8 1, r9 0, r10 1, r11 1,
+r12 1, r13 0, r14 1, r15 1, r16 1, r17 2 (out of 10 each). Book mean J:
+2.0125 -> 2.7875; book mean held-out 0.165 -> 0.22875.
 
-THE SEARCH HAS SATURATED UNDER SMALL EDITS. Only 4 of the last 50 proposals
-survived, and ALL FOUR won the same way: held-out exactly TIED and the proposal
-was SHORTER. Not one proposal has raised held-out above its incumbent since
-round 8. Your incumbent has repelled 11 or 12 consecutive challengers.
+THE SEARCH HAS SATURATED UNDER SMALL EDITS. Roughly 7 of the last 80 proposals
+survived. Your incumbent has repelled many consecutive challengers. But note the
+recent trend is encouraging: rounds 14-17 each kept something, and rounds 16 and
+17 produced genuine held-out GAINS (hint 10: 0.1625 -> 0.2250; hint 9: 0.2625 ->
+0.2875), not just tie-break wins. Real improvements are still available.
+
+SAMPLING IS NOT DETERMINISTIC - do not assume otherwise. A round-18 worker argued
+that because `config.json` pins seed=1234, an unchanged hint must re-score
+identically, and concluded the "training is noisy" advice was wrong. I checked it
+directly against every repeated measurement in this run: of the 25 hint texts
+trained more than once, 21 scored DIFFERENT train_correct on re-measurement with
+byte-identical text. Hint 1's incumbent was measured 17 times and scored 0, 1, 2
+and 3 out of 8; hint 9's was measured 10 times and scored 0, 1, 3 and 4. A pinned
+seed does not make batched vLLM generation reproducible. So treat your manifest's
+train numbers as noisy samples, never as exact values, and never conclude a text
+would re-score the same. (The private/held-out side never re-measures the same
+text at all, which is why it can look deterministic - it is simply unrepeated.)
 
 Two practical consequences:
 
