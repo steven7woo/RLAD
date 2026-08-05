@@ -359,6 +359,27 @@
             "J_i": 0.45
           },
           "proposal_eval_slurm_job_id": "150.304"
+        },
+        {
+          "round": 16,
+          "decision": "discarded",
+          "proposal_hash": "167fee7798a43e30753ac15c305badd906a5f1ff5fe5ca309b1ba9b55019ce66",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "167fee7798a43e30753ac15c305badd906a5f1ff5fe5ca309b1ba9b55019ce66",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 2,
+            "train_total": 8,
+            "train_i": 0.25,
+            "heldout_correct": 7,
+            "heldout_total": 80,
+            "heldout_i": 0.0875,
+            "J_numerator": 34,
+            "J_denominator": 80,
+            "J_i": 0.425
+          },
+          "proposal_eval_slurm_job_id": "150.324"
         }
       ]
     },
@@ -719,6 +740,27 @@
             "J_i": 1.225
           },
           "proposal_eval_slurm_job_id": "150.305"
+        },
+        {
+          "round": 16,
+          "decision": "discarded",
+          "proposal_hash": "5a353b1c94c86503aa094e87e4b2baccf018f410af4f1fc5b4692104a2623330",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "5a353b1c94c86503aa094e87e4b2baccf018f410af4f1fc5b4692104a2623330",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 98,
+            "J_denominator": 80,
+            "J_i": 1.225
+          },
+          "proposal_eval_slurm_job_id": "150.325"
         }
       ]
     },
@@ -1079,6 +1121,27 @@
             "J_i": 1.05
           },
           "proposal_eval_slurm_job_id": "150.306"
+        },
+        {
+          "round": 16,
+          "decision": "discarded",
+          "proposal_hash": "80c2b5a034e39fa67c295e794276c4af76df31083853accce597b007d433d5f6",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "80c2b5a034e39fa67c295e794276c4af76df31083853accce597b007d433d5f6",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 58,
+            "J_denominator": 80,
+            "J_i": 0.725
+          },
+          "proposal_eval_slurm_job_id": "150.326"
         }
       ]
     },
@@ -1439,6 +1502,27 @@
             "J_i": 0.875
           },
           "proposal_eval_slurm_job_id": "150.307"
+        },
+        {
+          "round": 16,
+          "decision": "discarded",
+          "proposal_hash": "7e62e118e1941776f34bc7d372dfc88481bf35ce1cf618fdcb34095ae65a053c",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "7e62e118e1941776f34bc7d372dfc88481bf35ce1cf618fdcb34095ae65a053c",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 28,
+            "J_denominator": 80,
+            "J_i": 0.35
+          },
+          "proposal_eval_slurm_job_id": "150.327"
         }
       ]
     },
@@ -1799,6 +1883,27 @@
             "J_i": 1.025
           },
           "proposal_eval_slurm_job_id": "150.308"
+        },
+        {
+          "round": 16,
+          "decision": "discarded",
+          "proposal_hash": "438891967ec49a9bff9dfd36021b2282b8a797aa6fc08326e828ab8dd93de77d",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "438891967ec49a9bff9dfd36021b2282b8a797aa6fc08326e828ab8dd93de77d",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 68,
+            "J_denominator": 80,
+            "J_i": 0.85
+          },
+          "proposal_eval_slurm_job_id": "150.328"
         }
       ]
     },
@@ -1806,23 +1911,23 @@
       "hint_id": 6,
       "train_position": 62,
       "train_qid": "26989",
-      "hint": "Trap: asserting symmetry. \"Each item is equally likely in any position\", or \"n! orderings so 1/n!\", is a guess. A process random over MOVES is rarely uniform over OUTCOMES.\n\nInstead build ONE sample space and reuse it for EVERY part. Its atoms are the genuinely FREE 50/50 choices: a step is 1/2 only when both options are legal, and forced steps count 1, so there are 2^(free) atoms — not 2^(all moves), not n!. First pin mechanics: which item a move may touch, and whether the asked slot is the FIRST or LAST arrival there.\n\nEach part is then (atoms meeting its constraint)/2^(free). Later parts are where work drifts: never divide a permutation count by a branch count, and never retreat to 1/n. Calibrate on n=2.",
-      "tokens": 182,
-      "hint_hash": "605dd6784c9f1f6f9bb9f5068b8e9744aad3781c1b1d0e9028b48e9692b555e2",
+      "hint": "Trap: asserting symmetry. \"Each item is equally likely in any position\", or \"n! orderings so 1/n!\", is a guess. A process random over MOVES is rarely uniform over OUTCOMES.\n\nBuild ONE sample space and reuse it for EVERY part. Its atoms are the genuinely FREE 50/50 choices: a step is 1/2 only when both options are legal, forced steps count 1, giving 2^(free) atoms — not 2^(all moves), not n!.\n\nBefore counting, settle the asked slot. Write BOTH readings — that slot holds the FIRST arrival, or the LAST — then kill one by tracing a single concrete run to the end under the stated placement rule. Never carry an unchecked reading into a count.\n\nEach part is then (atoms meeting its constraint)/2^(free). Never divide a permutation count by a branch count, and never retreat to 1/n.",
+      "tokens": 189,
+      "hint_hash": "6cc0498766a54216a935bbbc0ce499f24702bc049ad32425cc35a2cc06164549",
       "metrics": {
         "schema_version": 1,
         "hint_id": 6,
-        "hint_hash": "605dd6784c9f1f6f9bb9f5068b8e9744aad3781c1b1d0e9028b48e9692b555e2",
+        "hint_hash": "6cc0498766a54216a935bbbc0ce499f24702bc049ad32425cc35a2cc06164549",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-        "train_correct": 2,
+        "train_correct": 1,
         "train_total": 8,
-        "train_i": 0.25,
-        "heldout_correct": 13,
+        "train_i": 0.125,
+        "heldout_correct": 19,
         "heldout_total": 80,
-        "heldout_i": 0.1625,
-        "J_numerator": 46,
+        "heldout_i": 0.2375,
+        "J_numerator": 48,
         "J_denominator": 80,
-        "J_i": 0.575
+        "J_i": 0.6
       },
       "history": [
         {
@@ -2159,6 +2264,27 @@
             "J_i": 0.25
           },
           "proposal_eval_slurm_job_id": "150.309"
+        },
+        {
+          "round": 16,
+          "decision": "kept",
+          "proposal_hash": "6cc0498766a54216a935bbbc0ce499f24702bc049ad32425cc35a2cc06164549",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "6cc0498766a54216a935bbbc0ce499f24702bc049ad32425cc35a2cc06164549",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 19,
+            "heldout_total": 80,
+            "heldout_i": 0.2375,
+            "J_numerator": 48,
+            "J_denominator": 80,
+            "J_i": 0.6
+          },
+          "proposal_eval_slurm_job_id": "150.329"
         }
       ]
     },
@@ -2519,6 +2645,27 @@
             "J_i": 0.35
           },
           "proposal_eval_slurm_job_id": "150.310"
+        },
+        {
+          "round": 16,
+          "decision": "discarded",
+          "proposal_hash": "faab49ad8e897f0d9b6230422999b6d3fcef68cac929ca585925bd0107179f84",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "faab49ad8e897f0d9b6230422999b6d3fcef68cac929ca585925bd0107179f84",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 18,
+            "J_denominator": 80,
+            "J_i": 0.225
+          },
+          "proposal_eval_slurm_job_id": "150.330"
         }
       ]
     },
@@ -2879,6 +3026,27 @@
             "J_i": 1.325
           },
           "proposal_eval_slurm_job_id": "150.311"
+        },
+        {
+          "round": 16,
+          "decision": "discarded",
+          "proposal_hash": "f7869e1a095beb5920f6dd4e70fa08044810cf8237833cce4def1d786e05799d",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "f7869e1a095beb5920f6dd4e70fa08044810cf8237833cce4def1d786e05799d",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 106,
+            "J_denominator": 80,
+            "J_i": 1.325
+          },
+          "proposal_eval_slurm_job_id": "150.331"
         }
       ]
     },
@@ -3239,6 +3407,27 @@
             "J_i": 0.225
           },
           "proposal_eval_slurm_job_id": "150.312"
+        },
+        {
+          "round": 16,
+          "decision": "discarded",
+          "proposal_hash": "6f9715fcff6e314cf53acd220b05a2af3a25c7b68ebe4a5b9c048502216c3d54",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "6f9715fcff6e314cf53acd220b05a2af3a25c7b68ebe4a5b9c048502216c3d54",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 18,
+            "heldout_total": 80,
+            "heldout_i": 0.225,
+            "J_numerator": 106,
+            "J_denominator": 80,
+            "J_i": 1.325
+          },
+          "proposal_eval_slurm_job_id": "150.332"
         }
       ]
     },
@@ -3246,23 +3435,23 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Trace concretely, not symbolically: write a row of distinct labels and rewrite the whole row after each stated step, each step acting on the previous row, never on the original. Never mix a \"goes to\" map with a \"comes from\" map. Any map you build by hand must be a bijection; if two inputs share an output, or one is missing, that is bookkeeping error, not exotic structure, so redo that trace. Return-to-start questions want an order: reapply the whole process, counting, until the row repeats. When the problem promises one formula in a parameter but your cases force a piecewise split, the odd case is almost surely mis-traced: recheck it, and trust the clean pattern rather than reporting a split or looping. Swap-shaped stages need not have period 2. Commit your result early, then stop.",
-      "tokens": 178,
-      "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb",
+      "hint": "Let the requested shape of the result police your work. When the problem asks for an expression in a parameter, the value must move with that parameter, so small cases coming out constant are mis-traced: repair them before fitting anything, and require your formula to reproduce every case you trust, including the smallest. Get cases cheaply and concretely: run the stated procedure literally on one small instance, each step acting on the previous step's output, never on the original data. Keep that instance as your anchor; an elegant structural shortcut stays a conjecture until the anchor confirms it, and if they disagree the shortcut dies, not the anchor. A map you build by hand that sends two things to one place is a bookkeeping slip; redo it, do not theorize. Length, not difficulty, defeats problems like this: once a value fits your cases, state it plainly and stop.",
+      "tokens": 180,
+      "hint_hash": "c6b2f9561c1e6af3526f6a1e843cacc706a6ef966672074d7847253f229087de",
       "metrics": {
         "schema_version": 1,
         "hint_id": 10,
-        "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb",
+        "hint_hash": "c6b2f9561c1e6af3526f6a1e843cacc706a6ef966672074d7847253f229087de",
         "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
         "train_correct": 5,
         "train_total": 8,
         "train_i": 0.625,
-        "heldout_correct": 13,
+        "heldout_correct": 14,
         "heldout_total": 80,
-        "heldout_i": 0.1625,
-        "J_numerator": 76,
+        "heldout_i": 0.175,
+        "J_numerator": 78,
         "J_denominator": 80,
-        "J_i": 0.95
+        "J_i": 0.975
       },
       "history": [
         {
@@ -3599,6 +3788,27 @@
             "J_i": 0.7
           },
           "proposal_eval_slurm_job_id": "150.313"
+        },
+        {
+          "round": 16,
+          "decision": "kept",
+          "proposal_hash": "c6b2f9561c1e6af3526f6a1e843cacc706a6ef966672074d7847253f229087de",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "c6b2f9561c1e6af3526f6a1e843cacc706a6ef966672074d7847253f229087de",
+            "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 78,
+            "J_denominator": 80,
+            "J_i": 0.975
+          },
+          "proposal_eval_slurm_job_id": "150.333"
         }
       ]
     }

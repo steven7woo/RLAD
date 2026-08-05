@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 16,
+  "generation": 15,
   "hints": [
     {
       "hint_id": 1,
@@ -47,9 +47,9 @@
       "hint_id": 6,
       "train_position": 62,
       "train_qid": "26989",
-      "hint": "Trap: asserting symmetry. \"Each item is equally likely in any position\", or \"n! orderings so 1/n!\", is a guess. A process random over MOVES is rarely uniform over OUTCOMES.\n\nBuild ONE sample space and reuse it for EVERY part. Its atoms are the genuinely FREE 50/50 choices: a step is 1/2 only when both options are legal, forced steps count 1, giving 2^(free) atoms — not 2^(all moves), not n!.\n\nBefore counting, settle the asked slot. Write BOTH readings — that slot holds the FIRST arrival, or the LAST — then kill one by tracing a single concrete run to the end under the stated placement rule. Never carry an unchecked reading into a count.\n\nEach part is then (atoms meeting its constraint)/2^(free). Never divide a permutation count by a branch count, and never retreat to 1/n.",
-      "tokens": 189,
-      "hint_hash": "6cc0498766a54216a935bbbc0ce499f24702bc049ad32425cc35a2cc06164549"
+      "hint": "Trap: asserting symmetry. \"Each item is equally likely in any position\", or \"n! orderings so 1/n!\", is a guess. A process random over MOVES is rarely uniform over OUTCOMES.\n\nInstead build ONE sample space and reuse it for EVERY part. Its atoms are the genuinely FREE 50/50 choices: a step is 1/2 only when both options are legal, and forced steps count 1, so there are 2^(free) atoms — not 2^(all moves), not n!. First pin mechanics: which item a move may touch, and whether the asked slot is the FIRST or LAST arrival there.\n\nEach part is then (atoms meeting its constraint)/2^(free). Later parts are where work drifts: never divide a permutation count by a branch count, and never retreat to 1/n. Calibrate on n=2.",
+      "tokens": 182,
+      "hint_hash": "605dd6784c9f1f6f9bb9f5068b8e9744aad3781c1b1d0e9028b48e9692b555e2"
     },
     {
       "hint_id": 7,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Let the requested shape of the result police your work. When the problem asks for an expression in a parameter, the value must move with that parameter, so small cases coming out constant are mis-traced: repair them before fitting anything, and require your formula to reproduce every case you trust, including the smallest. Get cases cheaply and concretely: run the stated procedure literally on one small instance, each step acting on the previous step's output, never on the original data. Keep that instance as your anchor; an elegant structural shortcut stays a conjecture until the anchor confirms it, and if they disagree the shortcut dies, not the anchor. A map you build by hand that sends two things to one place is a bookkeeping slip; redo it, do not theorize. Length, not difficulty, defeats problems like this: once a value fits your cases, state it plainly and stop.",
-      "tokens": 180,
-      "hint_hash": "c6b2f9561c1e6af3526f6a1e843cacc706a6ef966672074d7847253f229087de"
+      "hint": "Trace concretely, not symbolically: write a row of distinct labels and rewrite the whole row after each stated step, each step acting on the previous row, never on the original. Never mix a \"goes to\" map with a \"comes from\" map. Any map you build by hand must be a bijection; if two inputs share an output, or one is missing, that is bookkeeping error, not exotic structure, so redo that trace. Return-to-start questions want an order: reapply the whole process, counting, until the row repeats. When the problem promises one formula in a parameter but your cases force a piecewise split, the odd case is almost surely mis-traced: recheck it, and trust the clean pattern rather than reporting a split or looping. Swap-shaped stages need not have period 2. Commit your result early, then stop.",
+      "tokens": 178,
+      "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
     }
   ],
-  "total_tokens": 1590,
-  "book_hash": "cc9e3d220ada4f889ffa8922beac4a008b00999a422b6380ac2ab464804e6827"
+  "total_tokens": 1581,
+  "book_hash": "bbb622b63a54c44b4d9370a634fffde6683937182c74e244bf9ba4e3b40831e8"
 }
