@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 11,
+  "generation": 10,
   "hints": [
     {
       "hint_id": 1,
       "train_position": 163,
       "train_qid": "28054",
-      "hint": "In \"I don't know\" puzzles, judge knowledge only from what one speaker holds. Fix that speaker's private value v and list every scenario consistent with v plus the public data, carrying any choice the problem leaves unstated, such as which quantity was published, inside the scenario, and allowing the two private values to be equal. Drop scenarios breaking the domain rules. One survivor means that speaker knows; two or more means they do not, so v pinning the partner under one unstated choice is never a contradiction. Key step: turn each announcement into an explicit predicate on that speaker's own value, list the values satisfying it, then enforce that same predicate on whichever slot that speaker occupies in every remaining scenario. Take announcements in order, re-listing between them, and answer with a coordinate of a scenario surviving all of them. If none survives, widen the unstated choices rather than boxing a plausible factor.",
-      "tokens": 184,
-      "hint_hash": "a3a9805f3b37695536ecf7628ac6a588215a3f9ca6cb77ede20cc39aa1b660f1"
+      "hint": "In \"I don't know\" puzzles, never judge a speaker's knowledge from the public data alone. Fix that speaker's own private value v; list every complete scenario consistent with v plus all public statements, including any structural choice the problem leaves unstated, such as which quantity was published. Drop scenarios breaking the domain rules. Exactly one scenario left means that speaker knows; two or more means they do not. Take statements in order: each deletes the values v where that speaker would already have known, and you re-list before the next statement. Report only a coordinate of a scenario that survives every statement. If nothing survives you gave a speaker a fact they were never told, so widen the scenarios instead of naming a plausible factor.",
+      "tokens": 147,
+      "hint_hash": "201354a92ede8d8aac1cb60ea727c71fda8c2a78ad6bed1e1f28858eb6defeef"
     },
     {
       "hint_id": 2,
@@ -23,9 +23,9 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Union = summed areas minus overlap, so minimize overlap. Put the shared point at the origin with axes along the two edges meeting there; the cover is then the wedge x >= 0, y >= 0, membership is two sign tests, and far edges never matter. A corner at an interior point of S covers a positive-angle sector of S while its edge lines cross S, so overlap is strictly between 0 and area(S): reject every disjoint verdict and every containment verdict. Distance from a point to a side proves nothing, since the origin is a corner, not a center; skip tangency. Compute the overlap in the easiest orientation and keep that union as your working answer, replaceable only by another computed area. If the origin is a k-fold rotation center of S and the wedge angle is 2*pi/k, rotation permutes k congruent pieces, so overlap is constant and your value is optimal. State it and stop.",
-      "tokens": 190,
-      "hint_hash": "e706044d3f2b50b5b56d612f00e693ef4bbb86f0d16e53200f96da94b7c7109e"
+      "hint": "Union = areas summed minus overlap, so minimize overlap. Put the shared point at the origin. A corner there covers only a wedge: two half-planes whose boundary lines run through the origin. Those lines cut the interior of the other shape S, so part of S always lies on their far side, uncovered. Size never implies containment once a boundary crosses the interior: never set overlap to all of S, and skip tangency and origin-to-side distances. Decide membership only from the sign of each edge's linear form. If the origin is a k-fold rotational-symmetry center of S, the wedge angle is 2*pi/k, and both wedge edges leave S, then rotating by 2*pi/k maps S to itself and carries the wedge to the next position, so the k positions partition S into k congruent pieces and overlap = area(S)/k at every rotation. Compute that one area in the easiest orientation, report the union, and stop.",
+      "tokens": 194,
+      "hint_hash": "fb51b21593ed905cd5a002358e62f833d6da9e1c02aa884460885af4ac2cb21a"
     },
     {
       "hint_id": 4,
@@ -84,6 +84,6 @@
       "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
     }
   ],
-  "total_tokens": 1778,
-  "book_hash": "c98db19e40459bb6323de703dfd2e09b720dfdb16db92d618ef33304185076fa"
+  "total_tokens": 1745,
+  "book_hash": "0b5e7cf86e71e1357166db5255ed9c494f112171be75719879c9ad69a88a264d"
 }
