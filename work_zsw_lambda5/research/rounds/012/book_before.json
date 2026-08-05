@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 12,
+  "generation": 11,
   "hints": [
     {
       "hint_id": 1,
@@ -31,9 +31,9 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "A maximum count is an upper bound meeting a matching construction; produce both. With each term from any of N functions, never chain adjacent terms: neighbours may differ, so nothing follows. Write the target at index n as T(n); group indices by the function used. On P's group, P - T vanishes but is not identically zero, since low-degree T cannot cancel P's leading term: at most d = deg P indices per group. That cap is per group, so Bound = N x d, never N alone. Finitely many agreements are equations, not an identity. Concretely: give each function a block n_1..n_d and set P = T + c(x-n_1)...(x-n_d), c nonzero. P keeps full degree yet equals T across its block, so its own steps there match T's difference; drop any 'P must be low-degree, so one index each'.",
-      "tokens": 190,
-      "hint_hash": "71bbac004964e95216c81767dcfcedba54fed6a04125845418ad992501b8e093"
+      "hint": "A maximum count is where an upper bound meets a matching construction; produce both. When each term may come from any of N functions, never compare adjacent terms: neighbours may use different functions, so no bound follows. Write the target at index n as explicit T(n); group indices by which function made them. On P's group, P - T vanishes and is not identically zero, since low-degree T cannot cancel P's leading term; so that group holds at most d = deg P indices. The cap is per group, so Bound = N x d, never N alone. For tightness, build rather than debate whether P can behave like T: give each function a block of d indices n_1..n_d and set P = T + c(x-n_1)...(x-n_d), c nonzero. P keeps full degree yet equals T across its block, killing the 'P must be low-degree' objection. Then answer.",
+      "tokens": 193,
+      "hint_hash": "cfd221f96601c768c674155cae1b1bf5da8ceab825508c5ae2c116994550bf59"
     },
     {
       "hint_id": 5,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "For \"how many repeats restore the original\" problems, simulate; don't theorize. One repeat = ALL listed sub-steps in order, each acting on what the previous produced. Write the state as distinct labels and rewrite it whole per sub-step: swapping two adjacent blocks concatenates them in the other order, rest fixed. Keep ONE convention (slot i now holds X), never its inverse; check every label appears once. Swapping two length-L blocks moves 2L slots, so it is L parallel swaps, not one transposition, and sub-steps on nested ranges never compose to disjoint swaps. Then apply the full operation repeatedly, writing each state, until it first equals the original; cross-check via the lcm of cycle lengths. Prove minimality: no proper divisor of your count may return, so a small answer like 2 must be exhibited, never assumed. Do the two smallest sizes, fit ONE closed form, confirm at one larger.",
-      "tokens": 194,
-      "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85"
+      "hint": "For \"how many repeats restore the original\" problems, simulate; don't theorize. Write the state as distinct labels and do each listed sub-step by rewriting the whole state: swapping two adjacent blocks concatenates them in the other order and leaves the rest fixed. Fix ONE convention (slot i now holds label X) and never mix in its inverse (label at i goes to slot j); that mix-up makes correct work look self-contradictory. After each sub-step check every label appears once. Never assume overlapping sub-steps compose to an involution or to disjoint swaps. Then repeat the full operation, counting until the state first returns to the original; cross-check against the lcm of the disjoint cycle lengths. Do the two smallest sizes exactly, propose a closed form, test it on one larger size, and if a size disagrees redo that simulation instead of patching the formula piecewise.",
+      "tokens": 181,
+      "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
     }
   ],
-  "total_tokens": 1788,
-  "book_hash": "d3674a8dde1d215ea2be51b23ecb1333e983fc34dd8477f86e20e58986a95fc3"
+  "total_tokens": 1778,
+  "book_hash": "c98db19e40459bb6323de703dfd2e09b720dfdb16db92d618ef33304185076fa"
 }

@@ -275,6 +275,27 @@
             "J_i": 1.25
           },
           "proposal_eval_slurm_job_id": "149.228"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "82e59cba9e1d93cfc48d347eb86fbfc7fef24c2429090f3ac04a941004efd194",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "82e59cba9e1d93cfc48d347eb86fbfc7fef24c2429090f3ac04a941004efd194",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 90,
+            "J_denominator": 80,
+            "J_i": 1.125
+          },
+          "proposal_eval_slurm_job_id": "149.248"
         }
       ]
     },
@@ -551,6 +572,27 @@
             "J_i": 1.8125
           },
           "proposal_eval_slurm_job_id": "149.229"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "ddebacefad3d1a9c3ecac3799fc8dd69e72dc55e36b66a56a5411f121856181d",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "ddebacefad3d1a9c3ecac3799fc8dd69e72dc55e36b66a56a5411f121856181d",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 140,
+            "J_denominator": 80,
+            "J_i": 1.75
+          },
+          "proposal_eval_slurm_job_id": "149.249"
         }
       ]
     },
@@ -827,6 +869,27 @@
             "J_i": 1.75
           },
           "proposal_eval_slurm_job_id": "149.230"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "034632933613e4914d3950e7107fdafffcad413f140d94b4fa555ad32fcdbd1b",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "034632933613e4914d3950e7107fdafffcad413f140d94b4fa555ad32fcdbd1b",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 120,
+            "J_denominator": 80,
+            "J_i": 1.5
+          },
+          "proposal_eval_slurm_job_id": "149.250"
         }
       ]
     },
@@ -834,23 +897,23 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "A maximum count is where an upper bound meets a matching construction; produce both. When each term may come from any of N functions, never compare adjacent terms: neighbours may use different functions, so no bound follows. Write the target at index n as explicit T(n); group indices by which function made them. On P's group, P - T vanishes and is not identically zero, since low-degree T cannot cancel P's leading term; so that group holds at most d = deg P indices. The cap is per group, so Bound = N x d, never N alone. For tightness, build rather than debate whether P can behave like T: give each function a block of d indices n_1..n_d and set P = T + c(x-n_1)...(x-n_d), c nonzero. P keeps full degree yet equals T across its block, killing the 'P must be low-degree' objection. Then answer.",
-      "tokens": 193,
-      "hint_hash": "cfd221f96601c768c674155cae1b1bf5da8ceab825508c5ae2c116994550bf59",
+      "hint": "A maximum count is an upper bound meeting a matching construction; produce both. With each term from any of N functions, never chain adjacent terms: neighbours may differ, so nothing follows. Write the target at index n as T(n); group indices by the function used. On P's group, P - T vanishes but is not identically zero, since low-degree T cannot cancel P's leading term: at most d = deg P indices per group. That cap is per group, so Bound = N x d, never N alone. Finitely many agreements are equations, not an identity. Concretely: give each function a block n_1..n_d and set P = T + c(x-n_1)...(x-n_d), c nonzero. P keeps full degree yet equals T across its block, so its own steps there match T's difference; drop any 'P must be low-degree, so one index each'.",
+      "tokens": 190,
+      "hint_hash": "71bbac004964e95216c81767dcfcedba54fed6a04125845418ad992501b8e093",
       "metrics": {
         "schema_version": 1,
         "hint_id": 4,
-        "hint_hash": "cfd221f96601c768c674155cae1b1bf5da8ceab825508c5ae2c116994550bf59",
+        "hint_hash": "71bbac004964e95216c81767dcfcedba54fed6a04125845418ad992501b8e093",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-        "train_correct": 6,
+        "train_correct": 8,
         "train_total": 8,
-        "train_i": 0.75,
+        "train_i": 1.0,
         "heldout_correct": 13,
         "heldout_total": 80,
         "heldout_i": 0.1625,
-        "J_numerator": 125,
+        "J_numerator": 145,
         "J_denominator": 80,
-        "J_i": 1.5625
+        "J_i": 1.8125
       },
       "history": [
         {
@@ -1103,6 +1166,27 @@
             "J_i": 0.875
           },
           "proposal_eval_slurm_job_id": "149.231"
+        },
+        {
+          "round": 12,
+          "decision": "kept",
+          "proposal_hash": "71bbac004964e95216c81767dcfcedba54fed6a04125845418ad992501b8e093",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "71bbac004964e95216c81767dcfcedba54fed6a04125845418ad992501b8e093",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 145,
+            "J_denominator": 80,
+            "J_i": 1.8125
+          },
+          "proposal_eval_slurm_job_id": "149.251"
         }
       ]
     },
@@ -1379,6 +1463,27 @@
             "J_i": 1.6875
           },
           "proposal_eval_slurm_job_id": "149.232"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "e5c0266468eee4cbc543f512482432987d987a5c0999dbcf1f16ed41cbfc2ff8",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "e5c0266468eee4cbc543f512482432987d987a5c0999dbcf1f16ed41cbfc2ff8",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 110,
+            "J_denominator": 80,
+            "J_i": 1.375
+          },
+          "proposal_eval_slurm_job_id": "149.252"
         }
       ]
     },
@@ -1655,6 +1760,27 @@
             "J_i": 0.5625
           },
           "proposal_eval_slurm_job_id": "149.233"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "108f23014958e1d8e006cad4beee00cb85c9a8b4269ee3bf458266997c20dd70",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "108f23014958e1d8e006cad4beee00cb85c9a8b4269ee3bf458266997c20dd70",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 75,
+            "J_denominator": 80,
+            "J_i": 0.9375
+          },
+          "proposal_eval_slurm_job_id": "149.253"
         }
       ]
     },
@@ -1931,6 +2057,27 @@
             "J_i": 0.8125
           },
           "proposal_eval_slurm_job_id": "149.234"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "c20fb0175aec46632a86274276e007415c578c472275efa772ddddee50f04cbd",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "c20fb0175aec46632a86274276e007415c578c472275efa772ddddee50f04cbd",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 80,
+            "J_denominator": 80,
+            "J_i": 1.0
+          },
+          "proposal_eval_slurm_job_id": "149.254"
         }
       ]
     },
@@ -2207,6 +2354,27 @@
             "J_i": 1.4375
           },
           "proposal_eval_slurm_job_id": "149.235"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "5c470b3bf37b404fecf605bbc79dc9e6db5b633409a828085d076d1b9c1063b0",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "5c470b3bf37b404fecf605bbc79dc9e6db5b633409a828085d076d1b9c1063b0",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 11,
+            "heldout_total": 80,
+            "heldout_i": 0.1375,
+            "J_numerator": 125,
+            "J_denominator": 80,
+            "J_i": 1.5625
+          },
+          "proposal_eval_slurm_job_id": "149.255"
         }
       ]
     },
@@ -2483,6 +2651,27 @@
             "J_i": 1.6875
           },
           "proposal_eval_slurm_job_id": "149.236"
+        },
+        {
+          "round": 12,
+          "decision": "discarded",
+          "proposal_hash": "e96a6ba41a883c4427867ee75b19a4d671f81a50bef36a7a45fa6fabb9a83bbc",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "e96a6ba41a883c4427867ee75b19a4d671f81a50bef36a7a45fa6fabb9a83bbc",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 10,
+            "heldout_total": 80,
+            "heldout_i": 0.125,
+            "J_numerator": 130,
+            "J_denominator": 80,
+            "J_i": 1.625
+          },
+          "proposal_eval_slurm_job_id": "149.256"
         }
       ]
     },
@@ -2490,23 +2679,23 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "For \"how many repeats restore the original\" problems, simulate; don't theorize. Write the state as distinct labels and do each listed sub-step by rewriting the whole state: swapping two adjacent blocks concatenates them in the other order and leaves the rest fixed. Fix ONE convention (slot i now holds label X) and never mix in its inverse (label at i goes to slot j); that mix-up makes correct work look self-contradictory. After each sub-step check every label appears once. Never assume overlapping sub-steps compose to an involution or to disjoint swaps. Then repeat the full operation, counting until the state first returns to the original; cross-check against the lcm of the disjoint cycle lengths. Do the two smallest sizes exactly, propose a closed form, test it on one larger size, and if a size disagrees redo that simulation instead of patching the formula piecewise.",
-      "tokens": 181,
-      "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4",
+      "hint": "For \"how many repeats restore the original\" problems, simulate; don't theorize. One repeat = ALL listed sub-steps in order, each acting on what the previous produced. Write the state as distinct labels and rewrite it whole per sub-step: swapping two adjacent blocks concatenates them in the other order, rest fixed. Keep ONE convention (slot i now holds X), never its inverse; check every label appears once. Swapping two length-L blocks moves 2L slots, so it is L parallel swaps, not one transposition, and sub-steps on nested ranges never compose to disjoint swaps. Then apply the full operation repeatedly, writing each state, until it first equals the original; cross-check via the lcm of cycle lengths. Prove minimality: no proper divisor of your count may return, so a small answer like 2 must be exhibited, never assumed. Do the two smallest sizes, fit ONE closed form, confirm at one larger.",
+      "tokens": 194,
+      "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85",
       "metrics": {
         "schema_version": 1,
         "hint_id": 10,
-        "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4",
+        "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
         "train_correct": 6,
         "train_total": 8,
         "train_i": 0.75,
-        "heldout_correct": 11,
+        "heldout_correct": 15,
         "heldout_total": 80,
-        "heldout_i": 0.1375,
-        "J_numerator": 115,
+        "heldout_i": 0.1875,
+        "J_numerator": 135,
         "J_denominator": 80,
-        "J_i": 1.4375
+        "J_i": 1.6875
       },
       "history": [
         {
@@ -2759,6 +2948,27 @@
             "J_i": 1.0
           },
           "proposal_eval_slurm_job_id": "149.237"
+        },
+        {
+          "round": 12,
+          "decision": "kept",
+          "proposal_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 135,
+            "J_denominator": 80,
+            "J_i": 1.6875
+          },
+          "proposal_eval_slurm_job_id": "149.257"
         }
       ]
     }
