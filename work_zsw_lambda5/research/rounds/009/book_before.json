@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 9,
+  "generation": 8,
   "hints": [
     {
       "hint_id": 1,
@@ -39,9 +39,9 @@
       "hint_id": 5,
       "train_position": 70,
       "train_qid": "30418",
-      "hint": "Kill a fractional base first: log base 1/k equals minus log base k, so a point of height y has argument k^-y, and negative y means a LARGE argument. This sign drives the fit, the reduction, and every height, so settle it once. Fit parameters from the given points. A vector equality is ONE constraint; read the displacement off it directly. Carry one unknown: put a vertex at (t, f(t)), translate it, force the image onto the curve. A height gap d becomes one factor k^-d on the argument, giving a rational equation in t. First test a given vertex's x in it: the unknown vertex sitting there fits everything, so it MUST be a root. If not, a sign is wrong; refix, don't grind radicals. If so, divide it out; the wanted root is then linear. Take each new height from f. Area = |cross product| of adjacent edges.",
-      "tokens": 193,
-      "hint_hash": "85f213d578062adcf883b7f1f27d6adaf1b87fd1ff0c18c817da13cc0a477ef6"
+      "hint": "Fit unknown parameters first: rewrite each given point in exponential form (log_c u = y means u = c^y) and solve the resulting system. For the unknown vertices, use the vector condition to write one as a translation of a variable point, then subtract the two log equations so only a ratio of arguments survives: a y-difference d becomes argument factor c^d. With base under 1 this inverts the naive direction, so test that ratio relation on the known points before solving. A negative discriminant, or roots outside the domain, means an orientation, sign, or branch choice is wrong: flip it and redo once instead of re-verifying the same arithmetic. Get the area as the absolute cross product of adjacent edge vectors.",
+      "tokens": 151,
+      "hint_hash": "bf462b403f17cd428257353852dc46039314abb29f7a1232a8b7b962384878f2"
     },
     {
       "hint_id": 6,
@@ -84,6 +84,6 @@
       "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
     }
   ],
-  "total_tokens": 1729,
-  "book_hash": "46a08735227eb02c031f4ec85c41c1c1524355d58eb2f1d3560d7b27ec9ce28a"
+  "total_tokens": 1687,
+  "book_hash": "d084530373d8f79860471777d85e6c1e381f30a0cbb376b025eb3f7f354af164"
 }
