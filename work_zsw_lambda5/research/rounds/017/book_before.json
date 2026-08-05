@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 17,
+  "generation": 16,
   "hints": [
     {
       "hint_id": 1,
@@ -31,17 +31,17 @@
       "hint_id": 4,
       "train_position": 189,
       "train_qid": "25003",
-      "hint": "A maximum count is an upper bound meeting a matching construction; produce both. With each term from any of N functions, never chain adjacent terms: neighbours may differ, so nothing follows. Write the target at index n as T(n); group indices by function used. On P's group, P - T vanishes but is not identically zero, since low-degree T cannot cancel P's leading term: at most d = deg P indices per group. The bound is N x d, never N alone; a total far above N is expected, since one function serves d indices. Certify tightness by substitution, not argument: give each function a block n_1..n_d and set P = T + c(x-n_1)...(x-n_d), c nonzero. Each n_j kills the factor, so P(n_j) = T(n_j) while P keeps degree d. That settles it; report N x d.",
+      "hint": "A maximum count is an upper bound meeting a matching construction; produce both. With each term from any of N functions, never chain adjacent terms: neighbours may differ, so nothing follows. Write the target at index n as T(n); group indices by the function used. On P's group, P - T vanishes but is not identically zero, since low-degree T cannot cancel P's leading term: at most d = deg P indices per group. That cap is per group, so Bound = N x d, never N alone. Finitely many agreements are equations, not an identity. Concretely: give each function a block n_1..n_d and set P = T + c(x-n_1)...(x-n_d), c nonzero. P keeps full degree yet equals T across its block, so its own steps there match T's difference; drop any 'P must be low-degree, so one index each'.",
       "tokens": 190,
-      "hint_hash": "903dd62479cd089fd4952649e099566998aae3073dafc4c839f1c02dee0a465a"
+      "hint_hash": "71bbac004964e95216c81767dcfcedba54fed6a04125845418ad992501b8e093"
     },
     {
       "hint_id": 5,
       "train_position": 70,
       "train_qid": "30418",
-      "hint": "Curve with unknown parameters plus a figure condition: fit the parameters from the given points first. A vector equality is ONE constraint, a parallelogram: read the displacement (dx,dy) off it; midpoint or vertex-sum conditions only restate it. Carry one unknown, a vertex at (t, f(t)), closure f(t+dx) = f(t) + dy. On a log curve the gap dy becomes one multiplicative factor on the argument, giving a rational equation in t; a given vertex's x MUST be a root, as the coincident vertex satisfies everything, so divide it out and the rest is linear. If it is not a root, your factor is inverted. Verify every new coordinate FORWARD, never by repeating the inverse step that produced it: check numerically that base^y equals the argument. So base under 1 with argument under 1 gives POSITIVE y. Area = |cross product| of adjacent edges.",
-      "tokens": 192,
-      "hint_hash": "9b72d775b5b90b0f4a3bb10a97778be955594fc3b27c36d41e63cc6dc4ef005f"
+      "hint": "Kill a fractional base first: log base 1/k equals minus log base k, so a point of height y has argument k^-y, and negative y means a LARGE argument. This sign drives the fit, the reduction, and every height, so settle it once. Fit parameters from the given points. A vector equality is ONE constraint; read the displacement off it directly. Carry one unknown: put a vertex at (t, f(t)), translate it, force the image onto the curve. A height gap d becomes one factor k^-d on the argument, giving a rational equation in t. First test a given vertex's x in it: the unknown vertex sitting there fits everything, so it MUST be a root. If not, a sign is wrong; refix, don't grind radicals. If so, divide it out; the wanted root is then linear. Take each new height from f. Area = |cross product| of adjacent edges.",
+      "tokens": 193,
+      "hint_hash": "85f213d578062adcf883b7f1f27d6adaf1b87fd1ff0c18c817da13cc0a477ef6"
     },
     {
       "hint_id": 6,
@@ -84,6 +84,6 @@
       "hint_hash": "1e3acbae873bc435b7dfe5ef08152ba300c78d6c321ecbd752834208236d2a85"
     }
   ],
-  "total_tokens": 1879,
-  "book_hash": "3609e57ab6f9a536f57b134cf65b8477e8117931d099da4400c2aeacd97713d8"
+  "total_tokens": 1880,
+  "book_hash": "81e54eb0104f9c89a2ee8d6dfcaf2a0b28f3aaf3da53148590cb27e058116cda"
 }
