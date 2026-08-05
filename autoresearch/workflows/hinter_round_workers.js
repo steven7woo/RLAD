@@ -58,16 +58,22 @@ one training problem but does not generalize will LOSE. Your incumbent will be
 replaced only if the proposal scores higher J (tie-break: higher held-out, then
 shorter). So write a REUSABLE STRATEGY, not a solution.
 
-## What nine rounds of evidence say (read this first)
+## What ten rounds of evidence say (read this first)
 
 Keep counts: r1 5/10, r2 0/10, r3 5/10, r4 2/10, r5 3/10, r6 2/10, r7 0/10,
-r8 1/10, r9 0/10. Book mean J: 2.0125 -> ... -> 2.6875 (unchanged for two rounds).
+r8 1/10, r9 0/10, r10 1/10. Book mean J: 2.0125 -> ... -> 2.7125.
 
-THE SEARCH HAS SATURATED UNDER SMALL EDITS. Only 3 of the last 40 proposals
-survived. In rounds 7 and 9 every single proposal lost held-out, and in round 9
-the losses were large (several fell 0.10-0.11 below their incumbent). Your
-incumbent has repelled 8 or 9 consecutive challengers. The base rate for a
-careful marginal edit succeeding is now under 10 percent.
+THE SEARCH HAS SATURATED UNDER SMALL EDITS. Only 2 of the last 30 proposals
+survived, and BOTH won on the LENGTH TIE-BREAK - identical held-out, fewer
+tokens - not by improving transfer. No proposal has raised held-out above its
+incumbent since round 8. Your incumbent has repelled 9 or 10 consecutive
+challengers. The base rate for a careful marginal edit succeeding is under 10
+percent.
+
+Note what that tie-break fact implies: when you cannot find a real strategy
+improvement, a STRICTLY LOSSLESS COMPRESSION is not a consolation prize - it is
+the mutation that has actually been winning lately. Same steps, same meaning,
+same order, fewer tokens. Both round-8 and round-10 keeps were exactly that.
 
 The important consequence: SMALL SAFE-LOOKING EDITS ARE NOT SAFE. They are the
 single most-tested and most-failed category in this book. Specifically these have
