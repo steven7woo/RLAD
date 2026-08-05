@@ -1,15 +1,15 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 6,
+  "generation": 5,
   "hints": [
     {
       "hint_id": 1,
       "train_position": 163,
       "train_qid": "28054",
-      "hint": "Treat announcement puzzles as elimination over one candidate set, never as separate global cases. A candidate fixes every unknown at once, including structure the problem leaves unstated, so a speaker's uncertainty can come from that coordinate alone even when their own value plus one fixed reading would pin the partner. Drop candidates breaking the domain rules. Someone can deduce iff exactly one candidate matches what they privately hold; \"I don't know\" deletes the candidates where their own value was already decisive. Apply statements in order, recounting after each deletion, then report only the coordinate asked for. If every reading looks contradictory you credited a speaker with knowledge they lack: recount across all coordinates jointly instead of naming a plausible-looking value.",
-      "tokens": 142,
-      "hint_hash": "1624391b1ea234720db50aada7f5e2f22f58c8f7853e976d277c7b07bec2a58d"
+      "hint": "First write, for each speaker, exactly what they see and what stays unknown to them. If the problem never says which quantity the public number is, that role is unknown to them too, so no speaker may just subtract or divide to pin the partner. For each possible private value v, list the partners allowed under every reading, dropping those that break the domain rules (natural number, exact division). One survivor means \"I know\"; two or more means \"I don't know\". Turn each announcement into the set of v it permits, then apply later announcements only to those survivors. If every reading looks contradictory, you gave a speaker knowledge they lack: fix the unknown list rather than guessing a plausible value to fill the answer.",
+      "tokens": 146,
+      "hint_hash": "7bfb7a0d8f83d797ba13b71ed1076d9e3bc7002785faa9b3a27625fa42b6c21f"
     },
     {
       "hint_id": 2,
@@ -84,6 +84,6 @@
       "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
     }
   ],
-  "total_tokens": 1566,
-  "book_hash": "1358516ce8afd3f222364550290b13d90f6380cbdb9ea215012983839ca641f4"
+  "total_tokens": 1570,
+  "book_hash": "10979cbf508db70e257afd9f78dee65feee597539e11815ffa931af2e839beb1"
 }

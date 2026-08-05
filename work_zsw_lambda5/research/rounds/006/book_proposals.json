@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+  "round": 6,
+  "book_hash_before": "10979cbf508db70e257afd9f78dee65feee597539e11815ffa931af2e839beb1",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Treat announcement puzzles as elimination over one candidate set, never as separate global cases. A candidate fixes every unknown at once, including structure the problem leaves unstated, so a speaker's uncertainty can come from that coordinate alone even when their own value plus one fixed reading would pin the partner. Drop candidates breaking the domain rules. Someone can deduce iff exactly one candidate matches what they privately hold; \"I don't know\" deletes the candidates where their own value was already decisive. Apply statements in order, recounting after each deletion, then report only the coordinate asked for. If every reading looks contradictory you credited a speaker with knowledge they lack: recount across all coordinates jointly instead of naming a plausible-looking value.",
+      "mutation": "uncertainty-lives-in-the-unstated-coordinate",
+      "subagent_summary": "All 8 rollouts (execution 149.118) scored 2/8; every one of the six failures reasoned that a speaker who knows their own value plus the public number can just subtract or divide, declared both readings of the public number impossible, and then filled the box with an arbitrary divisor (143 three times, 11 once) or burned the 16k cap looping on that contradiction (three of eight hit finish_reason=length). The revision keeps the incumbent's short elimination frame but names the mechanism the failures skipped: residual uncertainty can live entirely in the unstated coordinate, so candidates must be counted jointly across all coordinates rather than inside one committed reading, and a dead end signals over-credited knowledge rather than a contradictory puzzle.",
+      "sampling_slurm_job_id": "149.118",
+      "tokens": 142,
+      "hint_hash": "1624391b1ea234720db50aada7f5e2f22f58c8f7853e976d277c7b07bec2a58d",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "7bfb7a0d8f83d797ba13b71ed1076d9e3bc7002785faa9b3a27625fa42b6c21f"
+    },
+    {
+      "hint_id": 2,
+      "hint": "For (z-a)^n = c(z-b)^n, b possibly 0, do not enumerate roots. Take moduli raw: |z-a|^n = |c||z-b|^n. Then pick k > 0 with k^n = |c|: |z-a| = k|z-b|. A wrong k is the usual fatal slip, so audit it: solve z-a = k(z-b) for z0, test |z0-a|^n = |c||z0-b|^n, refix k if it fails. k = 1 gives the bisector of a, b: a line. Else an Apollonius circle, where z-a = k(z-b) and z-a = -k(z-b) end a diameter: center = midpoint, radius = half their distance. Never judge it by whether |z| is constant. Report what is asked.",
+      "mutation": "verify-k-numerically-at-a-collinear-point",
+      "subagent_summary": "All 8 rollouts scored 1 so training is saturated; the diagnostic signal is that the two longest rollouts (12.2k and 7.0k tokens, 37 and 35 hedges) each botched the modulus constant in opposite directions - one applied the 1/n root twice and carried k=2^(1/6), the other took a square root and carried k=8 - then spent thousands of tokens on a self-inflicted contradiction before recovering. Prior rounds tried to fix this with symbolic exponent lectures (verify k^n=|c|, split the modulus step) and both lost heldout, so this revision instead keeps the raw |z-a|^n=|c||z-b|^n form and adds a cheap numeric audit at one collinear point, which is what actually let the derailed rollouts detect the wrong k, and it drops the redundant x+iy completion-of-the-square cross-check.",
+      "sampling_slurm_job_id": "149.119",
+      "tokens": 186,
+      "hint_hash": "09a3f539da4139be31cce0495ef80072afa92029867895a043fe591eae05bbdb",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "1f201f288fcb54e8912556e65d37575844f34bb6254ce56a76fd292e0482315d"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Union = areas summed minus overlap, so minimize overlap. Put the shared point at the origin. A corner strictly inside S covers a wedge of S, so overlap is positive and less than S: reject zero, single-point contact, or all of S. Never chase tangent lines or origin-to-side distances; that detour never closes. If the origin is a k-fold rotational-symmetry center of S, the wedge angle is 2*pi/k, and both wedge edges leave S, then rotating by 2*pi/k maps S to itself and sends the wedge to the next one, so the k positions partition S into k congruent pieces and overlap = area(S)/k at every rotation. Compute that one area in the easiest orientation, then answer briefly and stop: no second method, no extra orientations; restating a finished solution exhausts the budget. Use a piecewise area function only if the wedge angle is not 2*pi/k.",
+      "mutation": "ban-tangent-line-detour-and-stop-after-first-area",
+      "subagent_summary": "This round's 8 rollouts split 4/4 and every one of the 4 failures ended at the 16384-token cap, never on a wrong committed answer: two of them had already reached the correct union value and then kept re-deriving and restating it until truncation, while the other two abandoned the invariance argument to hunt for a tangent line or an origin-to-side distance that determines the rotation angle and never closed that search. The winners instead computed one wedge area in the aligned orientation and terminated promptly. This revision keeps the rotation-partition proof but adds a named ban on the tangent-line/point-to-line detour that consumed two failures and an explicit stop-after-the-first-area instruction to kill the restatement loop that consumed the other two.",
+      "sampling_slurm_job_id": "149.120",
+      "tokens": 191,
+      "hint_hash": "73e9a5572d27ca560e7cadfbcfb39a419f01e3abfc31a7fbe934b1993a81c5de",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "9ebe8ddbf8a5d9daaae8e0a4357cd7a942e10529d116c36fa43a25d554e232f5"
+    },
+    {
+      "hint_id": 4,
+      "hint": "For a largest-possible-count problem, the answer is where an upper bound meets a matching construction; build both. Bound: when each term of a required pattern may come from any of N given objects, never chain adjacent terms, since neighbours may use different objects. Write the pattern's value at index n as an explicit T(n) and partition indices by which object produced them. Inside one object P's group the only condition is P(n) = T(n), so those indices are roots of P - T, not identically zero because the low-degree T cannot cancel P's leading term; a nonzero degree-d polynomial has at most d roots, capping that group. The cap is per group: add it over all N groups. Construction: give each object its own block of consecutive indices and interpolate T there; free coefficients remain, so it exists. Report the count when bound and construction agree.",
+      "mutation": "bound-meets-construction-with-explicit-jointly-summed-group-caps",
+      "subagent_summary": "My 8 public rollouts scored 5/8 and all three failures terminated normally with wrong counts, every one of them an aggregation error at the last step: one reported the per-polynomial root cap as the whole answer, one assumed each polynomial contributes exactly one index, and one used the interpolation count (degree plus one) for a single group and never summed over groups. Rounds 3-5 showed that adding jargon-heavy prohibition or reject rules to the incumbent collapses both train and heldout, so this revision instead reframes the hint around the portable extremal principle (upper bound plus matching construction) and states the summation over all N groups as an ordinary jointly required step rather than a list of forbidden endings.",
+      "sampling_slurm_job_id": "149.121",
+      "tokens": 181,
+      "hint_hash": "95e2af1cf5a56e868c1b5649c74bcb0cc5d90016b1716072ab7daae123db4ca7",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "c88c72a8af76a0349016b46bf3a91690c7375399032fa6e2fedac91359b1f577"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Fit the parameters first: log_c u = y means u = c^y, so each given point gives one linear equation. A vector equality between opposite sides says only \"parallelogram\", so carry one unknown: write a vertex as (t, f(t)), translate by the given displacement, and force the image back onto the curve. Subtracting the two equations turns the y-gap into one multiplicative factor on the argument, leaving a rational equation in t. Powerful check: the degenerate choice putting the unknown vertex onto the matching known vertex satisfies everything, so that known x MUST be a root. Test it before solving; if it fails your reduction is wrong, so redo it instead of grinding into ugly radicals. If it holds, factor it out and the other root falls out cleanly. Get each new vertex's y by evaluating f, never by adding the carried y-shift. Area = |cross product| of adjacent edges.",
+      "mutation": "known-vertex-must-be-a-root-reduction-check",
+      "subagent_summary": "Train fell to 3/8 with the incumbent, and all five failures split into two mechanisms: three ran out of length after botching the reduction (one produced irrational roots, another a quadratic with four-digit coefficients) and never noticed that the reduction was wrong, while one solved the quadratic correctly but then assigned the translated vertex a y-value from the carried displacement instead of from f, putting the point off the graph and yielding a wrong area. The revision therefore adds a cheap, portable validity test on the reduced equation - the known vertex's x must satisfy it, since the degenerate coincident configuration trivially meets every stated condition - which both catches a mis-derived equation immediately and turns the remaining quadratic into a linear read-off, and it makes evaluating f the only sanctioned way to get a new vertex's y.",
+      "sampling_slurm_job_id": "149.122",
+      "tokens": 188,
+      "hint_hash": "c44d2c3bfcdec6bd95e10fd406d7fd5b8d6d0fe5cec6d156c1d3e70ae9f18d75",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "bf462b403f17cd428257353852dc46039314abb29f7a1232a8b7b962384878f2"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Describe a configuration by the ordered contents of each location rather than by informal move sequences. Before computing, probe variability: build two legal move sequences and compare their final configurations. If they differ, the outcome is not forced, so the answer is neither 0 nor 1; but differing outcomes are still not equally weighted, so favourable-over-total, 1/n and 1/n! are all invalid. Legal moves form a small state graph; at each state attach the actual transition probability, noting it becomes 1 when only one move is available. Propagate probabilities by dynamic programming while retaining enough label order to test the requested final event, first converting any named position into the arrival index that the placement rule assigns it. Check that probabilities, rather than merely path counts, sum to one.",
+      "mutation": "minimal-edit-add-variability-probe-and-arrival-index-conversion",
+      "sampling_slurm_job_id": "149.123",
+      "subagent_summary": "All 8 of my public rollouts scored 0 again: four asserted the delivery order is deterministically reversed (answering 1 and 0), two assumed uniformity over permutations plus 'each item equally likely to be last' (1/24 and 1/4), one mixed a correct-style branch product for part a with the same uniformity error for part b, and one exhausted its token budget on unstructured enumeration. Four also inverted the pile orientation, equating the bottom of the destination with the last item delivered rather than the first. Rounds 1-5 showed every long rewrite of the 83-token incumbent cost held-out, so this is a minimal edit that keeps the incumbent's wording and inserts only the two clauses the failures demand: a cheap two-sequence variability probe that kills both the forced-outcome and the equally-likely claims, and a position-to-arrival-index conversion before testing the event.",
+      "tokens": 158,
+      "hint_hash": "9c235952e8b7fd3ddd6a3cc542d5b9f1582fddc1b7a0a5acc73c58c7ba7864f2",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "99c30a3f882f054f77512e4fdca1d19befb3e5426d7d857d52f4369a95c4f820"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Before any algebra, tabulate the system: one row per given condition, one column per unknown, and write each entry as that column's own value raised to that row's exponent. Doing this first prevents the fatal slip of treating the unknowns as coefficients of a polynomial in the condition number.\n\nNever solve every column. To get one unknown, combine the rows with multipliers chosen so the combined entry vanishes in every column but yours. Those multipliers are a polynomial in the column values, and may use only exponents that appear as rows. Your unknown is then the combined right-hand side over that product; evaluate the product at your column instead of expanding it, and leave factorials closed-form.\n\nIf you catch yourself hunting a missing root or calling the system inconsistent, your rows and columns are swapped: rebuild the table. Rehearse the recipe on a same-shape case with equally many rows and columns.",
+      "mutation": "tabulate-rows-vs-columns-first+row-combination-probe+swap-detector",
+      "subagent_summary": "All 8 rollouts scored 0 (7 hit the 16384-token cap) with the identical root cause seen in rounds 1-5: each read the incumbent's 'linear functional' framing but still built a polynomial whose coefficients are the unknowns and whose argument is the condition number, producing a degree-2005 polynomial with only 2004 roots, then burned the budget resolving that phantom free factor and reported 1/2005, 0, or a harmonic sum; two also declared the system inconsistent from a mis-shaped toy. Since five prior rewordings of the abstract warning all lost heldout accuracy, this revision leads with a concrete row/column tabulation step that makes the swap impossible to commit, states the isolation move as a row combination with an explicit allowed-exponent constraint, and turns 'missing root or inconsistent' into a self-check trigger to rebuild rather than a rabbit hole.",
+      "sampling_slurm_job_id": "149.124",
+      "tokens": 184,
+      "hint_hash": "276943e411cff53cc8239caa81cd3587d62be37aa5281e06340328bf68e60a7b",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "39e2668fb5cca7669288765276aabe0dba01769397daa33b16a9dd7c0174a8f4"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let N be the unstated count of identical units; recover it from integrality, not the story. If every per-unit share must be whole, N divides each listed total, so admissible N are their common divisors and the intended one is the maximum feasible count, their gcd. A stated number of equal groups counts groups, not units: it only makes N a multiple of it, so never adopt it as N just because the totals divide evenly. Certify maximality: divide each total by candidate N and check the shares share no factor. If they all share a factor k above 1, then kN is admissible too, so replace N by kN and repeat. Decide once whether each figure is a grand total or a per-unit amount, then stop revisiting it. Finally sum all components, divide by N, apply any markup or discount as one factor, and confirm each per-unit value is whole and units match.",
+      "mutation": "add-gcd-1-maximality-certificate",
+      "subagent_summary": "6/8 public rollouts were correct; both failures shared one mode and it was not arithmetic - they equated the stated group count with the unit count, divided every listed total by it, saw each quotient come out whole, and treated that as confirmation, so the gcd/maximum-count step was never run. The incumbent already says group wording only imposes a multiple constraint, but it gives no way to detect that a passing candidate is non-maximal, and round 5 showed that merely front-loading that warning costs heldout (0.2125 down to 0.1125). So I kept the incumbent's order and length and added a concrete portable maximality test: after dividing by the candidate N the per-unit shares must have no remaining common factor, and any shared factor k means kN is also admissible.",
+      "sampling_slurm_job_id": "149.125",
+      "tokens": 190,
+      "hint_hash": "67989b2723eaff5614ef892c3094d26aa9a276fd0807a360200c77b6480fc2a8",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "631be8eed5f087f7cdab1dec25cead2e9d0ae8ea0b579379c5e58836f770dc11"
+    },
+    {
+      "hint_id": 9,
+      "hint": "For p(q(x))=q(p(x)) with p,q of equal degree n, skip the degree-n^2 coefficient system. Seek a common fixed point r and use the centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing forces AB^n=BA^n; factor once as AB(A^(n-1)-B^(n-1))=0 and carry both branches, since B=A collapses to p=q. Let the data, not a guessed sign, kill one branch. The given values then combine symmetrically: their sum cancels the (x-r)^n terms and pins r, their difference pins A. Read off the requested inputs in centered form, never expanding. Verify once: p(r)=q(r)=r and the identity at a spare point. Then stop searching - a candidate meeting all given data and the identity is the answer.",
+      "mutation": "add-verification-closes-search-stopping-rule",
+      "subagent_summary": "All 8 public rollouts were correct again (8/8, 4.1k-5.6k tokens, none truncated), so the training question stays saturated and every remaining point is transfer. The one uniform waste is post-solution second-guessing: each rollout reaches the centered solution by roughly its midpoint, verifies the identity, and then spends the rest re-litigating whether another center, sign, or family could work (7-14 'wait' restarts and 11-20 're-check' detours per rollout), which is exactly the behaviour that ran out of room in round 1. This revision keeps the proven trigger, centered ansatz, factored both-branch condition, and symmetric-data steps intact and adds only a portable closure rule stating that verification ends the search, which should convert wasted re-derivation into budget on harder unseen problems.",
+      "sampling_slurm_job_id": "149.126",
+      "tokens": 186,
+      "hint_hash": "274e5c180b887844082fe65ff845acd6cc09142fabae1df8dfd1d5dd8c6afa48",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "379c17a37ce59d87b284ce8a3da735f1f64ff50b56d7336619bd74033c49cb1a"
+    },
+    {
+      "hint_id": 10,
+      "hint": "For \"how many repeats restore the original\" problems, get a concrete count before any theory. Write the state as distinct labels and rewrite it for each listed sub-step, in order, always from the state the previous sub-step produced. Swapping two adjacent length-L blocks is L parallel position-swaps, not one transposition, and sub-steps sharing positions overlap, so their composite is almost never disjoint transpositions. Before ever writing \"order 2\", apply the FULL operation twice to the smallest nontrivial size and compare to the original; if it differs, that story is dead. Then stop rewriting whole states: track ONE label, applying the full operation repeatedly, recording only where that label sits, until it returns. Each orbit length divides the answer; the answer is the lcm of the orbit lengths. Do the two smallest sizes, fit a closed form, confirm it at the next size by tracing one orbit, then commit.",
+      "mutation": "refute-order2-then-single-label-orbit-lcm",
+      "subagent_summary": "Only 2/8 correct and all six failures hit the 16384-token cap; every one of them collapsed the block swap into a single transposition, declared the composite a product of disjoint 2-cycles, and answered 2, or thrashed between mutually inconsistent per-size counts (one even reported 12 for one size) without ever verifying anything. The revision states that swapping length-L blocks is L parallel position swaps rather than one transposition, adds a cheap falsification test (apply the FULL operation twice and compare) that kills the order-2 story immediately, and replaces expensive repeated whole-state rewriting with tracking a single label orbit and taking the lcm of orbit lengths.",
+      "sampling_slurm_job_id": "149.127",
+      "tokens": 188,
+      "hint_hash": "496282342ecd4858441dbcdd9ceaa239e6ca982b25b5262ff7bdb0c5d66c7f2e",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
+    }
+  ]
+}
