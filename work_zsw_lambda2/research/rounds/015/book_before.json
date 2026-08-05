@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 15,
+  "generation": 14,
   "hints": [
     {
       "hint_id": 1,
@@ -23,9 +23,9 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Fix one setup and never rebuild it. Overlapping pieces obey total = sum minus overlap, so maximize coverage by minimizing overlap; the same bookkeeping serves counting. A corner reaches only the directions inside its own angle, so what it covers of the small piece is a wedge: part of that piece always lies outside, part always inside. The overlap is therefore strictly between zero and the whole piece; both extreme claims are wrong. Settle the free parameter by a trade, not by sampling: shift it slightly and compare what enters the overlap against what leaves. Matched pieces mean the quantity never moved, so no further value can teach you anything. End reasoning there, do the sum-minus-overlap arithmetic in your first visible line, and state the result next. Never append a section asking whether another configuration wins.",
-      "tokens": 162,
-      "hint_hash": "19fa4d72a92c2cb9fa9637a396188fbd19d57aa30794d82e0b9637f8a43322b1"
+      "hint": "Fix one setup once and never rebuild it. When fixed pieces overlap, total = sum minus overlap, so maximize coverage by minimizing overlap; the same inclusion-exclusion bookkeeping serves counting. Never assume a big object swallows a small one: a vertex spans only its interior angle, so test one concrete point past that wedge. For an extremal claim, stop sweeping the free parameter and certify: one bound valid in every configuration plus one configuration attaining it is a complete proof, so no later case can beat it. Then write the visible solution by transcribing the numbers you already settled. Re-deriving it from scratch, or restating the problem again, is what runs you out of room before your result ever appears.",
+      "tokens": 146,
+      "hint_hash": "a69022206f815aa610531eaf90a55d289cb8cba855d7fdd86219bae38ef15efe"
     },
     {
       "hint_id": 4,
@@ -84,6 +84,6 @@
       "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
     }
   ],
-  "total_tokens": 1581,
-  "book_hash": "bbb622b63a54c44b4d9370a634fffde6683937182c74e244bf9ba4e3b40831e8"
+  "total_tokens": 1565,
+  "book_hash": "67926e054b4bcfc9ea033dc17635890614554923304809e30ab3e87d9616d6a1"
 }
