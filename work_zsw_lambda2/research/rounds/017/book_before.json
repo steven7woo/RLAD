@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 17,
+  "generation": 16,
   "hints": [
     {
       "hint_id": 1,
@@ -39,9 +39,9 @@
       "hint_id": 5,
       "train_position": 70,
       "train_qid": "30418",
-      "hint": "Name your unknowns and turn each given condition into one exact equation; solve for any constants first. Reduce to a single variable, keep exact fractions, and discard roots that are degenerate or outside the domain. Verify a candidate by substituting it back into the original conditions, not by re-deriving; once it passes, stop revisiting it. Re-read the question and report the exact quantity it asks for, simplified. State your result early, then stop.",
-      "tokens": 94,
-      "hint_hash": "d0cc608af71edf1cce78c5a6c8da2e4bf7005ad7e886454d37f8c6cae44dcc6d"
+      "hint": "Name your unknowns and turn each given condition into one exact equation; solve for any constants first. Reduce to a single variable, keep exact fractions, and discard roots that are degenerate or outside the domain. Verify with a second, different method rather than repeating the first. State your result early, then stop.",
+      "tokens": 63,
+      "hint_hash": "83c896bc82082c6ed4cb8791f9d2a555f90a25b05e0dc438a5532b3b8a6282c8"
     },
     {
       "hint_id": 6,
@@ -84,6 +84,6 @@
       "hint_hash": "c6b2f9561c1e6af3526f6a1e843cacc706a6ef966672074d7847253f229087de"
     }
   ],
-  "total_tokens": 1621,
-  "book_hash": "f25f9a3bf1118e663f1442b42f2e9a69a29f58a57d2b74f84c22f4edda86719d"
+  "total_tokens": 1590,
+  "book_hash": "cc9e3d220ada4f889ffa8922beac4a008b00999a422b6380ac2ab464804e6827"
 }
