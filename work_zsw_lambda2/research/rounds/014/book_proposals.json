@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
+  "round": 14,
+  "book_hash_before": "8517812548134fbfeb82fc92a51e7aa3561f7e9f78f0d5bf0262e0783f364161",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Before any long enumeration, shrink the problem: swap a large given number for a small one, solve that miniature copy fully by hand, read off the mechanism, then transfer it back. Prefer structure to lists: divisors, complements, symmetry, and the balanced case where two unknowns coincide -- test that case rather than discarding it on a vague objection. A well-posed problem admits exactly one result, so if every candidate you test dies, your test is too strict: you granted yourself or someone in the problem a fact never given, or you settled a distinction the wording leaves open. An open distinction keeps all its readings live at once, and something is undetermined exactly when two or more live readings give it different legal values. Never report a value your own work refuted, and never call the problem broken. State your result before you run long, verify once, stop.",
+      "mutation": "lead with shrink-to-a-small-case plus structure-over-enumeration, and compress the reading-ambiguity rule to a single line",
+      "subagent_summary": "Fresh sampling with the incumbent scored 0/8; two rollouts died at the 16384 cap and all eight burned 13k-16.4k tokens. Every rollout fixed one reading of the displayed number, proved a speaker's own value pins the partner there, then looped: three explicitly declared the problem flawed or contradictory and kept re-arguing the same two cases, and the rest reported a value their own text had just refuted or admitted was recalled from a classic puzzle. The incumbent's intersect-across-readings clause never fires because the student exhausts its budget before reaching it. So I led with a cheap concrete technique it has never been given -- solve a shrunken copy with a small number first, then prefer structure and the balanced case -- and kept only the compact rules against self-refutation and declaring the problem broken.",
+      "sampling_slurm_job_id": "150.274",
+      "tokens": 179,
+      "hint_hash": "df4319e2517e30da76e0c796b74672ca6598e0325852a1861defadbf9b9216c4",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "fda1791300f21976dd72f9eebe700de3cfaba1edb06bf4fc0339ea25871f6960"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable to introduce the ratio w=(z-1)/z; the equation then pins w to a finite set on a circle. Solve for z in terms of w and turn the locus into an equation in x and y, completing the square to read off center and radius. Generally: substitute so the relation depends on one quantity, and keep every value exact.\n\nSanity-check each value's magnitude as you compute it: a reciprocal of something large must come out small, dividing by a bigger quantity must shrink it, a square cannot be negative. Slips that later look like a contradiction almost always failed this cheap test first. If a conflict survives one recheck, drop that instance and test an easier one instead of relitigating. Never restart; state your simplified value as soon as you have one.",
+      "mutation": "replace the incumbent's route-agnostic recheck advice with a magnitude/order-of-magnitude plausibility test applied at each computation, plus an instance-swap escape when a conflict persists",
+      "subagent_summary": "7 of 8 fresh rollouts were correct. The single failure was not a strategy error: the setup and reduction were right, but one division by a complex number produced a value larger than the thing being inverted, so a later consistency check appeared to contradict a sound derivation. The rollout then spent the remaining budget re-deriving the same substitution and questioning whether the problem was well-posed, hitting the token cap with no value stated. Earlier rounds already told it to recheck one line and not restart, and that was insufficient because the student cannot see which line is wrong. So I gave it a cheap detector that fires at the moment of the slip - magnitudes must move in the plausible direction - and an escape hatch: if a conflict persists, switch to an easier instance rather than relitigating.",
+      "sampling_slurm_job_id": "150.275",
+      "tokens": 170,
+      "hint_hash": "ce2b2b154076fa10d0edfb3ff653ad1fb487b5986619db7c6d08c02f21ff7e8b",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "64b0f516c4150af456f05fd043eae6476f571e240a578af063256e2ea28e9e9a"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Fix one setup and never rebuild it. Overlapping pieces obey total = sum minus overlap, so maximize coverage by minimizing overlap; the same bookkeeping serves counting. Never assume a big object swallows a small one: a vertex spans only its interior angle, so test one concrete point past that wedge. When you write that something is too vague, too complex, or impossible without exact boundaries, that is a demand for arithmetic, not for more hedging: pick one concrete value of the free parameter, get real coordinates and a real number, then repeat for a second value. Equal numbers mean the parameter cancels and the search is over; different numbers show you which direction helps. Never let another qualitative what-if replace one such computation. The moment a value settles, write it on one plain line, then justify in a few sentences with no headings and no rebuilt setup.",
+      "mutation": "replace abstract enumerate/certify licence with a concrete anti-hedging trigger: treat 'too vague/too complex' as an order to evaluate the free parameter numerically at two values and compare, plus a heading-free write-up rule",
+      "subagent_summary": "Only 2 of 8 finished; the other 6 hit the token cap. The cause is not re-derivation this time: the losing traces repeatedly write that a configuration is 'too vague', 'too complex', or impossible 'without exact boundaries', then substitute another qualitative what-if instead of ever computing one rotated case numerically. Two traces did reach the answer inside thinking but were cut off in a long headed markdown write-up before any result surfaced. So the revision keeps the union-minus-overlap and vertex-wedge cores, but replaces the abstract certify/enumerate licence with a concrete trigger: treat 'too complex' as an order to evaluate the free parameter at two concrete values and compare real numbers, which both settles invariance and bans hedging loops, plus a short heading-free write-up rule.",
+      "sampling_slurm_job_id": "150.276",
+      "tokens": 174,
+      "hint_hash": "3a3ef390d6a70880f9b20f6c54499782284552b880fd01f4824a7bb83ea93ac9",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "a69022206f815aa610531eaf90a55d289cb8cba855d7fdd86219bae38ef15efe"
+    },
+    {
+      "hint_id": 4,
+      "hint": "For \"at most how many\" questions give both halves: a bound and an example reaching it. Name a count early.\n\nPosit ONE unknown affine target for the whole pattern (an arithmetic progression is A+B*n), shared by every piece. Index n suits piece f exactly when f agrees with that line at n. Never demand that one piece alone give consecutive terms, and never invent a one-use-per-piece rule; reuse is allowed unless forbidden.\n\nCount AGREEMENTS, never the degree of a subtracted remainder - that step invites an off-by-one. A degree-d curve meeting a line at more than d points would BE that line, which its degree forbids: d indices per piece, not d-1.\n\nThat caps ONE piece, not the pattern. Index sets are disjoint, so budgets ADD over m pieces; a lone d or a lone m dropped a factor.\n\nAttain it with consecutive blocks, one piece each.",
+      "mutation": "replace the residual-degree audit with an agreement count (a degree-d curve meeting a line more than d times would be that line), and ban inventing a one-use-per-piece rule",
+      "subagent_summary": "Fresh 8 rollouts with the incumbent scored 4/8, no truncations, so length is not the constraint. All four failures split into two leaks. Two computed the remainder after subtracting the affine target, called its degree one below the piece degree, and reported a product one factor short per piece. One asserted each called number needs its own distinct piece and answered the piece count; one applied the per-piece root cap to the entire pattern and answered the bare degree. The residual-degree wording in the incumbent is itself feeding the off-by-one, so the revision drops the subtract-then-degree step entirely and replaces it with a direct agreement count: a degree-d curve meeting a line at more than d points would have to be that line, which its degree forbids. It also states outright that reuse is allowed unless forbidden.",
+      "sampling_slurm_job_id": "150.277",
+      "tokens": 188,
+      "hint_hash": "2b164c771908e8762a2db4e4af5109d7ad453e809a66076bdb58f23f35dcae48",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "2f7b2098363b9a53549fa724b1dc1c9431fbed1120452254cacf4f6a7a8218ff"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Name your unknowns and turn each given condition into one exact equation; solve for any constants first. Reduce to a single variable and keep exact fractions. Before discarding a root, place it against each boundary by checking the sign of the difference, not by eyeballing which interval it sits in: for negatives a larger magnitude means a smaller value, so convert to a common denominator or a decimal first. If your discards leave nothing usable, that comparison is the error -- redo it, do not doubt the problem. Verify with a second, different method rather than repeating the first. State your result early, then stop.",
+      "mutation": "replace the generic discard-out-of-domain clause with sign-of-the-difference boundary comparison plus a negative-magnitude warning",
+      "subagent_summary": "Seven of eight fresh rollouts were correct; the single failure derived the reduced quadratic, both roots, and the domain flawlessly, then misplaced a negative fraction into the wrong interval, discarded the only usable root, kept the one that merely reproduced given data, and declared the figure degenerate. So the incumbent's 'discard roots outside the domain' clause is precisely the step that fires wrongly: the domain reasoning was right and the ordering comparison was wrong. I replaced that clause with a concrete comparison procedure -- test a boundary by the sign of the difference, and remember that for negatives larger magnitude means smaller value -- plus a recovery rule that an empty surviving set indicts the comparison rather than the problem. Both moves are representation-level and transfer to any inequality or interval screening.",
+      "sampling_slurm_job_id": "150.278",
+      "tokens": 124,
+      "hint_hash": "8a4fba186646e7776fe79f0562605e487cd19f171736af46f4c912cec9d68425",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "83c896bc82082c6ed4cb8791f9d2a555f90a25b05e0dc438a5532b3b8a6282c8"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Randomness over STEPS rarely means uniformity over OUTCOMES. Never call the result a \"random permutation\"; 1/n and 1/n! are guesses.\n\nGet the free-step count by WALKING the process: a step costs 1/2 only where both options are legal, 1 where a side is empty or exhausted.\n\nWhen a part asks which object occupies a named position, do not paraphrase that position in words - ask WHICH STEP FILLS IT. Number the steps, find the one step that loads that slot, and say what must hold for the wanted object to be available then. The event becomes a condition on the steps up to that one: pay 1/2 per free step inside, ignore later steps.\n\nA small case transfers METHOD, not its value. Two parts may honestly share a value.",
+      "mutation": "replace verbal restatement of the asked position with a which-step-fills-that-slot localization, plus derive the free-step count by walking the process and warn that a small case transfers method not its numeric value",
+      "subagent_summary": "Fresh sampling with the incumbent gave 1/8; seven rollouts stopped normally at 10k-15k tokens, so length is not the block. Six of eight got the free-step denominator on part one, then abandoned it: each asserted the outcome was a uniform random permutation and read off 1/n for the slot question. Two mis-sized the space by charging one branch per object instead of walking legality, and one imported a small case's numeric value wholesale. Earlier rounds gave the arrival-order orientation fact declaratively and the student read past it. This revision makes the slot question operational instead: identify the single step that fills the named slot and turn the event into a condition on the steps up to it, so the same step model prices every part, and it warns that a small case exports method, not its number.",
+      "sampling_slurm_job_id": "150.279",
+      "tokens": 169,
+      "hint_hash": "c33d556a4ffaf6b2c35f3d863aecf16786d2058d9be1960aff353981e219500c",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "605dd6784c9f1f6f9bb9f5068b8e9744aad3781c1b1d0e9028b48e9692b555e2"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Reach a stated result early, then spend the rest of your effort checking it: reasoning that never lands scores nothing. Take the cheapest concrete foothold first -- at a large or symbolic size, work the smallest honest instances out exactly, substitute back to confirm each, and match the confirmed values against factorials, binomials, powers, and simple products, watching sign and any off-by-one shift. Once you hold concrete numbers, that is the route you finish. Switching to a slicker representation mid-solve is the classic way to lose: a reformulation that introduces unknowns the stated conditions cannot fix is a worse description of the problem, not a deeper one -- drop it and extend your table by one more instance. If one value breaks a pattern the rest obey, recheck its arithmetic rather than retheorizing.",
+      "mutation": "commit to the concrete route: treat any mid-solve recast that adds unknowns the conditions cannot fix as evidence the recast is wrong, and extend the verified table instead",
+      "subagent_summary": "Fresh sampling scored 2 of 8; the other six all ran to the token cap. The split is stark: both successes stayed on concrete small instances and never left them, while every failure abandoned a partly-built table for a general form carrying two constants that the single non-vanishing condition cannot fix, then burned thousands of tokens trying to pin them, three concluding the data was insufficient. Prior rounds already banned the insufficient-data exit and told the student to hunt an unused given, and both failed, so the real defect is the switch itself, not what happens after. This revision reframes it as a commitment rule: concrete numbers are the route you finish, and a reformulation that adds unfixable unknowns is evidence the recast is wrong -- drop it and add one more instance instead.",
+      "sampling_slurm_job_id": "150.280",
+      "tokens": 167,
+      "hint_hash": "9300bc3ffa577ffd05cfd6854f99348ead9ab916c0aac6c6e36fca997ad1b786",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "624bd880b5b94320846e50c68a8c4de3ea35b048ba853273064bcd1c17d0a2db"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Let H be the total number of houses. The equal-street layout constrains H arithmetically, and integer stage costs per house mean H must divide every listed stage total. Determine the admissible common divisors using the intended maximum-feasible-count interpretation. Add all construction costs before dividing by H, and apply the stated markup multiplicatively. In general, when a direct attack stalls, work the smallest cases by hand and read off the pattern or invariant rather than pushing a long computation. State your result plainly as soon as you have it, then check it by substituting back into the original given numbers.",
+      "mutation": "delete the never-exercised exact-fractions clause so the hint is shorter than the incumbent, and make the closing recheck a concrete substitute-back-into-the-givens check",
+      "subagent_summary": "All 8 fresh rollouts scored reward 1 and stopped cleanly in 3.0k-7.0k tokens, so train has been saturated for seven straight rounds and every remaining gain must come from transfer. Rounds 9-13 each appended or swapped in a new generic tail, pushing length to 156-167 tokens; all five lost held-out ground (0.1125-0.175 versus the incumbent 0.2), so piling on more generic advice is empirically harmful here. The rollouts never exercise the exact-fractions clause at all, working in plain integers throughout, while the longest rollout burns thousands of tokens re-litigating the same divisibility argument five times. So I deleted that dead clause, making the hint shorter than the incumbent for the first time, and turned the vague closing recheck into a concrete substitute-back-into-the-given-numbers check. The train-preserving opening is kept verbatim.",
+      "sampling_slurm_job_id": "150.281",
+      "tokens": 124,
+      "hint_hash": "1ae029176fa2efcf46f32393a17ee32f6e62bd15280174353d0b1a784682074b",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "8a6dfd748e0553b9accc3ad13afe0c4aa08f94103b64259ab984bac22622e13d"
+    },
+    {
+      "hint_id": 9,
+      "hint": "Never name unknown coefficients, never expand a composed or high-degree identity, and never survey relations like inverses first; that exhausts your budget. Recenter immediately: put both maps about one shared unknown center c, f=c+a(x-c)^k and g=c-a(x-c)^k, odd k, opposite signs, no offset, so the identity collapses by symmetry. The two supplied values are then c-a*c^k and c+a*c^k, so c is half the sum of those two given numbers; subtracting isolates a. A degenerate center is a sign slip in that one line. Once c and a are pinned you are done; never go back to coefficients. Read off requested inputs inside the centered form, never re-expanded into standard powers, which re-adds the constant the center already carries. Write down each requested component the moment you have it, verify once, and stop.",
+      "mutation": "forbid re-expansion into standard powers when reading off results (the observed wrong-answer trap), declare the problem finished once center and scale are pinned so no return to coefficients, and require each requested component be written down immediately with a single verification pass",
+      "subagent_summary": "Only 3 of 8 fresh rollouts were correct: three hit the token cap and one terminated wrong. Every failure reached the shared-center antisymmetric form and then left it. One solved it correctly, then rewrote the centered form into standard powers and re-added the given constant the center already encodes, turning correct components into wrong ones. Two recovered the center, then went back to naming coefficients and expanding the degree-nine composition, looping on their own arithmetic contradictions until the cap. One mis-added the two supplied values, got a zero center, read that as refutation, and reverted to coefficient extraction. One had the complete correct solution and kept re-verifying past the cap. The revision therefore bans re-expansion when reading off results, declares the work finished once center and scale are pinned, and requires writing each requested component down immediately with a single check.",
+      "sampling_slurm_job_id": "150.282",
+      "tokens": 184,
+      "hint_hash": "9cc24de27d4e499caf96b96dbe30b455fab783ee779adda2d1b2360e89b3dd24",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "652ee8dc58008e69bb7e90163e071e0708bc579422e2fd3d5a546ca1fb63ccad"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Fix once what ONE application is: the whole listed sequence of steps, not a single step. Never reopen it. Trace concretely rather than writing index maps, whose direction ambiguity causes most of the wreckage: write distinct labels in a row, rewrite the whole row after each step, acting on the row above and never the original, and count complete passes until the start reappears. A count you traced outranks any structural argument: when they disagree, delete the argument and keep the trace. Re-auditing a working trace is what burns your budget. Calling a composite a product of swaps, hence order two, is a guess about a product you never carried out; such composites are rarely undone in two passes, and the return count scales with the item count, not the step count. Trace two sizes, fit one formula, state the value, stop.",
+      "mutation": "give the traced count explicit precedence over any structural argument and forbid re-auditing a trace that already worked; name index-map direction ambiguity as the concrete source of wreckage",
+      "subagent_summary": "Only 1 of 8 rollouts was correct; 5 of 8 hit the 16384-token cap with nothing committed. The mechanism was uniform: the student produced a correct concrete trace, then wrote a position map, mislabelled the composite as disjoint transpositions of order two, and on seeing the contradiction spent the rest of its budget auditing the trace instead of the claim. Two finishers resolved that conflict in favour of the structural claim and reported the order as two. The incumbent already forbids untraced period-2 claims and demands bijectivity, but never says which side wins when a trace and an algebraic argument collide, so the model kept relitigating. This revision installs that precedence rule, bans re-auditing a trace that already worked, and blames index-map direction ambiguity rather than exotic structure.",
+      "sampling_slurm_job_id": "150.283",
+      "tokens": 175,
+      "hint_hash": "2347bfc8ae976f5b2c1b3a930c3e6e991ae3619adad7aef0a2ace15e44ffe025",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
+    }
+  ]
+}

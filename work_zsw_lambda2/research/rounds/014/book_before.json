@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3be528a373cac933836d908269ae02f19f2b025fa003af42f7fe0e75bc6fe5eb",
-  "generation": 14,
+  "generation": 13,
   "hints": [
     {
       "hint_id": 1,
@@ -55,9 +55,9 @@
       "hint_id": 7,
       "train_position": 57,
       "train_qid": "3836",
-      "hint": "Reach a stated result early, then spend the rest of your effort checking it: reasoning that never lands scores nothing. Take the cheapest concrete foothold first -- at a large or symbolic size, work the smallest honest instances out exactly, substitute back to confirm each, and match the confirmed values against factorials, binomials, powers, and simple products, watching sign and any off-by-one shift. Once you hold concrete numbers, that is the route you finish. Switching to a slicker representation mid-solve is the classic way to lose: a reformulation that introduces unknowns the stated conditions cannot fix is a worse description of the problem, not a deeper one -- drop it and extend your table by one more instance. If one value breaks a pattern the rest obey, recheck its arithmetic rather than retheorizing.",
-      "tokens": 167,
-      "hint_hash": "9300bc3ffa577ffd05cfd6854f99348ead9ab916c0aac6c6e36fca997ad1b786"
+      "hint": "Reach a stated result early, then spend the rest of your effort checking it: reasoning that never lands scores nothing. Get the cheapest foothold first -- if the problem is posed at a large or symbolic size, solve the smallest genuine instance exactly and compare a few confirmed values against factorials, binomials, powers, and products of differences, watching the sign and any off-by-one shift. Fix notation once; no symbol may serve as both an index and an exponent. If one tabulated value breaks a pattern the others obey, recheck that value's arithmetic instead of inventing a new theory. Extract a single coefficient by evaluating or differentiating at a convenient point, never by expanding a long product. Verify by substituting into the original conditions, and never re-solve a settled case or restate your work from the top.",
+      "tokens": 168,
+      "hint_hash": "624bd880b5b94320846e50c68a8c4de3ea35b048ba853273064bcd1c17d0a2db"
     },
     {
       "hint_id": 8,
@@ -84,6 +84,6 @@
       "hint_hash": "dd96dfb992052dea62ab2214a4d147f14aa95c0c6f35b1224c4d06d84cf346cb"
     }
   ],
-  "total_tokens": 1565,
-  "book_hash": "67926e054b4bcfc9ea033dc17635890614554923304809e30ab3e87d9616d6a1"
+  "total_tokens": 1566,
+  "book_hash": "8517812548134fbfeb82fc92a51e7aa3561f7e9f78f0d5bf0262e0783f364161"
 }
