@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "round": 16,
+  "book_hash_before": "ad4f752af49048a59170071561ba8824dc55228071811c046006f2c0d519d159",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Represent every interpretation consistent with the public statements as a finite candidate set. For each speaker, group candidates by what that speaker alone sees: the public number and their own value. Not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing information sets after every deletion, never from the original set. The surviving candidate determines the requested quantity.",
+      "mutation": "name-the-speakers-own-private-value-in-the-grouping-key-one-token-shorter",
+      "subagent_summary": "Execution 148.316 scored 2 of 8. The recurring failure is not arithmetic: in six of eight rollouts the student evaluated 'does not know' using only the public number, repeatedly writing that a speaker 'knows the sum/product is 2002' while never crediting the speaker with their own value. Because everyone then looks ignorant, no group is ever eliminated, and those runs stall (three hit the 16384-token cap with no boxed answer) or settle on a familiar wrong number. The incumbent's phrase 'the value that speaker privately knows' is too abstract to fix this; the revision states the grouping key operationally as public number plus own value, keeping every other incumbent step intact. Making the private coordinate explicit is what any two-speaker announcement puzzle needs, and this version is one token shorter than the incumbent.",
+      "sampling_slurm_job_id": "148.316",
+      "tokens": 76,
+      "hint_hash": "cf124f5baec4c77a6d97f67329169c4881477a3cc66c5b62775f8f2afd152c64",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable and set w=(z-1)/z, confining w to a circle |w|=R. Real coefficients center the root circle on the real axis, so z at w=R and w=-R end a diameter: halve their distance. Check exceptional values before extracting the requested circle parameter.",
+      "mutation": "replace-parameter-elimination-with-two-antipodal-roots-diameter-shortcut-at-69-tokens",
+      "subagent_summary": "Fresh rollouts (148.317) scored 7/8; the sole failure hit the 16384-token cap after the incumbent's 'characterize the image locus by an equation in x and y' step led it to an unnormalized quadratic, where it looped for thousands of tokens arguing circle-versus-ellipse and never boxed an answer. Six of the other seven also spent most of their budget parametrizing w=Re^{iθ} and eliminating θ. This edit swaps that costly, error-prone elimination for one concrete cheap move a 1.7B student can execute: evaluate the two real extreme values of w, note their images bound a diameter of the symmetric root circle, and halve the distance. It should transfer to any equal-powers-of-two-linear-expressions problem with real coefficients, and at 69 tokens it is shorter than the 70-token incumbent.",
+      "sampling_slurm_job_id": "148.317",
+      "tokens": 69,
+      "hint_hash": "cd769b3e899f1cf61c7554c525a2b3810a2126442023706a770ed7d0190972ab",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "a2617d5cf40e8a99a8f74a784b3ae2a8d34000cee46fba8c99104d13b42a8740"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Only a boxed value written after your reasoning block closes is graded, so a trace that never closes scores zero. Close the reasoning as soon as you hold one exact value plus one confirming check. Then write the boxed value first after closing, and put any explanation after the box, never before it, so being cut off costs nothing. Never restart the derivation in the write-up. Do not reopen a settled value; only a finished rival computation beats it, unease does not. Set up in coordinates first and write each object's extent; do not assume one figure sits inside another. If a rotation or offset stays free, ask whether the answer depends on it: a symmetry swapping congruent pieces makes every allowed value give the same result, so use the easiest one. For coverings, covered = sum of parts - overlap.",
+      "mutation": "function-word-only-compression-of-the-inert-box-first-ordering-clause",
+      "subagent_summary": "Fresh rollouts scored 4/8: one never closed the reasoning block, one was truncated mid-write-up with no box, and two closed cleanly but boxed a value asserted in prose from a containment claim rather than a computed intersection. Every one of the eight write-ups put its box LAST, at 99-100 percent of the write-up, so the incumbent's 'as the very first thing' ordering was disobeyed 8/8, as in rounds 6, 8 and 15. Deleting that clause (round 8) and rewording it (rounds 6, 15) both lost held-out, and rounds 7 and 13 already tried replacing the setup clause to fix the prose-assertion failure and also lost. So this makes the one untested conservative move: remove three function words from that measurably inert clause, leaving every content phrase byte-identical and every step in its original order, at roughly 165 tokens against the incumbent's 169.",
+      "sampling_slurm_job_id": "148.318",
+      "tokens": 165,
+      "hint_hash": "dac8830cd66f7203b5fa07e4c6c707a34bb1e618520d16eaec5f0a6233feedcd",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of a required linear pattern may come from any of finitely many fixed-degree polynomials fed consecutive integers, do not difference terms across different polynomials. Consecutive inputs make index and input interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. Ask of each menu polynomial how many inputs can satisfy the equation P(x)=A+Bx: it is a polynomial equation of degree deg P, so at most deg P inputs solve it, one more forcing P=L identically. The quantity wanted is the total input count, so sum that capacity across the whole menu, never reporting one factor alone; attain it by letting each polynomial match L on its own block.",
+      "mutation": "lossless-function-word-compression-drop-Then-connective-and-nominalize-count-of-inputs-144-vs-146-tokens",
+      "subagent_summary": "Fresh rollouts (148.319) scored 6/8. Both failures collapse the count: one applies the degree bound to the whole called-out stretch and drops the menu, the other decides two inputs already force linearity and multiplies the menu by two. Grepping all eight rollouts, every clause of the incumbent is quoted and used, including the ban and the never-one-factor-alone reminder, so nothing is inert and cutting any step would be the round-6 mistake. My manifest also shows every semantic re-scoping of the counting step already lost (rounds 2, 13, 15) and the pointwise-agreement idea lost in round 5, so I did not re-test those. This is therefore a strictly lossless compression: only the discourse connective 'Then' and the nominalization 'count of inputs' to 'input count' change, every math phrase byte-identical, 144 versus 146 tokens, so a held-out tie now breaks my way.",
+      "sampling_slurm_job_id": "148.319",
+      "tokens": 144,
+      "hint_hash": "9a6dbd714caa5d1e7bcde4398e98f49b86b47ab8f4defe13badf33e54ee477be",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "e0ca78c56f30a95ccffa6bbca03e866e7e92dfbb723570c1181e9524f64d335b"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Make each stated condition an equation; pin unknown constants first, then verify. Assume nothing unstated. Use the given relation to express remaining unknowns through one variable, then impose the defining equation. Reject roots outside the domain or repeating a known point. Recheck every solved value in the defining equation. Box the first candidate meeting every condition.",
+      "mutation": "swap-inert-relabel-clause-for-recheck-solved-values-in-defining-equation",
+      "subagent_summary": "Seven of eight rollouts were correct. The single failure pinned the constants and even substituted them back, then solved for the remaining point's coordinate and evaluated the defining relation with a flipped exponent sign, never rechecking that derived value against the equation it came from, so a wrong coordinate propagated straight into the final quantity. Meanwhile no rollout in this round or the previous one ever referenced the incumbent's 'relabel, not restart' clause, so that text is inert transfer tax. This edit swaps the inert clause for one concrete positive step - recheck every solved value in the defining equation, not just the constants - which should transfer to any unseen problem where later coordinates are derived from a pinned relation, and lands two tokens shorter than the incumbent.",
+      "sampling_slurm_job_id": "148.320",
+      "tokens": 68,
+      "hint_hash": "168cf8bb177dbcb95c68fee97b56c630ba69161d111e0b0bb30fb28ae3b17eba",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "1eb4e3cdd613a791abc5a6eca1cdc1c28a39f7f417b75d407c5cfcb7ed4ed992"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Model relay-through-a-buffer stack tasks as stack shunting: fix one labeling, items named bottom-to-top; keep ordered source, buffer and destination stacks; describe a run by its word of pushes and pops. Read the demanded final stack bottom-to-top to get the required delivery order, since a destination's bottom arrived first and its top last, so \"at the bottom\" constrains the earliest moves, not the latest. Never assume all n! final orders or all words are equally likely: stack rules leave many orders unreachable and forced moves make branches unequal, so a bare 1/k or 1/k! is a red flag. Multiply true per-step probabilities along each admissible word, one where a move is forced (empty buffer forces a push, empty source forces a pop) and one half only at free steps; check each state's branches sum to one.",
+      "mutation": "convert-target-stack-into-required-delivery-order-175-vs-176-tokens",
+      "subagent_summary": "Fresh rollouts scored 1/8 and all eight made the same error: each wrote that the shed's bottom bag is the one delivered LAST, and all eight got there by an equally-likely-permutation claim (1/4 five times, plus 1/24, 1/16, 0, 1). The incumbent already states the correct fact adjacently (round 14's win) and already forbids the uniform shortcut, yet no rollout ever wrote down which sequence of deliveries the event demands, so it had nothing to price and fell back on counting permutations. Rounds 12 and 13 lost by restating that fact passively and round 15 by pure compression, so this edit instead makes it an executable first move: read the demanded final stack bottom-to-top and that is the required delivery order. Both directions of the fact are kept (round 12 lost by dropping the 'last' half), S1/S3/S4 are byte-identical, and it lands at 175 tokens versus 176.",
+      "sampling_slurm_job_id": "148.321",
+      "tokens": 175,
+      "hint_hash": "8f07220eb7325437c1f4217985ed9e3633ca515cdbcdc2ca53db3e94419d2946",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "e64f97e23626cd3b726aa52d8740f627fe7f8a230645491fa857bd91465c19e1"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Numbers before symbols: set the huge parameter to 2, then 3, then 4, subtract consecutive equations to solve each tiny system, record the asked value. Divide consecutive entries, tracking signs separately; that ratio exposes the rule. Never build a polynomial in x or leave the table for theory. Confirm on one more size, then commit.",
+      "mutation": "replace-inert-word-elimination-with-the-concrete-operation-subtract-consecutive-equations",
+      "subagent_summary": "Fresh round-16 rollouts scored 1/8; seven hit the 16384-token cap with no boxed value. The incumbent's word 'elimination' is measurably inert: 'eliminat' appears only inside the quoted hint in six of eight traces and never as an action. The sole winner instead performed and named the concrete operation, subtracting one equation from the next seven times, which collapsed its small systems and produced the table the rest of the hint needs; the losers circled matrix and Vandermonde language for tens of thousands of characters and never reduced anything. So I spend the inert abstract noun on the concrete move that worked, and reclaim the token by merging the two prohibitions (heldout-neutral when tested alone in round 11), keeping the hint at the incumbent's length. Subtracting consecutive relations is the generic reduction step for any small-case ladder, so it should transfer.",
+      "sampling_slurm_job_id": "148.322",
+      "tokens": 70,
+      "hint_hash": "b06f1c8d6381a330cc83095ca823e88c322c3093fb5071d85d588b9cc6eafbbc",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Write the quantity asked for as a formula in named symbols, including any unknown the text never states outright, usually a count; substitute numbers only at the end. Tag each given as a group total or a per-item amount.\n\nIf per-item amounts must be whole or equal, that unknown count divides every such total at once, so the candidates are the divisors of their gcd. A stated count names a grouping, not that unknown.\n\nMake each percent a multiplier on its named base: a percent of cost multiplies cost, not price. Sum the parts before dividing once, then check every stated condition.",
+      "mutation": "add-concrete-percent-base-and-sum-then-divide-once-funded-by-compression-not-clause-deletion",
+      "subagent_summary": "Round 16 scored 6/8. All 8 rollouts reached the gcd step and built the same divisor list, so those clauses are load-bearing and must stay. Both failures broke only at selection: with no rule for choosing among survivors they grabbed the count the text states for groups and divided by it, while the six successes finished the computation they had set up. History says explicit selection rules are a dead end here (four tried, all lost held-out), whereas the concrete percent-base plus sum-before-dividing-once appeared in this hint's two best held-out observations but only in rounds that paid for it by deleting the grouping clause. This keeps every clause the successes use, adds those two executable arithmetic instructions, and still lands two tokens under the incumbent.",
+      "sampling_slurm_job_id": "148.323",
+      "tokens": 121,
+      "hint_hash": "6da630b8ba1bf5f2888b8f9a32c843cb8d3dca61be21035214e1d23f9e168228",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e"
+    },
+    {
+      "hint_id": 9,
+      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: the two maps sum to one constant, f(x) + g(x) = s for every x, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation rather than solving for every coefficient. Reflect the maps, not the argument x: substituting s - x into the given identity only reproduces it.",
+      "mutation": "state-linking-relation-as-pointwise-sum-identity-instead-of-abstract-affine-involution-notation",
+      "subagent_summary": "3 of 8 correct. All three winners wrote the maps-sum-to-a-constant form g = s - f as a pointwise identity (19-43 times each) and finished under 12k tokens. Four of the five failures never reached it: they read the incumbent's abstract 'affine involution, f = L(g) with L(t) = s - t' as a reflection of the ARGUMENT and burned the full 16384-token cap cycling through variants like g(x) = f(s - x) + k (42 and 54 restatements in two rollouts), boxing nothing. The 'reflect the maps not the argument' warning alone does not prevent this, so this edit replaces the abstract L-notation with the pointwise sum identity the successes actually execute, keeping every other clause and the warning intact. Naming the linking relation as a concrete equation should transfer to any pair of maps tied by an identity, and it is 144 tokens versus the incumbent's 147.",
+      "sampling_slurm_job_id": "148.324",
+      "tokens": 144,
+      "hint_hash": "2212795ae889ad5574257074cb2ef6aa5b3be7f214bcc31ed41a8538838470d0",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "391f18d0a38c1a07058f9782b12c580bfb7fb5aae04b069b173f7d17d3e75563"
+    },
+    {
+      "hint_id": 10,
+      "hint": "Settle what one pass of the process does, and what is asked, first. Then carry the smallest nontrivial case out fully and literally, writing the actual objects with distinct labels, not arguing abstractly, until the asked quantity is in front of you. Record it and go to the next size; never re-run a size you wrote out. For an answer in terms of a parameter, get three such rows, fit one formula, check every row, and box it, not rivals.",
+      "mutation": "commit-each-measured-size-and-advance-instead-of-re-running-the-same-size",
+      "subagent_summary": "3/8 correct. All five failures did write the smallest case out literally, so the incumbent's 'every row from a case you wrote out' step already fires; what killed them was re-running that same smallest size again and again, getting two or three conflicting values for it, and burning the whole budget relitigating one size instead of ever reaching a second or third. The successes recorded the small value once and immediately moved up in size. So I replace the redundant 'not a structural argument' qualifier with the concrete missing move: commit the value and advance to the next size, never re-running a size already written out. It is one token shorter than the incumbent and should transfer to any tabulate-and-fit problem.",
+      "sampling_slurm_job_id": "148.325",
+      "tokens": 100,
+      "hint_hash": "f35723e4dc2afe2c9e6b06cc17fbe624bd14c7dc195ef432ec15398d3a5af454",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "b4625f41b606ccf2c7016dbf4b2ecc78323f2a9c9491361dc7cea908b65814ce"
+    }
+  ]
+}

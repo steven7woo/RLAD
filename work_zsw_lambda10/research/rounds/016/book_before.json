@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 16,
+  "generation": 15,
   "hints": [
     {
       "hint_id": 1,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Settle what one pass of the process does, and what is asked, first. Then carry the smallest nontrivial case out fully and literally, writing the actual objects with distinct labels, not arguing abstractly, until the asked quantity is in front of you. Record it and go to the next size; never re-run a size you wrote out. For an answer in terms of a parameter, get three such rows, fit one formula, check every row, and box it, not rivals.",
-      "tokens": 100,
-      "hint_hash": "f35723e4dc2afe2c9e6b06cc17fbe624bd14c7dc195ef432ec15398d3a5af454"
+      "hint": "Settle what one pass of the process does, and what is asked, first. Then carry the smallest nontrivial case out fully and literally, writing the actual objects with distinct labels, not arguing abstractly, until the asked quantity is in front of you. If the answer is wanted in terms of a parameter, do two more sizes the same way, each row from a case you wrote out, not a structural argument. Fit one formula, check every row, and box it, not rivals.",
+      "tokens": 101,
+      "hint_hash": "b4625f41b606ccf2c7016dbf4b2ecc78323f2a9c9491361dc7cea908b65814ce"
     }
   ],
-  "total_tokens": 1148,
-  "book_hash": "0f640bd6f9c69cc49e697e134faee0fe4e9982aba910f4586c5ce37ccbde0a85"
+  "total_tokens": 1149,
+  "book_hash": "ad4f752af49048a59170071561ba8824dc55228071811c046006f2c0d519d159"
 }
