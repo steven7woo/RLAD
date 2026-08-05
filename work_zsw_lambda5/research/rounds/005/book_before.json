@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-  "generation": 5,
+  "generation": 4,
   "hints": [
     {
       "hint_id": 1,
@@ -23,9 +23,9 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Union = areas summed minus overlap, so minimize overlap. Put the shared point at the origin and settle membership by signed half-plane tests. A corner placed at an interior point of shape S covers a wedge there, so the overlap is positive and strictly less than S: reject any claim that they touch in one point or that one lies wholly inside the other. Prove invariance rather than sampling angles. If that point is a k-fold rotational-symmetry center of S and the wedge angle is exactly 2*pi/k with both edges exiting S, rotation by 2*pi/k maps S to itself and sends the wedge to the next one, so the k wedge positions cut S into k equal pieces. Overlap is then area(S)/k at every rotation, so minimum equals maximum: compute that one area, report the union, stop. Build a piecewise area function and test its breakpoints only if the wedge angle differs from 2*pi/k.",
-      "tokens": 192,
-      "hint_hash": "9ebe8ddbf8a5d9daaae8e0a4357cd7a942e10529d116c36fa43a25d554e232f5"
+      "hint": "Union = sum of areas minus overlap, so minimize overlap. Put the shared point at the origin. A corner touching a point covers only a wedge there: never conclude one shape lies inside the other from bounding-box extents. Decide every point's membership by signed half-plane tests. Key fact: a corner of angle 2*pi/k placed at a k-fold rotational-symmetry center of the other shape cuts off exactly one of its k congruent parts, so the overlap is 1/k of it at every rotation. Check this by computing the overlap at one aligned and one rotated orientation using the same membership tests. If they agree, the overlap is constant, so it is both the minimum and the maximum: report the union and stop. Only if they disagree build a piecewise area function and test its breakpoints and endpoints.",
+      "tokens": 165,
+      "hint_hash": "12ca35d8eb1c90348cad76d7ffd06b60ac04aa2e8bf55dff87141c5343e05d37"
     },
     {
       "hint_id": 4,
@@ -71,9 +71,9 @@
       "hint_id": 9,
       "train_position": 188,
       "train_qid": "3980",
-      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, do not grind the degree-n^2 coefficient system - that is where attempts stall and run out of room. Instead look for a common fixed point r and try the jointly centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing forces AB^n=BA^n; factor that once as AB(A^(n-1)-B^(n-1))=0 and carry both branches, since B=A collapses to p=q. Let the given data, not a guessed sign, kill a branch. On the sign-flipped branch the given values combine symmetrically: their sum cancels the (x-r)^n terms and pins r, their difference pins A. Verify p(r)=q(r)=r and check the identity at one spare point. Then evaluate only the requested inputs in centered form, never expanding.",
-      "tokens": 192,
-      "hint_hash": "379c17a37ce59d87b284ce8a3da735f1f64ff50b56d7336619bd74033c49cb1a"
+      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, do not grind the degree-n^2 coefficient system - that is where these attempts stall and run out of room. Instead look for a common fixed point r and try the jointly centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing gives AB^n and BA^n as leading coefficients, so A^(n-1)=B^(n-1); for odd n the distinct choice is B=-A. Now use the two given values: adding them cancels the (x-r)^n parts and pins r, subtracting them pins A. Verify p(r)=q(r)=r and check the identity at one spare point. Then substitute only the requested inputs; exploit the (x-r)^n symmetry instead of expanding.",
+      "tokens": 175,
+      "hint_hash": "8c6cf2ad54328ef6d5d7727c427a0f3b4e2872fcbd87df2e3a186687f9e272bd"
     },
     {
       "hint_id": 10,
@@ -84,6 +84,6 @@
       "hint_hash": "ce69be40ed567eba12a96f0a63ea1462e4b13c7ba9b4265dd1382a154fe82da4"
     }
   ],
-  "total_tokens": 1570,
-  "book_hash": "10979cbf508db70e257afd9f78dee65feee597539e11815ffa931af2e839beb1"
+  "total_tokens": 1526,
+  "book_hash": "c969b2d3faac98a1c697962b5788533699c290678445852213aa48c861ea53c7"
 }

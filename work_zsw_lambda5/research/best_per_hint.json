@@ -128,6 +128,27 @@
             "J_i": 0.625
           },
           "proposal_eval_slurm_job_id": "149.87"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "da4fa41138fb2d2e02827afeeaf4716733f4a932070f06cee247429ab7632e08",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "da4fa41138fb2d2e02827afeeaf4716733f4a932070f06cee247429ab7632e08",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 55,
+            "J_denominator": 80,
+            "J_i": 0.6875
+          },
+          "proposal_eval_slurm_job_id": "149.107"
         }
       ]
     },
@@ -257,6 +278,27 @@
             "J_i": 1.625
           },
           "proposal_eval_slurm_job_id": "149.88"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "8726311eca322f6252c2bcc41d2ed1f414d51e492fa8f070fb7a093bc45ddf97",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "8726311eca322f6252c2bcc41d2ed1f414d51e492fa8f070fb7a093bc45ddf97",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 14,
+            "heldout_total": 80,
+            "heldout_i": 0.175,
+            "J_numerator": 150,
+            "J_denominator": 80,
+            "J_i": 1.875
+          },
+          "proposal_eval_slurm_job_id": "149.108"
         }
       ]
     },
@@ -264,20 +306,20 @@
       "hint_id": 3,
       "train_position": 6,
       "train_qid": "8554",
-      "hint": "Union = sum of areas minus overlap, so minimize overlap. Put the shared point at the origin. A corner touching a point covers only a wedge there: never conclude one shape lies inside the other from bounding-box extents. Decide every point's membership by signed half-plane tests. Key fact: a corner of angle 2*pi/k placed at a k-fold rotational-symmetry center of the other shape cuts off exactly one of its k congruent parts, so the overlap is 1/k of it at every rotation. Check this by computing the overlap at one aligned and one rotated orientation using the same membership tests. If they agree, the overlap is constant, so it is both the minimum and the maximum: report the union and stop. Only if they disagree build a piecewise area function and test its breakpoints and endpoints.",
-      "tokens": 165,
-      "hint_hash": "12ca35d8eb1c90348cad76d7ffd06b60ac04aa2e8bf55dff87141c5343e05d37",
+      "hint": "Union = areas summed minus overlap, so minimize overlap. Put the shared point at the origin and settle membership by signed half-plane tests. A corner placed at an interior point of shape S covers a wedge there, so the overlap is positive and strictly less than S: reject any claim that they touch in one point or that one lies wholly inside the other. Prove invariance rather than sampling angles. If that point is a k-fold rotational-symmetry center of S and the wedge angle is exactly 2*pi/k with both edges exiting S, rotation by 2*pi/k maps S to itself and sends the wedge to the next one, so the k wedge positions cut S into k equal pieces. Overlap is then area(S)/k at every rotation, so minimum equals maximum: compute that one area, report the union, stop. Build a piecewise area function and test its breakpoints only if the wedge angle differs from 2*pi/k.",
+      "tokens": 192,
+      "hint_hash": "9ebe8ddbf8a5d9daaae8e0a4357cd7a942e10529d116c36fa43a25d554e232f5",
       "metrics": {
         "schema_version": 1,
         "hint_id": 3,
-        "hint_hash": "12ca35d8eb1c90348cad76d7ffd06b60ac04aa2e8bf55dff87141c5343e05d37",
+        "hint_hash": "9ebe8ddbf8a5d9daaae8e0a4357cd7a942e10529d116c36fa43a25d554e232f5",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
-        "train_correct": 5,
+        "train_correct": 4,
         "train_total": 8,
-        "train_i": 0.625,
-        "heldout_correct": 14,
+        "train_i": 0.5,
+        "heldout_correct": 16,
         "heldout_total": 80,
-        "heldout_i": 0.175,
+        "heldout_i": 0.2,
         "J_numerator": 120,
         "J_denominator": 80,
         "J_i": 1.5
@@ -386,6 +428,27 @@
             "J_i": 1.5
           },
           "proposal_eval_slurm_job_id": "149.89"
+        },
+        {
+          "round": 5,
+          "decision": "kept",
+          "proposal_hash": "9ebe8ddbf8a5d9daaae8e0a4357cd7a942e10529d116c36fa43a25d554e232f5",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "9ebe8ddbf8a5d9daaae8e0a4357cd7a942e10529d116c36fa43a25d554e232f5",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 4,
+            "train_total": 8,
+            "train_i": 0.5,
+            "heldout_correct": 16,
+            "heldout_total": 80,
+            "heldout_i": 0.2,
+            "J_numerator": 120,
+            "J_denominator": 80,
+            "J_i": 1.5
+          },
+          "proposal_eval_slurm_job_id": "149.109"
         }
       ]
     },
@@ -515,6 +578,27 @@
             "J_i": 1.0625
           },
           "proposal_eval_slurm_job_id": "149.90"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "ce36182bcfaa4c4b721018be157cb8138f1e0a53390625dae23b06f0587b7fa5",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "ce36182bcfaa4c4b721018be157cb8138f1e0a53390625dae23b06f0587b7fa5",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 70,
+            "J_denominator": 80,
+            "J_i": 0.875
+          },
+          "proposal_eval_slurm_job_id": "149.110"
         }
       ]
     },
@@ -644,6 +728,27 @@
             "J_i": 1.6875
           },
           "proposal_eval_slurm_job_id": "149.91"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "edd3a8dc0a0c500fda8fe9ae9b613d02a9e8fcb61f60d2021aa1a1f5a1f77d2c",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "edd3a8dc0a0c500fda8fe9ae9b613d02a9e8fcb61f60d2021aa1a1f5a1f77d2c",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 75,
+            "J_denominator": 80,
+            "J_i": 0.9375
+          },
+          "proposal_eval_slurm_job_id": "149.111"
         }
       ]
     },
@@ -773,6 +878,27 @@
             "J_i": 0.6875
           },
           "proposal_eval_slurm_job_id": "149.92"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "35534215ceae3e5593a438cb851575c6b4b33b0f4690acbd42de916943544094",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "35534215ceae3e5593a438cb851575c6b4b33b0f4690acbd42de916943544094",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 65,
+            "J_denominator": 80,
+            "J_i": 0.8125
+          },
+          "proposal_eval_slurm_job_id": "149.112"
         }
       ]
     },
@@ -902,6 +1028,27 @@
             "J_i": 0.625
           },
           "proposal_eval_slurm_job_id": "149.93"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "01cb715a3d1d9d867b8114ae92c5f429cfcdda1dced6ccd8cd287be6f1f1e51b",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "01cb715a3d1d9d867b8114ae92c5f429cfcdda1dced6ccd8cd287be6f1f1e51b",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 60,
+            "J_denominator": 80,
+            "J_i": 0.75
+          },
+          "proposal_eval_slurm_job_id": "149.113"
         }
       ]
     },
@@ -1031,6 +1178,27 @@
             "J_i": 1.6875
           },
           "proposal_eval_slurm_job_id": "149.94"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "f15a59be5e32bbac0f45dc9166f4040b794a9430087eeb08df27860054369005",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "f15a59be5e32bbac0f45dc9166f4040b794a9430087eeb08df27860054369005",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 7,
+            "train_total": 8,
+            "train_i": 0.875,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 115,
+            "J_denominator": 80,
+            "J_i": 1.4375
+          },
+          "proposal_eval_slurm_job_id": "149.114"
         }
       ]
     },
@@ -1038,23 +1206,23 @@
       "hint_id": 9,
       "train_position": 188,
       "train_qid": "3980",
-      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, do not grind the degree-n^2 coefficient system - that is where these attempts stall and run out of room. Instead look for a common fixed point r and try the jointly centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing gives AB^n and BA^n as leading coefficients, so A^(n-1)=B^(n-1); for odd n the distinct choice is B=-A. Now use the two given values: adding them cancels the (x-r)^n parts and pins r, subtracting them pins A. Verify p(r)=q(r)=r and check the identity at one spare point. Then substitute only the requested inputs; exploit the (x-r)^n symmetry instead of expanding.",
-      "tokens": 175,
-      "hint_hash": "8c6cf2ad54328ef6d5d7727c427a0f3b4e2872fcbd87df2e3a186687f9e272bd",
+      "hint": "If p(q(x))=q(p(x)) with p,q the same degree n, do not grind the degree-n^2 coefficient system - that is where attempts stall and run out of room. Instead look for a common fixed point r and try the jointly centered form p(x)=r+A(x-r)^n, q(x)=r+B(x-r)^n. Composing forces AB^n=BA^n; factor that once as AB(A^(n-1)-B^(n-1))=0 and carry both branches, since B=A collapses to p=q. Let the given data, not a guessed sign, kill a branch. On the sign-flipped branch the given values combine symmetrically: their sum cancels the (x-r)^n terms and pins r, their difference pins A. Verify p(r)=q(r)=r and check the identity at one spare point. Then evaluate only the requested inputs in centered form, never expanding.",
+      "tokens": 192,
+      "hint_hash": "379c17a37ce59d87b284ce8a3da735f1f64ff50b56d7336619bd74033c49cb1a",
       "metrics": {
         "schema_version": 1,
         "hint_id": 9,
-        "hint_hash": "8c6cf2ad54328ef6d5d7727c427a0f3b4e2872fcbd87df2e3a186687f9e272bd",
+        "hint_hash": "379c17a37ce59d87b284ce8a3da735f1f64ff50b56d7336619bd74033c49cb1a",
         "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
         "train_correct": 8,
         "train_total": 8,
         "train_i": 1.0,
-        "heldout_correct": 13,
+        "heldout_correct": 15,
         "heldout_total": 80,
-        "heldout_i": 0.1625,
-        "J_numerator": 145,
+        "heldout_i": 0.1875,
+        "J_numerator": 155,
         "J_denominator": 80,
-        "J_i": 1.8125
+        "J_i": 1.9375
       },
       "history": [
         {
@@ -1160,6 +1328,27 @@
             "J_i": 1.5
           },
           "proposal_eval_slurm_job_id": "149.95"
+        },
+        {
+          "round": 5,
+          "decision": "kept",
+          "proposal_hash": "379c17a37ce59d87b284ce8a3da735f1f64ff50b56d7336619bd74033c49cb1a",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "379c17a37ce59d87b284ce8a3da735f1f64ff50b56d7336619bd74033c49cb1a",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 15,
+            "heldout_total": 80,
+            "heldout_i": 0.1875,
+            "J_numerator": 155,
+            "J_denominator": 80,
+            "J_i": 1.9375
+          },
+          "proposal_eval_slurm_job_id": "149.115"
         }
       ]
     },
@@ -1289,6 +1478,27 @@
             "J_i": 0.9375
           },
           "proposal_eval_slurm_job_id": "149.96"
+        },
+        {
+          "round": 5,
+          "decision": "discarded",
+          "proposal_hash": "696ab4c241f7d13d35d173fbf8ef6f4e902fa9d60e1130386bc63757b8bf880d",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "696ab4c241f7d13d35d173fbf8ef6f4e902fa9d60e1130386bc63757b8bf880d",
+            "config_hash": "3390f146f27e1ddde989c37f09e787e3d36ffa587f583eef5cb2b13bdb424b51",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 70,
+            "J_denominator": 80,
+            "J_i": 0.875
+          },
+          "proposal_eval_slurm_job_id": "149.116"
         }
       ]
     }
