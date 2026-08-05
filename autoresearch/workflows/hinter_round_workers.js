@@ -58,19 +58,29 @@ one training problem but does not generalize will LOSE. Your incumbent will be
 replaced only if the proposal scores higher J (tie-break: higher held-out, then
 shorter). So write a REUSABLE STRATEGY, not a solution.
 
-## What eleven rounds of evidence say (read this first)
+## What twelve rounds of evidence say (read this first)
 
 Keep counts: r1 5/10, r2 0/10, r3 5/10, r4 2/10, r5 3/10, r6 2/10, r7 0/10,
-r8 1/10, r9 0/10, r10 1/10, r11 1/10. Book mean J: 2.0125 -> ... -> 2.7375.
+r8 1/10, r9 0/10, r10 1/10, r11 1/10, r12 1/10. Book mean J: 2.0125 -> 2.7375.
 
-THE SEARCH HAS SATURATED UNDER SMALL EDITS. Only 3 of the last 40 proposals
-survived, and they won by tying held-out and being SHORTER - not by improving
-transfer. Your incumbent has repelled 10 or 11 consecutive challengers. The base
-rate for a careful marginal edit succeeding is under 10 percent.
+THE SEARCH HAS SATURATED UNDER SMALL EDITS. Only 4 of the last 50 proposals
+survived, and ALL FOUR won the same way: held-out exactly TIED and the proposal
+was SHORTER. Not one proposal has raised held-out above its incumbent since
+round 8. Your incumbent has repelled 11 or 12 consecutive challengers.
 
-Consequence: when you cannot find a real strategy improvement, a STRICTLY
-LOSSLESS COMPRESSION is not a consolation prize - it is the mutation that has
-actually been winning. Same steps, same meaning, same order, fewer tokens.
+Two practical consequences:
+
+FIRST, a STRICTLY LOSSLESS COMPRESSION is the highest-expected-value move for
+most hints. Same steps, same meaning, same order, fewer tokens. It cannot raise
+transfer, but it converts a held-out tie into a win, and that is how every
+recent keep happened. Do it carefully: the compressions that LOST all altered a
+content-bearing phrase while believing they were lossless. Change function words
+and redundant syntax only; keep every content phrase byte-identical if you can.
+
+SECOND, semantic edits need a genuinely new idea, not a new phrasing of an old
+one. Before proposing one, check your manifest: if a previous round already
+tested the same underlying idea and lost, do not re-test it with different
+wording - that has happened repeatedly and lost every time.
 
 WHERE THE REMAINING HEADROOM IS. Held-out per hint is now: h1 0.250, h2 0.225,
 h3 0.225, h4 0.225, h5 0.250, h6 0.250, h7 0.175, h8 0.163, h9 0.263, h10 0.150.
