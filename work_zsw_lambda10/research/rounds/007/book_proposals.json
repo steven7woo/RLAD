@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "round": 7,
+  "book_hash_before": "2433039dfc1945908a71c6e78b94149041c1a9a176db2c28400f1340c0424d0d",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "Represent each interpretation consistent with the public statements as a finite candidate set, and finish one before trying another. For each speaker, group candidates by the value that speaker privately knows. A claim of not knowing deletes groups whose relevant coordinate is already unique. Apply the announcements in chronological order, recomputing after each deletion. The interpretation that still leaves a survivor determines the requested quantity.",
+      "mutation": "finish-one-interpretation-before-another-and-keep-the-one-leaving-a-survivor",
+      "subagent_summary": "Execution 148.135 scored 1 of 8. Five rollouts hit the 16384-token cap with no boxed answer, oscillating between the two readings of the public value instead of carrying either to a conclusion; the two terminating failures picked the reading they had just argued was impossible and boxed a value from it. The one success carried a single reading through to the end. The incumbent says to enumerate interpretations but never says to finish one before opening another, nor which one to keep, so the student thrashes. This adds those two moves in place of the 'do not reason from the original set' clause only 2 of 8 rollouts echoed, and comes in shorter than the incumbent (75 vs 77 tokens). Branch discipline and a survivor-based test for choosing among readings help any multi-case problem.",
+      "sampling_slurm_job_id": "148.135",
+      "tokens": 75,
+      "hint_hash": "acfc7e4f9f2e5cd5a761ca5ee0568cb0472c14f079e168cd9f60e7d47b1f0a35",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable and set w=(z-1)/z. The equation restricts w to a circle. Solve the Möbius relation for z, set z=x+iy, and eliminate the angle. Normalize the resulting x^2,y^2 coefficient and complete the square before extracting the requested circle parameter.",
+      "mutation": "replace-vague-geometrically-branch-with-eliminate-the-angle-then-normalize-and-complete-the-square",
+      "subagent_summary": "Fresh rollouts (execution_id 148.136) scored 7/8. The one miss never formed a locus equation at all: it substituted individual roots, compared their moduli one at a time, found them unequal, declared the locus an ellipse 28 times over 13948 tokens, and boxed a guess. All seven passing traces instead did the same concrete thing the incumbent only gestures at with 'characterize the locus geometrically': parametrize, eliminate the angle to one x,y quadratic, divide by the common x^2,y^2 coefficient, complete the square. That vague branch is the clause the failing trace could not execute, so this edit names the executable route instead, at 69 tokens versus the incumbent's 70. Rounds 2 and 4 showed appending guards for this stall loses, and round 6 showed removing the concrete w=(z-1)/z anchor loses, so both are preserved.",
+      "sampling_slurm_job_id": "148.136",
+      "tokens": 69,
+      "hint_hash": "0581251ae20a9b95c29850d8c26d413e0a6208e514e755b2ba2efbf5f03fadb5",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "a2617d5cf40e8a99a8f74a784b3ae2a8d34000cee46fba8c99104d13b42a8740"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Only a boxed value written after your reasoning block closes is graded, so a trace that never closes scores zero. Close the reasoning as soon as you hold one exact value plus one confirming check. Then write the boxed value as the very first thing after closing, and put any explanation after the box, never before it, so being cut off costs nothing. Never restart the derivation in the write-up. Do not reopen a settled value; only a finished rival computation beats it, unease does not. Set up coordinates and list every corner; test containment by plugging corners into inequalities, not by comparing sizes. If a rotation or offset stays free, ask whether the answer depends on it: a symmetry swapping congruent pieces makes every allowed value give the same result, so use the easiest one. Coverings: covered = sum of parts - overlap.",
+      "mutation": "replace-vague-containment-warning-with-corner-inequality-containment-test",
+      "subagent_summary": "Fresh rollouts scored 4/8. One never closed its reasoning block; two closed at 96-98 percent of budget and were truncated part-way through a long multi-section write-up before reaching any box; one failed on method, asserting the small figure lay wholly inside the large one by comparing center-to-side distances (32 such mentions) and boxing the containment value. The incumbent's setup clause is the weak link: 'extent' appeared 0-3 times per trace and its bare prohibition 'do not assume one figure sits inside another' did not stop that containment error. This edit replaces that vague gesture with one executable test - list the corners, decide containment by plugging corners into inequalities rather than comparing sizes - which is checkable on any placement/overlap problem. Round 6 showed rewording the output protocol costs held-out, so the protocol text is left untouched and the tail is trimmed to hold total length at the incumbent's 169 tokens.",
+      "sampling_slurm_job_id": "148.137",
+      "tokens": 169,
+      "hint_hash": "f3118e89b75a2d71c17650d4998bc51d97566711c2b42f6bbc4a134b39457a67",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of a required linear pattern may come from any of finitely many fixed-degree polynomials fed consecutive integers, do not difference terms across polynomials. Inputs are consecutive, so index and input are interchangeable and every value equals one shared affine L(x)=A+Bx of its own input. Group inputs by producing polynomial: each is a root of P(x)-L(x), nonzero of degree deg P since an affine subtraction keeps the leading term, so a polynomial serves at most deg P inputs, one more forcing P=L. Sum that capacity across the menu for the total input count wanted, never one factor alone; attain it via P=L+c(x-x_1)...(x-x_k) on its own block, still degree deg P.",
+      "mutation": "replace-vague-match-L-on-its-own-block-with-explicit-witness-formula",
+      "subagent_summary": "Fresh round-7 rollouts (execution 148.138) scored 5/8. All three failures collapse to one factor because they believe a high-degree polynomial cannot agree with the affine target on several inputs without being linear: one caps a block at a single input and reports the menu size, one shrinks the cap by one, and one abandons the affine target entirely for finite differences of consecutive terms. The incumbent's closing clause only vaguely says to make each polynomial 'match L on its own block', giving no way to see that is possible. The edit spends those words on the explicit witness P=L+c(x-x_1)...(x-x_k), which visibly keeps degree deg P while equalling L on the whole block, and is one token shorter than the incumbent (152 vs 153).",
+      "sampling_slurm_job_id": "148.138",
+      "tokens": 152,
+      "hint_hash": "34e73890280115dc122f5de6ef326fd0076bd3af160b41f071c42e56023e6505",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Make each stated condition an equation; pin unknown constants first. Assume nothing unstated. Use the given relation to reduce to one unknown, then impose the defining equation. Reject roots outside the domain or repeating a known point. An impossible intermediate is a sign slip: re-expand that line, not the setup. Recheck each survivor, then box it.",
+      "mutation": "replace-inert-relabel-clause-with-re-expand-suspect-line-and-verify-survivors",
+      "subagent_summary": "Three of eight rollouts scored; four of the five failures ended in finish_reason=length. Each failure pinned the constants and set up the right single-unknown equation, then dropped a sign while expanding the cross-multiplied product, got no real roots, and spent the rest of the budget re-litigating the setup and the problem's validity instead of re-expanding that one algebraic line. The one correct rollout that hit the same dead end simply re-expanded the line, found the sign error and finished; another stopped early with a coordinate it never rechecked on the curve. The incumbent's 'relabel, not restart' clause is inert - no rollout ever relabels - so it is replaced by the concrete recovery move (re-expand the suspect line, then verify each surviving value) at identical length.",
+      "sampling_slurm_job_id": "148.139",
+      "tokens": 70,
+      "hint_hash": "198b1e1ac4da9bd8ace1359f186888d61981b1d577f0756a2eb8ff3fe5a6d422",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "1eb4e3cdd613a791abc5a6eca1cdc1c28a39f7f417b75d407c5cfcb7ed4ed992"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Model relay-through-a-buffer stack tasks as stack shunting: fix one stated labeling (name items bottom-to-top), keep the ordered source, buffer, and destination stacks, and describe a run by its word of pushes and pops. Restate the target event as a condition on that word. A destination stack's bottom is whatever arrived FIRST, not last, so \"lands at the bottom\" constrains the earliest moves: push until the wanted item tops the buffer, then pop it, and the event is already settled. Never assume all n! final orders or all words are equally likely: stack rules make many orders unreachable and forced moves make branches unequal, so a bare 1/k or 1/k! is a red flag. Multiply true per-step probabilities along that opening, using one when a move is forced (empty buffer forces a push, empty source forces a pop) and one half only at free steps.",
+      "mutation": "swap-inert-sum-to-one-check-for-concrete-opening-construction",
+      "subagent_summary": "Fresh rollouts scored 2/8, the best in this hint's history, and the surviving failure is uniform: part (b) is priced without ever building the opening moves. Four rollouts answered a bare 1/n or 1/4 from an equally-likely-permutation claim, and two declared the placement impossible; several also read 'bottom' as arrived last rather than arrived first. No rollout in this or the prior round ever ran the incumbent's sum-to-one branch check, so that clause is inert transfer tax. This edit spends those tokens instead on the concrete first move the student lacks (push until the wanted item tops the buffer, then pop it, event settled) and capitalises FIRST, not last, to block the direction error. Net result is shorter than the incumbent, 184 vs 185 tokens, with no clause the successful rollouts relied on removed.",
+      "sampling_slurm_job_id": "148.140",
+      "tokens": 184,
+      "hint_hash": "1966d88916fa96a04ce34322f6e0546d068f743f255d9e9684624ac5528c90f6",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "67d122a90af2e0710ab939322c2a6639c7d9434bfc510d8f18475e267a2103c9"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Numbers before symbols: shrink the number of unknowns to 2, then 3, then 4, solve each tiny system by elimination, record the asked value exactly. Write one formula in n fitting every entry, signs included. Never build a polynomial in x, never leave the table for theory. Substitute the huge size and box it.",
+      "mutation": "name-what-to-shrink-and-replace-ignored-ratio-clause-with-formula-in-n",
+      "subagent_summary": "Fresh round-7 rollouts under the incumbent scored 0/8: six hit the 16384-token generation cap with no boxed value, and every rollout built the polynomial-in-x / Vandermonde model first, only mentioning a smaller case 8k-40k characters in. Two diagnostics: the phrase 'set the huge parameter to 2' is systematically misread (one trace read it as setting the coefficients to 2,3,4) because the hint never says WHICH quantity shrinks, and the divide-consecutive-entries/ratio clause is inert - 'ratio' appears exactly once (the quotation itself) in six traces and zero times in another. This edit names the shrink target concretely (number of unknowns) and swaps the ignored ratio clause for a single executable extraction step (one formula in n fitting every entry, signs included) plus an explicit box, at 69 tokens versus the incumbent's 70.",
+      "sampling_slurm_job_id": "148.141",
+      "tokens": 69,
+      "hint_hash": "652dc396336d33140d54f904f48ffc6c20deb38ea90a2edeac78fc4d38a66576",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Write the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count; substitute numbers only at the end. Mark each given number as a total for a group or an amount per item.\n\nIf per-item amounts must be whole or equal, that unknown count divides every such total at once, so the candidates are the divisors of their gcd. A count the problem does state describes a grouping; keep only the candidates that are multiples of it.\n\nMake each percent or ratio a multiplier on the base it acts on, then check the result against every stated condition.",
+      "mutation": "make-grouping-clause-executable-as-multiple-of-filter",
+      "subagent_summary": "Fresh round-7 rollouts scored 5/8. Every one of the eight derived the gcd of the stage totals and listed its divisors as candidate counts, so that machinery works; all three failures then substituted the stated grouping count itself as the item count, calling it a reasonable assumption. The incumbent's clause 'it constrains the unknown count without being it' is an abstract negative that no rollout ever acted on, while the single rollout that applied the grouping count as a divisibility filter on the candidate list answered correctly. This edit replaces that inert clause with the same idea stated as one executable operation on a list the student has already written down, adding no tiebreak rule and no prohibition (both of which cost held-out in rounds 2, 4 and 6) and holding length at the incumbent's 123 tokens.",
+      "sampling_slurm_job_id": "148.142",
+      "tokens": 123,
+      "hint_hash": "1a3bcdc05dd14c1ee22f40153a3f4af79b176f2205d9a9a4957d21f3b7de3513",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e"
+    },
+    {
+      "hint_id": 9,
+      "hint": "For commuting same-degree polynomials, do not expand the full composition coefficient by coefficient; that exhausts your budget. Match leading and constant terms, then look for a shared symmetry. Strong ansatz: link the two maps by an affine involution, f = L(g) with L(t) = s - t, and require g(s - x) = s - g(x). That one reflection identity implies the commuting identity and collapses the unknowns to a single free parameter. Fix s from the given values at x = 0. Read the requested outputs straight from the symmetry relation rather than solving for every coefficient. A leftover free parameter is normal; the moment the requested quantities stop depending on it, box them.",
+      "mutation": "replace-verify-numerically-and-retry-another-symmetry-clause-with-free-parameter-normal-plus-stop-and-box",
+      "subagent_summary": "4/8 correct. All four failures ran to the 16384-token cap with nothing boxed, and two of them had already reached correct values before dying: they obeyed the incumbent's closing 'verify the identity at one numeric input' and spent the whole remaining budget evaluating the degree-9 composition with huge numbers. The other two acted on the same clause's 'test a different symmetry' licence and thrashed between restarts and full multinomial coefficient matching. No winning rollout ever ran a numeric verification; each read the values off the relation and stopped. So this keeps the involution ansatz wording the winners echo verbatim and swaps only that harmful trailing clause for the positive first move it lacked: treat a leftover free parameter as expected and commit a boxed answer as soon as it cancels. Net 8 tokens shorter.",
+      "sampling_slurm_job_id": "148.143",
+      "tokens": 144,
+      "hint_hash": "722569ddcaf97de07c48e1fda9d6864d795da3bb386d99d4017b4fd0664da179",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076"
+    },
+    {
+      "hint_id": 10,
+      "hint": "One application means the whole prescribed sequence of steps, never a single step; settle that first. Run it literally on the smallest nontrivial instance with distinct labels, writing out each state until the original returns, and count. Your written-out states outrank any structural or cycle-length argument: if the two conflict, keep the count, drop the argument, and move on. Get one more size the same way, fit one formula in the parameter, and box it rather than listing rivals.",
+      "mutation": "written-states-outrank-structural-argument-tiebreak",
+      "subagent_summary": "Fresh rollouts under the incumbent scored 1/8, and six of eight died at the completion cap with one shared shape: the student did carry out the literal run and got counts, then a cycle-structure/disjoint-transposition argument contradicted those counts, and it spent thousands of tokens asking where the contradiction was instead of proceeding; the one finished failure overrode its own simulation with an invented cycle-order story. The lone success simply counted at small sizes and committed. So the missing instruction is a tie-break rule, not another prohibition: I replace the incumbent's pass-versus-pass convention clause and its bare 'a composite does not inherit the period of its parts' line (which rollouts recite verbatim and then ignore) with an explicit rule that the written-out states beat any structural argument, so keep the count and move on. Kept operation-agnostic and 8 tokens shorter than the incumbent.",
+      "sampling_slurm_job_id": "148.144",
+      "tokens": 98,
+      "hint_hash": "3a9b9e957bfb7df4ad48f40037232d7ce19cb093aa417900157eeffeb9d31249",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "c114dde1b09adf25ca78c933cba74a999d4e75ce2bcfbaaecc757f2887473b0c"
+    }
+  ]
+}
