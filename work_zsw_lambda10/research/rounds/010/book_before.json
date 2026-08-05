@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 10,
+  "generation": 9,
   "hints": [
     {
       "hint_id": 1,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "One application means the whole prescribed sequence of steps, never a single step; settle that first. Run it literally on the smallest nontrivial instance with distinct labels, writing out each state until the original returns, and count. Build a table of the parameter against the measured count and fill three rows the same way before attempting any general argument. A composite does not inherit the period of its parts. Then fit one formula to the table, check it reproduces every row, and box it rather than listing rivals.",
-      "tokens": 102,
-      "hint_hash": "8f7b8e1d1d6e2d9340e42495d567be9a197bd3fa8ed7642d587f47ff305db523"
+      "hint": "One application means the whole prescribed sequence of steps, never a single step; settle that first. Run it literally on the smallest nontrivial instance with distinct labels, writing out each state until the original returns, and count. If two of your own passes at one size disagree, a convention slipped: settle it once, keep it fixed, and move on. A composite does not inherit the period of its parts. Get one more size the same way, fit one formula in the parameter, and box it rather than listing rivals.",
+      "tokens": 106,
+      "hint_hash": "c114dde1b09adf25ca78c933cba74a999d4e75ce2bcfbaaecc757f2887473b0c"
     }
   ],
-  "total_tokens": 1163,
-  "book_hash": "493675db1f81bd9369c600d4f7790970542419b0d1a629380b0ea06ea0000af4"
+  "total_tokens": 1167,
+  "book_hash": "52916ac12182102c6d79c5619243f25fdd9f30577309e9ef123bf224186a6d4a"
 }
