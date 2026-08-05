@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+  "round": 6,
+  "book_hash_before": "e7bbbf5d893358eeee8c3344227a889c839797219093683f3675500e3daa0469",
+  "hints": [
+    {
+      "hint_id": 1,
+      "hint": "List the finitely many cases the public facts allow. Group them by the value one speaker privately knows; that speaker not knowing deletes every group of size one, knowing keeps only those. Apply the statements in the order spoken, regrouping after each. Box the survivor early instead of re-checking settled cases.",
+      "mutation": "lossless-compression-77-to-64-tokens-plus-commit-early",
+      "subagent_summary": "Execution 148.115 scored 3 of 8. Three failures hit the 16384-token cap with no boxed answer, and the other two wrote a survivor after already re-arguing the same cases dozens of times. Every rollout, winning or losing, spent most of its budget on repeated self-correction, so the deciding factor is finishing, not method. Rounds 1-5 all tried longer rewrites (101-167 tokens) and every one lost held-out against this 77-token incumbent; no round has yet tried going shorter. This proposal keeps all four incumbent steps (enumerate cases, group by private value, read a knowledge claim as a group-size test, re-filter in spoken order) in plainer words at 64 tokens, drops the inert 'do not reason from the original set' clause no rollout ever acted on, and replaces it with the one behaviour the rollouts actually lacked: commit and box early rather than re-check settled cases.",
+      "sampling_slurm_job_id": "148.115",
+      "tokens": 64,
+      "hint_hash": "07363e1a841cc22086b50fc6f756f5491f820240a7de3386db6f2d2e809f93aa",
+      "train_position": 163,
+      "train_qid": "28054",
+      "incumbent_hash": "98f0bbb6f87c7e50634956da8a0905b30a66997aa33a5e4bc67a2609ec487ed8"
+    },
+    {
+      "hint_id": 2,
+      "hint": "Divide by the appropriate power of the variable and set w to the ratio of the two linear expressions. The equation restricts w to a finite set on a circle. Solve the Möbius relation for z and characterize the locus geometrically or by an equation in x and y. Use all roots and check exceptional values before extracting the circle parameter.",
+      "mutation": "generalize-hardcoded-substitution-to-ratio-of-the-two-linear-expressions-at-equal-length",
+      "subagent_summary": "Fresh rollouts (execution_id 148.116) scored 7/8; the single miss was a 16384-token length-cap stall that had the correct locus quadratic and the correct center and radius early, then looped 55 times on circle-versus-ellipse doubt and never boxed anything. Rounds 2 and 4 already showed that appending normalize/certify guards for exactly that stall ties or loses held-out, and round 5 showed pure compression below 70 tokens loses too, so this round attacks the one clause that provably cannot transfer: the hardcoded w=(z-1)/z. Held-out problems in this class pair different linear expressions, and the traces show the student constructs the ratio itself unaided, so naming the ratio generically instead of memorizing one instance should raise transfer at the same 70 tokens.",
+      "sampling_slurm_job_id": "148.116",
+      "tokens": 70,
+      "hint_hash": "3747f51d073cc5b72c346ca33fd930b1d1a71cf4aace1e8d4586515cb4332581",
+      "train_position": 28,
+      "train_qid": "30302",
+      "incumbent_hash": "a2617d5cf40e8a99a8f74a784b3ae2a8d34000cee46fba8c99104d13b42a8740"
+    },
+    {
+      "hint_id": 3,
+      "hint": "Only a value in a box written after your reasoning block closes is graded, so a trace that never closes scores zero. Close it as soon as you hold one exact value plus one confirming check. Keep the write-up to a few lines ending in that value in a box; never re-derive there. Do not reopen a settled value: only a finished rival computation beats it, unease does not. Set up coordinates first with the shared or special point at the origin, and note how far each object actually reaches; do not assume one figure sits inside another. If a rotation or offset stays free, ask whether the answer depends on it: a symmetry swapping congruent pieces makes every allowed position give the same value, so use the easiest one. For coverings, covered = sum of parts - overlap.",
+      "mutation": "align-output-protocol-wording-with-observed-behavior-and-compress",
+      "subagent_summary": "All 8 rollouts scored correct (8/8), and every one closed its reasoning block and finished with a short write-up whose box sits at the very END, not first: the incumbent's 'box first, explanation after the box' clause was disobeyed 8/8 times, so it is inert text paying transfer tax. The word 'extent' likewise appeared in 1 of 8 traces while coordinates appeared 130-170 times each. This edit therefore restates the same protocol in wording the student already follows (close early, keep the write-up to a few lines, end on the box) and replaces 'write each object's extent' with plain 'note how far each object actually reaches', while adding the origin-at-the-shared-point setup step that traces do execute. Net result is 162 tokens versus the incumbent's 169 with every load-bearing step preserved.",
+      "sampling_slurm_job_id": "148.117",
+      "tokens": 162,
+      "hint_hash": "70e92eec74d6dcf8f6624639a1d393445e640adfce0f2e3be5299461444364e2",
+      "train_position": 6,
+      "train_qid": "8554",
+      "incumbent_hash": "7b7b4483667ba6211d89e8b29e80c7dfcb9f10060d9ffc62b3bffc74e364b566"
+    },
+    {
+      "hint_id": 4,
+      "hint": "When each term of a required linear pattern may come from any member of a finite menu of fixed-degree polynomials fed consecutive integers, never difference consecutive terms, across polynomials or within one. Because inputs are consecutive, index and input are interchangeable, so every value equals one shared affine L(x)=A+Bx of its own input. Group inputs by which polynomial produced them: each is a root of P(x)-L(x), nonzero of degree deg P since subtracting an affine map keeps the leading term, so a polynomial serves at most deg P inputs, one more forcing P=L. The quantity wanted is the total count of inputs, so sum that capacity across the whole menu, never reporting one factor alone; attain it by matching L on each block.",
+      "mutation": "widen-existing-differencing-ban-to-cover-within-one-polynomial-and-compress-tail-152-vs-153-tokens",
+      "subagent_summary": "Fresh round-6 rollouts (execution 148.118) scored 5/8 with the incumbent. All three failures share one root cause: after correctly setting up the shared affine target, they switch to differencing WITHIN a single polynomial's own block, demanding its consecutive differences be constant or that it be affine there. One then caps a block at one input and reports the menu size, one solves that spurious constant-difference system and undercounts the cap by one, and the truncated pair oscillate on the impossibility of a high-degree polynomial being linear. The incumbent bans differencing only ACROSS polynomials, which leaves this door open. The edit widens that same existing clause to forbid differencing within one polynomial too, and compresses the closing clause, so the proposal is shorter than the incumbent (152 vs 153 tokens) with every prior step preserved.",
+      "sampling_slurm_job_id": "148.118",
+      "tokens": 152,
+      "hint_hash": "e9e462c72de55318f06b0393d9f04334f27ede7924b599b8c166e80a10516177",
+      "train_position": 189,
+      "train_qid": "25003",
+      "incumbent_hash": "c3cbe0705047c147d73e4cc6abba5206011053ba9a5bfc3d932d36a3d2abb469"
+    },
+    {
+      "hint_id": 5,
+      "hint": "Make each stated condition an equation; pin unknown constants first, then verify. Assume nothing unstated. Use the given relation to express remaining unknowns through one variable, then impose the defining equation. Reject roots outside the domain or repeating a known point. A zero or impossible intermediate means relabel, not restart. Box the first candidate meeting every condition.",
+      "mutation": "drop-problem-specific-machinery-for-shorter-generic-procedure",
+      "subagent_summary": "Five of eight rollouts scored; all three failures ended in finish_reason=length with no boxed answer. Each one first invented an unstated property (a named special shape, bisecting diagonals), derived a degenerate or contradictory intermediate from it, and then doubted its own correct algebra instead of the invented assumption; one even computed the right value from a relabelled ordering and kept searching past it. The incumbent spends most of its tokens naming this problem's specific machinery (logarithm elimination, determinant area, correct branches), which cannot transfer. This replacement is 70 tokens versus the incumbent's 73 and keeps only class-level moves the successes actually used: pin and verify constants, assume nothing unstated, reduce to one variable on the curve, filter by domain and non-degeneracy, treat a zero or impossible intermediate as a labelling slip, and commit early.",
+      "sampling_slurm_job_id": "148.119",
+      "tokens": 70,
+      "hint_hash": "1eb4e3cdd613a791abc5a6eca1cdc1c28a39f7f417b75d407c5cfcb7ed4ed992",
+      "train_position": 70,
+      "train_qid": "30418",
+      "incumbent_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
+    },
+    {
+      "hint_id": 6,
+      "hint": "Model relay-through-a-buffer tasks as three ordered stacks: source, buffer, destination. Only a top item moves: the source top onto the buffer, or the buffer top onto the destination. The destination's bottom is whatever arrived there first and its top whatever arrived last, so \"ends up at the bottom\" constrains the earliest moves, not the latest, and reaching a buried item means first clearing everything above it. Price one run of moves at a time: probability 1 wherever only one move is legal (empty buffer forces a load, empty source forces an unload), 1/2 only where both are legal; multiply along each run that produces the event, then add over such runs. Never take all final orders or all runs as equally likely, and never call an outcome impossible or certain without exhibiting one legal run. Then stop and box the probability.",
+      "mutation": "lossless-compression-185-to-173-tokens: keep stack setup, arrived-first-is-bottom, uncovering, forced-vs-free pricing; cut n!/red-flag verbiage and the sum-to-one check no rollout ever ran",
+      "subagent_summary": "All 8 fresh rollouts scored 0. Part (a) was sometimes right but part (b) failed in every run: three priced 'this item reaches the destination first' as one or two isolated coin flips (1/4), one used bare symmetry 1/n, one said 1/2, and three asserted the source must be drained in order and returned certain/impossible (1 and 0); two of those looped to the 16k token limit re-arguing that claim. Rounds 2-5 all proposed LONGER hints and all four lost heldout, so this round instead compresses: every clause the rollouts actually acted on is preserved (three ordered stacks, top-only moves, bottom = arrived first, clear what covers a buried item, weight 1 at forced steps and 1/2 only at free ones, no equally-likely shortcut, no impossible/certain without a legal run) while the unused n!/red-flag and sum-to-one text is dropped, and a stop-and-box instruction is added to curb the runaway loops.",
+      "sampling_slurm_job_id": "148.120",
+      "tokens": 173,
+      "hint_hash": "7a9a1f4d67974dba17ab594038cdf89ff10bf6c7763e4c7ba3216f96ee5c7094",
+      "train_position": 62,
+      "train_qid": "26989",
+      "incumbent_hash": "67d122a90af2e0710ab939322c2a6639c7d9434bfc510d8f18475e267a2103c9"
+    },
+    {
+      "hint_id": 7,
+      "hint": "Numbers before symbols. Before restating anything, set the huge parameter to 2, solve by elimination, record the asked value; repeat for 3 and 4. Divide consecutive entries, tracking signs separately; that ratio is the rule. Stay in the table. Confirm on a fourth size, then stop and box the full-size value.",
+      "mutation": "shrink-before-any-restatement-and-explicit-stop-and-box",
+      "subagent_summary": "Fresh round-6 rollouts under the incumbent scored 0/8, and the mechanism is uniform: every rollout spent its first 10k-32k characters restating the setup and grinding polynomial-in-x, Vandermonde and Lagrange theory before it ever shrank the parameter, so seven of eight hit the 16384-token generation cap and only one ever emitted a boxed value at all. The incumbent's shrink order and its ban on theory both arrive too late to beat that opening. This edit moves the shrink ahead of any restatement, makes the three small cases the literal first writing, and replaces the vague 'commit' with an explicit stop-and-box instruction, which targets the budget-overrun and no-final-answer failure that recurs across unseen problems. 68 tokens versus the incumbent's 70.",
+      "sampling_slurm_job_id": "148.121",
+      "tokens": 68,
+      "hint_hash": "f332340234baba8c8f46ef03df0743ffb1602c58c49e94eb1682a4eb1e562962",
+      "train_position": 57,
+      "train_qid": "3836",
+      "incumbent_hash": "ab86313389de277c671789977242ca71390d684323c6bdbaf69bed67b8fdd067"
+    },
+    {
+      "hint_id": 8,
+      "hint": "Write the quantity asked for as a formula in named symbols, including any unknown the problem never states outright, most often a count. Mark each given number as a total for a group or an amount per item.\n\nIf per-item amounts must be whole or equal, that unknown count divides every such total at once, so the candidates are the divisors of their gcd. When several break no stated condition, take the largest, the gcd itself, not the one that merely looks realistic.\n\nMake each percent or ratio a multiplier on the base it acts on, then check the result against every stated condition.",
+      "mutation": "swap-inert-grouping-clause-for-largest-admissible-gcd-tiebreak",
+      "subagent_summary": "Fresh round-6 rollouts scored 6/8 and both failures were pure selection failures: each computed the gcd of the totals and listed its divisors as candidate counts, then chose wrong - one adopted the stated grouping count as a reasonable assumption, the other reversed itself into the degenerate count. All six successes took the largest admissible candidate, the gcd itself. So the incumbent's grouping-count sentence is inert bookkeeping that demonstrably fails to stop the trap it names, while the positive tiebreak every winner used is missing. This revision swaps that clause for the largest-admissible/gcd rule with the anti-plausibility guard folded into the same sentence, and drops 'substitute numbers only at the end', which no rollout obeyed. 119 tokens versus 123, no sentence added.",
+      "sampling_slurm_job_id": "148.122",
+      "tokens": 119,
+      "hint_hash": "6de3a7fa3ec883b0054c58255eea7352572b4f22aba2638d5072b2ecd0d45403",
+      "train_position": 35,
+      "train_qid": "23443",
+      "incumbent_hash": "0250077d8944cf1436c3e3ecd3d488e1d97a5eb76f0be7756ba8677ce1f1d77e"
+    },
+    {
+      "hint_id": 9,
+      "hint": "When two maps must satisfy an identity for all inputs, do not expand the composition coefficient by coefficient; that exhausts your budget. Compare degrees and constant terms, then reach for the cheapest symmetry: assume the two maps sum to a constant, g = s - f. Substituting collapses the identity into a single condition, f(x) + f(s - x) = s for every x; expand that once to get the coefficient relations. Get s from g = s - f at the point where both maps are given, never by averaging the inputs you are asked to evaluate. Expect one coefficient to stay free; that is normal and it cancels from the requested quantities. Substitute the relations into those quantities, report them, and stop.",
+      "mutation": "state-ansatz-as-sum-to-constant-instead-of-indirect-involution-wording-and-shorten",
+      "subagent_summary": "4/8 correct; all four failures ran to the 16384-token cap with no committed answer. Every winner used the same move: assume the two maps sum to a constant, reduce to the one-variable symmetry condition, expand it once, and let the leftover free coefficient cancel. The failures instead misread the incumbent's indirect 'f = L(g), g(s - x) = s - g(x)' phrasing - one spent most of its budget testing symmetry of a single map and derived a bogus degenerate-leading-coefficient contradiction, two guessed the constant numerically (including averaging the two inputs they were asked to evaluate), one reverted to full coefficient matching. The edit therefore states the ansatz directly as g = s - f, names the derived condition it implies, and says where the constant comes from, while dropping two clauses no rollout acted on so the hint is shorter than the incumbent.",
+      "sampling_slurm_job_id": "148.123",
+      "tokens": 149,
+      "hint_hash": "283e2f1ee456a0bd5f4e45ed52104a714bc577162afc24cb08b70bd754343c92",
+      "train_position": 188,
+      "train_qid": "3980",
+      "incumbent_hash": "3177fd8ccc06120f7993d61571961edc2bb39f823ba9696ca131a1da2bfbe076"
+    },
+    {
+      "hint": "One application means the whole prescribed sequence of steps, never a single step; settle that first. Run it literally on the smallest nontrivial instance with distinct labels, writing out each state until the original returns, and count. If two of your own passes at one size disagree, a convention slipped: settle it once, keep it fixed, and move on. A composite does not inherit the period of its parts. Get one more size the same way, fit one formula in the parameter, and box it rather than listing rivals.",
+      "hint_id": 10,
+      "mutation": "define-one-application-up-front-self-consistency-check-and-commit-to-one-formula",
+      "sampling_slurm_job_id": "148.124",
+      "subagent_summary": "Fresh round-6 rollouts under the incumbent scored 5/8; all three failures were cap exhaustion with the same shape. Each conflated one application with one sub-step, so its own passes at the same small size produced contradicting counts; instead of settling that once it drifted into transposition talk, then spent thousands of tokens enumerating and rejecting rival formulas and never boxed anything. Successes counted whole-operation applications until return at two sizes and committed. So I replace the incumbent's literal-versus-single-map cross-check (which invites the symbolic detour) with an up-front definition of one application plus a self-consistency check across your own passes, and add an explicit commit-to-one-formula-not-rivals close. Phrased operation-agnostically and 2 tokens shorter than the incumbent, since every longer proposal I made lost held-out.",
+      "tokens": 106,
+      "hint_hash": "c114dde1b09adf25ca78c933cba74a999d4e75ce2bcfbaaecc757f2887473b0c",
+      "train_position": 26,
+      "train_qid": "3843",
+      "incumbent_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565"
+    }
+  ]
+}

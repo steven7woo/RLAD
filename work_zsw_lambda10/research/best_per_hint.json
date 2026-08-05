@@ -149,6 +149,27 @@
             "J_i": 2.25
           },
           "proposal_eval_slurm_job_id": "148.105"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "07363e1a841cc22086b50fc6f756f5491f820240a7de3386db6f2d2e809f93aa",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 1,
+            "hint_hash": "07363e1a841cc22086b50fc6f756f5491f820240a7de3386db6f2d2e809f93aa",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 7,
+            "heldout_total": 80,
+            "heldout_i": 0.0875,
+            "J_numerator": 70,
+            "J_denominator": 80,
+            "J_i": 0.875
+          },
+          "proposal_eval_slurm_job_id": "148.125"
         }
       ]
     },
@@ -299,6 +320,27 @@
             "J_i": 2.375
           },
           "proposal_eval_slurm_job_id": "148.106"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "3747f51d073cc5b72c346ca33fd930b1d1a71cf4aace1e8d4586515cb4332581",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 2,
+            "hint_hash": "3747f51d073cc5b72c346ca33fd930b1d1a71cf4aace1e8d4586515cb4332581",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 8,
+            "train_total": 8,
+            "train_i": 1.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 170,
+            "J_denominator": 80,
+            "J_i": 2.125
+          },
+          "proposal_eval_slurm_job_id": "148.126"
         }
       ]
     },
@@ -449,6 +491,27 @@
             "J_i": 2.875
           },
           "proposal_eval_slurm_job_id": "148.107"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "70e92eec74d6dcf8f6624639a1d393445e640adfce0f2e3be5299461444364e2",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 3,
+            "hint_hash": "70e92eec74d6dcf8f6624639a1d393445e640adfce0f2e3be5299461444364e2",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 5,
+            "train_total": 8,
+            "train_i": 0.625,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 170,
+            "J_denominator": 80,
+            "J_i": 2.125
+          },
+          "proposal_eval_slurm_job_id": "148.127"
         }
       ]
     },
@@ -599,6 +662,27 @@
             "J_i": 2.25
           },
           "proposal_eval_slurm_job_id": "148.108"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "e9e462c72de55318f06b0393d9f04334f27ede7924b599b8c166e80a10516177",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 4,
+            "hint_hash": "e9e462c72de55318f06b0393d9f04334f27ede7924b599b8c166e80a10516177",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 130,
+            "J_denominator": 80,
+            "J_i": 1.625
+          },
+          "proposal_eval_slurm_job_id": "148.128"
         }
       ]
     },
@@ -606,23 +690,23 @@
       "hint_id": 5,
       "train_position": 70,
       "train_qid": "30418",
-      "hint": "First substitute the two known graph points to determine the parameters of the logarithmic fractional-linear function. Derive the parallelogram translation from oriented vectors, impose both graph equations, and eliminate one coordinate using the logarithm. Solve the remaining scalar relation while respecting the domain, then compute the area from a determinant. Verify that the resulting points lie on the correct branches.",
-      "tokens": 73,
-      "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81",
+      "hint": "Make each stated condition an equation; pin unknown constants first, then verify. Assume nothing unstated. Use the given relation to express remaining unknowns through one variable, then impose the defining equation. Reject roots outside the domain or repeating a known point. A zero or impossible intermediate means relabel, not restart. Box the first candidate meeting every condition.",
+      "tokens": 70,
+      "hint_hash": "1eb4e3cdd613a791abc5a6eca1cdc1c28a39f7f417b75d407c5cfcb7ed4ed992",
       "metrics": {
         "schema_version": 1,
         "hint_id": 5,
-        "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81",
+        "hint_hash": "1eb4e3cdd613a791abc5a6eca1cdc1c28a39f7f417b75d407c5cfcb7ed4ed992",
         "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-        "train_correct": 8,
+        "train_correct": 6,
         "train_total": 8,
-        "train_i": 1.0,
-        "heldout_correct": 12,
+        "train_i": 0.75,
+        "heldout_correct": 20,
         "heldout_total": 80,
-        "heldout_i": 0.15,
-        "J_numerator": 200,
+        "heldout_i": 0.25,
+        "J_numerator": 260,
         "J_denominator": 80,
-        "J_i": 2.5
+        "J_i": 3.25
       },
       "history": [
         {
@@ -749,6 +833,27 @@
             "J_i": 1.875
           },
           "proposal_eval_slurm_job_id": "148.109"
+        },
+        {
+          "round": 6,
+          "decision": "kept",
+          "proposal_hash": "1eb4e3cdd613a791abc5a6eca1cdc1c28a39f7f417b75d407c5cfcb7ed4ed992",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 5,
+            "hint_hash": "1eb4e3cdd613a791abc5a6eca1cdc1c28a39f7f417b75d407c5cfcb7ed4ed992",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 20,
+            "heldout_total": 80,
+            "heldout_i": 0.25,
+            "J_numerator": 260,
+            "J_denominator": 80,
+            "J_i": 3.25
+          },
+          "proposal_eval_slurm_job_id": "148.129"
         }
       ]
     },
@@ -899,6 +1004,27 @@
             "J_i": 1.5
           },
           "proposal_eval_slurm_job_id": "148.110"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "7a9a1f4d67974dba17ab594038cdf89ff10bf6c7763e4c7ba3216f96ee5c7094",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 6,
+            "hint_hash": "7a9a1f4d67974dba17ab594038cdf89ff10bf6c7763e4c7ba3216f96ee5c7094",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 1,
+            "train_total": 8,
+            "train_i": 0.125,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 100,
+            "J_denominator": 80,
+            "J_i": 1.25
+          },
+          "proposal_eval_slurm_job_id": "148.130"
         }
       ]
     },
@@ -1049,6 +1175,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.111"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "f332340234baba8c8f46ef03df0743ffb1602c58c49e94eb1682a4eb1e562962",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 7,
+            "hint_hash": "f332340234baba8c8f46ef03df0743ffb1602c58c49e94eb1682a4eb1e562962",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 9,
+            "heldout_total": 80,
+            "heldout_i": 0.1125,
+            "J_numerator": 90,
+            "J_denominator": 80,
+            "J_i": 1.125
+          },
+          "proposal_eval_slurm_job_id": "148.131"
         }
       ]
     },
@@ -1199,6 +1346,27 @@
             "J_i": 2.375
           },
           "proposal_eval_slurm_job_id": "148.112"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "6de3a7fa3ec883b0054c58255eea7352572b4f22aba2638d5072b2ecd0d45403",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 8,
+            "hint_hash": "6de3a7fa3ec883b0054c58255eea7352572b4f22aba2638d5072b2ecd0d45403",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 6,
+            "train_total": 8,
+            "train_i": 0.75,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 180,
+            "J_denominator": 80,
+            "J_i": 2.25
+          },
+          "proposal_eval_slurm_job_id": "148.132"
         }
       ]
     },
@@ -1349,6 +1517,27 @@
             "J_i": 2.0
           },
           "proposal_eval_slurm_job_id": "148.113"
+        },
+        {
+          "round": 6,
+          "decision": "discarded",
+          "proposal_hash": "283e2f1ee456a0bd5f4e45ed52104a714bc577162afc24cb08b70bd754343c92",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 9,
+            "hint_hash": "283e2f1ee456a0bd5f4e45ed52104a714bc577162afc24cb08b70bd754343c92",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 0,
+            "train_total": 8,
+            "train_i": 0.0,
+            "heldout_correct": 13,
+            "heldout_total": 80,
+            "heldout_i": 0.1625,
+            "J_numerator": 130,
+            "J_denominator": 80,
+            "J_i": 1.625
+          },
+          "proposal_eval_slurm_job_id": "148.133"
         }
       ]
     },
@@ -1356,23 +1545,23 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "Ground the general argument in one verified small case. Run the process literally on the smallest nontrivial instance with distinct labels and write out the whole resulting state; separately describe it as a single map and check the two agree. A mismatch means a convention slipped: repair it once, keep it fixed, and move on instead of re-deriving it. A composite of steps does not inherit the period of its parts, so measure the composite, never the pieces. Confirm one size up, fit a formula in the parameter, and commit.",
-      "tokens": 108,
-      "hint_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565",
+      "hint": "One application means the whole prescribed sequence of steps, never a single step; settle that first. Run it literally on the smallest nontrivial instance with distinct labels, writing out each state until the original returns, and count. If two of your own passes at one size disagree, a convention slipped: settle it once, keep it fixed, and move on. A composite does not inherit the period of its parts. Get one more size the same way, fit one formula in the parameter, and box it rather than listing rivals.",
+      "tokens": 106,
+      "hint_hash": "c114dde1b09adf25ca78c933cba74a999d4e75ce2bcfbaaecc757f2887473b0c",
       "metrics": {
         "schema_version": 1,
         "hint_id": 10,
-        "hint_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565",
+        "hint_hash": "c114dde1b09adf25ca78c933cba74a999d4e75ce2bcfbaaecc757f2887473b0c",
         "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-        "train_correct": 4,
+        "train_correct": 3,
         "train_total": 8,
-        "train_i": 0.5,
-        "heldout_correct": 10,
+        "train_i": 0.375,
+        "heldout_correct": 12,
         "heldout_total": 80,
-        "heldout_i": 0.125,
-        "J_numerator": 140,
+        "heldout_i": 0.15,
+        "J_numerator": 150,
         "J_denominator": 80,
-        "J_i": 1.75
+        "J_i": 1.875
       },
       "history": [
         {
@@ -1499,6 +1688,27 @@
             "J_i": 1.25
           },
           "proposal_eval_slurm_job_id": "148.114"
+        },
+        {
+          "round": 6,
+          "decision": "kept",
+          "proposal_hash": "c114dde1b09adf25ca78c933cba74a999d4e75ce2bcfbaaecc757f2887473b0c",
+          "proposal_metrics": {
+            "schema_version": 1,
+            "hint_id": 10,
+            "hint_hash": "c114dde1b09adf25ca78c933cba74a999d4e75ce2bcfbaaecc757f2887473b0c",
+            "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
+            "train_correct": 3,
+            "train_total": 8,
+            "train_i": 0.375,
+            "heldout_correct": 12,
+            "heldout_total": 80,
+            "heldout_i": 0.15,
+            "J_numerator": 150,
+            "J_denominator": 80,
+            "J_i": 1.875
+          },
+          "proposal_eval_slurm_job_id": "148.134"
         }
       ]
     }

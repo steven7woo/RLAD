@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "config_hash": "3249c6a9a4a4dfb56821a0f61ba378ff758c07949b6a08443493130b7f940a04",
-  "generation": 6,
+  "generation": 5,
   "hints": [
     {
       "hint_id": 1,
@@ -39,9 +39,9 @@
       "hint_id": 5,
       "train_position": 70,
       "train_qid": "30418",
-      "hint": "Make each stated condition an equation; pin unknown constants first, then verify. Assume nothing unstated. Use the given relation to express remaining unknowns through one variable, then impose the defining equation. Reject roots outside the domain or repeating a known point. A zero or impossible intermediate means relabel, not restart. Box the first candidate meeting every condition.",
-      "tokens": 70,
-      "hint_hash": "1eb4e3cdd613a791abc5a6eca1cdc1c28a39f7f417b75d407c5cfcb7ed4ed992"
+      "hint": "First substitute the two known graph points to determine the parameters of the logarithmic fractional-linear function. Derive the parallelogram translation from oriented vectors, impose both graph equations, and eliminate one coordinate using the logarithm. Solve the remaining scalar relation while respecting the domain, then compute the area from a determinant. Verify that the resulting points lie on the correct branches.",
+      "tokens": 73,
+      "hint_hash": "b807d87e8e00cc91a6166db0fb3921c3d3651d016bdd936e3700d0c9bde5fa81"
     },
     {
       "hint_id": 6,
@@ -79,11 +79,11 @@
       "hint_id": 10,
       "train_position": 26,
       "train_qid": "3843",
-      "hint": "One application means the whole prescribed sequence of steps, never a single step; settle that first. Run it literally on the smallest nontrivial instance with distinct labels, writing out each state until the original returns, and count. If two of your own passes at one size disagree, a convention slipped: settle it once, keep it fixed, and move on. A composite does not inherit the period of its parts. Get one more size the same way, fit one formula in the parameter, and box it rather than listing rivals.",
-      "tokens": 106,
-      "hint_hash": "c114dde1b09adf25ca78c933cba74a999d4e75ce2bcfbaaecc757f2887473b0c"
+      "hint": "Ground the general argument in one verified small case. Run the process literally on the smallest nontrivial instance with distinct labels and write out the whole resulting state; separately describe it as a single map and check the two agree. A mismatch means a convention slipped: repair it once, keep it fixed, and move on instead of re-deriving it. A composite of steps does not inherit the period of its parts, so measure the composite, never the pieces. Confirm one size up, fit a formula in the parameter, and commit.",
+      "tokens": 108,
+      "hint_hash": "f772ab29bcbea76311626f4c1f77eaac463c18fdba2a1be7222f1d266cb3e565"
     }
   ],
-  "total_tokens": 1175,
-  "book_hash": "2433039dfc1945908a71c6e78b94149041c1a9a176db2c28400f1340c0424d0d"
+  "total_tokens": 1180,
+  "book_hash": "e7bbbf5d893358eeee8c3344227a889c839797219093683f3675500e3daa0469"
 }
