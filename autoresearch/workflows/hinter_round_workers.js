@@ -71,7 +71,7 @@ recent trend is encouraging: rounds 14-17 each kept something, and rounds 16 and
 0.2875), not just tie-break wins. Real improvements are still available.
 
 SAMPLING IS NOT DETERMINISTIC - do not assume otherwise. A round-18 worker argued
-that because `config.json` pins seed=1234, an unchanged hint must re-score
+that because config.json pins seed=1234, an unchanged hint must re-score
 identically, and concluded the "training is noisy" advice was wrong. I checked it
 directly against every repeated measurement in this run: of the 25 hint texts
 trained more than once, 21 scored DIFFERENT train_correct on re-measurement with
